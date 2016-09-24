@@ -1,0 +1,71 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+.alert {
+  width: 70%;
+  margin: 0 auto;
+}
+
+/*loader css */ 
+.spinner {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  opacity: 0.9;
+  background: url('../images/ajax-loader.gif') 50% 50% no-repeat rgb(249,249,249);
+}
+/*loader css */ 
+.nav-bar .navbar-nav li {
+  border-right:1px solid #fff; 
+}
+.nav-bar .navbar-nav li.active a, 
+.nav-bar .navbar-nav li:hover a {
+  color: #fff;
+  background: #e65100;
+}
+.login-form {
+  align-items: center;
+  display: flex;
+  margin: auto;
+  .btn-login {
+    background: #e65100;
+    color: #fff;
+    opacity: 0.8;
+  }
+}
+.main-content {
+  margin-top: 40px !important;
+	 min-height: calc(100vh - 90px);
+	 overflow: auto;
+	 margin-top: -5px;
+}
+.footer {
+  bottom: 0;
+  width: 100%;
+  border-top: 1px solid #ccc;
+  padding-top: 15px;
+  height: 54px;
+}
+
+.navbar-nav > li > a {
+    color:#444;
+  }
+@media (max-width: 768px) {
+  .navbar-nav > li > a {
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 7px;
+      padding-right: 7px;
+  }
+}
+@media (min-width: 769px) {
+  .navbar-nav > li > a {
+      padding: 10px;
+      font-size: 12px;
+  }
+}

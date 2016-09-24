@@ -1,0 +1,71 @@
+<section>
+	<div class="container">
+		<h2><span class="heading-bottom">Status Dashboard</span></h2>
+  	<!-- Nav tabs -->
+		<ul class="nav nav-tabs" role="tablist">
+			<li role="presentation" class="active"><a data-target="#home" aria-controls="home" role="tab" data-toggle="tab" ng-click="statusReport.expaire('Staff');filterOpt = '';">STAFF</a></li>
+			<li role="presentation" ng-click="statusReport.expaire('Facility');filterOpt = '';"><a data-target="#profile" aria-controls="profile" role="tab" data-toggle="tab">FACILITY</a></li>
+		</ul>
+		<br>
+		<div class="tabs" >
+		<div class="tab-body">
+			<div id="staff" style="display:block;">
+				<div class="four-col">
+				 <div class="col-xs-6 col-sm-4 col-md-3" style="padding-right:5px;" ng-click="filterOpt='ExpiresSoon'">
+				  <div class="dashboard light-orange">
+				   	<div class="top">
+						  <div class="row">
+								<div class="top-left">
+									<div class="status-count text-center"><a href="javascript:void(0);" ng-bind="statusReport.expaireData.expiressoon"></a></div> 
+								</div>
+								<div class="top-right"><img src="images/dashboard-icon.png" alt="Dashboard Icon" /></div>
+							</div>
+							<div class="status-name">Expires Soon</div>
+				   	</div>
+				  </div>
+				 </div>
+				 <div class="col-xs-6 col-sm-4 col-md-3" style="padding-left:5px" ng-click="filterOpt='EXPIRED'">
+				  <div class="dashboard warning-red">
+					   <div class="top">
+					   		<div class="row">
+									<div class="top-left">
+										<div class="status-count text-center"><a href="javascript:void(0);" ng-bind="statusReport.expaireData.expired"></a></div> 
+									</div>
+									<div class="top-right"><img src="images/dashboard-icon.png" alt="Dashboard Icon" /></div>
+								</div>
+								<div class="status-name">Expired</div>
+						  </div>
+				  </div>
+				 </div>
+				</div>
+				<div id="staff-status-dashboard" class="row status-dashboard">
+					<table>
+					  <thead>
+						  <tr>
+								<th>Person ID</th>
+								<th>Name</th>
+								<th>Date of Birth</th>
+								<th>Gender</th>
+								<th>SSN</th>
+								<th>Active</th>
+								<th>Status</th>
+						  </tr>
+					  </thead>
+					  <tbody>
+						  <tr class="bf-warning" ng-repeat="item in statusReport.expaireData.employees | filter:filterOpt">
+								<td ng-bind="item.empId"></td>
+								<td ng-bind="item.userName"></td>
+								<td ng-bind="item.dob"></td>
+								<td ng-bind="item.gender"></td>
+								<td ng-bind="item.ssn"></td>
+								<td ng-bind="item.active"></td>
+								<td class="{{(item.status==='EXPIRED') && 'expired-color' || 'expires-soon-color'}}"></td>
+						  </tr>
+				  </tbody>
+				 </table>
+				</div>
+			</div>
+		</div>
+	</div>
+ </div>
+</section>
