@@ -23,46 +23,37 @@
 
     <!-- Add your site or application content here -->
     <header ng-controller="HeaderCtrl as header">
-    <nav class="navbar navbar-fixed-top nav-bar">
-      <div class="container-fluid" style="background: #ccc;">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <div class="navbar-header">
-            <div class="logo">
-             <a href="#"><span class="orange">HealthCare</span>Business</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
-          <ul class="nav navbar-nav" ng-if="!hideNavbar">
+      <div class="menuwrap" ng-hide="!hideNavbar">
+        <ul class="nav nav-pills menu">
+            <li class="logo">
+              <a href="javascript:void(0)"><span class="orange">HealthCare</span>Business</a>
+            </li>
+        </ul>
+      </div>
+      <div class="menuwrap" ng-hide="hideNavbar">
+        <ul id="menu" class="nav nav-pills menu">
+            <li class="logo">
+              <a href="javascript:void(0)"><span class="orange">HealthCare</span>Business</a>
+            </li>
             <li><a href="javascript:void(0)">OPERATIONS</a></li>
             <li ng-class="header.getClass('/main')"><a href="javascript:void(0);" ng-click="header.humanResource();">HUMAN RESOURCE</a></li>
             <li><a href="javascript:void(0);">SYSTEMS & ASSETS</a></li>
             <li ng-class="header.getClass('/statusReport')"><a href="javascript:void(0);" ng-click="header.statusReport();">STATUS & REPORTS</a></li>
             <li><a href="javascript:void(0);">ORGANIZATION</a></li>
-            <li class="dropdown">
-              <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MORE <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="javascript:void(0)">Directory</a></li>
-                <li><a href="javascript:void(0)">Documents</a></li>
-              </ul>
-            </li>
+            <li><a href="javascript:void(0)">Directory</a></li>
+            <li><a href="javascript:void(0)">Documents</a></li>
             <li><a href="javascript:void(0);">ADMINISTRATION</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right" ng-if="!hideNavbar">
             <li><a href="#">Sign Out</a></li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
+        </ul>
+        <ul class="nav nav-pills collect">
+          <li class="dropdown">
+          <a role="button" href="javascript:void(0)" data-toggle="dropdown" class="dropdown-toggle">
+          More <span class="caret"></span>
+          </a>
+          <ul id="submenu" class="dropdown-menu"></ul>
+          </li>
+        </ul>
+      </div>
     </header>
     <div class="main-content">
       <div class="spinner" ng-show="loading"></div>

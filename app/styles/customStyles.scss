@@ -11,13 +11,32 @@ a {
  color:#e65100;
 }
 .container {
- width:80%;
+ width: 90%;
  margin:0 auto;
 }
 header {
  width:100%;
  height: auto;
  margin:0 auto;
+ position: fixed;
+ top:0;
+ z-index: 1;
+}
+
+.nav-pills > li.active > a, .nav > li > a:hover, .nav > li > a:focus, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+  background: #e65100 !important;
+  color: #fff !important;
+}
+
+
+.nav > .logo > a:hover,  .nav > .logo > a:focus {
+ color: #000 !important;
+ text-decoration: none;
+  background: none !important;
+}
+
+.nav > .logo > a {
+  color:#000 !important;
 }
 section {
  min-height:350px;
@@ -77,11 +96,10 @@ section {
  font-family:'Agency FB';
  font-weight:bold;
  float:left;
+ padding-top: 7px !important;
+ background: none !important;
 }
-.logo a {
- color: #000;
- text-decoration: none;
-}
+
 .orange {
  color:#e65100;
 }
@@ -799,3 +817,37 @@ table tr:nth-child(even) {
    width:100%;
   }
 }
+
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+div.menuwrap {
+    position: relative;
+    background-color: #ccc;
+    height: 64px; overflow: visible;
+}
+ul.menu {
+    height: 48px;
+    overflow: hidden;
+    
+}
+ul.menu > li {
+    display: block; float: left; 
+    height: auto; white-space: nowrap;
+    padding: 4px 8px;
+    padding-top: 12px;
+}
+ul.menu > li a {
+     padding: 8px 15px;
+}
+ul.menu > .logo a {
+     padding: 6px 15px;
+}
+
+ul.collect {
+    position: absolute;
+    right: 0; top: 0;
+    padding: 10px 8px; 
+    overflow: visible;
+}
+ul.collect ul.dropdown-menu { right: 0; left: auto; }
+

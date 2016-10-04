@@ -37,7 +37,6 @@ angular
       .otherwise({
         redirectTo: '/login'
       })
-
       $httpProvider.interceptors.push(function($q, $cookies) {
         return {
          'request': function(config) {

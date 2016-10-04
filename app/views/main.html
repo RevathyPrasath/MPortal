@@ -5,103 +5,103 @@
 		</ul>
 </div>
 <!-- Tab panes -->
-<div class="tab-content">
-  <div role="tabpanel" class="tab-pane active" id="vileList" ng-controller="ViewListCtrl as viewList">
-	  <div class="alert alert-danger" ng-show="viewList.errorMsg">
-		    <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		    <strong>OOPS! </strong> <span ng-bind="viewList.errorMsg"></span>
+<div class="tab-content" ng-controller="PersonCtrl as person" >
+	<div role="tabpanel" class="tab-pane active" id="vileList" >
+		<div class="alert alert-danger" ng-show="person.errorMsg">
+				<a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong>OOPS! </strong> <span ng-bind="person.errorMsg"></span>
 		</div>
-	  <section>
-		  <div class="container">
+		<section>
+			<div class="container">
 				<h2><span class="heading-bottom">View List</span></h2>
 				<div class="four-col human-search-section">
 					<div class="col-sm-3">
-					  <label>Name</label>
-					  <input type="text" name="name" ng-model="viewList.name" placeholder="Enter Name to Search" />
+						<label>Name</label>
+						<input type="text" name="name" ng-model="person.name" placeholder="Enter Name to Search" />
 					</div>
 					<div class="col-sm-3">
-					  <label>Employee ID</label>
-					  <input type="text" name="employee-id" ng-model="viewList.employeeId" placeholder="Enter Employee ID Search" />
+						<label>Employee ID</label>
+						<input type="text" name="employee-id" ng-model="person.employeeId" placeholder="Enter Employee ID Search" />
 					</div>
 					<div class="col-sm-3">
-					  <label>SSN</label>
-					  <input type="text" name="ssn" ng-model="viewList.ssn" placeholder="Enter SSN Search" />
+						<label>SSN</label>
+						<input type="text" name="ssn" ng-model="person.ssn" placeholder="Enter SSN Search" />
 					</div>
-				 	<div class="col-sm-3">
-					  <label>&nbsp;</label>
-					  <input type="button" id="humansearh" class="orange-button" name="ssn" value="search" ng-click="viewList.searchEmployee()"/>
-				 	</div>
-			  </div>
-				<div id="human-resource-list" class="row" ng-show="viewList.users.length>0">
+					<div class="col-sm-3">
+						<label>&nbsp;</label>
+						<input type="button" id="humansearh" class="orange-button" name="ssn" value="search" ng-click="person.searchEmployee()"/>
+					</div>
+				</div>
+				<div id="human-resource-list" class="row" ng-show="person.users.length>0">
 				 <table class="table table-bordered table-hover table-stripped">
-				  <thead>
-				   <tr>
+					<thead>
+					 <tr>
 						<th class="text-center">Employee ID</th>
 						<th class="text-center">Name</th>
 						<th class="text-center">Gender</th>
 						<th class="text-center">Edit</th>
 						<th class="text-center">Delete</th>
-				   </tr>
-				  </thead>
-				  <tbody>
-				   <tr ng-repeat="employee in viewList.users">
+					 </tr>
+					</thead>
+					<tbody>
+					 <tr ng-repeat="employee in person.users">
 						<td class="text-center" ng-bind="employee.empId"></td>
 						<td class="text-center" ng-bind="employee.userName"></td>
 						<td class="text-center" ng-bind="employee.gender"></td>
 						<td class="text-center">
-							<a ng-click="viewList.editEmployye(employee)">
+							<a ng-click="person.editEmployye(employee)">
 								<i class="glyphicon glyphicon-pencil text-muted"></i>
 							</a>
 						</td>
 						<td class="text-center">
-							<a href="javascript:void(0);" ng-click="viewList.deleteEmployye(employee, $index)" class="text-danger">
+							<a href="javascript:void(0);" ng-click="person.deleteEmployye(employee, $index)" class="text-danger">
 								<i class="glyphicon glyphicon-trash text-danger"></i>
 							</a>
 						</td>
-				   </tr>
-				  </tbody>
+					 </tr>
+					</tbody>
 				 </table>
 				</div>
 			</div>
-	 	</section>
+		</section>
 	</div>
 	<!-- tab2 -->
-  <form role="tabpanel" class="tab-pane" id="profile" ng-controller="PersonCtrl as person" ng-submit="person.addPerson(person)">
-  	<section>
-		  <div class="container">
+	<form role="tabpanel" class="tab-pane" id="profile" ng-submit="person.addPerson(person)">
+		<section>
+			<div class="container">
 				<h2><span class="heading-bottom">Person Details</span></h2>
 				<div class="two-col">
 					<div class="left-col">
 						<div class="row">
 							<label>PersonID</label>
-							<input type="text" name="PersonID" placeholder="Enter Person ID" ng-model="person.persondetails.personId"/>
+							<input type="text" name="PersonID" placeholder="Enter Person ID" ng-model="person.details.persondetails.personId"/>
 						</div>
 						<div class="row">
 							<label>LastName</label>
-							<input type="text" name="LastName"  ng-model="person.persondetails.lastname" placeholder="Enter Last Name" />
+							<input type="text" name="LastName"  ng-model="person.details.persondetails.lastname" placeholder="Enter Last Name" />
 						</div>
 						<div class="row">
 							<label>FirstName</label>
-							<input type="text" ng-model="person.persondetails.firstname" name="FirstName" placeholder="Enter First Name" />
+							<input type="text" ng-model="person.details.persondetails.firstname" name="FirstName" placeholder="Enter First Name" />
 						</div>
 						<div class="row">
 							<label>MiddleName</label>
-							<input type="text" ng-model="person.persondetails.middlename" name="MiddleName" placeholder="Enter Middle Name" />
+							<input type="text" ng-model="person.details.persondetails.middlename" name="MiddleName" placeholder="Enter Middle Name" />
 						</div>
 						<div class="row">
 							<label>Birthdate</label>
-							<input type="text" name="Birthdate" ng-model="person.persondetails.dob" class="datepicker" placeholder="MM/DD/YYYY" />
+							<input type="text" name="Birthdate" ng-model="person.details.persondetails.dob" class="datepicker" placeholder="MM/DD/YYYY" />
 						</div>
 						<div class="row radio">
 						<label>Gender</label>
 							<ul>
 								<li>
-									<input type="radio" id="gender-male" ng-model="person.persondetails.gender" name="gender" value="male" checked>
+									<input type="radio" id="gender-male" ng-model="person.details.persondetails.gender" name="gender" value="male" checked>
 									<label for="gender-male">Male</label>
 									<div class="check"></div>
 								</li>
 								<li>
-									<input type="radio" id="gender-female" ng-model="person.persondetails.gender" name="gender" value="female">
+									<input type="radio" id="gender-female" ng-model="person.details.persondetails.gender" name="gender" value="female">
 									<label for="gender-female">Female</label>
 									<div class="check"><div class="inside"></div></div>
 								</li>
@@ -109,18 +109,18 @@
 						</div>
 						<div class="row">
 							<label>SSN</label>
-							<input type="text" name="SSN" ng-model="person.persondetails.ssn" placeholder="Enter SSN" />
+							<input type="text" name="SSN" ng-model="person.details.persondetails.ssn" placeholder="Enter SSN" />
 						</div>
 						<div class="row radio">
 							<label>IsActive</label>
 							<ul>
 								<li>
-									<input type="radio" id="active-yes" ng-model="person.persondetails.isactive" name="active" value="Yes" checked>
+									<input type="radio" id="active-yes" ng-model="person.details.persondetails.isactive" name="active" value="Yes" checked>
 									<label for="active-yes">Yes</label>
 									<div class="check"></div>
 								</li>
 								<li>
-									<input type="radio" id="active-no" ng-model="person.persondetails.isactive" name="active" value="No">
+									<input type="radio" id="active-no" ng-model="person.details.persondetails.isactive" name="active" value="No">
 									<label for="active-no">No</label>
 									<div class="check"><div class="inside"></div></div>
 								</li>
@@ -129,43 +129,43 @@
 					</div>
 
 					<div class="right-col">
-					  <h3><span class="heading-bottom orange">HomeAddressID</span></h3>
-					  <div class="row">
-					   <label>Name</label>
-					   <input type="text" name="Name" ng-model="person.persondetails.name" placeholder="Enter Name" />
-					  </div>
-					  <div class="row">
-					   <label>Street Address</label>
-					   <input type="text" name="Street Address" ng-model="person.persondetails.streetAddress" placeholder="Enter Street Address" />
-					  </div>
-					  <div class="row">
-					   <label>City</label>
-					   <input type="text" name="City" ng-model="person.persondetails.city" placeholder="Enter City Name" />
-					  </div>
-					  <div class="row">
-					   <label>State</label>
-					   <input type="text" name="State" ng-model="person.persondetails.state" placeholder="Enter State Name" />
-					  </div>
-					  <div class="row">
-					   <label>Country</label>
-					   <input type="text" name="Country" ng-model="person.persondetails.country" placeholder="Enter Country Name" />
-					  </div>
-					  <div class="row">
-					   <label>ZIP</label>
-					   <input type="text" name="ZIP" ng-model="person.persondetails.zip" placeholder="Enter ZIP Code" />
-					  </div>
-					  <div class="row">
-					   <label>Telephone</label>
-					   <input type="text" name="Telephone" ng-model="person.persondetails.telephone" placeholder="Enter Telephone Number" />
-					  </div>
-					  <div class="row">
-					   <label>Fax</label>
-					   <input type="text" name="Fax" ng-model="person.persondetails.fax" placeholder="Enter Fax Code" />
-					  </div>
-					  <div class="row">
-					   <label>Email</label>
-					   <input type="text" name="Email" ng-model="person.persondetails.email" placeholder="Enter Email ID" />
-					  </div>
+						<h3><span class="heading-bottom orange">HomeAddressID</span></h3>
+						<div class="row">
+						 <label>Name</label>
+						 <input type="text" name="Name" ng-model="person.details.persondetails.name" placeholder="Enter Name" />
+						</div>
+						<div class="row">
+						 <label>Street Address</label>
+						 <input type="text" name="Street Address" ng-model="person.details.persondetails.streetAddress" placeholder="Enter Street Address" />
+						</div>
+						<div class="row">
+						 <label>City</label>
+						 <input type="text" name="City" ng-model="person.details.persondetails.city" placeholder="Enter City Name" />
+						</div>
+						<div class="row">
+						 <label>State</label>
+						 <input type="text" name="State" ng-model="person.details.persondetails.state" placeholder="Enter State Name" />
+						</div>
+						<div class="row">
+						 <label>Country</label>
+						 <input type="text" name="Country" ng-model="person.details.persondetails.country" placeholder="Enter Country Name" />
+						</div>
+						<div class="row">
+						 <label>ZIP</label>
+						 <input type="text" name="ZIP" ng-model="person.details.persondetails.zip" placeholder="Enter ZIP Code" />
+						</div>
+						<div class="row">
+						 <label>Telephone</label>
+						 <input type="text" name="Telephone" ng-model="person.details.persondetails.telephone" placeholder="Enter Telephone Number" />
+						</div>
+						<div class="row">
+						 <label>Fax</label>
+						 <input type="text" name="Fax" ng-model="person.details.persondetails.fax" placeholder="Enter Fax Code" />
+						</div>
+						<div class="row">
+						 <label>Email</label>
+						 <input type="text" name="Email" ng-model="person.details.persondetails.email" placeholder="Enter Email ID" />
+						</div>
 					</div>
 				</div>
 
@@ -173,26 +173,26 @@
 				<div class="two-col">
 				 <div class="left-col">
 					<div class="row">
-				   <label>Employee ID</label>
-				   <input type="text" name="Employee Id" ng-model="person.employeedetails.empid" placeholder="Employee ID">
-				  </div> 
-				  <div class="row">
+					 <label>Employee ID</label>
+					 <input type="text" name="Employee Id" ng-model="person.details.employeedetails.empid" placeholder="Employee ID">
+					</div> 
+					<div class="row">
 						<label>Supervisor</label>
-						<select id="supervisor" ng-model="person.employeedetails.supervisor">
+						<select id="supervisor" ng-model="person.details.employeedetails.supervisor">
 							<option value="Employee">Employee</option>
 							<option class="Supervisor">Supervisor</option>
 						</select>
-				  </div>
-				  <div class="row">
-				   <label>Field</label>
-				   <input type="text" name="Field" ng-model="person.employeedetails.field" placeholder="Enter Field Value" />
-				  </div>
+					</div>
+					<div class="row">
+					 <label>Field</label>
+					 <input type="text" name="Field" ng-model="person.details.employeedetails.field" placeholder="Enter Field Value" />
+					</div>
 				 </div>
 				 <div class="right-col">
-				  <div class="row">
-				   <input type="file" id="emp-file" name="upload-file" placeholder="" />
-				  </div>
-				  <table class="fileupload">
+					<div class="row">
+					 <input type="file" id="emp-file" name="upload-file" placeholder="" />
+					</div>
+					<table class="fileupload">
 						<thead>
 							<tr>
 								<th>File Name</th>
@@ -205,256 +205,281 @@
 								<td><a href="javascript:;" onclick="deleteFile(this);">Delete</a></td>
 							</tr>
 						</tbody>
-				  </table>
+					</table>
 				 </div>
 				</div>
-				
-			<div id="physician-details">
-				<h2><span class="heading-bottom">Provider Details</span></h2>
-				<div class="two-col">
-				 <div class="left-col">
-				  <div class="row">
-				   <label>Specialty</label>
-				   <select id="specialty" ng-model="person.providerdetails.specialty">
-						<option>Cardiaology</option>
-						<option>Neurology</option>
-				   </select>
-				  </div>
-				  <div class="row">
-				   <label>NPI</label>
-				   <input type="text" name="NPI" ng-model="person.providerdetails.npi" placeholder="Enter NPI Details" />
-				  </div>
-				  <div class="row">
-				   <label>Taxonomy</label>
-				   <input type="text" name="Taxonomy" ng-model="person.providerdetails.taxonomy" placeholder="Enter Taxonomy Details" />
-				  </div>
-				  <div class="row">
-				   <label>Credentials</label>
-				   <input type="text" ng-model="person.providerdetails.credentials" name="Credentials" placeholder="Enter Credentials" />
-				  </div>
-				 </div>
-				</div>
-			 
-				<div class="toggle-container">
-				  <div class="toggle-header"><img src="images/right-arrow.png" alt="arrow" /><a href="javascript:;">MedicalLicense</a></div>
-				  <div class="toggle-content">
-				    <div class="two-col">
-							<div class="left-col">
-								<div class="row">
-									<label>State</label>
-									<input type="text" name="State" ng-model="person.providerdetails.medicallicense.state" placeholder="Enter State" />
-								</div>
-								<div class="row">
-									<label>ExpiryDate</label>
-									<input type="text" name="ExpiryDate" ng-model="person.providerdetails.medicallicense.expirydate" class="datepicker" placeholder="MM/DD/YYYY" />
-								</div>
-								<div class="row">
-									<label>Number</label>
-									<input type="text" name="Number" ng-model="person.providerdetails.medicallicense.number" placeholder="Enter Number" />
+				<div id="physician-details">
+					<h2><span class="heading-bottom">Provider Details</span></h2>
+					<div class="two-col">
+					 <div class="left-col">
+						<div class="row">
+						 <label>Specialty</label>
+						 <select id="specialty" ng-model="person.details.providerdetails.specialty">
+							<option>Cardiaology</option>
+							<option>Neurology</option>
+						 </select>
+						</div>
+						<div class="row">
+						 <label>NPI</label>
+						 <input type="text" name="NPI" ng-model="person.details.providerdetails.npi" placeholder="Enter NPI Details" />
+						</div>
+						<div class="row">
+						 <label>Taxonomy</label>
+						 <input type="text" name="Taxonomy" ng-model="person.details.providerdetails.taxonomy" placeholder="Enter Taxonomy Details" />
+						</div>
+						<div class="row">
+						 <label>Credentials</label>
+						 <input type="text" ng-model="person.details.providerdetails.credentials" name="Credentials" placeholder="Enter Credentials" />
+						</div>
+					 </div>
+					</div>
+					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingOne">
+								<h4 class="panel-title text-uppercase">
+									<a role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+										MedicalLicense
+									</a>
+								</h4>
+							</div>
+							<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+								<div class="panel-body">
+									<div class="toggle-content">
+										<div class="two-col">
+											<div class="left-col">
+												<div class="row">
+													<label>State</label>
+													<input type="text" name="State" ng-model="person.details.providerdetails.medicallicense.state" placeholder="Enter State" />
+												</div>
+												<div class="row">
+													<label>ExpiryDate</label>
+													<input type="text" name="ExpiryDate" ng-model="person.details.providerdetails.medicallicense.expirydate" class="datepicker" placeholder="MM/DD/YYYY" />
+												</div>
+												<div class="row">
+													<label>Number</label>
+													<input type="text" name="Number" ng-model="person.details.providerdetails.medicallicense.number" placeholder="Enter Number" />
+												</div>
+											</div>
+											<div class="right-col">
+												<h3><span class="heading-bottom orange">File Details</span></h3>
+												<div class="row">
+												 <input type="file" id="medical-file" name="upload-file" placeholder="" />
+												</div>
+												<table class="fileupload">
+													<thead>
+														<tr>
+															<th>File Name</th>
+															<th>Actions</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr class="1">
+															<td><a href="files/Sample Document.docx" target="_blank">Sample Document.docx</a></td>
+															<td><a href="javascript:;" onclick="deleteFile(this);">Delete</a></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
-							<div class="right-col">
-								<h3><span class="heading-bottom orange">File Details</span></h3>
-								<div class="row">
-								 <input type="file" id="medical-file" name="upload-file" placeholder="" />
+						</div>
+
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingTwo">
+								<h4 class="panel-title">
+									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+										DEALicense
+									</a>
+								</h4>
+							</div>
+							<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+								<div class="panel-body">
+									<div class="toggle-content">
+										<div class="two-col">
+											<div class="left-col">
+												<h3><span class="heading-bottom orange">DEALicense Address</span></h3>
+												<div class="row">
+												 <label>Name</label>
+												 <input type="text" name="Name" ng-model="person.details.providerdetails.dealicense.name" placeholder="Enter Name" />
+												</div>
+												<div class="row">
+												 <label>Street Address</label>
+												 <input type="text" name="Street Address" ng-model="person.details.providerdetails.dealicense.streetaddress"  placeholder="Enter Street Address" />
+												</div>
+												<div class="row">
+												 <label>City</label>
+												 <input type="text" name="City" ng-model="person.details.providerdetails.dealicense.city"  placeholder="Enter City Name" />
+												</div>
+												<div class="row">
+												 <label>State</label>
+												 <input type="text" name="State" ng-model="person.details.providerdetails.dealicense.state" placeholder="Enter State Name" />
+												</div>
+												<div class="row">
+												 <label>Country</label>
+												 <input type="text" name="Country" ng-model="person.details.providerdetails.dealicense.country"  placeholder="Enter Country Name" />
+												</div>
+												<div class="row">
+												 <label>ZIP</label>
+												 <input type="text" name="ZIP" ng-model="person.details.providerdetails.dealicense.zip"  placeholder="Enter ZIP Code" />
+												</div>
+												<div class="row">
+												 <label>Telephone</label>
+												 <input type="text" name="Telephone" ng-model="person.details.providerdetails.dealicense.telephone"  placeholder="Enter Telephone Number" />
+												</div>
+												<div class="row">
+												 <label>Fax</label>
+												 <input type="text" name="Fax" ng-model="person.details.providerdetails.dealicense.fax"  placeholder="Enter Fax Code" />
+												</div>
+												<div class="row">
+												 <label>Email</label>
+												 <input type="text" name="Email" ng-model="person.details.providerdetails.dealicense.email"  placeholder="Enter Email ID" />
+												</div>
+											</div>
+											<div class="right-col">
+												<div class="row">
+												 <label>ExpiryDate</label>
+												 <input type="text" name="ExpiryDate" class="datepicker" ng-model="person.details.providerdetails.dealicense.expdate"  placeholder="MM/DD/YYYY" />
+												</div>
+												<div class="row">
+												 <label>Number</label>
+												 <input type="text" name="Number" ng-model="person.details.providerdetails.dealicense.number" placeholder="Enter Number" />
+												</div>
+												<h3><span class="heading-bottom orange">File Details</span></h3>
+												<div class="row">
+												 <input type="file" id="dea-file" name="upload-file" placeholder="" />
+												</div>
+												<table class="fileupload">
+													<thead>
+														<tr>
+															<th>File Name</th>
+															<th>Actions</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr class="1">
+															<td><a href="files/Sample Document.docx" target="_blank">Sample Document.docx</a></td>
+															<td><a href="javascript:;" onclick="deleteFile(this);">Delete</a></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
 								</div>
-								<table class="fileupload">
-									<thead>
-										<tr>
-											<th>File Name</th>
-											<th>Actions</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr class="1">
-											<td><a href="files/Sample Document.docx" target="_blank">Sample Document.docx</a></td>
-											<td><a href="javascript:;" onclick="deleteFile(this);">Delete</a></td>
-										</tr>
-									</tbody>
-								</table>
+							</div>
+						</div>
+
+						<div class="panel panel-default">
+							<div class="panel-heading" role="tab" id="headingThree">
+								<h4 class="panel-title">
+									<a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+										MalpracticeInsurance
+									</a>
+								</h4>
+							</div>
+							<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+								<div class="panel-body">
+									<div class="two-col">
+										<div class="left-col">
+											<h3><span class="heading-bottom orange">MalpracticeInsurance Address</span></h3>
+											<div class="row">
+												<label>Name</label>
+												<input type="text" name="Name" ng-model="person.details.providerdetails.malpracticeinsurance.name"  placeholder="Enter Name" />
+											</div>
+											<div class="row">
+												<label>Street Address</label>
+												<input type="text" name="Street Address" ng-model="person.details.providerdetails.malpracticeinsurance.streetaddress" placeholder="Enter Street Address" />
+											</div>
+											<div class="row">
+												<label>City</label>
+												<input type="text" name="City" ng-model="person.details.providerdetails.malpracticeinsurance.city" placeholder="Enter City Name" />
+											</div>
+											<div class="row">
+												<label>State</label>
+												<input type="text" name="State" ng-model="person.details.providerdetails.malpracticeinsurance.state" placeholder="Enter State Name" />
+											</div>
+											<div class="row">
+												<label>Country</label>
+												<input type="text" name="Country" ng-model="person.details.providerdetails.malpracticeinsurance.country" placeholder="Enter Country Name" />
+											</div>
+											<div class="row">
+												<label>ZIP</label>
+												<input type="text" name="ZIP" ng-model="person.details.providerdetails.malpracticeinsurance.zip" placeholder="Enter ZIP Code" />
+											</div>
+											<div class="row">
+												<label>Telephone</label>
+												<input type="text" name="Telephone" ng-model="person.details.providerdetails.malpracticeinsurance.teliphone" placeholder="Enter Telephone Number" />
+											</div>
+											<div class="row">
+												<label>Fax</label>
+												<input type="text" name="Fax" ng-model="person.details.providerdetails.malpracticeinsurance.fax" placeholder="Enter Fax Code" />
+											</div>
+											<div class="row">
+												<label>Email</label>
+												<input type="text" name="Email" ng-model="person.details.providerdetails.malpracticeinsurance.email" placeholder="Enter Email ID" />
+											</div>
+										</div>
+										<div class="right-col">
+											<div class="row">
+												<label>ExpiryDate</label>
+												<input type="text" name="ExpiryDate" ng-model="person.details.providerdetails.malpracticeinsurance.expdate" class="datepicker" placeholder="MM/DD/YYYY" />
+											</div>
+											<div class="row">
+												<label>PolicyNumber</label>
+												<input type="text" name="PolicyNumber" ng-model="person.details.providerdetails.malpracticeinsurance.policyno" placeholder="Enter PolicyNumber" />
+											</div>
+											<h3><span class="heading-bottom orange">Policy File Details</span></h3>
+											<div class="row">
+												<input type="file" id="policy-file" name="upload-file" placeholder="" />
+											</div>
+											<table class="fileupload">
+												<thead>
+													<tr>
+														<th>File Name</th>
+														<th>Actions</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr class="1">
+														<td><a href="files/Sample Document.docx" target="_blank">Sample Document.docx</a></td>
+														<td><a href="javascript:;" onclick="deleteFile(this);">Delete</a></td>
+													</tr>
+												</tbody>
+											</table>
+											<h3><span class="heading-bottom orange">FaceSheet File Details</span></h3>
+											<div class="row">
+												<input type="file" id="facesheet-file" name="upload-file" placeholder="" />
+											</div>
+											<table class="fileupload">
+												<thead>
+													<tr>
+														<th>File Name</th>
+														<th>Actions</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr class="1">
+														<td><a href="files/Sample Document.docx" target="_blank">Sample Document.docx</a></td>
+														<td><a href="javascript:;" onclick="deleteFile(this);">Delete</a></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			 
-				<div class="toggle-container">
-					<div class="toggle-header"><img src="images/right-arrow.png" alt="arrow" /><a href="javascript:;">DEALicense</a></div>
-						<div class="toggle-content">
-					 	 <div class="two-col">
-							 <div class="left-col">
-							  <h3><span class="heading-bottom orange">DEALicense Address</span></h3>
-							  <div class="row">
-							   <label>Name</label>
-							   <input type="text" name="Name" ng-model="person.providerdetails.dealicense.name" placeholder="Enter Name" />
-							  </div>
-							  <div class="row">
-							   <label>Street Address</label>
-							   <input type="text" name="Street Address" ng-model="person.providerdetails.dealicense.streetaddress"  placeholder="Enter Street Address" />
-							  </div>
-							  <div class="row">
-							   <label>City</label>
-							   <input type="text" name="City" ng-model="person.providerdetails.dealicense.city"  placeholder="Enter City Name" />
-							  </div>
-							  <div class="row">
-							   <label>State</label>
-							   <input type="text" name="State" ng-model="person.providerdetails.dealicense.state" placeholder="Enter State Name" />
-							  </div>
-							  <div class="row">
-							   <label>Country</label>
-							   <input type="text" name="Country" ng-model="person.providerdetails.dealicense.country"  placeholder="Enter Country Name" />
-							  </div>
-							  <div class="row">
-							   <label>ZIP</label>
-							   <input type="text" name="ZIP" ng-model="person.providerdetails.dealicense.zip"  placeholder="Enter ZIP Code" />
-							  </div>
-							  <div class="row">
-							   <label>Telephone</label>
-							   <input type="text" name="Telephone" ng-model="person.providerdetails.dealicense.telephone"  placeholder="Enter Telephone Number" />
-							  </div>
-							  <div class="row">
-							   <label>Fax</label>
-							   <input type="text" name="Fax" ng-model="person.providerdetails.dealicense.fax"  placeholder="Enter Fax Code" />
-							  </div>
-							  <div class="row">
-							   <label>Email</label>
-							   <input type="text" name="Email" ng-model="person.providerdetails.dealicense.email"  placeholder="Enter Email ID" />
-							  </div>
-							</div>
-							<div class="right-col">
-							  <div class="row">
-							   <label>ExpiryDate</label>
-							   <input type="text" name="ExpiryDate" class="datepicker" ng-model="person.providerdetails.dealicense.expdate"  placeholder="MM/DD/YYYY" />
-							  </div>
-							  <div class="row">
-							   <label>Number</label>
-							   <input type="text" name="Number" ng-model="person.providerdetails.dealicense.number" placeholder="Enter Number" />
-							  </div>
-
-							  <h3><span class="heading-bottom orange">File Details</span></h3>
-							  <div class="row">
-							   <input type="file" id="dea-file" name="upload-file" placeholder="" />
-							  </div>
-							  <table class="fileupload">
-								<thead>
-									<tr>
-										<th>File Name</th>
-										<th>Actions</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr class="1">
-										<td><a href="files/Sample Document.docx" target="_blank">Sample Document.docx</a></td>
-										<td><a href="javascript:;" onclick="deleteFile(this);">Delete</a></td>
-									</tr>
-								</tbody>
-							  </table>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			 <div class="toggle-container">
-			  <div class="toggle-header"><img src="images/right-arrow.png" alt="arrow" /><a href="javascript:;">MalpracticeInsurance</a></div>
-			  <div class="toggle-content">
-			    <div class="two-col">
-				 <div class="left-col">
-				  <h3><span class="heading-bottom orange">MalpracticeInsurance Address</span></h3>
-				  <div class="row">
-				   <label>Name</label>
-				   <input type="text" name="Name" ng-model="person.providerdetails.malpracticeinsurance.name"  placeholder="Enter Name" />
-				  </div>
-				  <div class="row">
-				   <label>Street Address</label>
-				   <input type="text" name="Street Address" ng-model="person.providerdetails.malpracticeinsurance.streetaddress" placeholder="Enter Street Address" />
-				  </div>
-				  <div class="row">
-				   <label>City</label>
-				   <input type="text" name="City" ng-model="person.providerdetails.malpracticeinsurance.city" placeholder="Enter City Name" />
-				  </div>
-				  <div class="row">
-				   <label>State</label>
-				   <input type="text" name="State" ng-model="person.providerdetails.malpracticeinsurance.state" placeholder="Enter State Name" />
-				  </div>
-				  <div class="row">
-				   <label>Country</label>
-				   <input type="text" name="Country" ng-model="person.providerdetails.malpracticeinsurance.country" placeholder="Enter Country Name" />
-				  </div>
-				  <div class="row">
-				   <label>ZIP</label>
-				   <input type="text" name="ZIP" ng-model="person.providerdetails.malpracticeinsurance.zip" placeholder="Enter ZIP Code" />
-				  </div>
-				  <div class="row">
-				   <label>Telephone</label>
-				   <input type="text" name="Telephone" ng-model="person.providerdetails.malpracticeinsurance.teliphone" placeholder="Enter Telephone Number" />
-				  </div>
-				  <div class="row">
-				   <label>Fax</label>
-				   <input type="text" name="Fax" ng-model="person.providerdetails.malpracticeinsurance.fax" placeholder="Enter Fax Code" />
-				  </div>
-				  <div class="row">
-				   <label>Email</label>
-				   <input type="text" name="Email" ng-model="person.providerdetails.malpracticeinsurance.email" placeholder="Enter Email ID" />
-				  </div>
-				 </div>
-				  
-				 <div class="right-col">
-				  <div class="row">
-				   <label>ExpiryDate</label>
-				   <input type="text" name="ExpiryDate" ng-model="person.providerdetails.malpracticeinsurance.expdate" class="datepicker" placeholder="MM/DD/YYYY" />
-				  </div>
-				  <div class="row">
-				   <label>PolicyNumber</label>
-				   <input type="text" name="PolicyNumber" ng-model="person.providerdetails.malpracticeinsurance.policyno" placeholder="Enter PolicyNumber" />
-				  </div>
-
-				  <h3><span class="heading-bottom orange">Policy File Details</span></h3>
-				  <div class="row">
-				   <input type="file" id="policy-file" name="upload-file" placeholder="" />
-				  </div>
-				  <table class="fileupload">
-						<thead>
-							<tr>
-								<th>File Name</th>
-								<th>Actions</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="1">
-								<td><a href="files/Sample Document.docx" target="_blank">Sample Document.docx</a></td>
-								<td><a href="javascript:;" onclick="deleteFile(this);">Delete</a></td>
-							</tr>
-						</tbody>
-				  </table>
-				  <h3><span class="heading-bottom orange">FaceSheet File Details</span></h3>
-				  <div class="row">
-				   <input type="file" id="facesheet-file" name="upload-file" placeholder="" />
-				  </div>
-				  <table class="fileupload">
-						<thead>
-							<tr>
-								<th>File Name</th>
-								<th>Actions</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr class="1">
-								<td><a href="files/Sample Document.docx" target="_blank">Sample Document.docx</a></td>
-								<td><a href="javascript:;" onclick="deleteFile(this);">Delete</a></td>
-							</tr>
-						</tbody>
-				  </table>
+				<div class="row">
+				 <div class="align-right">
+					<input type="button" class="gray-button" value="Cancel" />
+					<input type="submit" class="orange-button" value="Add" />
 				 </div>
 				</div>
-			 </div>
 			</div>
-			</div>
-			<div class="row">
-			 <div class="align-right">
-			  <input type="button" class="gray-button" value="Cancel" />
-			  <input type="submit" class="orange-button" value="Add" />
-			 </div>
-			</div>
-		 </div>
-	  </section>
-  </form>
+		</section>
+	</form>
 </div>

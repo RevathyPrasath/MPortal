@@ -8,7 +8,7 @@
  * Controller of the healthCareApp
  */
 angular.module('healthCareApp')
-  .controller('ViewListCtrl', function ($rootScope, ApiService, healthCareBusinessConstants) {
+  .controller('ViewListCtrl', function ($rootScope, ApiService, healthCareBusinessConstants, $location) {
   	var vm = this;
   	$rootScope.hideNavbar = false;
     console.log(vm.jwtToken);
@@ -42,7 +42,9 @@ angular.module('healthCareApp')
     };
 
   	vm.editEmployye = function (editObj) {
-  		console.log("Edit Employee Object::",editObj)
+      $('a[data-target="#profile"]').tab('show');
+  		console.log("Edit Employee Object::",editObj);
+      
   	};
 
   	vm.deleteEmployye = function (obj, index) {
@@ -51,6 +53,7 @@ angular.module('healthCareApp')
   	};
 
     vm.init = function () {
+      $rootScope.loading = true;
       var searchObj = { "empId": null, "empFirstName": null, "empLastName": null, "tilte": null, "location": null, "supervisor": null, "phiAccess": null, "status": null, "system": null, "userName": null, "dob": null, "gender": null, "ssn": null, "active": null, "createDt": null, "updatedDt": null, "updatedId": null };
       ApiService.post(healthCareBusinessConstants.SEARCH_URL, searchObj).then(successCallback, errorCallback).finally(finalCallBack);
     };

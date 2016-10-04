@@ -53,13 +53,13 @@
 					  </thead>
 					  <tbody>
 						  <tr class="bf-warning" ng-repeat="item in statusReport.expaireData.employees | filter:filterOpt">
-								<td ng-bind="item.empId"></td>
-								<td ng-bind="item.userName"></td>
-								<td ng-bind="item.dob"></td>
-								<td ng-bind="item.gender"></td>
-								<td ng-bind="item.ssn"></td>
-								<td ng-bind="item.active"></td>
-								<td class="{{(item.status==='EXPIRED') && 'expired-color' || 'expires-soon-color'}}"></td>
+								<td ng-bind="item.person.personID"></td>
+								<td ng-bind="item.person.firstNm"></td>
+								<td ng-bind="item.person.birthDt"></td>
+								<td ng-bind="item.person.gender"></td>
+								<td ng-bind="item.person.ssn"></td>
+								<td ng-bind="item.person.status"></td>
+								<td class="{{(item.statusCheck==='EXPIRED') && 'expired-color' || 'expires-soon-color'}}"></td>
 						  </tr>
 				  </tbody>
 				 </table>

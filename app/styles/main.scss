@@ -1,7 +1,10 @@
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 // bower:scss
-@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+@import 'bootstrap-sass-official/assets/stylesheets/_bootstrap.scss';
 // endbower
+
+@import 'customStyles.scss';
+@import 'jquery-ui.css';
 
 .alert {
   width: 70%;
@@ -39,10 +42,17 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
   }
 }
 .main-content {
-  margin-top: 40px !important;
+  margin-top: 64px !important;
 	 min-height: calc(100vh - 90px);
 	 overflow: auto;
 	 margin-top: -5px;
+}
+.glyphicon {
+  cursor: pointer;
+}
+#accordion {
+  width: 80% !important;
+  margin: 0 auto;
 }
 .footer {
   bottom: 0;
@@ -55,6 +65,13 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 .navbar-nav > li > a {
     color:#444;
   }
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  { 
+#accordion {
+    width: 100% !important;
+  }
+}
+
 @media (max-width: 768px) {
   .navbar-nav > li > a {
       padding-top: 10px;
