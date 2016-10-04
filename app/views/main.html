@@ -45,9 +45,9 @@
 					</thead>
 					<tbody>
 					 <tr ng-repeat="employee in person.users">
-						<td class="text-center" ng-bind="employee.empId"></td>
-						<td class="text-center" ng-bind="employee.userName"></td>
-						<td class="text-center" ng-bind="employee.gender"></td>
+						<td class="text-center" ng-bind="employee.employeeID"></td>
+						<td class="text-center" ng-bind="employee.person.firstNm"></td>
+						<td class="text-center" ng-bind="employee.person.gender"></td>
 						<td class="text-center">
 							<a ng-click="person.editEmployye(employee)">
 								<i class="glyphicon glyphicon-pencil text-muted"></i>
