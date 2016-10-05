@@ -65,6 +65,7 @@
 			</div>
 		</section>
 	</div>
+
 	<!-- tab2 -->
 	<form role="tabpanel" class="tab-pane" id="profile" ng-submit="person.addPerson(person)">
 		<section>
@@ -74,34 +75,34 @@
 					<div class="left-col">
 						<div class="row">
 							<label>PersonID</label>
-							<input type="text" name="PersonID" placeholder="Enter Person ID" ng-model="person.details.persondetails.personId"/>
+							<input type="text" name="PersonID" placeholder="Enter Person ID" ng-model="person.details.person.personID" readonly="true" />
 						</div>
 						<div class="row">
 							<label>LastName</label>
-							<input type="text" name="LastName"  ng-model="person.details.persondetails.lastname" placeholder="Enter Last Name" />
+							<input type="text" name="LastName"  ng-model="person.details.person.lastNm" placeholder="Enter Last Name" />
 						</div>
 						<div class="row">
 							<label>FirstName</label>
-							<input type="text" ng-model="person.details.persondetails.firstname" name="FirstName" placeholder="Enter First Name" />
+							<input type="text" ng-model="person.details.person.firstNm" name="FirstName" placeholder="Enter First Name" />
 						</div>
 						<div class="row">
 							<label>MiddleName</label>
-							<input type="text" ng-model="person.details.persondetails.middlename" name="MiddleName" placeholder="Enter Middle Name" />
+							<input type="text" ng-model="person.details.person.middleNm" name="MiddleName" placeholder="Enter Middle Name" />
 						</div>
 						<div class="row">
 							<label>Birthdate</label>
-							<input type="text" name="Birthdate" ng-model="person.details.persondetails.dob" class="datepicker" placeholder="MM/DD/YYYY" />
+							<input type="text" name="Birthdate" ng-model="person.details.person.birthDt" class="datepicker" placeholder="MM/DD/YYYY" />
 						</div>
 						<div class="row radio">
 						<label>Gender</label>
 							<ul>
 								<li>
-									<input type="radio" id="gender-male" ng-model="person.details.persondetails.gender" name="gender" value="male" checked>
+									<input type="radio" id="gender-male" ng-model="person.details.person.gender" name="gender" value="M" checked>
 									<label for="gender-male">Male</label>
 									<div class="check"></div>
 								</li>
 								<li>
-									<input type="radio" id="gender-female" ng-model="person.details.persondetails.gender" name="gender" value="female">
+									<input type="radio" id="gender-female" ng-model="person.details.person.gender" name="gender" value="F">
 									<label for="gender-female">Female</label>
 									<div class="check"><div class="inside"></div></div>
 								</li>
@@ -109,18 +110,18 @@
 						</div>
 						<div class="row">
 							<label>SSN</label>
-							<input type="text" name="SSN" ng-model="person.details.persondetails.ssn" placeholder="Enter SSN" />
+							<input type="text" name="SSN" ng-model="person.details.person.ssn" placeholder="Enter SSN" readonly="true"/>
 						</div>
 						<div class="row radio">
 							<label>IsActive</label>
 							<ul>
 								<li>
-									<input type="radio" id="active-yes" ng-model="person.details.persondetails.isactive" name="active" value="Yes" checked>
+									<input type="radio" id="active-yes" ng-model="person.details.person.status" name="active" value="Yes" checked>
 									<label for="active-yes">Yes</label>
 									<div class="check"></div>
 								</li>
 								<li>
-									<input type="radio" id="active-no" ng-model="person.details.persondetails.isactive" name="active" value="No">
+									<input type="radio" id="active-no" ng-model="person.details.person.status" name="active" value="No">
 									<label for="active-no">No</label>
 									<div class="check"><div class="inside"></div></div>
 								</li>
@@ -132,39 +133,39 @@
 						<h3><span class="heading-bottom orange">HomeAddressID</span></h3>
 						<div class="row">
 						 <label>Name</label>
-						 <input type="text" name="Name" ng-model="person.details.persondetails.name" placeholder="Enter Name" />
+						 <input type="text" name="Name" ng-model="person.details.person.address.name" placeholder="Enter Name" />
 						</div>
 						<div class="row">
 						 <label>Street Address</label>
-						 <input type="text" name="Street Address" ng-model="person.details.persondetails.streetAddress" placeholder="Enter Street Address" />
+						 <input type="text" name="Street Address" ng-model="person.details.person.address.streetAddress" placeholder="Enter Street Address" />
 						</div>
 						<div class="row">
 						 <label>City</label>
-						 <input type="text" name="City" ng-model="person.details.persondetails.city" placeholder="Enter City Name" />
+						 <input type="text" name="City" ng-model="person.details.person.address.city" placeholder="Enter City Name" />
 						</div>
 						<div class="row">
 						 <label>State</label>
-						 <input type="text" name="State" ng-model="person.details.persondetails.state" placeholder="Enter State Name" />
+						 <input type="text" name="State" ng-model="person.details.person.address.state" placeholder="Enter State Name" />
 						</div>
 						<div class="row">
 						 <label>Country</label>
-						 <input type="text" name="Country" ng-model="person.details.persondetails.country" placeholder="Enter Country Name" />
+						 <input type="text" name="Country" ng-model="person.details.person.address.country" placeholder="Enter Country Name" />
 						</div>
 						<div class="row">
 						 <label>ZIP</label>
-						 <input type="text" name="ZIP" ng-model="person.details.persondetails.zip" placeholder="Enter ZIP Code" />
+						 <input type="text" name="ZIP" ng-model="person.details.person.address.zip" placeholder="Enter ZIP Code" />
 						</div>
 						<div class="row">
 						 <label>Telephone</label>
-						 <input type="text" name="Telephone" ng-model="person.details.persondetails.telephone" placeholder="Enter Telephone Number" />
+						 <input type="text" name="Telephone" ng-model="person.details.person.address.phoneNumber" placeholder="Enter Telephone Number" />
 						</div>
 						<div class="row">
 						 <label>Fax</label>
-						 <input type="text" name="Fax" ng-model="person.details.persondetails.fax" placeholder="Enter Fax Code" />
+						 <input type="text" name="Fax" ng-model="person.details.person.address.faxNumber" placeholder="Enter Fax Code" />
 						</div>
 						<div class="row">
 						 <label>Email</label>
-						 <input type="text" name="Email" ng-model="person.details.persondetails.email" placeholder="Enter Email ID" />
+						 <input type="text" name="Email" ng-model="person.details.person.address.emailID" placeholder="Enter Email ID" />
 						</div>
 					</div>
 				</div>
@@ -174,20 +175,21 @@
 				 <div class="left-col">
 					<div class="row">
 					 <label>Employee ID</label>
-					 <input type="text" name="Employee Id" ng-model="person.details.employeedetails.empid" placeholder="Employee ID">
+					 <input type="text" name="Employee Id" ng-model="person.details.employeeID" placeholder="Employee ID">
 					</div> 
 					<div class="row">
 						<label>Supervisor</label>
-						<select id="supervisor" ng-model="person.details.employeedetails.supervisor">
+						<select id="supervisor" ng-model="person.details.empType">
 							<option value="Employee">Employee</option>
-							<option class="Supervisor">Supervisor</option>
+							<option value="Supervisor">Supervisor</option>
 						</select>
 					</div>
 					<div class="row">
 					 <label>Field</label>
-					 <input type="text" name="Field" ng-model="person.details.employeedetails.field" placeholder="Enter Field Value" />
+					 <input type="text" name="Field" ng-model="person.details.field" placeholder="Enter Field Value" />
 					</div>
 				 </div>
+
 				 <div class="right-col">
 					<div class="row">
 					 <input type="file" id="emp-file" name="upload-file" placeholder="" />
@@ -200,39 +202,41 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr class="1">
-								<td><a href="files/Sample Document.docx" target="_blank">Sample Document.docx</a></td>
-								<td><a href="javascript:;" onclick="deleteFile(this);">Delete</a></td>
+							<tr class="1" ng-repeat="doc in person.details.document">
+								<td><a target="_blank" ng-bind="doc.filename"></a></td>
+								<td><a href="javascript:void(0);" onclick="deleteFile(this);">Delete</a></td>
 							</tr>
 						</tbody>
 					</table>
 				 </div>
 				</div>
+
 				<div id="physician-details">
 					<h2><span class="heading-bottom">Provider Details</span></h2>
 					<div class="two-col">
 					 <div class="left-col">
 						<div class="row">
 						 <label>Specialty</label>
-						 <select id="specialty" ng-model="person.details.providerdetails.specialty">
-							<option>Cardiaology</option>
-							<option>Neurology</option>
+						 <select id="specialty" ng-model="person.details.provider.specialty">
+							<option value="Cardiaology">Cardiaology</option>
+							<option value="Neurology">Neurology</option>
 						 </select>
 						</div>
 						<div class="row">
 						 <label>NPI</label>
-						 <input type="text" name="NPI" ng-model="person.details.providerdetails.npi" placeholder="Enter NPI Details" />
+						 <input type="text" name="NPI" ng-model="person.details.provider.npi" placeholder="Enter NPI Details" />
 						</div>
 						<div class="row">
 						 <label>Taxonomy</label>
-						 <input type="text" name="Taxonomy" ng-model="person.details.providerdetails.taxonomy" placeholder="Enter Taxonomy Details" />
+						 <input type="text" name="Taxonomy" ng-model="person.details.provider.taxonomy" placeholder="Enter Taxonomy Details" />
 						</div>
 						<div class="row">
 						 <label>Credentials</label>
-						 <input type="text" ng-model="person.details.providerdetails.credentials" name="Credentials" placeholder="Enter Credentials" />
+						 <input type="text" ng-model="person.details.provider.credentials" name="Credentials" placeholder="Enter Credentials" />
 						</div>
 					 </div>
 					</div>
+
 					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 						<div class="panel panel-default">
 							<div class="panel-heading" role="tab" id="headingOne">
@@ -249,15 +253,15 @@
 											<div class="left-col">
 												<div class="row">
 													<label>State</label>
-													<input type="text" name="State" ng-model="person.details.providerdetails.medicallicense.state" placeholder="Enter State" />
+													<input type="text" name="State" ng-model="person.details.provider.medlicense.medLicState" placeholder="Enter State" />
 												</div>
 												<div class="row">
 													<label>ExpiryDate</label>
-													<input type="text" name="ExpiryDate" ng-model="person.details.providerdetails.medicallicense.expirydate" class="datepicker" placeholder="MM/DD/YYYY" />
+													<input type="text" name="ExpiryDate" ng-model="person.details.provider.medlicense.medLicExpDate" class="datepicker" placeholder="MM/DD/YYYY" />
 												</div>
 												<div class="row">
 													<label>Number</label>
-													<input type="text" name="Number" ng-model="person.details.providerdetails.medicallicense.number" placeholder="Enter Number" />
+													<input type="text" name="Number" ng-model="person.details.provider.medlicense.medLicNumber" placeholder="Enter Number" />
 												</div>
 											</div>
 											<div class="right-col">
@@ -273,8 +277,8 @@
 														</tr>
 													</thead>
 													<tbody>
-														<tr class="1">
-															<td><a href="files/Sample Document.docx" target="_blank">Sample Document.docx</a></td>
+														<tr class="1" ng-repeat="doc in person.details.provider.medlicense.document">
+															<td><a target="_blank" ng-bind="doc.filename"></a></td>
 															<td><a href="javascript:;" onclick="deleteFile(this);">Delete</a></td>
 														</tr>
 													</tbody>
@@ -302,49 +306,49 @@
 												<h3><span class="heading-bottom orange">DEALicense Address</span></h3>
 												<div class="row">
 												 <label>Name</label>
-												 <input type="text" name="Name" ng-model="person.details.providerdetails.dealicense.name" placeholder="Enter Name" />
+												 <input type="text" name="Name" ng-model="person.details.provider.dealicense.deaLicName" placeholder="Enter Name" />
 												</div>
 												<div class="row">
 												 <label>Street Address</label>
-												 <input type="text" name="Street Address" ng-model="person.details.providerdetails.dealicense.streetaddress"  placeholder="Enter Street Address" />
+												 <input type="text" name="Street Address" ng-model="person.details.provider.dealicense.address.deaLicAddress"  placeholder="Enter Street Address" />
 												</div>
 												<div class="row">
 												 <label>City</label>
-												 <input type="text" name="City" ng-model="person.details.providerdetails.dealicense.city"  placeholder="Enter City Name" />
+												 <input type="text" name="City" ng-model="person.details.provider.dealicense.address.city"  placeholder="Enter City Name" />
 												</div>
 												<div class="row">
 												 <label>State</label>
-												 <input type="text" name="State" ng-model="person.details.providerdetails.dealicense.state" placeholder="Enter State Name" />
+												 <input type="text" name="State" ng-model="person.details.provider.dealicense.address.state" placeholder="Enter State Name" />
 												</div>
 												<div class="row">
 												 <label>Country</label>
-												 <input type="text" name="Country" ng-model="person.details.providerdetails.dealicense.country"  placeholder="Enter Country Name" />
+												 <input type="text" name="Country" ng-model="person.details.provider.dealicense.address.country"  placeholder="Enter Country Name" />
 												</div>
 												<div class="row">
 												 <label>ZIP</label>
-												 <input type="text" name="ZIP" ng-model="person.details.providerdetails.dealicense.zip"  placeholder="Enter ZIP Code" />
+												 <input type="text" name="ZIP" ng-model="person.details.provider.dealicense.address.zip"  placeholder="Enter ZIP Code" />
 												</div>
 												<div class="row">
 												 <label>Telephone</label>
-												 <input type="text" name="Telephone" ng-model="person.details.providerdetails.dealicense.telephone"  placeholder="Enter Telephone Number" />
+												 <input type="text" name="Telephone" ng-model="person.details.provider.dealicense.address.phoneNumber"  placeholder="Enter Telephone Number" />
 												</div>
 												<div class="row">
 												 <label>Fax</label>
-												 <input type="text" name="Fax" ng-model="person.details.providerdetails.dealicense.fax"  placeholder="Enter Fax Code" />
+												 <input type="text" name="Fax" ng-model="person.details.provider.dealicense.address.faxNumber"  placeholder="Enter Fax Code" />
 												</div>
 												<div class="row">
 												 <label>Email</label>
-												 <input type="text" name="Email" ng-model="person.details.providerdetails.dealicense.email"  placeholder="Enter Email ID" />
+												 <input type="text" name="Email" ng-model="person.details.provider.dealicense.address.emailID"  placeholder="Enter Email ID" />
 												</div>
 											</div>
 											<div class="right-col">
 												<div class="row">
 												 <label>ExpiryDate</label>
-												 <input type="text" name="ExpiryDate" class="datepicker" ng-model="person.details.providerdetails.dealicense.expdate"  placeholder="MM/DD/YYYY" />
+												 <input type="text" name="ExpiryDate" class="datepicker" ng-model="person.details.provider.dealicense.expiryDate"  placeholder="MM/DD/YYYY" />
 												</div>
 												<div class="row">
 												 <label>Number</label>
-												 <input type="text" name="Number" ng-model="person.details.providerdetails.dealicense.number" placeholder="Enter Number" />
+												 <input type="text" name="Number" ng-model="person.details.provider.dealicense.telephone" placeholder="Enter Number" />
 												</div>
 												<h3><span class="heading-bottom orange">File Details</span></h3>
 												<div class="row">
@@ -358,8 +362,8 @@
 														</tr>
 													</thead>
 													<tbody>
-														<tr class="1">
-															<td><a href="files/Sample Document.docx" target="_blank">Sample Document.docx</a></td>
+														<tr class="1" ng-repeat="doc in person.details.provider.dealicense.document">
+															<td><a target="_blank" ng-bind="doc.filename"></a></td>
 															<td><a href="javascript:;" onclick="deleteFile(this);">Delete</a></td>
 														</tr>
 													</tbody>
@@ -386,49 +390,49 @@
 											<h3><span class="heading-bottom orange">MalpracticeInsurance Address</span></h3>
 											<div class="row">
 												<label>Name</label>
-												<input type="text" name="Name" ng-model="person.details.providerdetails.malpracticeinsurance.name"  placeholder="Enter Name" />
+												<input type="text" name="Name" ng-model="person.details.provider.malprctlnce.name"  placeholder="Enter Name" />
 											</div>
 											<div class="row">
 												<label>Street Address</label>
-												<input type="text" name="Street Address" ng-model="person.details.providerdetails.malpracticeinsurance.streetaddress" placeholder="Enter Street Address" />
+												<input type="text" name="Street Address" ng-model="person.details.provider.malprctlnce.streetaddress" placeholder="Enter Street Address" />
 											</div>
 											<div class="row">
 												<label>City</label>
-												<input type="text" name="City" ng-model="person.details.providerdetails.malpracticeinsurance.city" placeholder="Enter City Name" />
+												<input type="text" name="City" ng-model="person.details.provider.malprctlnce.city" placeholder="Enter City Name" />
 											</div>
 											<div class="row">
 												<label>State</label>
-												<input type="text" name="State" ng-model="person.details.providerdetails.malpracticeinsurance.state" placeholder="Enter State Name" />
+												<input type="text" name="State" ng-model="person.details.provider.malprctlnce.state" placeholder="Enter State Name" />
 											</div>
 											<div class="row">
 												<label>Country</label>
-												<input type="text" name="Country" ng-model="person.details.providerdetails.malpracticeinsurance.country" placeholder="Enter Country Name" />
+												<input type="text" name="Country" ng-model="person.details.provider.malprctlnce.country" placeholder="Enter Country Name" />
 											</div>
 											<div class="row">
 												<label>ZIP</label>
-												<input type="text" name="ZIP" ng-model="person.details.providerdetails.malpracticeinsurance.zip" placeholder="Enter ZIP Code" />
+												<input type="text" name="ZIP" ng-model="person.details.provider.malprctlnce.zip" placeholder="Enter ZIP Code" />
 											</div>
 											<div class="row">
 												<label>Telephone</label>
-												<input type="text" name="Telephone" ng-model="person.details.providerdetails.malpracticeinsurance.teliphone" placeholder="Enter Telephone Number" />
+												<input type="text" name="Telephone" ng-model="person.details.provider.malprctlnce.teliphone" placeholder="Enter Telephone Number" />
 											</div>
 											<div class="row">
 												<label>Fax</label>
-												<input type="text" name="Fax" ng-model="person.details.providerdetails.malpracticeinsurance.fax" placeholder="Enter Fax Code" />
+												<input type="text" name="Fax" ng-model="person.details.provider.malprctlnce.fax" placeholder="Enter Fax Code" />
 											</div>
 											<div class="row">
 												<label>Email</label>
-												<input type="text" name="Email" ng-model="person.details.providerdetails.malpracticeinsurance.email" placeholder="Enter Email ID" />
+												<input type="text" name="Email" ng-model="person.details.provider.malprctlnce.email" placeholder="Enter Email ID" />
 											</div>
 										</div>
 										<div class="right-col">
 											<div class="row">
 												<label>ExpiryDate</label>
-												<input type="text" name="ExpiryDate" ng-model="person.details.providerdetails.malpracticeinsurance.expdate" class="datepicker" placeholder="MM/DD/YYYY" />
+												<input type="text" name="ExpiryDate" ng-model="person.details.provider.malprctlnce.expdate" class="datepicker" placeholder="MM/DD/YYYY" />
 											</div>
 											<div class="row">
 												<label>PolicyNumber</label>
-												<input type="text" name="PolicyNumber" ng-model="person.details.providerdetails.malpracticeinsurance.policyno" placeholder="Enter PolicyNumber" />
+												<input type="text" name="PolicyNumber" ng-model="person.details.provider.malprctlnce.policyno" placeholder="Enter PolicyNumber" />
 											</div>
 											<h3><span class="heading-bottom orange">Policy File Details</span></h3>
 											<div class="row">
@@ -442,12 +446,13 @@
 													</tr>
 												</thead>
 												<tbody>
-													<tr class="1">
-														<td><a href="files/Sample Document.docx" target="_blank">Sample Document.docx</a></td>
+													<tr class="1" ng-repeat="doc in person.details.provider.malprctlnce.malInsPolicyDoc">
+														<td><a ng-bind="doc.filename"></a></td>
 														<td><a href="javascript:;" onclick="deleteFile(this);">Delete</a></td>
 													</tr>
 												</tbody>
 											</table>
+
 											<h3><span class="heading-bottom orange">FaceSheet File Details</span></h3>
 											<div class="row">
 												<input type="file" id="facesheet-file" name="upload-file" placeholder="" />
@@ -460,8 +465,8 @@
 													</tr>
 												</thead>
 												<tbody>
-													<tr class="1">
-														<td><a href="files/Sample Document.docx" target="_blank">Sample Document.docx</a></td>
+													<tr class="1" ng-repeat="doc in person.details.provider.malprctlnce.malInsFaceSheet">
+														<td><a ng-bind="doc.filename"></a></td>
 														<td><a href="javascript:;" onclick="deleteFile(this);">Delete</a></td>
 													</tr>
 												</tbody>
