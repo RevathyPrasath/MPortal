@@ -33,7 +33,7 @@ angular.module('healthCareApp')
     $(window).resize(collect);
     function collect() {
       elemWidth = $menu.width();
-      fitCount = Math.floor((elemWidth / varWidth) * ctr) - 1;
+      fitCount = Math.floor((elemWidth / varWidth) * ctr)-3;
       $menu.children().css({"display": "block", "width": "auto"});
       $collectedSet = $menu.children(":gt(" + fitCount + ")");
       $("#submenu").empty().append($collectedSet.clone());  
