@@ -192,14 +192,9 @@
 
 				 <div class="right-col">
 					<div class="row">
-					 <!-- <input id="fileInput" type="file" name="uploadingFiles" ng-change="person.updateSize();" multiple>
-						Selected files: <span id="fileNum">0</span>;
-						Total size: <span id="fileSize">0</span>
-						<input type="button" value="Upload" ng-click="person.uploadFile()"> -->
-
-						<input type="file" file-model="uploadingFiles"/>
+						<input type="file" file-model="EmployeeDoc" multiple/>
 						<br>
-         		<button ng-click="person.uploadFile()" class="btn btn-sm btn-warning" style="    margin-top: 10px;"> Upload </button>
+         		<button ng-click="person.uploadFile('EmployeeDoc', EmployeeDoc)" class="btn btn-sm btn-warning upload-btn"> Upload </button>
 					</div>
 					<table class="fileupload">
 						<thead>
@@ -211,13 +206,12 @@
 						<tbody>
 							<tr class="1" ng-repeat="doc in person.details.document">
 								<td><a target="_blank" ng-bind="doc.filename"></a></td>
-								<td><a href="javascript:void(0);" onclick="deleteFile(this);">Delete</a></td>
+								<td><a href="javascript:void(0);" onclick="deleteFile(doc);">Delete</a></td>
 							</tr>
 						</tbody>
 					</table>
 				 </div>
 				</div>
-
 				<div id="physician-details">
 					<h2><span class="heading-bottom">Provider Details</span></h2>
 					<div class="two-col">
@@ -273,9 +267,13 @@
 											</div>
 											<div class="right-col">
 												<h3><span class="heading-bottom orange">File Details</span></h3>
+
 												<div class="row">
-												 <input type="file" id="medical-file" name="upload-file" placeholder="" />
+													<input type="file" file-model="Medlicense" multiple/>
+													<br>
+							         		<button ng-click="person.uploadFile('Medlicense', Medlicense)" class="btn btn-sm btn-warning upload-btn"> Upload </button>
 												</div>
+
 												<table class="fileupload">
 													<thead>
 														<tr>
@@ -359,8 +357,11 @@
 												</div>
 												<h3><span class="heading-bottom orange">File Details</span></h3>
 												<div class="row">
-												 <input type="file" id="dea-file" name="upload-file" placeholder="" />
+													<input type="file" file-model="Dealicense" multiple/>
+													<br>
+							         		<button ng-click="person.uploadFile('Dealicense', Dealicense)" class="btn btn-sm btn-warning upload-btn"> Upload </button>
 												</div>
+
 												<table class="fileupload">
 													<thead>
 														<tr>
@@ -442,7 +443,9 @@
 											</div>
 											<h3><span class="heading-bottom orange">Policy File Details</span></h3>
 											<div class="row">
-												<input type="file" id="policy-file" name="upload-file" placeholder="" />
+												<input type="file" file-model="MalInsPolicyDoc" multiple/>
+												<br>
+						         		<button ng-click="person.uploadFile('MalInsPolicyDoc', MalInsPolicyDoc)" class="btn btn-sm btn-warning upload-btn"> Upload </button>
 											</div>
 											<table class="fileupload">
 												<thead>
@@ -461,7 +464,9 @@
 
 											<h3><span class="heading-bottom orange">FaceSheet File Details</span></h3>
 											<div class="row">
-												<input type="file" id="facesheet-file" name="upload-file" placeholder="" />
+												<input type="file" file-model="MalInsFaceSheet" multiple/>
+												<br>
+						         		<button ng-click="person.uploadFile('MalInsFaceSheet', MalInsFaceSheet)" class="btn btn-sm btn-warning upload-btn"> Upload </button>
 											</div>
 											<table class="fileupload">
 												<thead>

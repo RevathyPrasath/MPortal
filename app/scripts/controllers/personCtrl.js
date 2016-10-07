@@ -13,18 +13,6 @@ angular.module('healthCareApp')
   	$rootScope.hideNavbar = false;
     $rootScope.editEmployee = false;
 
-    //file upload stuff.
-    vm.uploadFile = function(){
-      var file = $scope.uploadingFiles;
-      console.dir(file);
-      var fd = new FormData();
-          fd.append('uploadingFiles', file);
-      ApiService.post(healthCareBusinessConstants.SAVE_DOC, fd, {transformRequest: angular.identity, headers: {'Content-Type': undefined}}).then(fileSuccessCallback, errorCallback).finally(finalCallBack);
-    };
-    function fileSuccessCallback (res) {
-      console.log(res);
-    };
-
     vm.details = {
         "employeeID": null,
         "empType": null,
@@ -212,6 +200,45 @@ angular.module('healthCareApp')
           "ssn": null
         }
       };
+
+
+     //file upload stuff.
+    vm.uploadFile = function(name, model) {
+      vm.name = name;
+      vm.filename = model.name;
+      var file = model;
+      var fd = new FormData();
+          fd.append('uploadingFiles', file);
+      ApiService.post(healthCareBusinessConstants.SAVE_DOC, fd, {transformRequest: angular.identity, headers: {'Content-Type': undefined}}).then(fileSuccessCallback, errorCallback).finally(finalCallBack);
+    };
+
+    function fileSuccessCallback (response) {
+      switch(vm.name) {
+          case 'EmployeeDoc':
+            vm.details.document = [
+              {
+                documentID: response.data,
+                filename: vm.filename
+              }
+            ];
+            break;
+          case 'Medlicense':
+            vm.details.provider.medlicense.document[0].documentID = response.data;
+            break;
+          case 'Dealicense':
+            vm.details.provider.dealicense.document[0].documentID = response.data;
+            break;
+          case 'MalInsPolicyDoc':
+            vm.details.provider.malprctlnce.malInsPolicyDoc[0].documentID = response.data;
+            break;
+          case 'MalInsFaceSheet':
+            vm.details.provider.malprctlnce.malInsFaceSheet[0].documentID = response.data;
+            break;
+          default:
+            alert('error');
+      }
+    };
+
   	vm.searchEmployee = function () {
      $rootScope.loading = true;
      var searchObj =  { "employeeID": vm.employeeId, "empType": null, "field": null, "statusCheck":null, "document": [{ "documentID": null, "created_date": null, "updated_date": null, "created_id": null, "updated_id": null, "filename": null, "filebytes": null }], "provider": { "providerID": null, "specialty": null, "npi": "Y", "taxonomy": null, "credentials": null, "medlicense": { "medLicState": null, "medLicExpDate": null, "created_date": null, "updated_date": null, "created_id": null, "updated_id": null, "medLicNumber": null, "medID": null, "document": [{ "documentID": null, "created_date": null, "updated_date": null, "created_id": null, "updated_id": null, "filename": null, "filebytes": null }, { "documentID": null, "created_date": null, "updated_date": null, "created_id": null, "updated_id": null, "filename": null, "filebytes": null }], "state": null, "expiryDate": null }, "dealicense": { "deaLicName": null, "deaLicAddress": null, "deaLicTelephone": 0, "deaLicFax": 0, "deaLicEmail": null, "deaLicExpDate": null, "deaLicNumber": 34343535353, "document": [{ "documentID": null, "created_date": null, "updated_date": null, "created_id": null, "updated_id": null, "filename": null, "filebytes": null }], "created_date": null, "updated_date": null, "created_id": null, "updated_id": null, "deaID": null, "address": { "streetAddress": null, "city": null, "state": null, "country": null, "zip": null, "phoneNumber": null, "faxNumber": null, "emailID": null, "created_date": null, "updated_date": null, "created_id": null, "updated_id": null, "addressID": null }, "name": null, "email": null, "fax": null, "deaaddress": null, "telephone": null, "expiryDate": null }, "malprctlnce": { "malPrctID": null, "malInsName": null, "malInsAddress": null, "malInsExpiryDate": null, "malInsPolicyNumber": null, "malInsPolicyDoc": [{ "documentID": null, "created_date": null, "updated_date": null, "created_id": null, "updated_id": null, "filename": null, "filebytes": null }, { "documentID": null, "created_date": null, "updated_date": null, "created_id": null, "updated_id": null, "filename": null, "filebytes": null }], "malInsFaceSheet": [{ "documentID": null, "created_date": null, "updated_date": null, "created_id": null, "updated_id": null, "filename": null, "filebytes": null }], "created_date": null, "updated_date": null, "created_id": null, "updated_id": null, "address": { "streetAddress": null, "city": null, "state": null, "country": null, "zip": null, "phoneNumber": null, "faxNumber": null, "emailID": null, "created_date": null, "updated_date": null, "created_id": null, "updated_id": null, "addressID": null } }, "created_date": null, "updated_date": null, "created_id": null, "updated_id": null }, "created_date": null, "updated_date": null, "created_id": null, "updated_id": null, "person": { "personID": null, "firstNm": null, "lastNm": vm.name, "middleNm": null, "birthDt": null, "gender": null, "status": null, "empAddress": null, "created_date": null, "updated_date": null, "created_id": null, "updated_id": null, "address": { "streetAddress": null, "city": null, "state": null, "country": null, "zip": null, "phoneNumber": null, "faxNumber": null, "emailID": null, "created_date": null, "updated_date": null, "created_id": null, "updated_id": null, "addressID": null }, "ssn": vm.ssn } };
