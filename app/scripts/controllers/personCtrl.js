@@ -10,198 +10,22 @@
 angular.module('healthCareApp')
   .controller('PersonCtrl', function ($scope, $rootScope, ApiService, healthCareBusinessConstants, $location, $window) {
   	var vm = this;
+
+
+      
+    
+    vm.viewList = function(){
+      $('a[data-target="#vileList"]').tab('show');
+    }
+
   	$rootScope.hideNavbar = false;
     $rootScope.editEmployee = false;
 
-    vm.details = {
-        "employeeID": null,
-        "empType": null,
-        "field": null,
-        "document": [
-          {
-            "documentID": null,
-            "created_date": null,
-            "updated_date": null,
-            "created_id": null,
-            "updated_id": null,
-            "filename": null,
-            "filebytes": null
-          }
-        ],
-        "provider": {
-          "providerID": null,
-          "specialty": null,
-          "npi": null,
-          "taxonomy": null,
-          "credentials": null,
-          "medlicense": {
-            "medLicState": null,
-            "medLicExpDate": null,
-            "created_date": null,
-            "updated_date": null,
-            "created_id": null,
-            "updated_id": null,
-            "medLicNumber": null,
-            "medID": null,
-            "document": [
-              {
-                "documentID": null,
-                "created_date": null,
-                "updated_date": null,
-                "created_id": null,
-                "updated_id": null,
-                "filename": null,
-                "filebytes": null
-              }
-            ],
-            "state": null,
-            "expiryDate": null
-          },
-          "dealicense": {
-            "deaLicName": null,
-            "deaLicAddress": null,
-            "deaLicTelephone": null,
-            "deaLicFax": null,
-            "deaLicEmail": null,
-            "deaLicExpDate": null,
-            "deaLicNumber": null,
-            "document": [
-              {
-                "documentID": null,
-                "created_date": null,
-                "updated_date": null,
-                "created_id": null,
-                "updated_id": null,
-                "filename": null,
-                "filebytes": null
-              }
-            ],
-            "created_date": null,
-            "updated_date": null,
-            "created_id": null,
-            "updated_id": null,
-            "deaID": null,
-            "address": {
-              "streetAddress": null,
-              "city": null,
-              "state": null,
-              "country": null,
-              "zip": null,
-              "phoneNumber": null,
-              "faxNumber": null,
-              "emailID": null,
-              "created_date": null,
-              "updated_date": null,
-              "created_id": null,
-              "updated_id": null,
-              "addressID": null
-            },
-            "name": null,
-            "email": null,
-            "fax": null,
-            "deaaddress": null,
-            "telephone": null,
-            "expiryDate": null
-          },
-          "malprctlnce": {
-            "malPrctID": null,
-            "malInsName": null,
-            "malInsAddress": null,
-            "malInsExpiryDate": null,
-            "malInsPolicyNumber": null,
-            "malInsPolicyDoc": [
-              {
-                "documentID": null,
-                "created_date": null,
-                "updated_date": null,
-                "created_id": null,
-                "updated_id": null,
-                "filename": null,
-                "filebytes": null
-              },
-              {
-                "documentID": null,
-                "created_date": null,
-                "updated_date": null,
-                "created_id": null,
-                "updated_id": null,
-                "filename": null,
-                "filebytes": null
-              }
-            ],
-            "malInsFaceSheet": [
-              {
-                "documentID": null,
-                "created_date": null,
-                "updated_date": null,
-                "created_id": null,
-                "updated_id": null,
-                "filename": null,
-                "filebytes": null
-              }
-            ],
-            "created_date": null,
-            "updated_date": null,
-            "created_id": null,
-            "updated_id": null,
-            "address": {
-              "streetAddress": null,
-              "city": null,
-              "state": null,
-              "country": null,
-              "zip": null,
-              "phoneNumber": null,
-              "faxNumber": null,
-              "emailID": null,
-              "created_date": null,
-              "updated_date": null,
-              "created_id": null,
-              "updated_id": null,
-              "addressID": null
-            }
-          },
-          "created_date": null,
-          "updated_date": null,
-          "created_id": null,
-          "updated_id": null
-        },
-        "created_date": null,
-        "updated_date": null,
-        "created_id": null,
-        "updated_id": null,
-        "person": {
-          "personID": null,
-          "firstNm": null,
-          "lastNm": null,
-          "middleNm": null,
-          "birthDt": null,
-          "gender": null,
-          "status": null,
-          "empAddress": null,
-          "created_date": null,
-          "updated_date": null,
-          "created_id": null,
-          "updated_id": null,
-          "address": {
-            "streetAddress": null,
-            "city": null,
-            "state": null,
-            "country": null,
-            "zip": null,
-            "phoneNumber": null,
-            "faxNumber": null,
-            "emailID": null,
-            "created_date": null,
-            "updated_date": null,
-            "created_id": null,
-            "updated_id": null,
-            "addressID": null
-          },
-          "ssn": null
-        }
-      };
-
-
+    vm.addNewTab = function(){
+      vm.editEmployee = false;
+      vm.details = { "employeeID": null, "empType": null, "field": null, "document": [], "provider": { "providerID": null, "specialty": null, "npi": null, "taxonomy": null, "credentials": null, "medlicense": { "medLicState": null, "medLicExpDate": null, "created_date": null, "updated_date": null, "created_id": null, "updated_id": null, "medLicNumber": null, "medID": null, "document": [], "state": null, "expiryDate": null }, "dealicense": { "deaLicName": null, "deaLicAddress": null, "deaLicTelephone": null, "deaLicFax": null, "deaLicEmail": null, "deaLicExpDate": null, "deaLicNumber": null, "document": [], "created_date": null, "updated_date": null, "created_id": null, "updated_id": null, "deaID": null, "address": { "streetAddress": null, "city": null, "state": null, "country": null, "zip": null, "phoneNumber": null, "faxNumber": null, "emailID": null, "created_date": null, "updated_date": null, "created_id": null, "updated_id": null, "addressID": null }, "name": null, "email": null, "fax": null, "deaaddress": null, "telephone": null, "expiryDate": null }, "malprctlnce": { "malPrctID": null, "malInsName": null, "malInsAddress": null, "malInsExpiryDate": null, "malInsPolicyNumber": null, "malInsPolicyDoc": [], "malInsFaceSheet": [], "created_date": null, "updated_date": null, "created_id": null, "updated_id": null, "address": { "streetAddress": null, "city": null, "state": null, "country": null, "zip": null, "phoneNumber": null, "faxNumber": null, "emailID": null, "created_date": null, "updated_date": null, "created_id": null, "updated_id": null, "addressID": null } }, "created_date": null, "updated_date": null, "created_id": null, "updated_id": null }, "created_date": null, "updated_date": null, "created_id": null, "updated_id": null, "person": { "personID": null, "firstNm": null, "lastNm": null, "middleNm": null, "birthDt": null, "gender": "M", "status": "Active", "empAddress": null, "created_date": null, "updated_date": null, "created_id": null, "updated_id": null, "address": { "streetAddress": null, "city": null, "state": null, "country": null, "zip": null, "phoneNumber": null, "faxNumber": null, "emailID": null, "created_date": null, "updated_date": null, "created_id": null, "updated_id": null, "addressID": null }, "ssn": null } };
+      $('a[data-target="#profile"]').tab('show');      
+    }
      //file upload stuff.
     vm.uploadFile = function(name, model) {
       vm.name = name;
@@ -215,28 +39,55 @@ angular.module('healthCareApp')
     function fileSuccessCallback (response) {
       switch(vm.name) {
           case 'EmployeeDoc':
-            vm.details.document = [
-              {
-                documentID: response.data,
-                filename: vm.filename
-              }
-            ];
+            if(vm.editEmployee) {
+              vm.details.document = response.data;
+            } else {
+              vm.details.document.push(response.data[0]);
+            }
             break;
           case 'Medlicense':
-            vm.details.provider.medlicense.document[0].documentID = response.data;
+            if(vm.editEmployee) {
+              vm.details.provider.medlicense.document = response.data;
+            } else {
+              vm.details.provider.medlicense.document.push(response.data[0]);
+            }
             break;
           case 'Dealicense':
-            vm.details.provider.dealicense.document[0].documentID = response.data;
+            if(vm.editEmployee) {
+              vm.details.provider.dealicense.document = response.data;
+            } else {
+              vm.details.provider.dealicense.document.push(response.data[0]);
+            }
             break;
           case 'MalInsPolicyDoc':
-            vm.details.provider.malprctlnce.malInsPolicyDoc[0].documentID = response.data;
+            if(vm.editEmployee) {
+              vm.details.provider.malprctlnce.malInsPolicyDoc = response.data;
+            } else {
+              vm.details.provider.malprctlnce.malInsPolicyDoc.push(response.data[0]);
+            }
             break;
           case 'MalInsFaceSheet':
-            vm.details.provider.malprctlnce.malInsFaceSheet[0].documentID = response.data;
+            if(vm.editEmployee) {
+              vm.details.provider.malprctlnce.malInsFaceSheet = response.data;
+            } else {
+              vm.details.provider.malprctlnce.malInsFaceSheet.push(response.data[0]);
+            }
             break;
           default:
-            alert('error');
+            console.log('Fileupload Default Case');
       }
+    };
+
+    vm.deleteFile = function (arr, obj, index) {
+      $rootScope.loading = true;   
+      var temp = angular.copy(obj);
+      arr.splice(index, 1);   
+      ApiService.get(healthCareBusinessConstants.DELETE_DOC + temp.documentID).then(deleteDocSuccessCallback, errorCallback).finally(finalCallBack);
+      
+    };
+
+    function deleteDocSuccessCallback (res) {
+      console.log('Delete Response', res);
     };
 
   	vm.searchEmployee = function () {
@@ -298,6 +149,7 @@ angular.module('healthCareApp')
     vm.cancel = function () {
       $('a[data-target="#vileList"]').tab('show');
       $rootScope.editEmployee = false;
+      vm.init();
     };
 
 
