@@ -192,13 +192,20 @@
 
 				 <div class="right-col">
 					<div class="row">
-					 <input type="file" id="emp-file" name="upload-file" placeholder="" />
+					 <!-- <input id="fileInput" type="file" name="uploadingFiles" ng-change="person.updateSize();" multiple>
+						Selected files: <span id="fileNum">0</span>;
+						Total size: <span id="fileSize">0</span>
+						<input type="button" value="Upload" ng-click="person.uploadFile()"> -->
+
+						<input type="file" file-model="uploadingFiles"/>
+						<br>
+         		<button ng-click="person.uploadFile()" class="btn btn-sm btn-warning" style="    margin-top: 10px;"> Upload </button>
 					</div>
 					<table class="fileupload">
 						<thead>
 							<tr>
 								<th>File Name</th>
-								<th>Actions</th>
+								<th>Actions123</th>
 							</tr>
 						</thead>
 						<tbody>
