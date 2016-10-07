@@ -8,10 +8,23 @@
  * Controller of the healthCareApp
  */
 angular.module('healthCareApp')
-  .controller('PersonCtrl', function ($rootScope, ApiService, healthCareBusinessConstants, $location, $window) {
+  .controller('PersonCtrl', function ($scope, $rootScope, ApiService, healthCareBusinessConstants, $location, $window) {
   	var vm = this;
   	$rootScope.hideNavbar = false;
     $rootScope.editEmployee = false;
+
+    //file upload stuff.
+    vm.uploadFile = function(){
+      var file = $scope.uploadingFiles;
+      console.dir(file);
+      var fd = new FormData();
+          fd.append('uploadingFiles', file);
+      ApiService.post(healthCareBusinessConstants.SAVE_DOC, fd, {transformRequest: angular.identity, headers: {'Content-Type': undefined}}).then(fileSuccessCallback, errorCallback).finally(finalCallBack);
+    };
+    function fileSuccessCallback (res) {
+      console.log(res);
+    };
+
     vm.details = {
         "employeeID": null,
         "empType": null,

@@ -3,8 +3,8 @@
  */
 angular.module('healthCareApp').factory('ApiService', function($http) {
  	return {
-    post: function (url, data) {
-      return $http.post(url, data);
+    post: function (url, data, headers) {
+      return $http.post(url, data, headers);
     },
     get: function (url, headers) {
     	return $http.get(url);
