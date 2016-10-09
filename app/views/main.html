@@ -206,7 +206,7 @@
 							</thead>
 							<tbody>
 								<tr class="1" ng-repeat="doc in person.details.document">
-									<td><a target="_blank" href="{{doc.filename}}" ng-bind="doc.filename">ghh</a></td>
+									<td><a  ng-click="person.getDoc(doc)" ng-bind="doc.filename"></a></td>
 									<td><a href="javascript:void(0);" ng-click="person.deleteFile(person.details.document, doc, $index);">Delete</a></td>
 								</tr>
 							</tbody>
@@ -284,7 +284,7 @@
 														</thead>
 														<tbody>
 															<tr class="1" ng-repeat="doc in person.details.provider.medlicense.document">
-																<td><a target="_blank" ng-bind="doc.filename" ng-click="person.getDoc(doc)"></a></td>
+																<td><a ng-bind="doc.filename" ng-click="person.getDoc(doc)"></a></td>
 																<td><a href="javascript:;" ng-click="person.deleteFile(person.details.provider.medlicense.document, doc, $index);">Delete</a></td>
 															</tr>
 														</tbody>
@@ -372,7 +372,7 @@
 														</thead>
 														<tbody>
 															<tr class="1" ng-repeat="doc in person.details.provider.dealicense.document">
-																<td><a target="_blank" ng-bind="doc.filename" ng-click="person.getDoc(doc)"></a></td>
+																<td><a ng-bind="doc.filename" ng-click="person.getDoc(doc)"></a></td>
 																<td><a href="javascript:;" ng-click="person.deleteFile(person.details.provider.dealicense.document, doc, $index);">Delete</a></td>
 															</tr>
 														</tbody>

@@ -241,7 +241,7 @@ angular.module('healthCareApp')
             "deaLicFax": vm.details.provider.dealicense.deaLicFax,
             "deaLicEmail": vm.details.provider.dealicense.deaLicEmail,
             "deaLicExpDate": vm.details.provider.dealicense.deaLicExpDate,
-            "deaLicNumber": vm.details.provider.dealicense.deaLicNumber,
+            "deaLicNumber": vm.details.provider.dealicense.telephone,
             "document": [
               {
                 "documentID": null,
@@ -278,7 +278,7 @@ angular.module('healthCareApp')
             "email": vm.details.provider.dealicense.email,
             "fax": vm.details.provider.dealicense.fax,
             "deaaddress": null,
-            "telephone": vm.details.provider.dealicense.telephone,
+            "telephone": null,
             "expiryDate": vm.details.provider.dealicense.expiryDate
           },
           "malprctlnce": {
