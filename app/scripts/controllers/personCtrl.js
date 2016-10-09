@@ -83,7 +83,15 @@ angular.module('healthCareApp')
       var temp = angular.copy(obj);
       arr.splice(index, 1);   
       ApiService.get(healthCareBusinessConstants.DELETE_DOC + temp.documentID).then(deleteDocSuccessCallback, errorCallback).finally(finalCallBack);
-      
+    };
+
+    vm.getDoc = function (doc) {
+      $rootScope.loading = true; 
+       ApiService.get(healthCareBusinessConstants.GET_DOC + doc.documentID).then(getDocSuccessCallback, errorCallback).finally(finalCallBack);
+    }
+
+    function getDocSuccessCallback (res) {
+      console.log('get doc::', res)
     };
 
     function deleteDocSuccessCallback (res) {
@@ -166,6 +174,7 @@ angular.module('healthCareApp')
       vm.init();
     };
 
+
     //add user
     vm.addPerson = function (obj) {
       debugger;
@@ -200,8 +209,8 @@ angular.module('healthCareApp')
             "updated_date": null,
             "created_id": null,
             "updated_id": null,
-            "medLicNumber": vm.details.provider.medlicense,
-            "medID": vm.details.provider.medlicense.medID,
+            "medLicNumber": vm.details.provider.medlicense.medLicNumber,
+            "medID": null,
             "document": [
               {
                 "documentID": vm.details.provider.medlicense.document.documentID,
@@ -213,8 +222,8 @@ angular.module('healthCareApp')
                 "filebytes": null
               }
             ],
-            "state": vm.details.provider.medlicense.state,
-            "expiryDate": vm.details.provider.medlicense.expiryDate
+            "state": vm.details.provider.medlicense.medLicState,
+            "expiryDate": vm.details.provider.medlicense.medLicExpDate
           },
           "dealicense": {
             "deaLicName": vm.details.provider.dealicense.deaLicName,
@@ -239,9 +248,10 @@ angular.module('healthCareApp')
             "updated_date": null,
             "created_id": null,
             "updated_id": null,
-            "deaID": vm.details.provider.dealicense.deaID,
+            "deaID": null,
             "address": {
               "streetAddress": vm.details.provider.dealicense.address.streetAddress,
+              "addressName": vm.details.provider.dealicense.address.addressName,
               "city": vm.details.provider.dealicense.address.city,
               "state": vm.details.provider.dealicense.address.state,
               "country": vm.details.provider.dealicense.address.country,
@@ -253,17 +263,17 @@ angular.module('healthCareApp')
               "updated_date": null,
               "created_id": null,
               "updated_id": null,
-              "addressID": vm.details.provider.dealicense.address.addressID
+              "addressID": null
             },
             "name": vm.details.provider.dealicense.name,
             "email": vm.details.provider.dealicense.email,
             "fax": vm.details.provider.dealicense.fax,
-            "deaaddress": vm.details.provider.dealicense.deaaddress,
+            "deaaddress": null,
             "telephone": vm.details.provider.dealicense.telephone,
             "expiryDate": vm.details.provider.dealicense.expiryDate
           },
           "malprctlnce": {
-            "malPrctID": vm.details.provider.malprctlnce.malPrctID,
+            "malPrctID": null,
             "malInsName": vm.details.provider.malprctlnce.malInsName,
             "malInsAddress": vm.details.provider.malprctlnce.malInsAddress,
             "malInsExpiryDate": vm.details.provider.malprctlnce.malInsExpiryDate,
@@ -296,6 +306,7 @@ angular.module('healthCareApp')
             "updated_id": null,
             "address": {
               "streetAddress": vm.details.provider.malprctlnce.address.streetAddress,
+              "addressName": vm.details.provider.malprctlnce.address.addressName,
               "city": vm.details.provider.malprctlnce.address.city,
               "state": vm.details.provider.malprctlnce.address.state,
               "country": vm.details.provider.malprctlnce.address.country,
@@ -307,7 +318,7 @@ angular.module('healthCareApp')
               "updated_date": null,
               "created_id": null,
               "updated_id": null,
-              "addressID": vm.details.provider.malprctlnce.address.addressID
+              "addressID": null
             }
           },
           "created_date": null,
@@ -327,13 +338,14 @@ angular.module('healthCareApp')
           "birthDt": vm.details.person.birthDt,
           "gender": vm.details.person.gender,
           "status": vm.details.person.status,
-          "empAddress": vm.details.person.empAddress,
+          "empAddress": null,
           "created_date": null,
           "updated_date": null,
           "created_id": null,
           "updated_id": null,
           "address": {
             "streetAddress": vm.details.person.address.streetAddress,
+            "addressName": vm.details.person.address.addressName,
             "city": vm.details.person.address.city,
             "state": vm.details.person.address.state,
             "country": vm.details.person.address.country,
@@ -345,9 +357,10 @@ angular.module('healthCareApp')
             "updated_date": null,
             "created_id": null,
             "updated_id": null,
-            "addressID": vm.details.person.address.addressID
+            "addressID": null
           },
-          "ssn": vm.details.person.ssn
+          "ssn": vm.details.person.ssn,
+          "userName": 'ADMIN'
         }
       };
       ApiService.post(healthCareBusinessConstants.ADD_EMPLOYEE, addObj).then(addSuccessCallback, errorCallback).finally(finalCallBack);

@@ -25,8 +25,10 @@ angular.module('healthCareApp')
    function successCallback (response) {
      vm.username = '';
      vm.password = '';
+     debugger;
      localStorage.setItem('jwtToken', response.data.jwtToken);
-     console.log("login response::", response);
+     localStorage.setItem('username', response.data.role);
+     console.log("login response::", response.data);
      $location.path('main');
    };
 
