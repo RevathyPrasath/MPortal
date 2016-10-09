@@ -39,4 +39,5 @@ angular.module('healthCareApp')
       $("#submenu").empty().append($collectedSet.clone());  
       $collectedSet.css({"display": "none", "width": "0"});
     };
+    
   });

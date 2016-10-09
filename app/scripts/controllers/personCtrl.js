@@ -91,7 +91,16 @@ angular.module('healthCareApp')
     }
 
     function getDocSuccessCallback (res) {
-      console.log('get doc::', res)
+      //console.log('get doc::', res)
+      var ext = res.data.filename.split('.')[1].toLowerCase();
+      var pre;
+      if(ext=="pdf") {
+        pre = "data:application/pdf;base64,";
+      } else {
+        pre = "data:image/png;base64,";
+      }
+      var file = pre + res.data.filebytes;
+      window.open(file);
     };
 
     function deleteDocSuccessCallback (res) {
