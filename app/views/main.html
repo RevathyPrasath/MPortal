@@ -37,8 +37,9 @@
 					 <table class="table table-bordered table-hover table-stripped">
 						<thead>
 						 <tr>
-							<th class="text-center">Employee ID</th>
-							<th class="text-center">Name</th>
+							<th class="text-center emp-id">Employee ID</th>
+							<th class="text-center">First Name</th>
+							<th class="text-center">Last Name</th>
 							<th class="text-center">Gender</th>
 							<th class="text-center">Edit</th>
 							<th class="text-center">Delete</th>
@@ -48,6 +49,7 @@
 						 <tr ng-repeat="employee in person.users">
 							<td class="text-center" ng-bind="employee.employeeID"></td>
 							<td class="text-center" ng-bind="employee.person.firstNm"></td>
+							<td class="text-center" ng-bind="employee.person.lastNm"></td>
 							<td class="text-center" ng-bind="employee.person.gender"></td>
 							<td class="text-center">
 								<a ng-click="person.editEmployye(employee)">
@@ -180,14 +182,11 @@
 						</div> 
 						<div class="row">
 							<label>Supervisor</label>
-							<select id="supervisor" ng-model="person.details.empType">
-								<option value="Employee">Employee</option>
-								<option value="Supervisor">Supervisor</option>
-							</select>
+							<input type="text" placeholder="supervisor" ng-model="person.details.empType">
 						</div>
 						<div class="row">
-						 <label>Field</label>
-						 <input type="text" name="Field" ng-model="person.details.field" placeholder="Enter Field Value" />
+						 <label>Job Title</label>
+						 <input type="text" name="Field" ng-model="person.details.field" placeholder="Enter Job Title" />
 						</div>
 					 </div>
 
@@ -213,7 +212,15 @@
 						</table>
 					 </div>
 					</div>
-					<div id="physician-details">
+ 					
+ 					<div class="row">
+						 <label>Are you a provider ?</label>
+						  <input type="checkbox" ng-model="provider" value="provider">
+						</div>
+
+ 				
+ 		
+					<div id="physician-details" ng-show="provider">
 						<h2><span class="heading-bottom">Provider Details</span></h2>
 						<div class="two-col">
 						 <div class="left-col">
@@ -490,6 +497,7 @@
 							</div>
 						</div>
 					</div>
+
 					<div class="row">
 					 <div class="text-center">
 						<input type="button" class="gray-button" value="Cancel" ng-click="person.cancel()"/>
