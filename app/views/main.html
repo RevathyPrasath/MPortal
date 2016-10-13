@@ -194,6 +194,8 @@
 						<div class="row">
 							<input type="file" file-model="EmployeeDoc" multiple/>
 							<br>
+							(Supported Types: .pdf /.jpeg /.xls /.doc /.png)
+							<br>
 	         		<button ng-click="person.uploadFile('EmployeeDoc', EmployeeDoc)" class="btn btn-sm btn-warning upload-btn"> Upload </button>
 						</div>
 						<table class="fileupload" ng-if="person.details.document.length > 0">
@@ -278,6 +280,8 @@
 
 													<div class="row">
 														<input type="file" file-model="Medlicense" multiple/>
+														<br>
+														(Supported Types: .pdf /.jpeg /.xls /.doc /.png)
 														<br>
 								         		<button ng-click="person.uploadFile('Medlicense', Medlicense)" class="btn btn-sm btn-warning upload-btn"> Upload </button>
 													</div>
@@ -366,6 +370,9 @@
 													<h3><span class="heading-bottom orange">File Details</span></h3>
 													<div class="row">
 														<input type="file" file-model="Dealicense" multiple/>
+														
+														<br>
+														(Supported Types: .pdf /.jpeg /.xls /.doc /.png)
 														<br>
 								         		<button ng-click="person.uploadFile('Dealicense', Dealicense)" class="btn btn-sm btn-warning upload-btn"> Upload </button>
 													</div>
@@ -452,7 +459,9 @@
 												<h3><span class="heading-bottom orange">Policy File Details</span></h3>
 												<div class="row">
 													<input type="file" file-model="MalInsPolicyDoc" multiple/>
+													<br> (Supported Types: .pdf /.jpeg /.xls /.doc /.png)
 													<br>
+		
 							         		<button ng-click="person.uploadFile('MalInsPolicyDoc', MalInsPolicyDoc)" class="btn btn-sm btn-warning upload-btn"> Upload </button>
 												</div>
 												<table class="fileupload" ng-if="person.details.provider.malprctlnce.malInsPolicyDoc.length > 0">
@@ -474,6 +483,9 @@
 												<div class="row">
 													<input type="file" file-model="MalInsFaceSheet" multiple/>
 													<br>
+													(Supported Types: .pdf /.jpeg /.xls /.doc /.png)
+													<br>
+													
 							         		<button ng-click="person.uploadFile('MalInsFaceSheet', MalInsFaceSheet)" class="btn btn-sm btn-warning upload-btn"> Upload </button>
 												</div>
 												<table class="fileupload" ng-if="person.details.provider.malprctlnce.malInsFaceSheet.length > 0">
