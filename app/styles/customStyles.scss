@@ -768,13 +768,32 @@ table tr:nth-child(even) {
 }
 /* Status Dashboard Styles End */
 
+.padding0 {
+  padding: 0;
+}
 
 /* Human Resource List Styles begin */
-.human-search-section label {
- width:100%;
- display:inline-block;
- text-align:left;
+.human-search-section  {
+  .total-items, .status {
+    padding-top: 5px;
+  }
+  .serch-section {
+    position: relative;
+  }
+  .serch-box {
+    width: 100%;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding-left: 5px;
+  }
+ .glyphicon-search {
+    position: absolute;
+    right: 20px;
+    top: 9px;
+ }
 }
+
 .human-search-section input[type="text"] {
  width:90%;
 }

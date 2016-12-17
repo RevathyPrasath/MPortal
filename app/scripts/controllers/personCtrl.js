@@ -10,9 +10,47 @@
 angular.module('healthCareApp')
   .controller('PersonCtrl', function ($scope, $rootScope, ApiService, healthCareBusinessConstants, $location, $window) {
   	var vm = this;
-
-
-      
+    
+     vm.personalData =  [
+       {
+        laname: 'balaga',
+        fname: 'babu',
+        email: 'bujji@gmail.com',
+        location: 'hyd',
+        staus: 'active',
+        title: 'medical assistant'
+       },
+       {
+        laname: 'balaga1',
+        fname: 'babu',
+        email: 'bujji@gmail.com',
+        location: 'hyd1',
+        staus: 'active',
+        title: 'medical assistant'
+       },
+       {
+        laname: 'john',
+        fname: 'babu',
+        email: 'bujji@gmail.com',
+        location: 'hyd',
+        staus: 'inactive',
+        title: 'medical assistant1'
+       },{
+        laname: 'user5',
+        fname: 'babu',
+        email: 'bujji@gmail.com',
+        location: 'hyd',
+        staus: 'active',
+        title: 'medical assistant'
+       },{
+        laname: 'balaga',
+        fname: 'user6',
+        email: 'bujji@gmail.com',
+        location: 'hyd',
+        staus: 'active',
+        title: 'medical assistant'
+       }
+     ];
     
     vm.viewList = function(){
       $('a[data-target="#vileList"]').tab('show');
