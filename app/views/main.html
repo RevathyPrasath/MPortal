@@ -71,30 +71,30 @@
 						<tr>
 								<td colspan="7">
 									<div class="col-sm-12 padding0">
-										<div class="col-sm-9 padding0">
-											<div class="col-sm-2 padding0 total-items"><span>10</span> Items</div>
-											<div class="col-xs-3 serch-section">
-												<input type="serch" placeholder="serch FirstName" class="serch-box">
+										<div class="col-sm-1 padding0 total-items"><span>10</span> items</div>
+										<div class="col-sm-8 padding0">									
+											<div class="col-sm-4 serch-section">
+												<input type="serch" placeholder="Search First Name" class="serch-box">
 												<span class="glyphicon glyphicon-search"></span>
 											</div>
-											<div class="col-sm-3 serch-section">
-												<input type="serch" placeholder="serch LastName" class="serch-box">
+											<div class="col-sm-4 serch-section">
+												<input type="serch" placeholder="Search Last Name" class="serch-box">
 												<span class="glyphicon glyphicon-search"></span>
 											</div>
-											<div class="col-sm-3 serch-section">
-												<input type="serch" placeholder="serch Location" class="serch-box">
+											<div class="col-sm-4 serch-section">
+												<input type="serch" placeholder="Search Location" class="serch-box">
 												<span class="glyphicon glyphicon-search"></span>
 											</div>	
 										</div>
-										<div class="col-sm-3 pull-right text-right status">
-											Status
-											<select style="width: 40%">
-												<option>All</option>
-												<option>Active</option>
-												<option>Inactive</option>
+										<div class="col-sm-3">
+											<span class="text-status">Status:</span>
+											<select class="status-dropdown">
+												<option class="text-status">All</option>
+												<option class="text-status">Active</option>
+												<option class="text-status">Inactive</option>
 											</select>
-											<span>
-												+ Add new
+											<span class="text-status add-item pull-right" ng-click="person.addNew()">
+												<span>+</span> Add New
 											</span>
 										</div>
 									</div>
@@ -102,19 +102,19 @@
 							</tr>
 							<tr style="background: #000">
 								<th ng-click="predict = 'laname'; reverse = !reverse;">
-								Last Name  
+								<u> Last Name </u>
 									<span class="glyphicon pull-right {{(predict == 'laname' && reverse==true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
 								</th>
-								<th ng-click="predict = 'fname'; reverse = !reverse;">First Name 
+								<th ng-click="predict = 'fname'; reverse = !reverse;"><u>First Name</u>
 									<span class="glyphicon pull-right {{(predict == 'fname' && reverse==true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
 								</th>
-								<th>Email ID</th>
-								<th ng-click="predict = 'location'; reverse = !reverse;">Location 
+								<th><u>Email ID</u></th>
+								<th ng-click="predict = 'location'; reverse = !reverse;"><u>Location</u> 
 									<span class="glyphicon pull-right {{(predict == 'location' && reverse==true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
 								</th>
-								<th>Status</th>
-								<th>Title</th>
-								<th>More</th>
+								<th><u>Status</u></th>
+								<th><u>Title</u></th>
+								<th><u>More</u></th>
 							</tr>
 						<tbody>
 							<tr ng-repeat="obj in person.personalData | orderBy: predict: reverse">
@@ -129,15 +129,16 @@
 							<tr>
 								<td colspan="7">
 									<div class="col-xs-10">
-										<b> FIRST </b>
-										<b> PREV </b>
-										<input type="text" value="1" style="width: 50px;text-align: center;margin: 0 20px;">
-										<b> NEXT </b>
-										<b> LAST </b>
+										<span ng-class="person.disabled()?'page-inactive': 'page-active'" ng-click="person.pagination(person.pageNo,'first')"> FIRST </span>
+										<span ng-class="person.disabled()?'page-inactive': 'page-active'" ng-click="person.pagination(person.pageNo,'prev')"> PREV </span>
+										<input type="text" name="country" value="1" ng-model="person.pageNo"
+										 class="page-number" readonly>
+										<span ng-class="person.active()?'page-active':'page-inactive'"  ng-click="person.pagination(person.pageNo,'next')"> NEXT </span>
+										<span ng-class="person.active()?'page-active':'page-inactive'"  ng-click="person.pagination(person.pageNo,'last')"> LAST </span>
 									</div>
-									<div class="col-xs-2 pull-right text-right">
-										<span>SHOW</span>
-										<select>
+									<div class="col-xs-2 pull-right ">
+										<span class="text-show">Show</span>
+										<select class="show-dropdown">
 											<option>10</option>
 											<option>20</option>
 										</select>

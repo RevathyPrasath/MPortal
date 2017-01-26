@@ -8,7 +8,7 @@ body {
 }
 a {
  text-decoration: none;
- color:#e65100;
+ color: #337ab7;
 }
 .container {
  width: 90%;
@@ -92,7 +92,7 @@ section {
 .logo {
  color: #000;
  text-transform: uppercase;
- font-size:25px;
+ font-size:24px;
  font-family:'Agency FB';
  font-weight:bold;
  float:left;
@@ -293,7 +293,7 @@ label {
 }
 input[type="text"],input[type="password"], select {
  padding: 7px;
- padding-left: 10px;	
+ padding-left: 10px;  
  border: 1px solid #E8E8E8;
  -webkit-box-shadow:inset 0 0 10px #E8E8E8;
  -moz-box-shadow:inset 0 0 10px #E8E8E8;
@@ -544,7 +544,7 @@ footer {
 }
 
 .radio ul li:hover label{
-	color: #444;
+  color: #444;
 }
 
 .radio ul li .check{
@@ -586,6 +586,75 @@ input[type=radio]:checked ~ .check::before{
 .four-col {
  width:100%;
  margin:0 auto;
+  .operations,.personnel,.administration{
+    height: 140px;
+    width:250px;
+    display:inline-block;
+    float:left;
+    margin-right:5px;
+    margin-top:10px;
+    border-radius: 4px
+  }
+  .title{
+    color: white;
+    font-size: 27px;
+    padding: 6px 0px 12px;
+    text-align: center;
+  }
+  .body{
+    .symbol{
+      text-align:center;
+    }
+    .text{
+      font-size:18px;
+      color:white;
+      text-align: right;
+    }  
+  }
+  .operations{
+    background: #e65100;
+    .glyphicon{
+        color: white;
+        font-size: 60px;
+        background-color: red;
+        border-radius: 39px;
+      }
+  }
+  .personnel{
+    background: rgba(16, 171, 255, 0.78);
+    .glyphicon{
+        color: white;
+        font-size: 60px;
+        background-color: #3CB371;
+        border-radius: 39px;
+      }
+  }
+  .administration{
+    background: rgba(53, 199, 24, 0.74);
+    .glyphicon{
+        color: white;
+        font-size: 60px;
+        background-color: #FF7F50;
+        border-radius: 39px;
+      }
+  }
+}
+.status-dashboard{
+  ul{
+    li{
+      float:left;
+      list-style:none;
+      display:inline-block;
+      margin-right:40px;
+      font-size: 20px;
+    }
+  }  
+  .select-tabs{
+    cursor:pointer;
+  }
+  .selected-tab{
+    border-bottom:1px solid black;    
+  }
 }
 .four-col .col1 {
  width:23.5%;
@@ -722,9 +791,10 @@ table tr th {
  font-weight: normal;
 }
 table tr th, table tr td {
- padding:7px;
+  padding: 10px;
+  font-size: 18px;
 }
-table tr:nth-child(even) {
+table tr:nth-child(odd) {
  background-color: #f2f2f2;
 }
 .status-dashboard table {
@@ -774,6 +844,8 @@ table tr:nth-child(even) {
 
 /* Human Resource List Styles begin */
 .human-search-section  {
+    margin-top: 27px;
+    box-shadow: 0 0 1px #C0C0C0;
   .total-items, .status {
     padding-top: 5px;
   }
@@ -787,11 +859,67 @@ table tr:nth-child(even) {
     border: 1px solid #ccc;
     padding-left: 5px;
   }
+  .glyphicon{
+    font-size: 11px;
+  }
  .glyphicon-search {
     position: absolute;
     right: 20px;
-    top: 9px;
+    top: 7px;
+    color: #808080;
+    font-size: 16px;
  }
+  .text-status{
+    font-size: 18px;
+    color: #0d6bd0;
+  }
+  .status-dropdown{
+    color: #0d6bd0;
+    width: 43%;
+    padding: 3px;
+    background-color: rgba(128, 128, 128, 0.19);
+    box-shadow: 0 0 1px rgba(152, 133, 133, 0.09);
+    border: 1px solid rgba(0, 0, 0, 0.34);
+  }
+  .page-number{
+    width: 62px !important;
+    border-radius: 1px;
+    padding: 0px 23px;
+    border: 1px solid rgba(169, 169, 169, 0.69);
+    font-size: 15px;
+    margin-right: 20px;
+  }
+  .page-inactive{
+    margin-right: 20px;
+    font-size: 16px;
+    color: #C0C0C0;
+    cursor:not-allowed;
+  }
+  .page-active{
+    margin-right: 20px;
+    font-size: 16px;
+    color: #337ab7;
+    cursor:pointer;
+  }
+  .text-show{
+    font-size: 15px;
+    color: #A9A9A9;
+    margin-right: 18px;
+  }
+  .show-dropdown{
+    width: 62px;
+    font-size: 15px;
+    padding: 2px;
+    padding-left: 9px;
+    border: 1px solid #A9A9A9;
+    border-radius: 2px;
+  }
+  .add-item{
+    cursor: pointer;
+    span{
+      font-size: 20px;
+    }
+  }
 }
 
 .human-search-section input[type="text"] {
