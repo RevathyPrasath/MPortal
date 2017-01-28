@@ -1,0 +1,75 @@
+<div ng-cloak class="admin-view">
+  <md-content>
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="Users">
+        <md-content class="md-padding">
+          <table class="table table-bordered table-stripped users-table">
+            <thead>
+              <tr class="heading">
+                <td colspan="7">
+                  <div class="col-sm-12 padding0">
+                    <div class="col-sm-1 padding0 total-items"><span>10</span> items</div>
+                    <div class="col-sm-8 padding0">
+                      <div class="col-sm-4 serch-section">
+                        <input type="serch" placeholder="Search First Name" class="serch-box">
+                        <span class="glyphicon glyphicon-search"></span>
+                      </div>
+                      <div class="col-sm-4 serch-section">
+                        <input type="serch" placeholder="Search Last Name" class="serch-box">
+                        <span class="glyphicon glyphicon-search"></span>
+                      </div>
+                      <div class="col-sm-4 serch-section">
+                        <input type="serch" placeholder="Search Location" class="serch-box">
+                        <span class="glyphicon glyphicon-search"></span>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <span class="text-status">Status:</span>
+                      <select class="status-dropdown">
+                        <option class="text-status">All</option>
+                        <option class="text-status">Active</option>
+                        <option class="text-status">Inactive</option>
+                      </select>
+                      <span class="text-status add-item pull-right" ng-click="person.addNew()"><span>+</span> Add New
+                      </span>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>First Name</th>
+                <th>First Name</th>
+                <th>First Name</th>
+                <th>First Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="obj in [1,2,3,4,5,6,7,8,9]">
+                <td>Bujji</td>
+                <td>Bujji</td>
+                <td>Bujji</td>
+                <td>Bujji</td>
+                <td>Bujji</td>
+                <td>Bujji</td>
+              </tr>
+            </tbody>
+          </table>
+        </md-content>
+      </md-tab>
+      <md-tab label="Tab Two">
+        <md-content class="md-padding">
+          <h1 class="md-display-2">Tab Two</h1>
+          <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+        </md-content>
+      </md-tab>
+      <md-tab label="Tab Three">
+        <md-content class="md-padding">
+          <h1 class="md-display-2">Tab Two</h1>
+          <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-content>
+</div>
