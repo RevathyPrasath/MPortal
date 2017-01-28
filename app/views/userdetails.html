@@ -7,50 +7,50 @@
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label>Last Name</label>
-            <input ng-model="user.userDetailsObj.lastName">
+            <input ng-model="user.userDetailsObj.lastName" ng-readonly="user.viewmode">
           </md-input-container>
           <md-input-container class="md-block" flex-gt-sm>
             <label>First Name</label>
-            <input ng-model="user.userDetailsObj.firstName">
+            <input ng-model="user.userDetailsObj.firstName" ng-readonly="user.viewmode">
           </md-input-container>
         </div>
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label>User Name</label>
-            <input ng-model="user.userDetailsObj.userName">
+            <input ng-model="user.userDetailsObj.userName" ng-readonly="user.viewmode">
           </md-input-container>
           <md-input-container class="md-block" flex-gt-sm>
             <label>Email</label>
-            <input ng-model="user.userDetailsObj.email">
+            <input ng-model="user.userDetailsObj.email" ng-readonly="user.viewmode">
           </md-input-container>
         </div>
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label>Password</label>
-            <input type="password" ng-model="user.userDetailsObj.password">
+            <input type="password" ng-model="user.userDetailsObj.password" ng-readonly="user.viewmode">
           </md-input-container>
           <md-input-container class="md-block" flex-gt-sm>
             <label>Confirm Password</label>
-            <input type="password" ng-model="user.userDetailsObj.password">
+            <input type="password" ng-model="user.userDetailsObj.password" ng-readonly="user.viewmode">
           </md-input-container>
         </div>
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label>phone</label>
-            <input ng-model="user.userDetailsObj.phone">
+            <input ng-model="user.userDetailsObj.phone" ng-readonly="user.viewmode">
           </md-input-container>
           <md-input-container class="md-block" flex-gt-sm>
             <label>Role</label>
-            <input ng-model="user.userDetailsObj.role">
+            <input ng-model="user.userDetailsObj.role" ng-readonly="user.viewmode">
           </md-input-container>
         </div>
         <md-input-container class="md-block">
           <label>Notes</label>
-          <textarea ng-model="user.userDetailsObj.notes" rows="3"></textarea>
+          <textarea ng-model="user.userDetailsObj.notes" rows="3" ng-readonly="user.viewmode"></textarea>
         </md-input-container>
         <div flex layout='row' layout-padding layout-align="start center" style="    height: 30px;">
           <div>Status</div>
-          <md-radio-group ng-model="user.userDetailsObj.status">
+          <md-radio-group ng-model="user.userDetailsObj.status" ng-readonly="user.viewmode">
             <md-radio-button ng-value="true">Active</md-radio-button>
             <md-radio-button ng-value="false"> In active </md-radio-button>
           </md-radio-group>
@@ -76,8 +76,9 @@
       </div>
       <hr/>
       <div class="text-right">
-        <md-button class="md-raised md-primary">Edit</md-button>
-        <md-button class="md-raised">Cancel</md-button>
+        <md-button class="md-raised md-primary" ng-click="user.editBtnClick()" ng-show="user.viewmode">Edit</md-button>
+        <md-button ng-show="!user.viewmode" class="md-raised md-primary" ng-click="user.editBtnClick()">Save</md-button>
+        <md-button class="md-raised" ng-click="user.cancelBtnclick()">Cancel</md-button>
       </div>
     </div>
   </md-content>

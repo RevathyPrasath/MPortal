@@ -8,7 +8,7 @@
  * Controller of the healthCareApp
  */
 angular.module('healthCareApp')
-  .controller('UserdetailsCtrl', function($rootScope, $scope, healthCareBusinessConstants, ApiService) {
+  .controller('UserdetailsCtrl', function($rootScope, $scope, healthCareBusinessConstants, ApiService, $location) {
     $rootScope.hideNavbar = false;
     var vm = this;
 
@@ -33,8 +33,17 @@ angular.module('healthCareApp')
       ApiService.get(healthCareBusinessConstants.GET_USERS).then(getUsersSb, errorCallback).finally(finalCallBack);
     };
 
+    vm.cancelBtnclick = function () {
+      $location.path('admin');
+    };
+
+    vm.editBtnClick = function () {
+      vm.viewmode = false;
+    };
+
     vm.init = function() {
       vm.userDetailsObj = angular.fromJson(localStorage.getItem('userdetails'));
+      vm.viewmode = true;
       console.log(vm.userdetailsObj);
     };
 
