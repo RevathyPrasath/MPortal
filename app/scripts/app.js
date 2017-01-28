@@ -55,6 +55,11 @@ angular
         controller: 'AdminCtrl',
         controllerAs: 'admin'
       })
+      .when('/userdetails', {
+        templateUrl: 'views/userdetails.html',
+        controller: 'UserdetailsCtrl',
+        controllerAs: 'user'
+      })
       .otherwise({
         redirectTo: '/login'
       })

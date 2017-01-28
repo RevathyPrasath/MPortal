@@ -1251,3 +1251,19 @@ ul.collect ul.dropdown-menu {
     }
   }
 }
+
+md-input-container {
+  label {
+    text-align: left;
+    font-size: 12px;
+  }
+}
+md-radio-button {
+  .md-label {
+    margin-top: 4px;
+  }
+}
+
+md-nav-bar {
+  box-shadow: 0 0 10px #ccc;
+}
