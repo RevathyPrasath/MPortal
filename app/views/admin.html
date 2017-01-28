@@ -39,20 +39,20 @@
               <tr>
                 <th>Last Name</th>
                 <th>First Name</th>
-                <th>First Name</th>
-                <th>First Name</th>
-                <th>First Name</th>
-                <th>First Name</th>
+                <th>User Name</th>
+                <th>Status</th>
+                <th>Role</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="obj in [1,2,3,4,5,6,7,8,9]">
-                <td>Bujji</td>
-                <td>Bujji</td>
-                <td>Bujji</td>
-                <td>Bujji</td>
-                <td>Bujji</td>
-                <td>Bujji</td>
+              <tr ng-repeat="user in admin.users">
+                <td ng-bind="user.lastName"></td>
+                <td ng-bind="user.firstName"></td>
+                <td ng-bind="user.userName"></td>
+                <td ng-bind="user.userName"></td>
+                <td ng-bind="user.role"></td>
+                <td>More</td>
               </tr>
             </tbody>
           </table>

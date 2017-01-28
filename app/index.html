@@ -48,7 +48,7 @@
           <a href="javascript:void(0);" ng-click="header.humanResource();">Personnel</a>
         </li>
         <li><a href="javascript:void(0);">Organition</a></li>
-        <li><a href="javascript:void(0)">Admin</a></li>
+        <li ng-class="header.getClass('/admin')"><a ng-click="header.admin();">Admin</a></li>
         <!-- 
             <li><a href="javascript:void(0)">Tab1</a></li>
             <li><a href="javascript:void(0);">ta2</a></li> -->
