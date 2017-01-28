@@ -1253,11 +1253,20 @@ ul.collect ul.dropdown-menu {
 }
 
 md-input-container {
+  margin: 0 !important;
   label {
     text-align: left;
-    font-size: 12px;
+    font-size: 13px;
+    line-height: 12px;
+  }
+  input[type="password"] {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    border-bottom: 1px solid #ccc;
   }
 }
+
 md-radio-button {
   .md-label {
     margin-top: 4px;

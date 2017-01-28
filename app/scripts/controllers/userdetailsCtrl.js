@@ -12,8 +12,8 @@ angular.module('healthCareApp')
     $rootScope.hideNavbar = false;
     var vm = this;
 
-        // error call back method.
-    var errorCallback = function (error) {
+    // error call back method.
+    var errorCallback = function(error) {
       if (error && error.data) {
         vm.errorMsg = error.data.message;
       }
@@ -21,7 +21,7 @@ angular.module('healthCareApp')
     };
 
     // final call back method called no matter success or failure
-    var finalCallBack = function (res) {
+    var finalCallBack = function(res) {
       console.log('finalCallBack', res);
     };
 
@@ -34,7 +34,8 @@ angular.module('healthCareApp')
     };
 
     vm.init = function() {
-     // vm.getPersonals();
+      vm.userDetailsObj = angular.fromJson(localStorage.getItem('userdetails'));
+      console.log(vm.userdetailsObj);
     };
 
     vm.init();
