@@ -27,7 +27,7 @@ angular.module('healthCareApp')
       localStorage.clear();
       localStorage.setItem('jwtToken', response.data.jwtToken);
       localStorage.setItem('username', response.data.role);
-      $location.path('main');
+      $location.path('personal');
     };
 
     // error call back method.

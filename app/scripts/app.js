@@ -18,37 +18,52 @@ angular
     'ngTouch',
     'ngMaterial'
   ])
-  .config(function ($routeProvider, $httpProvider) {
+  .config(function($routeProvider, $httpProvider) {
     $routeProvider
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl',
         controllerAs: 'login'
       })
-      .when('/main', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+      .when('/home', {
+        templateUrl: 'views/home.html',
+        controller: 'HomeCtrl',
+        controllerAs: 'home'
+      })
+      .when('/operations', {
+        templateUrl: 'views/operations.html',
+        controller: 'OperationsCtrl',
+        controllerAs: 'operations'
+      })
+      .when('/status', {
+        templateUrl: 'views/status.html',
+        controller: 'StatusCtrl',
+        controllerAs: 'status'
+      })
+      .when('/personal', {
+        templateUrl: 'views/personal.html',
+        controller: 'PersonalCtrl',
+        controllerAs: 'personal'
+      })
+      .when('/organition', {
+        templateUrl: 'views/organition.html',
+        controller: 'OrganitionCtrl',
+        controllerAs: 'organition'
       })
       .when('/admin', {
         templateUrl: 'views/admin.html',
         controller: 'AdminCtrl',
         controllerAs: 'admin'
       })
-      .when('/statusReport', {
-        templateUrl: 'views/statusReport.html',
-        controller: 'StatusReportCtrl',
-        controllerAs: 'statusReport'
-      })
       .otherwise({
         redirectTo: '/login'
       })
-      $httpProvider.interceptors.push(function($q, $cookies) {
-        return {
-         'request': function(config) {
-            config.headers['authorization'] = 'Bearer '+ localStorage.getItem('jwtToken');
-            return config;
-          }
-        };
-      });
+    $httpProvider.interceptors.push(function($q, $cookies) {
+      return {
+        'request': function(config) {
+          config.headers['authorization'] = 'Bearer ' + localStorage.getItem('jwtToken');
+          return config;
+        }
+      };
+    });
   });

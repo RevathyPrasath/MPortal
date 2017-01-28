@@ -8,7 +8,7 @@
  * Controller of the healthCareApp
  */
 angular.module('healthCareApp')
-  .controller('PersonCtrl', function($scope, $rootScope, ApiService, healthCareBusinessConstants, $location, $window) {
+  .controller('PersonalCtrl', function($scope, $rootScope, ApiService, healthCareBusinessConstants, $location, $window) {
     var vm = this;
     vm.pageNo = 1;
     $rootScope.hideNavbar = false;

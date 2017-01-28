@@ -8,7 +8,7 @@
  * Controller of the healthCareApp
  */
 angular.module('healthCareApp')
-    .controller('StatusReportCtrl', function($rootScope, ApiService, healthCareBusinessConstants) {
+    .controller('StatusCtrl', function($rootScope, ApiService, healthCareBusinessConstants) {
         var vm = this;
         vm.expaire = function(value) {
             $rootScope.loading = true;

@@ -3,8 +3,8 @@
         <h2><span class="heading-bottom">Status Dashboard</span></h2>
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a data-target="#home" aria-controls="home" role="tab" data-toggle="tab" ng-click="statusReport.expaire('Staff');filterOpt = '';">STAFF</a></li>
-            <li role="presentation" ng-click="statusReport.expaire('Facility');filterOpt = '';"><a data-target="#profile" aria-controls="profile" role="tab" data-toggle="tab">FACILITY</a></li>
+            <li role="presentation" class="active"><a data-target="#home" aria-controls="home" role="tab" data-toggle="tab" ng-click="status.expaire('Staff');filterOpt = '';">STAFF</a></li>
+            <li role="presentation" ng-click="status.expaire('Facility');filterOpt = '';"><a data-target="#profile" aria-controls="profile" role="tab" data-toggle="tab">FACILITY</a></li>
         </ul>
         <br>
         <div class="tabs">
@@ -53,9 +53,9 @@
                     </div>
                     <div id="staff-status-dashboard" class="row status-dashboard">
                         <ul>
-                            <li ng-click="statusReport.statusSelected('OPERATIONS')" ng-class="{'selected-tab':statusReport.isActive('OPERATIONS')}" class="select-tabs">OPERATIONS</li>
-                            <li ng-click="statusReport.statusSelected('PERSONNEL')" ng-class="{'selected-tab':statusReport.isActive('PERSONNEL')}" class="select-tabs">PERSONNEL</li>
-                            <li ng-click="statusReport.statusSelected('ADMINISTRATION')" ng-class="{'selected-tab':statusReport.isActive('ADMINISTRATION')}" class="select-tabs">ADMINISTRATION</li>
+                            <li ng-click="status.statusSelected('OPERATIONS')" ng-class="{'selected-tab':status.isActive('OPERATIONS')}" class="select-tabs">OPERATIONS</li>
+                            <li ng-click="status.statusSelected('PERSONNEL')" ng-class="{'selected-tab':status.isActive('PERSONNEL')}" class="select-tabs">PERSONNEL</li>
+                            <li ng-click="status.statusSelected('ADMINISTRATION')" ng-class="{'selected-tab':status.isActive('ADMINISTRATION')}" class="select-tabs">ADMINISTRATION</li>
                         </ul>
                     </div>
                     <table class="human-search-section">

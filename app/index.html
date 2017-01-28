@@ -24,45 +24,16 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
   <!-- Add your site or application content here -->
-  <header ng-controller="HeaderCtrl as header">
-    <div class="menuwrap" ng-hide="!hideNavbar">
-      <ul class="nav nav-pills menu">
-        <li class="logo">
-          <a href="javascript:void(0)"><span class="orange">HealthCare</span>Business</a>
-        </li>
-      </ul>
-    </div>
-    <div class="menuwrap" ng-hide="hideNavbar">
-      <ul id="menu" class="nav nav-pills menu">
-        <li class="logo">
-          <a href="javascript:void(0)"><span class="orange">HealthCare</span>Business</a>
-        </li>
-        <li><a href="javascript:void(0)">Home</a></li>
-        <li >
-          <a href="javascript:void(0);">Operations</a>
-        </li>
-        <li  ng-class="header.getClass('/statusReport')">
-          <a href="javascript:void(0);" ng-click="header.statusReport();">Status</a>
-        </li>
-        <li ng-class="header.getClass('/main')">
-          <a href="javascript:void(0);" ng-click="header.humanResource();">Personnel</a>
-        </li>
-        <li><a href="javascript:void(0);">Organition</a></li>
-        <li ng-class="header.getClass('/admin')"><a ng-click="header.admin();">Admin</a></li>
-        <!-- 
-            <li><a href="javascript:void(0)">Tab1</a></li>
-            <li><a href="javascript:void(0);">ta2</a></li> -->
-        <!-- <li><a href="#">Sign Out</a></li> -->
-      </ul>
-      <!-- <ul class="nav nav-pills collect">
-          <li class="dropdown">
-          <a role="button" href="javascript:void(0)" data-toggle="dropdown" class="dropdown-toggle">
-          More <span class="caret"></span>
-          </a>
-          <ul id="submenu" class="dropdown-menu"></ul>
-          </li>
-        </ul> -->
-    </div>
+  <header ng-controller="HeaderCtrl as header" ng-hide="hideNavbar">
+    <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+      <md-nav-item md-nav-click="header.navigate('main')" name="main"><span class="orange">HealthCare</span>Business</md-nav-item>
+      <md-nav-item md-nav-click="header.navigate('home')" name="home">Home</md-nav-item>
+      <md-nav-item md-nav-click="header.navigate('operations')" name="Operations">Operations</md-nav-item>
+      <md-nav-item md-nav-click="header.navigate('status')" name="status">Status</md-nav-item>
+      <md-nav-item md-nav-click="header.navigate('personal')" name="personal">Personnel</md-nav-item>
+      <md-nav-item md-nav-click="header.navigate('organition')" name="organition">Organition</md-nav-item>
+      <md-nav-item md-nav-click="header.navigate('admin')" name="Admin">Admin</md-nav-item>
+    </md-nav-bar>
   </header>
   <div class="main-content">
     <div class="spinner" ng-show="loading"></div>
@@ -109,10 +80,12 @@
   <script src="scripts/directives/fileupload.js"></script>
   <script src="scripts/controllers/headerCtrl.js"></script>
   <script src="scripts/controllers/loginCtrl.js"></script>
-  <script src="scripts/controllers/mainCtrl.js"></script>
-  <script src="scripts/controllers/personCtrl.js"></script>
   <script src="scripts/controllers/adminCtrl.js"></script>
-  <script src="scripts/controllers/statusReportCtrl.js"></script>
+  <script src="scripts/controllers/homeCtrl.js"></script>
+  <script src="scripts/controllers/operationsCtrl.js"></script>
+  <script src="scripts/controllers/organitionCtrl.js"></script>
+  <script src="scripts/controllers/personalCtrl.js"></script>
+  <script src="scripts/controllers/statusCtrl.js"></script>
   <!-- endbuild -->
 </body>
 

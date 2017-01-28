@@ -1,16 +1,12 @@
-<div ng-controller="PersonCtrl as person">
+<div>
   <div class="sub-menu">
-    <!-- <ul role="tablist">
-      <li role="presentation" class="active"><a data-target="#vileList" ng-click="person.viewList()" aria-controls="vileList" role="tab" data-toggle="tab">View List</a></li>
-      <li role="presentation"><a data-target="#profile" ng-click="person.addNewTab()" aria-controls="profile" role="tab" data-toggle="tab">{{!editEmployee && 'Add New' || 'Edit'}}</a></li>
-    </ul> -->
   </div>
   <!-- Tab panes -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active">
-      <div class="alert alert-danger" ng-show="person.errorMsg">
+      <div class="alert alert-danger" ng-show="personal.errorMsg">
         <a href="javascript:void(0)" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>OOPS! </strong> <span ng-bind="person.errorMsg"></span>
+        <strong>OOPS! </strong> <span ng-bind="personal.errorMsg"></span>
       </div>
       <section>
         <div class="container">
@@ -40,7 +36,7 @@
                       <option class="text-status">Active</option>
                       <option class="text-status">Inactive</option>
                     </select>
-                    <span class="text-status add-item pull-right" ng-click="person.addNew()"><span>+</span> Add New
+                    <span class="text-status add-item pull-right" ng-click="personal.addNew()"><span>+</span> Add New
                     </span>
                   </div>
                 </div>
@@ -63,7 +59,7 @@
               <th><u>More</u></th>
             </tr>
             <tbody>
-              <tr ng-repeat="obj in person.personals | orderBy: predict: reverse">
+              <tr ng-repeat="obj in personal.personals | orderBy: predict: reverse">
                 <td ng-bind="obj.lastName"></td>
                 <td ng-bind="obj.firstName"></td>
                 <td ng-bind="obj.addressId.email"></td>
@@ -75,11 +71,11 @@
               <tr>
                 <td colspan="7">
                   <div class="col-xs-10">
-                    <span ng-class="person.disabled()?'page-inactive': 'page-active'" ng-click="person.pagination(person.pageNo,'first')"> FIRST </span>
-                    <span ng-class="person.disabled()?'page-inactive': 'page-active'" ng-click="person.pagination(person.pageNo,'prev')"> PREV </span>
-                    <input type="text" name="country" value="1" ng-model="person.pageNo" class="page-number" readonly>
-                    <span ng-class="person.active()?'page-active':'page-inactive'" ng-click="person.pagination(person.pageNo,'next')"> NEXT </span>
-                    <span ng-class="person.active()?'page-active':'page-inactive'" ng-click="person.pagination(person.pageNo,'last')"> LAST </span>
+                    <span ng-class="personal.disabled()?'page-inactive': 'page-active'" ng-click="person.pagination(personal.pageNo,'first')"> FIRST </span>
+                    <span ng-class="personal.disabled()?'page-inactive': 'page-active'" ng-click="personal.pagination(personal.pageNo,'prev')"> PREV </span>
+                    <input type="text" name="country" value="1" ng-model="personal.pageNo" class="page-number" readonly>
+                    <span ng-class="personal.active()?'page-active':'page-inactive'" ng-click="personal.pagination(personal.pageNo,'next')"> NEXT </span>
+                    <span ng-class="personal.active()?'page-active':'page-inactive'" ng-click="personal.pagination(personal.pageNo,'last')"> LAST </span>
                   </div>
                   <div class="col-xs-2 pull-right ">
                     <span class="text-show">Show</span>
@@ -98,7 +94,7 @@
 
 
     <!-- tab2 -->
-    <form role="tabpanel" class="tab-pane" id="profile">
+    <!-- <form role="tabpanel" class="tab-pane" id="profile">
       <section>
         <div class="container">
           <h2><span class="heading-bottom">Person Details</span></h2>
@@ -106,15 +102,15 @@
             <div class="left-col">
               <div class="row" ng-show="editEmployee">
                 <label>PersonID</label>
-                <input type="text" name="PersonID" placeholder="Enter Person ID" ng-model="person.details.person.personID" />
+                <input type="text" name="PersonID" placeholder="Enter Person ID" ng-model="personal.details.person.personID" />
               </div>
               <div class="row">
                 <label>LastName</label>
-                <input type="text" name="LastName" ng-model="person.details.person.lastNm" placeholder="Enter Last Name" />
+                <input type="text" name="LastName" ng-model="personal.details.person.lastNm" placeholder="Enter Last Name" />
               </div>
               <div class="row">
                 <label>FirstName</label>
-                <input type="text" ng-model="person.details.person.firstNm" name="FirstName" placeholder="Enter First Name" />
+                <input type="text" ng-model="personal.details.person.firstNm" name="FirstName" placeholder="Enter First Name" />
               </div>
               <div class="row">
                 <label>MiddleName</label>
@@ -540,6 +536,6 @@
           </div>
         </div>
       </section>
-    </form>
+    </form> -->
   </div>
 </div>

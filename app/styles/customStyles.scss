@@ -1227,12 +1227,26 @@ ul.collect ul.dropdown-menu {
 .emp-id {
   width: 12%;
 }
+
+
 /* admin */
+
 .admin-view {
   .users-table {
     .heading {
       .status-dropdown {
         width: 49%;
+      }
+      .serch-section {
+        position: relative;
+        input {
+          width: 100%;
+        }
+        .glyphicon-search {
+          position: absolute;
+          right: 20px;
+          top: 5px;
+        }
       }
     }
   }
