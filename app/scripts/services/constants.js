@@ -11,5 +11,7 @@ angular.module('healthCareApp').constant( 'healthCareBusinessConstants', {
   "EDIT_EMPLOYEE": ' http://managementportal-env.us-east-1.elasticbeanstalk.com/hsm/secure/employeeEdit',
   'DELETE_DOC': 'http://managementportal-env.us-east-1.elasticbeanstalk.com/hsm/secure/deleteDocument?docID=',  
   'GET_DOC': 'http://managementportal-env.us-east-1.elasticbeanstalk.com/hsm/secure/getDocument?docID=',
-  'SAVE_DOC': 'http://managementportal-env.us-east-1.elasticbeanstalk.com/hsm/secure/documentSave'
+  'SAVE_DOC': 'http://managementportal-env.us-east-1.elasticbeanstalk.com/hsm/secure/documentSave',
+  'GET_USERS': 'http://managementportal-env.us-east-1.elasticbeanstalk.com/hsm/secure/admin/users',
+  'PERSONAL': 'http://managementportal-env.us-east-1.elasticbeanstalk.com/hsm/secure/personnel'
  });
