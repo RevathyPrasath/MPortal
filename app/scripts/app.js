@@ -45,6 +45,11 @@ angular
         controller: 'PersonalCtrl',
         controllerAs: 'personal'
       })
+      .when('/personal/more', {
+        templateUrl: 'views/personalMore.html',
+        controller: 'personalMore',
+        controllerAs: 'morePersonnel'
+      })
       .when('/organition', {
         templateUrl: 'views/organition.html',
         controller: 'OrganitionCtrl',

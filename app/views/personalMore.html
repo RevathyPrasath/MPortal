@@ -1,0 +1,158 @@
+<div ng-controller="personalMore as morePersonnel">
+    <div class="personalMore">
+        <p>PERSONAL</p>
+        <hr>
+        <div class="row personal">
+            <div class="col-xs-6">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-sm-4 label-font" for="lastname">Last Name*</label>
+                        <div class="col-sm-6">
+                            <input type="text" ng-readonly="morePersonnel.readOnlyInput" class="form-control" ng-model="morePersonnel.urlParams.lastName" ng-class="{'edit-input':morePersonnel.readOnlyInput===false}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4 label-font" for="firstname">First Name*</label>
+                        <div class="col-sm-6">
+                            <input type="text" ng-readonly="morePersonnel.readOnlyInput" class="form-control" ng-model="morePersonnel.urlParams.firstName" ng-class="{'edit-input':morePersonnel.readOnlyInput===false}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4 label-font" for="middlename">Middle Name</label>
+                        <div class="col-sm-6">
+                            <input type="text" ng-readonly="morePersonnel.readOnlyInput" class="form-control" ng-model="morePersonnel.urlParams.middleName" ng-class="{'edit-input':morePersonnel.readOnlyInput===false}">
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <label class="control-label col-sm-4 label-font" for="birthday">Birthdate</label>
+                        <div class="col-sm-6">
+                            <input type="text" ng-readonly="morePersonnel.readOnlyInput" class="form-control" ng-model="morePersonnel.urlParams.dateOfBirth | date : 'dd/MM/yyyy'" ng-class="{'edit-input':morePersonnel.readOnlyInput===false}">
+                            <span ng-if="morePersonnel.readOnlyInput===false" class="glyphicon glyphicon-calendar form-control-feedback" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4 label-font" for="socialSecurity">Social Security #</label>
+                        <div class="col-sm-6">
+                            <input type="text" ng-readonly="morePersonnel.readOnlyInput" class="form-control" ng-model="morePersonnel.urlParams.socialSecurity" ng-class="{'edit-input':morePersonnel.readOnlyInput===false}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4 label-font" for="gender">Gender</label>
+                        <div class="col-sm-6">
+                            <label class="radio-inline" ng-class="{'text-opacity':morePersonnel.readOnlyInput && morePersonnel.urlParams.gender!='MALE'}">
+                                <input type="radio" ng-disabled='morePersonnel.readOnlyInput' name="optradio" class="radio-button" ng-model="morePersonnel.urlParams.gender" value="MALE"><span>Male</span></label>
+                            <label class="radio-inline" ng-class="{'text-opacity':morePersonnel.readOnlyInput && morePersonnel.urlParams.gender!='FEMALE'}">
+                                <input type="radio" ng-readonly="morePersonnel.readOnlyInput" ng-disabled='morePersonnel.readOnlyInput' name="optradio" class="radio-button" ng-model="morePersonnel.urlParams.gender" value="FEMALE"><span>Female</span></label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-xs-6">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-sm-4 label-font" for="streetAdress">Street Address</label>
+                        <div class="col-sm-6">
+                            <input type="text" ng-readonly="morePersonnel.readOnlyInput" class="form-control" ng-model="morePersonnel.urlParams.addressId.street" ng-class="{'edit-input':morePersonnel.readOnlyInput===false}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4 label-font" for="city">City</label>
+                        <div class="col-sm-6">
+                            <input type="text" ng-readonly="morePersonnel.readOnlyInput" class="form-control" ng-model="morePersonnel.urlParams.addressId.city" ng-class="{'edit-input':morePersonnel.readOnlyInput===false}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4 label-font" for="state">State</label>
+                        <div class="col-sm-6">
+                            <select aria-label="ngSelected" class="select-box" ng-class="{'edit-input':morePersonnel.readOnlyInput===false}">
+                                <option ng-repeat="state in morePersonnel.states" ng-disabled='morePersonnel.readOnlyInput' ng-selected="state===morePersonnel.urlParams.addressId.state">{{state}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4 label-font" for="ZIP">ZIP</label>
+                        <div class="col-sm-6">
+                            <input type="text" ng-readonly="morePersonnel.readOnlyInput" class="form-control" ng-model="morePersonnel.urlParams.addressId.zip" ng-class="{'edit-input':morePersonnel.readOnlyInput===false}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4 label-font" for="country">Country</label>
+                        <div class="col-sm-6">
+                            <input type="text" ng-readonly="morePersonnel.readOnlyInput" class="form-control" ng-model="morePersonnel.urlParams.addressId.country" ng-class="{'edit-input':morePersonnel.readOnlyInput===false}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4 label-font" for="phone">Phone</label>
+                        <div class="col-sm-6">
+                            <input type="text" ng-readonly="morePersonnel.readOnlyInput" class="form-control" ng-model="morePersonnel.urlParams.addressId.phone" ng-class="{'edit-input':morePersonnel.readOnlyInput===false}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4 label-font" for="email">Personal Email</label>
+                        <div class="col-sm-6">
+                            <input type="text" ng-readonly="morePersonnel.readOnlyInput" class="form-control" ng-model="morePersonnel.urlParams.addressId.email" ng-class="{'edit-input':morePersonnel.readOnlyInput===false}">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <p>EMPLOYEE</p>
+        <hr>
+        <div class="row employee">
+            <div class="col-xs-6">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-sm-4 label-font" for="jobTitle">Job Title</label>
+                        <div class="col-sm-6">
+                            <input type="text" ng-readonly="morePersonnel.readOnlyInput" class="form-control" ng-model="morePersonnel.urlParams.employeeId.jobTitle" ng-class="{'edit-input':morePersonnel.readOnlyInput===false}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-4 label-font" for="supervisor">Supervisor</label>
+                        <div class="col-sm-6">
+                            <select aria-label="ngSelected" class="select-box supervisor" ng-class="{'edit-input':morePersonnel.readOnlyInput===false}">
+                                <option ng-repeat="supervisor in morePersonnel.supervisors" ng-disabled='morePersonnel.readOnlyInput' ng-selected="supervisor===morePersonnel.urlParams.employeeId.superVisor">{{supervisor}}</option>
+                            </select>
+                            <div>
+                                <input type="checkbox" ng-disabled='morePersonnel.readOnlyInput' name="supervisor" value="supervisor"><span class="label-font supervisor-text">Supervisor</span>
+                            </div>
+                            <div class="provider">
+                                <input type="checkbox" ng-disabled='morePersonnel.readOnlyInput' name="provider" value="provider"><span class="label-font supervisor-text">Provider</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2 label-font" for="gender">Status</label>
+                                <div class="col-sm-10">
+                                    <label class="radio-inline">
+                                        <input type="radio" ng-disabled='morePersonnel.readOnlyInput' name="optradio" class="radio-button" value="Active"><span>Active</span></label>
+                                    <label class="radio-inline">
+                                        <input type="radio" ng-readonly="morePersonnel.readOnlyInput" ng-disabled='morePersonnel.readOnlyInput' class="radio-button" name="optradio" value="Inactive"><span>Inactive</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-xs-6">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-sm-4 label-font" for="location">Location</label>
+                        <div class="col-sm-6">
+                            <select aria-label="ngSelected" class="select-box" ng-class="{'edit-input':morePersonnel.readOnlyInput===false}">
+                                <option ng-repeat="location in morePersonnel.locations" ng-disabled='morePersonnel.readOnlyInput' ng-selected="location===morePersonnel.urlParams.employeeId.location">{{location}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <p>ATTACHMENTS/REMAINDERS</p>
+        <hr>
+        <div class="attachments">
+            <div class="pull-right">
+                <button type="button" class="btn btn-secondary custom-button edit" ng-click="morePersonnel.fnEditPersonnal()" ng-if="morePersonnel.readOnlyInput">Edit</button>
+                <button type="button" class="btn btn-secondary custom-button edit" ng-if="morePersonnel.readOnlyInput===false">Save</button>
+                <button type="button" class="btn btn-secondary custom-button">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
