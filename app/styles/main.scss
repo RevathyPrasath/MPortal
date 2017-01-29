@@ -2,16 +2,16 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 // bower:scss
 @import 'bootstrap-sass-official/assets/stylesheets/_bootstrap.scss';
 // endbower
-
 @import 'customStyles.scss';
 @import 'jquery-ui.scss';
-
 .alert {
   width: 70%;
   margin: 0 auto;
 }
 
-/*loader css */ 
+
+/*loader css */
+
 .spinner {
   position: fixed;
   left: 0px;
@@ -20,17 +20,22 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
   height: 100%;
   z-index: 9999;
   opacity: 0.9;
-  background: url('../images/ajax-loader.gif') 50% 50% no-repeat rgb(249,249,249);
+  background: url('../images/ajax-loader.gif') 50% 50% no-repeat rgb(249, 249, 249);
 }
-/*loader css */ 
+
+
+/*loader css */
+
 .nav-bar .navbar-nav li {
-  border-right:1px solid #fff; 
+  border-right: 1px solid #fff;
 }
-.nav-bar .navbar-nav li.active a, 
+
+.nav-bar .navbar-nav li.active a,
 .nav-bar .navbar-nav li:hover a {
   color: #fff;
   background: #e65100;
 }
+
 .login-form {
   align-items: center;
   display: flex;
@@ -41,19 +46,29 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
     opacity: 0.8;
   }
 }
+
 .main-content {
-  margin-top: 64px !important;
-	 min-height: calc(100vh - 90px);
-	 overflow: auto;
-	 margin-top: -5px;
+  margin-top: 47px !important;
+  min-height: calc(100vh - 90px);
+  overflow: auto;
+  margin-top: -5px;
 }
+
+.user-detail-view {
+  md-content {
+    background: rgba(204, 204, 204, 0.53);
+  }
+}
+
 .glyphicon {
   cursor: pointer;
 }
+
 #accordion {
   width: 80% !important;
   margin: 0 auto;
 }
+
 .footer {
   bottom: 0;
   width: 100%;
@@ -63,26 +78,27 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 }
 
 .navbar-nav > li > a {
-    color:#444;
-  }
+  color: #444;
+}
 
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)  { 
-#accordion {
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  #accordion {
     width: 100% !important;
   }
 }
 
 @media (max-width: 768px) {
   .navbar-nav > li > a {
-      padding-top: 10px;
-      padding-bottom: 10px;
-      padding-left: 7px;
-      padding-right: 7px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 7px;
+    padding-right: 7px;
   }
 }
+
 @media (min-width: 769px) {
   .navbar-nav > li > a {
-      padding: 10px;
-      font-size: 12px;
+    padding: 10px;
+    font-size: 12px;
   }
 }

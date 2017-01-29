@@ -1,7 +1,7 @@
-<div layout="column" ng-cloak class="md-inline-form">
+<div layout="column" ng-cloak class="md-inline-form user-detail-view">
   <md-content layout-padding>
     <div class="container" style="width:70%; margin: 0 auto; background: #fff;">
-      <h4>USER</h4>
+      <h5 style="color: #4CAF50;">USER</h5>
       <br>
       <form name="userForm">
         <div layout-gt-sm="row">
@@ -39,14 +39,16 @@
             <label>phone</label>
             <input ng-model="user.userDetailsObj.phone" ng-readonly="user.viewmode">
           </md-input-container>
-          <md-input-container class="md-block" flex-gt-sm>
+          <md-input-container lass="md-block" flex-gt-sm>
             <label>Role</label>
-            <input ng-model="user.userDetailsObj.role" ng-readonly="user.viewmode">
+            <md-select ng-model="user.userDetailsObj.role">
+              <md-option ng-repeat="role in user.roles" value="{{role.role}}">{{role.role}}</md-option>
+            </md-select>
           </md-input-container>
         </div>
         <md-input-container class="md-block">
           <label>Notes</label>
-          <textarea ng-model="user.userDetailsObj.notes" rows="3" ng-readonly="user.viewmode"></textarea>
+          <textarea ng-model="user.userDetailsObj.notes" rows="4" ng-readonly="user.viewmode"></textarea>
         </md-input-container>
         <div flex layout='row' layout-padding layout-align="start center" style="    height: 30px;">
           <div>Status</div>
@@ -56,9 +58,12 @@
           </md-radio-group>
         </div>
       </form>
-      <hr/>
+      <div style="border-bottom: 2px dotted #ccc; margin-top: 25px;margin-bottom: 30px;"></div>
       <div>
-        <h4>ATTACHMENTS/REMAINDERS</h4>
+        <h5 style="border-bottom: 1px solid #ccc; color: #4CAF50;">ATTACHMENTS/REMAINDERS</h5>
+        <p ng-show="!user.viewmode">
+          <md-button class="md-raised md-cornered">Add New</md-button>
+        </p>
         <table>
           <tr>
             <td>Id</td>

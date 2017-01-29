@@ -44,6 +44,7 @@ angular.module('healthCareApp')
     vm.init = function() {
       vm.userDetailsObj = angular.fromJson(localStorage.getItem('userdetails'));
       vm.viewmode = true;
+      vm.roles = [{role:'ADMINISTRATOR'},{role:'USER'}];
       console.log(vm.userdetailsObj);
     };
 

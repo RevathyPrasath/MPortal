@@ -24,14 +24,14 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
   <!-- Add your site or application content here -->
-  <header ng-controller="HeaderCtrl as header" ng-hide="hideNavbar">
+  <header ng-controller="HeaderCtrl as header" ng-hide="hideNavbar" class="main-header">
     <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
       <md-nav-item md-nav-click="header.navigate('main')" name="main"><span class="orange">HealthCare</span>Business</md-nav-item>
       <md-nav-item md-nav-click="header.navigate('home')" name="home">Home</md-nav-item>
       <md-nav-item md-nav-click="header.navigate('operations')" name="Operations">Operations</md-nav-item>
       <md-nav-item md-nav-click="header.navigate('status')" name="status">Status</md-nav-item>
       <md-nav-item md-nav-click="header.navigate('personal')" name="personal">Personnel</md-nav-item>
-      <md-nav-item md-nav-click="header.navigate('organition')" name="organition">Organition</md-nav-item>
+      <md-nav-item md-nav-click="header.navigate('organition')" name="organition">Organization</md-nav-item>
       <md-nav-item md-nav-click="header.navigate('admin')" name="Admin">Admin</md-nav-item>
     </md-nav-bar>
   </header>
