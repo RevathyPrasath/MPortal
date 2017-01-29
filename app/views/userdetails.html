@@ -41,8 +41,8 @@
           </md-input-container>
           <md-input-container lass="md-block" flex-gt-sm>
             <label>Role</label>
-            <md-select ng-model="user.userDetailsObj.role">
-              <md-option ng-repeat="role in user.roles" value="{{role.role}}">{{role.role}}</md-option>
+            <md-select ng-model="user.userDetailsObj.role" ng-disabled="user.viewmode">
+              <md-option ng-repeat="role in user.roles" value="{{role.role}}" ng-readonly="user.viewmode">{{role.role}}</md-option>
             </md-select>
           </md-input-container>
         </div>
