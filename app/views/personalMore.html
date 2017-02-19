@@ -116,11 +116,11 @@
           <div layout-gt-sm="row">
             <md-input-container class="md-block" flex-gt-sm>
               <label>Last Name</label>
-              <input ng-model="personalMore.personalDetailsObj.lastName" ng-readonly="personalMore.viewmode">
+              <input ng-model="personalMore.personalDetailsObj.lastName" ng-readonly="personalMore.viewmode" ng-required="true">
             </md-input-container>
             <md-input-container class="md-block" flex-gt-sm>
               <label>First Name</label>
-              <input ng-model="personalMore.personalDetailsObj.firstName" ng-readonly="personalMore.viewmode">
+              <input ng-model="personalMore.personalDetailsObj.firstName" ng-readonly="personalMore.viewmode" ng-required="true">
             </md-input-container>
             <md-input-container class="md-block" flex-gt-sm>
               <label>Middle Name</label>
@@ -137,59 +137,82 @@
               <input ng-model="personalMore.personalDetailsObj.socialSecurity" ng-readonly="personalMore.viewmode">
             </md-input-container>
             <div flex layout='row' layout-padding layout-align="start center" style="height: 30px;">
-              <div>Gendar</div>
-              <md-radio-group ng-model="user.personalDetailsObj.gender" ng-readonly="user.viewmode">
-                <md-radio-button ng-value="male">Male</md-radio-button>
-                <md-radio-button ng-value="femail">Female</md-radio-button>
+              <div>Gender</div>
+              <md-radio-group ng-disabled="true" ng-model="personalMore.personalDetailsObj.gender" ng-readonly="personalMore.viewmode">
+                <md-radio-button value="MALE">Male</md-radio-button>
+                <md-radio-button value="FEMALE">Female</md-radio-button>
               </md-radio-group>
             </div>
           </div>
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Street Address</label>
+              <input ng-model="personalMore.personalDetailsObj.addressId.street" ng-readonly="personalMore.viewmode">
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>City</label>
+              <input ng-model="personalMore.personalDetailsObj.addressId.city" ng-readonly="personalMore.viewmode">
+            </md-input-container>
+          </div>
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>State</label>
+              <input ng-model="personalMore.personalDetailsObj.addressId.state" ng-readonly="personalMore.viewmode">
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>ZIP</label>
+              <input ng-model="personalMore.personalDetailsObj.addressId.zip" ng-readonly="personalMore.viewmode">
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Country</label>
+              <input ng-model="personalMore.personalDetailsObj.addressId.country" ng-readonly="personalMore.viewmode">
+            </md-input-container>
+          </div>
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Phone</label>
+              <input ng-model="personalMore.personalDetailsObj.addressId.phone" ng-readonly="personalMore.viewmode">
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Personal Email</label>
+              <input ng-model="personalMore.personalDetailsObj.addressId.email" ng-readonly="personalMore.viewmode">
+            </md-input-container>
+          </div>
 
+          <h5 style="color: #4CAF50;">EMPLOYEE</h5>
+          <br>
           <div layout-gt-sm="row">
             <md-input-container class="md-block" flex-gt-sm>
-              <label>Middle Name</label>
-              <input ng-model="personalMore.userDetailsObj.userName" ng-readonly="personalMore.viewmode">
+              <label>Job Title</label>
+              <input ng-model="personalMore.personalDetailsObj.employeeId.jobTitle" ng-readonly="personalMore.viewmode">
             </md-input-container>
             <md-input-container class="md-block" flex-gt-sm>
-              <label>Birthdate</label>
-              <input ng-model="user.userDetailsObj.email" ng-readonly="user.viewmode">
+              <label>Location</label>
+              <input ng-model="personalMore.personalDetailsObj.employeeId.location" ng-readonly="personalMore.viewmode">
             </md-input-container>
+            <div flex layout='row' layout-padding layout-align="start center" style="height: 30px;">
+              <div>Status</div>
+              <md-radio-group ng-disabled="true" ng-model="personalMore.personalDetailsObj.employeeId.status" ng-readonly="personalMore.viewmode">
+                <md-radio-button ng-value="true">Active</md-radio-button>
+                <md-radio-button ng-value="false">Inactive</md-radio-button>
+              </md-radio-group>
+            </div>
           </div>
           <div layout-gt-sm="row">
             <md-input-container class="md-block" flex-gt-sm>
-              <label>Password</label>
-              <input type="password" ng-model="user.userDetailsObj.password" ng-readonly="user.viewmode">
+              <label>Supervisor</label>
+              <input ng-model="personalMore.personalDetailsObj.employeeId.superVisor" ng-readonly="personalMore.viewmode">
             </md-input-container>
-            <md-input-container class="md-block" flex-gt-sm>
-              <label>Confirm Password</label>
-              <input type="password" ng-model="user.userDetailsObj.password" ng-readonly="user.viewmode">
-            </md-input-container>
-          </div>
-          <div layout-gt-sm="row">
-            <md-input-container class="md-block" flex-gt-sm>
-              <label>phone</label>
-              <input ng-model="user.userDetailsObj.phone" ng-readonly="user.viewmode">
-            </md-input-container>
-            <md-input-container lass="md-block" flex-gt-sm>
-              <label>Role</label>
-              <md-select ng-model="user.userDetailsObj.role" ng-disabled="user.viewmode">
-                <md-option ng-repeat="role in user.roles" value="{{role.role}}" ng-readonly="user.viewmode">{{role.role}}</md-option>
-              </md-select>
-            </md-input-container>
-          </div>
-          <md-input-container class="md-block">
-            <label>Notes</label>
-            <textarea ng-model="user.userDetailsObj.notes" rows="4" ng-readonly="user.viewmode"></textarea>
-          </md-input-container>
-          <div flex layout='row' layout-padding layout-align="start center" style="    height: 30px;">
-            <div>Status</div>
-            <md-radio-group ng-model="user.userDetailsObj.status" ng-readonly="user.viewmode">
-              <md-radio-button ng-value="true">Active</md-radio-button>
-              <md-radio-button ng-value="false"> In active </md-radio-button>
-            </md-radio-group>
+            <div flex layout="row" layout-padding layout-align="start center" style="height: 30px;">
+              <md-checkbox ng-disabled="true" class="md-block" flex-gt-sm ng-model="personalMore.personalDetailsObj.employeeId.isSupervisor"
+                aria-label="Supervisor">Supervisor
+              </md-checkbox>
+              <md-checkbox ng-disabled="true" class="md-block" flex-gt-sm ng-model="personalMore.personalDetailsObj.employeeId.isProvider"
+                aria-label="Provider">Provider
+              </md-checkbox>
+            </div>
           </div>
         </form>
-        <div style="border-bottom: 2px dotted #ccc; margin-top: 25px;margin-bottom: 30px;"></div>
         <div>
           <h5 style="border-bottom: 1px solid #ccc; color: #4CAF50;">ATTACHMENTS/REMAINDERS</h5>
           <p ng-show="!user.viewmode">
@@ -202,7 +225,7 @@
               <td>Description</td>
               <td>Action</td>
             </tr>
-            <tr ng-repeat="doc in user.userDetailsObj.documents">
+            <tr ng-repeat="doc in personalMore.personalDetailsObj.document">
               <td ng-bind="doc.documentId"></td>
               <td ng-bind="doc.createdOn | date : format : timezone"></td>
               <td ng-bind="doc.description"></td>
@@ -212,8 +235,8 @@
         </div>
         <hr/>
         <div class="text-right">
-          <md-button class="md-raised md-primary" ng-click="user.editBtnClick()" ng-show="user.viewmode">Edit</md-button>
-          <md-button ng-show="!user.viewmode" class="md-raised md-primary" ng-click="user.editBtnClick()">Save</md-button>
+          <md-button class="md-raised md-primary" ng-click="user.editBtnClick()" ng-show="user.viewmode">Save</md-button>
+          <md-button ng-show="!user.viewmode" class="md-raised md-primary" ng-click="user.editBtnClick()">Edit</md-button>
           <md-button class="md-raised" ng-click="user.cancelBtnclick()">Cancel</md-button>
         </div>
       </div>
