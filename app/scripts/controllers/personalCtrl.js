@@ -1,5 +1,4 @@
 'use strict';
-
 /**
  * @ngdoc function
  * @name healthCareApp.controller:PersonCtrl
@@ -70,8 +69,10 @@ angular.module('healthCareApp')
       ApiService.get(healthCareBusinessConstants.PERSONAL + '?page=' + pagenumber).then(getPersonalsSb, errorCallback).finally(finalCallBack);
     };
 
-    vm.fnViewMore = function(obj) {
-      $location.path('personal/more').search({ obj: JSON.stringify(obj) });
+    vm.fnViewMore = function (obj) {
+      console.log(obj);
+      localStorage.setItem('personnalDetails', angular.toJson(obj));
+      $location.path('personnalDetails');
     };
 
     vm.init = function() {

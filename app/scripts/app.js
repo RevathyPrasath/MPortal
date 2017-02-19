@@ -45,10 +45,10 @@ angular
         controller: 'PersonalCtrl',
         controllerAs: 'personal'
       })
-      .when('/personal/more', {
+      .when('/personnalDetails', {
         templateUrl: 'views/personalMore.html',
-        controller: 'personalMore',
-        controllerAs: 'morePersonnel'
+        controller: 'personalMoreCtrl',
+        controllerAs: 'personalMore'
       })
       .when('/organition', {
         templateUrl: 'views/organition.html',
