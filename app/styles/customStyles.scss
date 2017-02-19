@@ -642,10 +642,12 @@ a.ui-button:active,
 }
 
 footer {
-    background: #e0e0e0;
+    background: green;
     text-align: center;
     padding: 10px 0;
     margin-top: 35px;
+    position: fixed;
+
 }
 
 
@@ -1095,20 +1097,23 @@ table tr:nth-child(odd) {
     }
     .page-inactive {
         margin-right: 20px;
-        font-size: 16px;
+        font-size: 12px;
         color: #C0C0C0;
         cursor: not-allowed;
     }
     .page-active {
         margin-right: 20px;
-        font-size: 16px;
+        font-size: 12px;
         color: #337ab7;
         cursor: pointer;
     }
     .text-show {
-        font-size: 15px;
+        font-size: 12px;
         color: #A9A9A9;
         margin-right: 18px;
+    }
+    .page-active:focus, .page-inactive:focus{
+        outline: 0;
     }
     .show-dropdown {
         width: 62px;

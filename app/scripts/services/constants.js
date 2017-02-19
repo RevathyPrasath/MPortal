@@ -3,7 +3,7 @@
  */
 angular.module('healthCareApp').constant( 'healthCareBusinessConstants', {
   "LOGIN_URL": 'http://managementportal-env.us-east-1.elasticbeanstalk.com/hsm/login',
-  "SEARCH_URL": 'http://managementportal-env.us-east-1.elasticbeanstalk.com/hsm/secure/employeesearch',
+  "PERSONAL_SEARCH_URL": 'http://managementportal-env.us-east-1.elasticbeanstalk.com/hsm/secure/personnel/search',
   "STAFF": 'http://managementportal-env.us-east-1.elasticbeanstalk.com/hsm/secure/status/staff',
   "FACILITY": 'http://managementportal-env.us-east-1.elasticbeanstalk.com/hsm/secure/status/Facility',
   "DELETE_EMP": 'http://managementportal-env.us-east-1.elasticbeanstalk.com/hsm/secure/employeeDelete?empID=',
