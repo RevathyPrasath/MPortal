@@ -55,6 +55,13 @@ angular
         controller: 'OrganitionCtrl',
         controllerAs: 'organition'
       })
+
+      .when('/locationsMore', {
+        templateUrl: 'views/locationsMore.html',
+        controller: 'locationsMoreCtrl',
+        controllerAs: 'locationsMore'
+      })
+
       .when('/admin', {
         templateUrl: 'views/admin.html',
         controller: 'AdminCtrl',

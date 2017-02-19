@@ -39,6 +39,10 @@ angular.module('healthCareApp')
       $location.path('userdetails');
     };
 
+    vm.addNew = function() {
+      alert('add')
+    };
+
     vm.init = function() {
       vm.getPersonals();
     };
