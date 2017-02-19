@@ -99,7 +99,7 @@
                 </td>
               </tr>
               <tr>
-                <th>Location Name</th>
+                <th>Comany Name</th>
                 <th>Street Address</th>
                 <th>City</th>
                 <th>Zip</th>
@@ -109,14 +109,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="location in organition.locations">
-                <td ng-bind="location.locationName"></td>
-                <td ng-bind="location.addressId.street"></td>
-                <td ng-bind="location.addressId.city"></td>
-                <td ng-bind="location.addressId.zip"></td>
-                <td ng-bind="location.addressId.state"></td>
-                <td>{{location.status && 'Active' || 'InActive'}}</td>
-                <td ng-click="organition.organitionDetailsView(location)"><strong><a>More</a></strong></td>
+              <tr ng-repeat="company in organition.companies">
+                <td ng-bind="company.locationName"></td>
+                <td ng-bind="company.addressId.street"></td>
+                <td ng-bind="company.addressId.city"></td>
+                <td ng-bind="company.addressId.zip"></td>
+                <td ng-bind="company.addressId.state"></td>
+                <td>{{company.status && 'Active' || 'InActive'}}</td>
+                <td ng-click="organition.organitionCompanyDetailsView(company)"><strong><a>More</a></strong></td>
               </tr>
               <!-- <tr>
                 <td colspan="7">

@@ -1,0 +1,84 @@
+<div layout="column" ng-cloak class="md-inline-form user-detail-view">
+  <md-content layout-padding>
+    <div class="container" style="width:70%; margin: 0 auto; background: #fff;">
+      <h5 style="color: #4CAF50;">COMPANY</h5>
+      <br>
+      <form name="userForm">
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Entity Name</label>
+            <input ng-model="companyMore.companyDetailsObj.entityname" ng-readonly="companyMore.viewmode" ng-required="true">
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>DBA</label>
+            <input ng-model="companyMore.companyDetailsObj.dba" ng-readonly="companyMore.viewmode" ng-required="true">
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Entity Type</label>
+            <input ng-model="companyMore.companyDetailsObj.entityType" ng-readonly="companyMore.viewmode">
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Zip Code</label>
+            <input ng-model="companyMore.companyDetailsObj.addressId.zip" ng-readonly="companyMore.viewmode">
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>State</label>
+            <input ng-model="companyMore.companyDetailsObj.addressId.state" ng-readonly="companyMore.viewmode">
+          </md-input-container>
+          <div flex layout='row' layout-padding layout-align="start center" style="height: 30px;">
+            <div>Status</div>
+            <md-radio-group ng-model="companyMore.companyDetailsObj.status" ng-readonly="companyMore.viewmode">
+              <md-radio-button ng-value="true">Active</md-radio-button>
+              <md-radio-button ng-value="false">In Active</md-radio-button>
+            </md-radio-group>
+          </div>
+        </div>
+
+        <div layout-gt-sm="row">
+           <md-input-container class="md-block" flex-gt-sm>
+            <label>Note</label>
+            <input ng-model="companyMore.companyDetailsObj.notes" ng-readonly="companyMore.viewmode">
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Phone</label>
+            <input ng-model="companyMore.companyDetailsObj.addressId.phone" ng-readonly="companyMore.viewmode">
+          </md-input-container>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Fax</label>
+            <input ng-model="companyMore.companyDetailsObj.addressId.fax" ng-readonly="companyMore.viewmode">
+          </md-input-container>
+        </div>
+      </form>
+      <div>
+        <h5 style="border-bottom: 1px solid #ccc; color: #4CAF50;">ATTACHMENTS/REMAINDERS</h5>
+        <p ng-show="!companyMore.viewmode">
+          <md-button class="md-raised md-cornered">Add New</md-button>
+        </p>
+        <table>
+          <tr>
+            <td>Id</td>
+            <td>Date Created</td>
+            <td>Description</td>
+            <td>Action</td>
+          </tr>
+          <tr ng-repeat="doc in companyMore.companyDetailsObj.documents">
+            <td ng-bind="doc.documentId"></td>
+            <td ng-bind="doc.createdOn | date : format : timezone"></td>
+            <td ng-bind="doc.description"></td>
+            <td><a href="">View</a></td>
+          </tr>
+        </table>
+      </div>
+      <hr/>
+      <div class="text-right">
+        <md-button class="md-raised md-primary" ng-click="companyMore.saveBtnClick()" ng-show="!companyMore.viewmode">Save</md-button>
+        <md-button ng-show="companyMore.viewmode" class="md-raised md-primary" ng-click="companyMore.editBtnClick()">Edit</md-button>
+        <md-button class="md-raised" ng-click="companyMore.cancelBtnclick()">Cancel</md-button>
+      </div>
+    </div>
+  </md-content>
+</div>

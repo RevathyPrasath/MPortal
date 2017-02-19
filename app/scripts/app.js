@@ -55,13 +55,16 @@ angular
         controller: 'OrganitionCtrl',
         controllerAs: 'organition'
       })
-
       .when('/locationsMore', {
         templateUrl: 'views/locationsMore.html',
         controller: 'locationsMoreCtrl',
         controllerAs: 'locationsMore'
       })
-
+      .when('/companyMore', {
+        templateUrl: 'views/companyMore.html',
+        controller: 'companyMoreCtrl',
+        controllerAs: 'companyMore'
+      })
       .when('/admin', {
         templateUrl: 'views/admin.html',
         controller: 'AdminCtrl',
