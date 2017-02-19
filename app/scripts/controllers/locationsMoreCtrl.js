@@ -11,6 +11,14 @@ angular.module('healthCareApp')
   .controller('locationsMoreCtrl', function($scope, $location) {
     var vm = this;
 
+    vm.cancelBtnclick = function () {
+      $location.path('organition');
+    };
+
+    vm.editBtnClick = function () {
+      vm.viewmode = false;
+    };
+
     vm.init = function() {
       vm.locationsDetailsObj = angular.fromJson(localStorage.getItem('locationsDetails'));
       vm.viewmode = true;

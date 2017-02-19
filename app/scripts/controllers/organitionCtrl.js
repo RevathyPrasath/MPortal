@@ -69,6 +69,12 @@ angular.module('healthCareApp')
       ApiService.get(healthCareBusinessConstants.GET_LOCATIONS + '?page=' + pagenumber).then(getLocationsSb, errorCallback).finally(finalCallBack);
     };
 
+    vm.organitionDetailsView = function (obj) {
+      console.log(obj);
+      localStorage.setItem('locationsDetails', angular.toJson(obj));
+      $location.path('locationsMore');
+    };
+
     vm.init = function() {
       vm.pageNo = 0;
       vm.getLocations(0);
