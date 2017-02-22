@@ -59,6 +59,19 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
     md-content {
         background: rgba(204, 204, 204, 0.53);
     }
+    .attachment-form {
+        padding-top: 15px;
+        margin-bottom: 20px;
+        padding: 25px 20px 5px;
+        box-shadow: 0 0 10px #ccc;
+        position: relative;
+    }
+    .attachment-delete {
+        color: #03a9f4;
+    }
+    .attachment-save {
+        color: #03a9f4;
+    }
 }
 
 .glyphicon {
