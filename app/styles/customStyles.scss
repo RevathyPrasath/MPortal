@@ -647,7 +647,6 @@ footer {
     padding: 10px 0;
     margin-top: 35px;
     position: fixed;
-
 }
 
 
@@ -754,11 +753,11 @@ input[type=radio]:checked ~ .check::before {
         text-align: center;
     }
     .body {
-        .symbol {
+       .symbol {
             text-align: center;
         }
         .text {
-            font-size: 18px;
+            font-size: 14px;
             color: white;
             text-align: right;
         }
@@ -799,14 +798,17 @@ input[type=radio]:checked ~ .check::before {
             list-style: none;
             display: inline-block;
             margin-right: 40px;
-            font-size: 20px;
+            font-size: 15px;
         }
     }
     .select-tabs {
         cursor: pointer;
     }
     .selected-tab {
-        border-bottom: 1px solid black;
+        border-bottom: 2px solid black;
+    }
+    .selected-tab:focus {
+        outline: 0;
     }
 }
 
@@ -1111,7 +1113,8 @@ table tr:nth-child(odd) {
         color: #A9A9A9;
         margin-right: 18px;
     }
-    .page-active:focus, .page-inactive:focus{
+    .page-active:focus,
+    .page-inactive:focus {
         outline: 0;
     }
     .show-dropdown {
