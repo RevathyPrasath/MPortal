@@ -8,22 +8,59 @@
  * Controller of the healthCareApp
  */
 angular.module('healthCareApp')
-  .controller('personalMoreCtrl', function($scope, $location) {
+  .controller('personalMoreCtrl', function($scope, $rootScope, $location, ApiService, healthCareBusinessConstants) {
     var vm = this;
-    // vm.urlParams = JSON.parse($location.search().obj);
-    // console.log($location.search().obj);
-    // vm.readOnlyInput = true;
-    // vm.fnEditPersonnal = function() {
-    //   vm.readOnlyInput = false;
-    // }
-    // vm.states = ['California', 'NewYork', 'London'];
-    // vm.supervisors = ['superVisor', 'xyz', 'abc'];
-    // vm.locations = [null, 'xyz', 'abc'];
+
+    var errorCallback = function(error) {
+      vm.errorMsg = error.data.message;
+      console.log("login response::", error);
+    };
+
+    // final call back method called no matter success or failure
+    var finalCallBack = function(res) {
+      console.log('finalCallBack', res);
+      $rootScope.loading = false;
+    };
+
+    vm.editBtnClick = function() {
+      vm.viewmode = false;
+    };
+
+    vm.cancelBtnclick = function() {
+      $location.path("personal");
+    };
+
+    vm.addNewDocument = function() {
+      vm.attachmentCreateViewmode = true;
+    };
+
+    vm.showAttachmentCreate = function() {
+      vm.attachmentCreateViewmode = true;
+    };
+
+    vm.hideAttachmentCreate = function() {
+      // remove or empty the attachment form data
+      vm.attachmentCreateViewmode = false;
+    };
+
+    vm.createAttachment = function() {
+      // make an api for adding the new attachment
+      vm.hideAttachmentCreate();
+    };
+
+    vm.getLocationsSb = function(res) {
+      vm.locations = res.data;
+    };
+
+    vm.getLocations = function() {
+      ApiService.get(healthCareBusinessConstants.LOCATIONS).then(getLocationsSb, errorCallback).finally(finalCallBack);
+    };
 
     vm.init = function() {
       vm.personalDetailsObj = angular.fromJson(localStorage.getItem('personnalDetails'));
       vm.viewmode = true;
-      vm.roles = [{ role: 'ADMINISTRATOR' }, { role: 'USER' }];
+      vm.personalDetailsObj.myDate = new Date();
+      vm.getLocations();
     };
 
     vm.init();
