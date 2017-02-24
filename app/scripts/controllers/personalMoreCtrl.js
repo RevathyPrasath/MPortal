@@ -60,7 +60,7 @@ angular.module('healthCareApp')
       vm.personalDetailsObj = angular.fromJson(localStorage.getItem('personnalDetails'));
       vm.viewmode = true;
       vm.personalDetailsObj.myDate = new Date();
-      vm.getLocations();
+      //vm.getLocations();
     };
 
     vm.init();
