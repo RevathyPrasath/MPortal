@@ -10,7 +10,6 @@
 angular.module('healthCareApp')
   .controller('personalMoreCtrl', function($scope, $rootScope, $location, ApiService, healthCareBusinessConstants) {
     var vm = this;
-
     var errorCallback = function(error) {
       vm.errorMsg = error.data.message;
       console.log("login response::", error);
@@ -48,19 +47,28 @@ angular.module('healthCareApp')
       vm.hideAttachmentCreate();
     };
 
-    vm.getLocationsSb = function(res) {
+    var getLocationsSb = function(res) {
       vm.locations = res.data;
     };
 
     vm.getLocations = function() {
-      ApiService.get(healthCareBusinessConstants.LOCATIONS).then(getLocationsSb, errorCallback).finally(finalCallBack);
+      ApiService.get(healthCareBusinessConstants.GET_LOCATIONS_LIST).then(getLocationsSb, errorCallback).finally(finalCallBack);
+    };
+
+    var getStatesSb = function(res) {
+      vm.states = res.data;
+    };
+
+    vm.getStates = function() {
+      ApiService.get(healthCareBusinessConstants.GET_STATES_LIST).then(getStatesSb, errorCallback).finally(finalCallBack);
     };
 
     vm.init = function() {
       vm.personalDetailsObj = angular.fromJson(localStorage.getItem('personnalDetails'));
       vm.viewmode = true;
       vm.personalDetailsObj.myDate = new Date();
-      //vm.getLocations();
+      vm.getLocations();
+      vm.getStates();
     };
 
     vm.init();

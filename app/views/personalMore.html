@@ -46,9 +46,17 @@
           </md-input-container>
         </div>
         <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm>
+          <!-- <md-input-container class="md-block" flex-gt-sm>
             <label>State</label>
             <input ng-model="personalMore.personalDetailsObj.addressId.state" ng-readonly="personalMore.viewmode">
+          </md-input-container> -->
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>State</label>
+            <md-select ng-model="personalMore.personalDetailsObj.addressId.state" ng-disabled="personalMore.viewmode">
+              <md-option ng-repeat="state in personalMore.states" ng-value="state.stateCode">
+                {{state.stateName}}
+              </md-option>
+            </md-select>
           </md-input-container>
           <md-input-container class="md-block" flex-gt-sm>
             <label>ZIP</label>
@@ -76,20 +84,14 @@
             <label>Job Title</label>
             <input ng-model="personalMore.personalDetailsObj.employeeId.jobTitle" ng-readonly="personalMore.viewmode">
           </md-input-container>
-          <!-- <md-input-container class="md-block" flex-gt-sm>
-            <label>Location</label>
-            <input ng-model="personalMore.personalDetailsObj.employeeId.location" ng-readonly="personalMore.viewmode">
-          </md-input-container> -->
           <md-input-container class="md-block" flex-gt-sm>
-          <label>Location</label>
-          <md-select ng-model="personalMore.personalDetailsObj.employeeId.location" ng-readonly="personalMore.viewmode">
-            <md-option><em>None</em></md-option>
-            <md-option ng-repeat="location in personalMore.locations" ng-value="location.abbrev" ng-disabled="$index === 1">
-              {{location.abbrev}}
-            </md-option>
-          </md-select>
-        </md-input-container>
-
+            <label>Location</label>
+            <md-select ng-model="personalMore.personalDetailsObj.employeeId.location" ng-readonly="personalMore.viewmode">
+              <md-option ng-repeat="location in personalMore.locations" ng-value="location.locationName">
+                {{location.locationName}}
+              </md-option>
+            </md-select>
+          </md-input-container>
           <div flex layout='row' layout-padding layout-align="start center" style="height: 30px;">
             <div>Status</div>
             <md-radio-group ng-disabled="true" ng-model="personalMore.personalDetailsObj.employeeId.status" ng-readonly="personalMore.viewmode">
