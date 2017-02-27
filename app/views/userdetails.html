@@ -61,10 +61,45 @@
       <div style="border-bottom: 2px dotted #ccc; margin-top: 25px;margin-bottom: 30px;"></div>
       <div>
         <h5 style="border-bottom: 1px solid #ccc; color: #4CAF50;">ATTACHMENTS/REMAINDERS</h5>
+        <form name="userForm" class="attachment-form" ng-show="user.attachmentCreateViewmode">
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Short Description</label>
+              <input ng-model="userDetailsObj.entityname" ng-required="true">
+            </md-input-container>
+          </div>
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Notes</label>
+              <textarea ng-model="userDetailsObj.entityname" rows="3" md-select-on-focus></textarea>
+            </md-input-container>
+          </div>
+          <br>
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Expiry / Due Date</label>
+              <md-datepicker ng-model="userDetailsObj.myDate" md-placeholder="Enter date"></md-datepicker>
+            </md-input-container>
+            <div flex layout='row' layout-padding layout-align="start center" style="height: 30px;">
+              <div>Track Expiry / Due Date</div>
+              <md-radio-group ng-model="userDetailsObj.status" ng-readonly="userDetailsObj.viewmode">
+                <md-radio-button ng-value="true">Yes</md-radio-button>
+                <md-radio-button ng-value="false">No</md-radio-button>
+              </md-radio-group>
+            </div>
+          </div>
+          <div layout-gt-sm="row">
+            <input type="file" ngf-select="onFileSelect($files)" multiple>
+          </div>
+          <div class="text-right">
+            <md-button class="md-raised md-primary" ng-click="userDetailsObj.createAttachment()">Save</md-button>
+            <md-button class="md-raised" ng-click="userDetailsObj.hideAttachmentCreate()">Cancel</md-button>
+          </div>
+        </form>
         <p ng-show="!user.viewmode">
-          <md-button class="md-raised md-cornered">Add New</md-button>
+          <md-button class="md-raised md-cornered" ng-click="user.showAttachmentCreate()">Add New</md-button>
         </p>
-        <table class="table">
+        <table class="table" ng-show="user.userDetailsObj.documents.lenth>0">
           <tr>
             <td>Id</td>
             <td>Date Created</td>

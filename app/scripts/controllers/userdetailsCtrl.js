@@ -33,18 +33,37 @@ angular.module('healthCareApp')
       ApiService.get(healthCareBusinessConstants.GET_USERS).then(getUsersSb, errorCallback).finally(finalCallBack);
     };
 
-    vm.cancelBtnclick = function () {
+    vm.cancelBtnclick = function() {
       $location.path('admin');
     };
 
-    vm.editBtnClick = function () {
+    vm.editBtnClick = function() {
       vm.viewmode = false;
     };
 
+    vm.showAttachmentCreate = function() {
+      vm.attachmentCreateViewmode = true;
+    };
+
+    vm.hideAttachmentCreate = function() {
+      // remove or empty the attachment form data
+      vm.attachmentCreateViewmode = false;
+    };
+
+    vm.createAttachment = function() {
+      // make an api for adding the new attachment
+      vm.hideAttachmentCreate();
+    };
+
+
     vm.init = function() {
       vm.userDetailsObj = angular.fromJson(localStorage.getItem('userdetails'));
-      vm.viewmode = true;
-      vm.roles = [{role:'ADMINISTRATOR'},{role:'USER'}];
+      if (Object.keys(vm.userDetailsObj).length) {
+        vm.viewmode = true;
+      } else {
+        vm.viewmode = false;
+      }
+      vm.roles = [{ role: 'ADMINISTRATOR' }, { role: 'USER' }];
       console.log(vm.userdetailsObj);
     };
 
