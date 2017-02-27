@@ -20,8 +20,8 @@
         </div>
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
-            <label>Birthdate</label>
-            <input ng-model="personalMore.personalDetailsObj.dateOfBirth" ng-readonly="personalMore.viewmode">
+              <label>Birthdate</label>
+              <md-datepicker ng-model="personalMore.personalDetailsObj.dateOfBirth" ng-readonly="personalMore.viewmode" md-placeholder="Enter Birthdate"></md-datepicker>
           </md-input-container>
           <md-input-container class="md-block" flex-gt-sm>
             <label>Social Security#</label>
@@ -29,7 +29,7 @@
           </md-input-container>
           <div flex layout='row' layout-padding layout-align="start center" style="height: 30px;">
             <div>Gender</div>
-            <md-radio-group ng-disabled="true" ng-model="personalMore.personalDetailsObj.gender" ng-readonly="personalMore.viewmode">
+            <md-radio-group ng-disabled="personalMore.viewmode" ng-model="personalMore.personalDetailsObj.gender" ng-readonly="personalMore.viewmode">
               <md-radio-button value="MALE">Male</md-radio-button>
               <md-radio-button value="FEMALE">Female</md-radio-button>
             </md-radio-group>
@@ -82,15 +82,15 @@
           </md-input-container>
           <md-input-container class="md-block" flex-gt-sm>
             <label>Location</label>
-            <md-select ng-model="personalMore.personalDetailsObj.employeeId.location.locationName" ng-disabled="personalMore.viewmode">
-              <md-option ng-repeat="location in personalMore.locations" ng-value="location.locationName">
+            <md-select ng-model="personalMore.personalDetailsObj.employeeId.location.locationId" ng-disabled="personalMore.viewmode">
+              <md-option ng-repeat="location in personalMore.locations" ng-value="location.locationId">
                 {{location.locationName}}
               </md-option>
             </md-select>
           </md-input-container>
           <div flex layout='row' layout-padding layout-align="start center" style="height: 30px;">
             <div>Status</div>
-            <md-radio-group ng-disabled="true" ng-model="personalMore.personalDetailsObj.employeeId.status" ng-readonly="personalMore.viewmode">
+            <md-radio-group ng-disabled="personalMore.viewmode" ng-model="personalMore.personalDetailsObj.employeeId.status" ng-readonly="personalMore.viewmode">
               <md-radio-button ng-value="true">Active</md-radio-button>
               <md-radio-button ng-value="false">Inactive</md-radio-button>
             </md-radio-group>
@@ -102,9 +102,9 @@
             <input ng-model="personalMore.personalDetailsObj.employeeId.superVisor" ng-readonly="personalMore.viewmode">
           </md-input-container>
           <div flex layout="row" layout-padding layout-align="start center" style="height: 30px;">
-            <md-checkbox ng-disabled="true" class="md-block" flex-gt-sm ng-model="personalMore.personalDetailsObj.employeeId.isSupervisor" aria-label="Supervisor">Supervisor
+            <md-checkbox ng-disabled="personalMore.viewmode" class="md-block" flex-gt-sm ng-model="personalMore.personalDetailsObj.employeeId.isSupervisor" aria-label="Supervisor">Supervisor
             </md-checkbox>
-            <md-checkbox ng-disabled="true" class="md-block" flex-gt-sm ng-model="personalMore.personalDetailsObj.employeeId.isProvider" aria-label="Provider">Provider
+            <md-checkbox ng-disabled="personalMore.viewmode" class="md-block" flex-gt-sm ng-model="personalMore.personalDetailsObj.employeeId.isProvider" aria-label="Provider">Provider
             </md-checkbox>
           </div>
         </div>
@@ -151,7 +151,7 @@
         <p ng-show="!personalMore.viewmode">
           <md-button class="md-raised md-cornered" ng-click="personalMore.addNewDocument()">Add New</md-button>
         </p>
-        <table class="table">
+        <table class="table" ng-show="personalMore.personalDetailsObj.document.length">
           <tr>
             <td>Id</td>
             <td>Date Created</td>
@@ -168,7 +168,7 @@
       </div>
       <hr/>
       <div class="text-right">
-        <md-button class="md-raised md-primary" ng-click="personalMore.editBtnClick()" ng-show="!personalMore.viewmode">Save</md-button>
+        <md-button class="md-raised md-primary" ng-click="personalMore.savePersonal()" ng-show="!personalMore.viewmode">Save</md-button>
         <md-button ng-show="personalMore.viewmode" class="md-raised md-primary" ng-click="personalMore.editBtnClick()">Edit</md-button>
         <md-button class="md-raised" ng-click="personalMore.cancelBtnclick()">Cancel</md-button>
       </div>

@@ -75,6 +75,11 @@ angular.module('healthCareApp')
       $location.path('personnalDetails');
     };
 
+    vm.fnAdd = function () {
+      localStorage.setItem('personnalDetails', angular.toJson({}));
+      $location.path('personnalDetails');
+    };
+
     vm.init = function() {
       $rootScope.loading = true;
       vm.pageNo = 0;
