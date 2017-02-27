@@ -33,7 +33,7 @@ angular.module('healthCareApp')
       ApiService.get(healthCareBusinessConstants.GET_USERS).then(getUsersSb, errorCallback).finally(finalCallBack);
     };
 
-    vm.userDetailsView = function (obj) {
+    vm.userDetailsView = function(obj) {
       console.log(obj);
       localStorage.setItem('userdetails', angular.toJson(obj));
       $location.path('userdetails');
@@ -43,10 +43,28 @@ angular.module('healthCareApp')
       alert('add')
     };
 
+    // success Call back method
+    var searchSuccessCallback = function(res) {
+      vm.users = res.data;
+    };
+
+    vm.searchUsers = function() {
+      var searchObj = {
+        "firstName": vm.firstName,
+        "lastName": vm.lastName,
+        "activeFlag": vm.status
+      };
+      if (vm.firstName || vm.lastName || vm.status) {
+        ApiService.post(healthCareBusinessConstants.SEARCH_USER, searchObj).then(searchSuccessCallback, errorCallback).finally(finalCallBack);
+      } else {
+        vm.errorMsg = 'Please Enter Valid Name';
+      }
+    };
+
+
     vm.init = function() {
       vm.getPersonals();
     };
 
     vm.init();
-
   });

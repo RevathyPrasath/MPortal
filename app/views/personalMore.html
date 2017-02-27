@@ -46,10 +46,6 @@
           </md-input-container>
         </div>
         <div layout-gt-sm="row">
-          <!-- <md-input-container class="md-block" flex-gt-sm>
-            <label>State</label>
-            <input ng-model="personalMore.personalDetailsObj.addressId.state" ng-readonly="personalMore.viewmode">
-          </md-input-container> -->
           <md-input-container class="md-block" flex-gt-sm>
             <label>State</label>
             <md-select ng-model="personalMore.personalDetailsObj.addressId.state" ng-disabled="personalMore.viewmode">
@@ -86,7 +82,7 @@
           </md-input-container>
           <md-input-container class="md-block" flex-gt-sm>
             <label>Location</label>
-            <md-select ng-model="personalMore.personalDetailsObj.employeeId.location" ng-readonly="personalMore.viewmode">
+            <md-select ng-model="personalMore.personalDetailsObj.employeeId.location.locationName" ng-disabled="personalMore.viewmode">
               <md-option ng-repeat="location in personalMore.locations" ng-value="location.locationName">
                 {{location.locationName}}
               </md-option>

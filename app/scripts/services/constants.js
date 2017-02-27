@@ -17,5 +17,6 @@ angular.module('healthCareApp').constant( 'healthCareBusinessConstants', {
   'GET_LOCATIONS': 'http://managementportal-env.us-east-1.elasticbeanstalk.com/hsm/secure/organization/location',
   'GET_COMPANIES': 'http://managementportal-env.us-east-1.elasticbeanstalk.com/hsm/secure/organization/company',
   'GET_LOCATIONS_LIST': 'http://managementportal-env.us-east-1.elasticbeanstalk.com/hsm/secure/organization/locationList',
-  'GET_STATES_LIST' : 'http://managementportal-env.us-east-1.elasticbeanstalk.com/hsm/secure/states'
+  'GET_STATES_LIST' : 'http://managementportal-env.us-east-1.elasticbeanstalk.com/hsm/secure/states',
+  'SEARCH_USER': 'http://managementportal-env.us-east-1.elasticbeanstalk.com/hsm/secure/admin/users/search'
  });
