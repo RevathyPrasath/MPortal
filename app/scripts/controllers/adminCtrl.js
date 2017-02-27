@@ -40,7 +40,8 @@ angular.module('healthCareApp')
     };
 
     vm.addNew = function() {
-      alert('add')
+     $location.path('userdetails');
+     localStorage.setItem('userdetails', angular.toJson({}));
     };
 
     // success Call back method
@@ -60,7 +61,6 @@ angular.module('healthCareApp')
         vm.errorMsg = 'Please Enter Valid Name';
       }
     };
-
 
     vm.init = function() {
       vm.getPersonals();
