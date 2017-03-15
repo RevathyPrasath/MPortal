@@ -85,7 +85,6 @@ angular.module('healthCareApp')
       } else {
         vm.viewmode = false;
       }
-
       vm.getLocations();
       vm.getStates();
     };

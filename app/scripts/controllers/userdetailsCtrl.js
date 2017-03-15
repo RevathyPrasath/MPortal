@@ -1,5 +1,4 @@
 'use strict';
-
 /**
  * @ngdoc function
  * @name healthCareApp.controller:UserdetailsCtrl
@@ -41,6 +40,17 @@ angular.module('healthCareApp')
       vm.viewmode = false;
     };
 
+    var savePersonalSuccessCallback = function () {
+      console.log("personal saved successfully");
+      $location.path('personal');
+    };
+
+    vm.saveBtnClick = function () {
+      //vm.personalDetailsObj.dateOfBirth = (vm.personalDetailsObj.dateOfBirth) ? vm.personalDetailsObj.dateOfBirth.getTime() : 0;
+      //vm.userDetailsObj 
+      ApiService.post(healthCareBusinessConstants.PERSONAL, vm.personalDetailsObj).then(savePersonalSuccessCallback, errorCallback).finally(finalCallBack);
+    };
+
     vm.showAttachmentCreate = function() {
       vm.attachmentCreateViewmode = true;
     };
@@ -52,9 +62,22 @@ angular.module('healthCareApp')
 
     vm.createAttachment = function() {
       // make an api for adding the new attachment
+      var nBytes = 0,
+          oFiles = document.getElementById("fileInput").files,
+          nFiles = oFiles.length;
+      for(var nFileId = 0; nFileId < nFiles; nFileId++) {
+          nBytes += oFiles[nFileId].size;
+      }
+      var sOutput = nBytes + " bytes";
+      // optional code for multiples approximation
+      for (var aMultiples = ["KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"], nMultiple = 0, nApprox = nBytes / 1024; nApprox > 1; nApprox /= 1024, nMultiple++) {
+          sOutput = nApprox.toFixed(3) + " " + aMultiples[nMultiple] + " (" + nBytes + " bytes)";
+      }
+      // end of optional code
+      document.getElementById("fileNum").innerHTML = nFiles;
+      document.getElementById("fileSize").innerHTML = sOutput;
       vm.hideAttachmentCreate();
     };
-
 
     vm.init = function() {
       vm.userDetailsObj = angular.fromJson(localStorage.getItem('userdetails'));
@@ -68,5 +91,4 @@ angular.module('healthCareApp')
     };
 
     vm.init();
-
-  });
+});
