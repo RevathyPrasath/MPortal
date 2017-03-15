@@ -26,23 +26,34 @@
                         <option class="text-status" value="true">Active</option>
                         <option class="text-status" value="false">Inactive</option>
                       </select>
-                      <span class="text-status add-item pull-right" ng-click="admin.addNew()"><span>+</span> Add New
+                      <span class="text-status add-item pull-right" ng-click="admin.addNew()"><span>+</span><a> Add New </a>
                       </span>
                     </div>
                   </div>
                 </td>
               </tr>
               <tr>
-                <th>Last Name</th>
-                <th>First Name</th>
-                <th>User Name</th>
+                <th ng-click="predict = 'lastName'; reverse = !reverse;">
+                  Last Name
+                  <span class="glyphicon pull-right {{(predict == 'lastName' && reverse == true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
+                </th>
+                <th ng-click="predict = 'firstName'; reverse = !reverse;">
+                  First Name
+                  <span class="glyphicon pull-right {{(predict == 'firstName' && reverse==true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
+                </th>
+                <th ng-click="predict = 'userName'; reverse = !reverse;">
+                  User Name
+                  <span class="glyphicon pull-right {{(predict == 'userName' && reverse==true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
+                </th>
                 <th>Status</th>
-                <th>Role</th>
+                <th ng-click="predict = 'role'; reverse = !reverse;">Role
+                  <span class="glyphicon pull-right {{(predict == 'role' && reverse==true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
+                </th>
                 <th>More</th>
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="user in admin.users">
+              <tr ng-repeat="user in admin.users | orderBy: predict: reverse ">
                 <td ng-bind="user.lastName"></td>
                 <td ng-bind="user.firstName"></td>
                 <td ng-bind="user.userName"></td>

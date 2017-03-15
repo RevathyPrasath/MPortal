@@ -40,15 +40,13 @@ angular.module('healthCareApp')
       vm.viewmode = false;
     };
 
-    var savePersonalSuccessCallback = function () {
+    var saveUserSuccessCallback = function () {
       console.log("personal saved successfully");
-      $location.path('personal');
+      $location.path('admin');
     };
 
     vm.saveBtnClick = function () {
-      //vm.personalDetailsObj.dateOfBirth = (vm.personalDetailsObj.dateOfBirth) ? vm.personalDetailsObj.dateOfBirth.getTime() : 0;
-      //vm.userDetailsObj 
-      ApiService.post(healthCareBusinessConstants.PERSONAL, vm.personalDetailsObj).then(savePersonalSuccessCallback, errorCallback).finally(finalCallBack);
+      ApiService.post(healthCareBusinessConstants.GET_USERS, vm.userDetailsObj).then(saveUserSuccessCallback, errorCallback).finally(finalCallBack);
     };
 
     vm.showAttachmentCreate = function() {
