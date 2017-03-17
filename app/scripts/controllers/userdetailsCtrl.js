@@ -58,50 +58,48 @@ angular.module('healthCareApp')
       vm.attachmentCreateViewmode = false;
     };
 
+
+
+$scope.uploadFile = function(files) {
+    var fd = new FormData();
+    //Take the first selected file
+    fd.append("uploadingFiles", files[0]);
+
+    $http.post(healthCareBusinessConstants.SAVE_DOC, fd, {
+        withCredentials: true,
+        headers: {'Content-Type': undefined },
+        transformRequest: angular.identity
+    }).success(function(){
+      alert('yes')
+    }).error(function(){
+      alert('error');
+    });
+};
+
+
     vm.files = [];
     vm.createAttachment = function() {
-      // make an api for adding the new attachment
-      // var nBytes = 0,
-      //     oFiles = document.getElementById("fileInput").files,
-      //     nFiles = oFiles.length;
-      // for(var nFileId = 0; nFileId < nFiles; nFileId++) {
-      //     nBytes += oFiles[nFileId].size;
-      // }
-      // var sOutput = nBytes + " bytes";
-      // // optional code for multiples approximation
-      // for (var aMultiples = ["KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB"], nMultiple = 0, nApprox = nBytes / 1024; nApprox > 1; nApprox /= 1024, nMultiple++) {
-      //     sOutput = nApprox.toFixed(3) + " " + aMultiples[nMultiple] + " (" + nBytes + " bytes)";
-      // }
-      // // end of optional code
-      // document.getElementById("fileNum").innerHTML = nFiles;
-      // document.getElementById("fileSize").innerHTML = sOutput;
       var url = healthCareBusinessConstants.SAVE_DOC;
-      //FILL FormData WITH FILE DETAILS.
            var data = new FormData();
-
             // for (var i in vm.files) {
             //     data.append("uploadingFiles", vm.files[i]);
             // }
-
-
         // var data = new FormData();
-        data.append('uploadingFiles', vm.files);
-        
-        
-            data.append('documentId', null);
-            data.append('person', null);
-            data.append('description', null);
-            data.append('createdOn', null);
-            data.append('createdBy', null);
-            data.append('updatedOn', null);
-            data.append('updatedBy', null);
-            data.append('license', null);
-            data.append('company', null);
-            data.append('documentUrl', null);
-            data.append('notes', null);
-            data.append('expiryDate', 1489686281597);
-            data.append('trackExpiryDate', true);
-            data.append('documentCategory', null);
+        data.append('uploadingFiles', angular.toJson(vm.files[0]));
+            // data.append('documentId', null);
+            // data.append('person', null);
+            // data.append('description', null);
+            // data.append('createdOn', null);
+            // data.append('createdBy', null);
+            // data.append('updatedOn', null);
+            // data.append('updatedBy', null);
+            // data.append('license', null);
+            // data.append('company', null);
+            // data.append('documentUrl', null);
+            // data.append('notes', null);
+            // data.append('expiryDate', 1489686281597);
+            // data.append('trackExpiryDate', true);
+            // data.append('documentCategory', null);
 
             // // ADD LISTENERS.
             // var objXhr = new XMLHttpRequest();
@@ -114,16 +112,13 @@ angular.module('healthCareApp')
 
             $http.post(url, data, {
               transformRequest: angular.identity,
-              headers: {'Content-Type': 'multipart/form-data'}
+              headers: {'Content-Type': undefined}
             })
             .then(function(){
               alert('success!!');
             }, function(){
                alert('fail!!');
             });
-
-
-      alert(vm.files.length+" files selected ... Write your Upload Code"); 
       vm.hideAttachmentCreate();
     };
 
