@@ -89,11 +89,15 @@
             </div>
           </div>
           <div layout-gt-sm="row">
-            <input type="file" ng-model="userDetailsObj.getDocumant" id="fileInput" name="uploadingFiles" ng-change="updateSize();" multiple>
+            <!-- <input type="file" ng-model="userDetailsObj.getDocumant" id="fileInput" name="uploadingFiles" ng-change="updateSize();" multiple> -->
+            <input type="file" ng-file-model="user.files" multiple />
           </div>
+          <p ng-repeat="file in user.files">
+            {{file.name}}
+          </p>
           <div class="text-right">
-            <md-button class="md-raised md-primary" ng-click="userDetailsObj.createAttachment()">Save</md-button>
-            <md-button class="md-raised" ng-click="userDetailsObj.hideAttachmentCreate()">Cancel</md-button>
+            <md-button class="md-raised md-primary" ng-click="user.createAttachment()">Save</md-button>
+            <md-button class="md-raised" ng-click="user.hideAttachmentCreate()">Cancel</md-button>
           </div>
         </form>
         <p ng-show="!user.viewmode">

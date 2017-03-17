@@ -4,7 +4,7 @@
 angular.module('healthCareApp').factory('ApiService', function($http) {
  	return {
     post: function (url, data, headers) {
-      return $http.post(url, data, headers);
+      return $http.post(url, data, {'Content-Type': 'multipart/form-data'});
     },
     get: function (url, headers) {
     	return $http.get(url);
