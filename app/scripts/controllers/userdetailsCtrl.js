@@ -59,92 +59,42 @@ angular.module('healthCareApp')
     };
 
 
-
-$scope.uploadFile = function(files) {
-    var fd = new FormData();
-    //Take the first selected file
+  var fd = new FormData();
+  $scope.uploadFile = function(files) {
     fd.append("uploadingFiles", files[0]);
+  };
 
-    $http.post(healthCareBusinessConstants.SAVE_DOC, fd, {
-        withCredentials: true,
-        headers: {'Content-Type': undefined },
-        transformRequest: angular.identity
-    }).success(function(){
-      alert('yes')
-    }).error(function(){
-      alert('error');
-    });
-};
-
-
-    vm.files = [];
-    vm.createAttachment = function() {
+  vm.fileuploadObject = {};
+  vm.createAttachment = function() {
       var url = healthCareBusinessConstants.SAVE_DOC;
-           var data = new FormData();
-            // for (var i in vm.files) {
-            //     data.append("uploadingFiles", vm.files[i]);
-            // }
-        // var data = new FormData();
-        data.append('uploadingFiles', angular.toJson(vm.files[0]));
-            // data.append('documentId', null);
-            // data.append('person', null);
-            // data.append('description', null);
-            // data.append('createdOn', null);
-            // data.append('createdBy', null);
-            // data.append('updatedOn', null);
-            // data.append('updatedBy', null);
-            // data.append('license', null);
-            // data.append('company', null);
-            // data.append('documentUrl', null);
-            // data.append('notes', null);
-            // data.append('expiryDate', 1489686281597);
-            // data.append('trackExpiryDate', true);
-            // data.append('documentCategory', null);
+      fd.append('description', vm.fileuploadObject.shortdescription);
+      fd.append('notes', vm.fileuploadObject.notes);
+      fd.append('expiryDate', vm.fileuploadObject.expiry);
+      fd.append('trackExpiryDate', vm.fileuploadObject.trackExpiry);
+      fd.append('documentCategory', 'abc');
 
-            // // ADD LISTENERS.
-            // var objXhr = new XMLHttpRequest();
-            // objXhr.addEventListener("progress", updateProgress, false);
-            // objXhr.addEventListener("load", transferComplete, false);
-
-            // // SEND FILE DETAILS TO THE API.
-            // objXhr.open("POST", url);
-            // objXhr.send(data);
-
-            $http.post(url, data, {
-              transformRequest: angular.identity,
-              headers: {'Content-Type': undefined}
-            })
-            .then(function(){
-              alert('success!!');
-            }, function(){
-               alert('fail!!');
-            });
-      vm.hideAttachmentCreate();
+      $http.post(url, fd, {
+        transformRequest: angular.identity,
+        headers: {'Content-Type': undefined}
+      })
+      .then(function(res){
+        alert('success!!');
+      }, function(res){
+         alert('fail!!');
+      });
+       // vm.hideAttachmentCreate();
     };
 
- // UPDATE PROGRESS BAR.
-        function updateProgress(e) {
-            if (e.lengthComputable) {
-                document.getElementById('pro').setAttribute('value', e.loaded);
-                document.getElementById('pro').setAttribute('max', e.total);
-            }
-        }
+  vm.init = function() {
+    vm.userDetailsObj = angular.fromJson(localStorage.getItem('userdetails'));
+    if (Object.keys(vm.userDetailsObj).length) {
+      vm.viewmode = true;
+    } else {
+      vm.viewmode = false;
+    }
+    vm.roles = [{ role: 'ADMINISTRATOR' }, { role: 'USER' }];
+    console.log(vm.userdetailsObj);
+  };
 
-        // CONFIRMATION.
-        function transferComplete(e) {
-            alert("Files uploaded successfully.");
-        }
-
-    vm.init = function() {
-      vm.userDetailsObj = angular.fromJson(localStorage.getItem('userdetails'));
-      if (Object.keys(vm.userDetailsObj).length) {
-        vm.viewmode = true;
-      } else {
-        vm.viewmode = false;
-      }
-      vm.roles = [{ role: 'ADMINISTRATOR' }, { role: 'USER' }];
-      console.log(vm.userdetailsObj);
-    };
-
-    vm.init();
+  vm.init();
 });
