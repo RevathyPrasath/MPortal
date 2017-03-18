@@ -89,7 +89,6 @@
             </div>
           </div>
           <div layout-gt-sm="row">
-            <!-- <input type="file" ng-file-model="user.files" multiple /> -->
             <input type="file" name="uploadingFiles" onchange="angular.element(this).scope().uploadFile(this.files)"/>
           </div>
           <div class="text-right">
@@ -100,7 +99,7 @@
         <p ng-show="!user.viewmode">
           <md-button class="md-raised md-cornered" ng-click="user.showAttachmentCreate()">Add New</md-button>
         </p>
-        <table class="table" ng-show="user.userDetailsObj.documents.lenth>0">
+        <table class="table" data-ng-show="user.userDetailsObj.documents.length>0">
           <tr>
             <td>Id</td>
             <td>Date Created</td>
@@ -111,7 +110,7 @@
             <td ng-bind="doc.documentId"></td>
             <td ng-bind="doc.createdOn | date : format : timezone"></td>
             <td ng-bind="doc.description"></td>
-            <td><a href="">View</a></td>
+            <td><a target="_blank" ng-href="{{doc.documentUrl}}">View</a></td>
           </tr>
         </table>
       </div>

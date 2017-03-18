@@ -58,7 +58,6 @@ angular.module('healthCareApp')
       vm.attachmentCreateViewmode = false;
     };
 
-
   var fd = new FormData();
   $scope.uploadFile = function(files) {
     fd.append("uploadingFiles", files[0]);
@@ -78,11 +77,11 @@ angular.module('healthCareApp')
         headers: {'Content-Type': undefined}
       })
       .then(function(res){
-        alert('success!!');
+        vm.hideAttachmentCreate();
+        vm.userDetailsObj.documents.push(res.data)
       }, function(res){
-         alert('fail!!');
+         alert('document upload fail!');
       });
-       // vm.hideAttachmentCreate();
     };
 
   vm.init = function() {

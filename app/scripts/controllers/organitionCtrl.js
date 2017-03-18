@@ -69,8 +69,41 @@ angular.module('healthCareApp')
       ApiService.get(healthCareBusinessConstants.GET_LOCATIONS + '?page=' + pagenumber).then(getLocationsSb, errorCallback).finally(finalCallBack);
     };
 
+
+
+
+    vm.cancelBtnclick = function() {
+      $location.path('organition');
+    };
+
+    vm.editBtnClick = function() {
+      vm.viewmode = false;
+    };
+
+    vm.showAttachmentCreate = function() {
+      vm.attachmentCreateViewmode = true;
+    };
+
+    vm.hideAttachmentCreate = function() {
+      // remove or empty the attachment form data
+      vm.attachmentCreateViewmode = false;
+    };
+
+    vm.createAttachment = function() {
+      // make an api for adding the new attachment
+      vm.hideAttachmentCreate();
+    };
+
+    var getStatesSb = function(res) {
+      vm.states = res.data;
+    };
+
+    vm.getStates = function() {
+      ApiService.get(healthCareBusinessConstants.GET_STATES_LIST).then(getStatesSb, errorCallback).finally(finalCallBack);
+    };
+    
     var getCompaniesSb = function(res) {
-      vm.companies = res.data;
+      vm.companyDetailsObj = res.data[0];
     };
 
     vm.getCompanies = function(pagenumber) {
@@ -91,6 +124,10 @@ angular.module('healthCareApp')
       vm.pageNo = 0;
       vm.getLocations(0);
       vm.getCompanies(0);
+      vm.viewmode = true;
+      vm.myDate = new Date();
+      vm.hideAttachmentCreate();
+      vm.getStates();
     };
 
     vm.init();
