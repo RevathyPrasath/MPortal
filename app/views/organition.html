@@ -118,36 +118,35 @@
                 <div>
                   <h5 style="border-bottom: 1px solid #ccc; color: #4CAF50;">ATTACHMENTS/REMAINDERS</h5>
                   <br>
-                  <!-- Need to build a form -->
                   <form name="userForm" class="attachment-form" ng-show="organition.attachmentCreateViewmode">
                     <div layout-gt-sm="row">
                       <md-input-container class="md-block" flex-gt-sm>
                         <label>Short Description</label>
-                        <input ng-model="companyDetailsObj.entityname" ng-required="true">
+                        <input ng-model="organition.fileuploadObject.shortdescription" ng-required="true">
                       </md-input-container>
                     </div>
                     <div layout-gt-sm="row">
                       <md-input-container class="md-block" flex-gt-sm>
                         <label>Notes</label>
-                        <textarea ng-model="companyDetailsObj.entityname" rows="3" md-select-on-focus></textarea>
+                        <textarea ng-model="organition.fileuploadObject.notes" rows="3" md-select-on-focus></textarea>
                       </md-input-container>
                     </div>
                     <br>
                     <div layout-gt-sm="row">
                       <md-input-container class="md-block" flex-gt-sm>
                         <label>Expiry / Due Date</label>
-                        <md-datepicker ng-model="organition.myDate" md-placeholder="Enter date"></md-datepicker>
+                        <md-datepicker ng-model="organition.fileuploadObject.expiry" md-placeholder="Enter date"></md-datepicker>
                       </md-input-container>
                       <div flex layout='row' layout-padding layout-align="start center" style="height: 30px;">
                         <div>Track Expiry / Due Date</div>
-                        <md-radio-group ng-model="companyDetailsObj.status" ng-readonly="organition.viewmode">
+                        <md-radio-group ng-model="organition.fileuploadObject.trackExpiry" ng-readonly="userDetailsObj.viewmode">
                           <md-radio-button ng-value="true">Yes</md-radio-button>
                           <md-radio-button ng-value="false">No</md-radio-button>
                         </md-radio-group>
                       </div>
                     </div>
                     <div layout-gt-sm="row">
-                      <input type="file" ngf-select="onFileSelect($files)" multiple>
+                      <input type="file" name="uploadingFiles" onchange="angular.element(this).scope().uploadFile(this.files)" />
                     </div>
                     <div class="text-right">
                       <md-button class="md-raised md-primary" ng-click="organition.createAttachment()">Save</md-button>
@@ -168,7 +167,7 @@
                       <td ng-bind="doc.documentId"></td>
                       <td ng-bind="doc.createdOn | date : format : timezone"></td>
                       <td ng-bind="doc.description"></td>
-                      <td><a href="">View</a></td>
+                      <td><a target="_blank" ng-href="{{doc.documentUrl}}">View</a></td>
                     </tr>
                   </table>
                 </div>

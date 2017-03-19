@@ -8,7 +8,7 @@
  * Controller of the healthCareApp
  */
 angular.module('healthCareApp')
-  .controller('OrganitionCtrl', function($location, healthCareBusinessConstants, ApiService, $rootScope) {
+  .controller('OrganitionCtrl', function($scope, $http, $location, healthCareBusinessConstants, ApiService, $rootScope) {
     var vm = this;
     // error call back method.
     var errorCallback = function(error) {
@@ -49,8 +49,8 @@ angular.module('healthCareApp')
     };
 
     vm.addNew = function() {
-     $location.path('locationsMore');
-     localStorage.setItem('locationsDetails', angular.toJson({}));
+      $location.path('locationsMore');
+      localStorage.setItem('locationsDetails', angular.toJson({}));
     };
 
     vm.cancelBtnclick = function() {
@@ -70,11 +70,31 @@ angular.module('healthCareApp')
       vm.attachmentCreateViewmode = false;
     };
 
-    vm.createAttachment = function() {
-      // make an api for adding the new attachment
-      vm.hideAttachmentCreate();
+    var fd = new FormData();
+    $scope.uploadFile = function(files) {
+      fd.append("uploadingFiles", files[0]);
     };
 
+    vm.fileuploadObject = {};
+    vm.createAttachment = function() {
+      var url = healthCareBusinessConstants.SAVE_DOC;
+      fd.append('description', vm.fileuploadObject.shortdescription);
+      fd.append('notes', vm.fileuploadObject.notes);
+      fd.append('expiryDate', vm.fileuploadObject.expiry);
+      fd.append('trackExpiryDate', vm.fileuploadObject.trackExpiry);
+      fd.append('documentCategory', 'abc');
+
+      $http.post(url, fd, {
+          transformRequest: angular.identity,
+          headers: { 'Content-Type': undefined }
+        })
+        .then(function(res) {
+          vm.hideAttachmentCreate();
+          vm.companyDetailsObj['documents'].push(res.data)
+        }, function(res) {
+          alert('document upload fail!');
+        });
+    };
     var getStatesSb = function(res) {
       vm.states = res.data;
     };
@@ -82,7 +102,7 @@ angular.module('healthCareApp')
     vm.getStates = function() {
       ApiService.get(healthCareBusinessConstants.GET_STATES_LIST).then(getStatesSb, errorCallback).finally(finalCallBack);
     };
-    
+
     var getCompaniesSb = function(res) {
       vm.companyDetailsObj = res.data[0];
     };
@@ -96,9 +116,18 @@ angular.module('healthCareApp')
       $location.path('locationsMore');
     };
 
-    vm.organitionCompanyDetailsView = function(obj) {
-      localStorage.setItem('companyDetails', angular.toJson(obj));
-      $location.path('companyMore');
+
+    // vm.organitionCompanyDetailsView = function(obj) {
+    //   localStorage.setItem('companyDetails', angular.toJson(obj));
+    //   $location.path('companyMore');
+    // };
+        //save button click
+    var saveUserSuccessCallback = function() {
+      vm.viewmode = true;
+    };
+
+    vm.saveBtnClick = function() {
+      ApiService.post(healthCareBusinessConstants.GET_COMPANIES, vm.companyDetailsObj).then(saveUserSuccessCallback, errorCallback).finally(finalCallBack);
     };
 
     vm.init = function() {
