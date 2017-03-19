@@ -8,7 +8,7 @@
  * Controller of the healthCareApp
  */
 angular.module('healthCareApp')
-  .controller('OrganitionCtrl', function($location, healthCareBusinessConstants, ApiService, $rootScope) {
+  .controller('OrganitionCtrl', function($scope, $http, $location, healthCareBusinessConstants, ApiService, $rootScope) {
     var vm = this;
     // error call back method.
     var errorCallback = function(error) {
@@ -29,35 +29,14 @@ angular.module('healthCareApp')
 
     vm.searchEmployee = function() {
       var searchObj = {
-        "firstName": vm.firstName,
-        "lastName": vm.lastName,
-        "location": vm.location,
+        "city": vm.city,
+        "state": vm.state,
         "activeFlag": vm.status
       };
-      if (vm.firstName || vm.lastName || vm.location || vm.status) {
+      if (vm.city || vm.state || vm.status) {
         ApiService.post(healthCareBusinessConstants.PERSONAL_SEARCH_URL, searchObj).then(searchSuccessCallback, errorCallback).finally(finalCallBack);
       } else {
         vm.errorMsg = 'Please Enter Name/Employee Id/SSN';
-      }
-    };
-
-    vm.pagination = function(pageno, selection) {
-      console.log("Current page number::", pageno);
-      if (selection == 'next') {
-        vm.pageNo += 1;
-      } else {
-        vm.pageNo -= 1;
-      }
-      vm.getPersonals(vm.pageNo);
-    };
-
-    vm.disabled = function(pageno, selection) {
-      return vm.pageNo == 0;
-    };
-
-    vm.active = function() {
-      if (vm.personals && vm.personals[0].total) {
-        return vm.pageNo == 0 && vm.pageNo <= vm.personals[0].total / 20;
       }
     };
 
@@ -69,8 +48,63 @@ angular.module('healthCareApp')
       ApiService.get(healthCareBusinessConstants.GET_LOCATIONS + '?page=' + pagenumber).then(getLocationsSb, errorCallback).finally(finalCallBack);
     };
 
+    vm.addNew = function() {
+      $location.path('locationsMore');
+      localStorage.setItem('locationsDetails', angular.toJson({}));
+    };
+
+    vm.cancelBtnclick = function() {
+      $location.path('organition');
+    };
+
+    vm.editBtnClick = function() {
+      vm.viewmode = false;
+    };
+
+    vm.showAttachmentCreate = function() {
+      vm.attachmentCreateViewmode = true;
+    };
+
+    vm.hideAttachmentCreate = function() {
+      // remove or empty the attachment form data
+      vm.attachmentCreateViewmode = false;
+    };
+
+    var fd = new FormData();
+    $scope.uploadFile = function(files) {
+      fd.append("uploadingFiles", files[0]);
+    };
+
+    vm.fileuploadObject = {};
+    vm.createAttachment = function() {
+      var url = healthCareBusinessConstants.SAVE_DOC;
+      fd.append('description', vm.fileuploadObject.shortdescription);
+      fd.append('notes', vm.fileuploadObject.notes);
+      fd.append('expiryDate', vm.fileuploadObject.expiry);
+      fd.append('trackExpiryDate', vm.fileuploadObject.trackExpiry);
+      fd.append('documentCategory', 'abc');
+
+      $http.post(url, fd, {
+          transformRequest: angular.identity,
+          headers: { 'Content-Type': undefined }
+        })
+        .then(function(res) {
+          vm.hideAttachmentCreate();
+          vm.companyDetailsObj['documents'].push(res.data)
+        }, function(res) {
+          alert('document upload fail!');
+        });
+    };
+    var getStatesSb = function(res) {
+      vm.states = res.data;
+    };
+
+    vm.getStates = function() {
+      ApiService.get(healthCareBusinessConstants.GET_STATES_LIST).then(getStatesSb, errorCallback).finally(finalCallBack);
+    };
+
     var getCompaniesSb = function(res) {
-      vm.companies = res.data;
+      vm.companyDetailsObj = res.data[0];
     };
 
     vm.getCompanies = function(pagenumber) {
@@ -82,15 +116,28 @@ angular.module('healthCareApp')
       $location.path('locationsMore');
     };
 
-    vm.organitionCompanyDetailsView = function(obj) {
-      localStorage.setItem('companyDetails', angular.toJson(obj));
-      $location.path('companyMore');
+
+    // vm.organitionCompanyDetailsView = function(obj) {
+    //   localStorage.setItem('companyDetails', angular.toJson(obj));
+    //   $location.path('companyMore');
+    // };
+        //save button click
+    var saveUserSuccessCallback = function() {
+      vm.viewmode = true;
+    };
+
+    vm.saveBtnClick = function() {
+      ApiService.post(healthCareBusinessConstants.GET_COMPANIES, vm.companyDetailsObj).then(saveUserSuccessCallback, errorCallback).finally(finalCallBack);
     };
 
     vm.init = function() {
       vm.pageNo = 0;
       vm.getLocations(0);
       vm.getCompanies(0);
+      vm.viewmode = true;
+      vm.myDate = new Date();
+      vm.hideAttachmentCreate();
+      vm.getStates();
     };
 
     vm.init();
