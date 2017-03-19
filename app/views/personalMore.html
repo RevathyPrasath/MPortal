@@ -146,21 +146,21 @@
           </span>
           <span style="float: right;">+ Add New
           </span>
-          </div>
-          <br>
-          <div style="border-bottom: 1px solid #ccc">
+        </div>
+        <br>
+        <div style="border-bottom: 1px solid #ccc">
           <span>DEA License
           </span>
           <span style="float: right;">+ Add New
           </span>
-          </div>
-          <br>
-          <div style="border-bottom: 1px solid #ccc">
+        </div>
+        <br>
+        <div style="border-bottom: 1px solid #ccc">
           <span>Malpractice Insurance
           </span>
           <span style="float: right;">+ Add New
           </span>
-          </div>
+        </div>
       </form>
       <br>
       <div>
@@ -171,31 +171,31 @@
           <div layout-gt-sm="row">
             <md-input-container class="md-block" flex-gt-sm>
               <label>Short Description</label>
-              <input ng-model="personalMore.personalDetailsObj.entityname" ng-required="true">
+              <input ng-model="personalMore.fileuploadObject.shortdescription" ng-required="true">
             </md-input-container>
           </div>
           <div layout-gt-sm="row">
             <md-input-container class="md-block" flex-gt-sm>
               <label>Notes</label>
-              <textarea ng-model="personalMore.personalDetailsObj.entityname" rows="3" md-select-on-focus></textarea>
+              <textarea ng-model="personalMore.fileuploadObject.notes" rows="3" md-select-on-focus></textarea>
             </md-input-container>
           </div>
           <br>
           <div layout-gt-sm="row">
             <md-input-container class="md-block" flex-gt-sm>
               <label>Expiry / Due Date</label>
-              <md-datepicker ng-model="personalMore.personalDetailsObj.myDate" md-placeholder="Enter date"></md-datepicker>
+              <md-datepicker ng-model="personalMore.fileuploadObject.expiry" md-placeholder="Enter date"></md-datepicker>
             </md-input-container>
             <div flex layout='row' layout-padding layout-align="start center" style="height: 30px;">
               <div>Track Expiry / Due Date</div>
-              <md-radio-group ng-model="personalMore.personalDetailsObj.status" ng-readonly="personalMore.personalDetailsObj.viewmode">
+              <md-radio-group ng-model="personalMore.fileuploadObject.trackExpiry" ng-readonly="userDetailsObj.viewmode">
                 <md-radio-button ng-value="true">Yes</md-radio-button>
                 <md-radio-button ng-value="false">No</md-radio-button>
               </md-radio-group>
             </div>
           </div>
           <div layout-gt-sm="row">
-            <input type="file" ngf-select="onFileSelect($files)" multiple>
+            <input type="file" name="uploadingFiles" onchange="angular.element(this).scope().uploadFile(this.files)" />
           </div>
           <div class="text-right">
             <md-button class="md-raised md-primary" ng-click="personalMore.createAttachment()">Save</md-button>
@@ -203,7 +203,7 @@
           </div>
         </form>
         <p ng-show="!personalMore.viewmode">
-          <md-button class="md-raised md-cornered" ng-click="personalMore.addNewDocument()">Add New</md-button>
+          <md-button class="md-raised md-cornered" ng-click="personalMore.showAttachmentCreate()">Add New</md-button>
         </p>
         <table class="table" ng-show="personalMore.personalDetailsObj.document.length">
           <tr>
@@ -216,7 +216,7 @@
             <td ng-bind="doc.documentId"></td>
             <td ng-bind="doc.createdOn | date : format : timezone"></td>
             <td ng-bind="doc.description"></td>
-            <td><a href="">View</a></td>
+            <td><a target="_blank" ng-href="{{doc.documentUrl}}">View</a></td>
           </tr>
         </table>
       </div>
