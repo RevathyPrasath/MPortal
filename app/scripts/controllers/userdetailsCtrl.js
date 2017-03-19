@@ -65,24 +65,24 @@ angular.module('healthCareApp')
 
   vm.fileuploadObject = {};
   vm.createAttachment = function() {
-      var url = healthCareBusinessConstants.SAVE_DOC;
-      fd.append('description', vm.fileuploadObject.shortdescription);
-      fd.append('notes', vm.fileuploadObject.notes);
-      fd.append('expiryDate', vm.fileuploadObject.expiry);
-      fd.append('trackExpiryDate', vm.fileuploadObject.trackExpiry);
-      fd.append('documentCategory', 'abc');
+    var url = healthCareBusinessConstants.SAVE_DOC;
+    fd.append('description', vm.fileuploadObject.shortdescription);
+    fd.append('notes', vm.fileuploadObject.notes);
+    fd.append('expiryDate', vm.fileuploadObject.expiry);
+    fd.append('trackExpiryDate', vm.fileuploadObject.trackExpiry);
+    fd.append('documentCategory', 'abc');
 
-      $http.post(url, fd, {
+    $http.post(url, fd, {
         transformRequest: angular.identity,
-        headers: {'Content-Type': undefined}
+        headers: { 'Content-Type': undefined }
       })
-      .then(function(res){
+      .then(function(res) {
         vm.hideAttachmentCreate();
         vm.userDetailsObj['documents'].push(res.data)
-      }, function(res){
-         alert('document upload fail!');
+      }, function(res) {
+        alert('document upload fail!');
       });
-    };
+  };
 
   vm.init = function() {
     vm.userDetailsObj = angular.fromJson(localStorage.getItem('userdetails'));

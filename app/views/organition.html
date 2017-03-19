@@ -12,17 +12,17 @@
                     {{organition.locations[0].total}}</span> items</div>
                     <div class="col-sm-8 padding0">
                       <div class="col-sm-4 serch-section">
-                        <input type="serch" placeholder="Search City" class="serch-box">
-                        <span class="glyphicon glyphicon-search"></span>
+                        <input type="serch" placeholder="Search City" class="serch-box" ng-enter="organition.searchEmployee()" ng-model="organition.city">
+                        <span class="glyphicon glyphicon-search" ng-click="organition.searchEmployee()"></span>
                       </div>
                       <div class="col-sm-4 serch-section">
-                        <input type="serch" placeholder="Search State" class="serch-box">
-                        <span class="glyphicon glyphicon-search"></span>
+                        <input type="serch" placeholder="Search State" class="serch-box" ng-enter="organition.searchEmployee()" ng-model="organition.state">
+                        <span class="glyphicon glyphicon-search" ng-click="organition.searchEmployee()"></span>
                       </div>
                     </div>
                     <div class="col-sm-3">
                       <span class="text-status">Status:</span>
-                      <select class="status-dropdown" ng-model="organition.status" ng-change="organition.searchEmployee();">
+                      <select class="status-dropdown" ng-model="organition.status" ng-change="organition.searchEmployee()">
                         <option value="" disabled="true">All</option>
                         <option class="text-status" value="true">Active</option>
                         <option class="text-status" value="false">Inactive</option>

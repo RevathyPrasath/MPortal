@@ -29,35 +29,14 @@ angular.module('healthCareApp')
 
     vm.searchEmployee = function() {
       var searchObj = {
-        "firstName": vm.firstName,
-        "lastName": vm.lastName,
-        "location": vm.location,
+        "city": vm.city,
+        "state": vm.state,
         "activeFlag": vm.status
       };
-      if (vm.firstName || vm.lastName || vm.location || vm.status) {
+      if (vm.city || vm.state || vm.status) {
         ApiService.post(healthCareBusinessConstants.PERSONAL_SEARCH_URL, searchObj).then(searchSuccessCallback, errorCallback).finally(finalCallBack);
       } else {
         vm.errorMsg = 'Please Enter Name/Employee Id/SSN';
-      }
-    };
-
-    vm.pagination = function(pageno, selection) {
-      console.log("Current page number::", pageno);
-      if (selection == 'next') {
-        vm.pageNo += 1;
-      } else {
-        vm.pageNo -= 1;
-      }
-      vm.getPersonals(vm.pageNo);
-    };
-
-    vm.disabled = function(pageno, selection) {
-      return vm.pageNo == 0;
-    };
-
-    vm.active = function() {
-      if (vm.personals && vm.personals[0].total) {
-        return vm.pageNo == 0 && vm.pageNo <= vm.personals[0].total / 20;
       }
     };
 
@@ -69,8 +48,10 @@ angular.module('healthCareApp')
       ApiService.get(healthCareBusinessConstants.GET_LOCATIONS + '?page=' + pagenumber).then(getLocationsSb, errorCallback).finally(finalCallBack);
     };
 
-
-
+    vm.addNew = function() {
+     $location.path('locationsMore');
+     localStorage.setItem('locationsDetails', angular.toJson({}));
+    };
 
     vm.cancelBtnclick = function() {
       $location.path('organition');
