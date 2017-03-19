@@ -1,5 +1,4 @@
 <div ng-cloak class="admin-view">
-
   <md-content>
     <md-tabs md-dynamic-height md-border-bottom>
       <md-tab label="Locations">
@@ -35,17 +34,35 @@
                 </td>
               </tr>
               <tr>
-                <th>Location Name</th>
-                <th>Street Address</th>
-                <th>City</th>
-                <th>Zip</th>
-                <th>State</th>
-                <th>Status</th>
+                <th ng-click="predict = 'locationName'; reverse = !reverse;">
+                  Location Name
+                  <span class="glyphicon pull-right {{(predict == 'locationName' && reverse == true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
+                </th>
+                <th ng-click="predict = 'addressId.street'; reverse = !reverse;">
+                  Street Address
+                  <span class="glyphicon pull-right {{(predict == 'addressId.street' && reverse == true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
+                </th>
+                <th ng-click="predict = 'addressId.city'; reverse = !reverse;">
+                  City
+                  <span class="glyphicon pull-right {{(predict == 'addressId.city' && reverse == true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
+                </th>
+                <th ng-click="predict = 'addressId.zip'; reverse = !reverse;">
+                  Zip
+                  <span class="glyphicon pull-right {{(predict == 'addressId.zip' && reverse == true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
+                </th>
+                <th ng-click="predict = 'addressId.state'; reverse = !reverse;">
+                  State
+                  <span class="glyphicon pull-right {{(predict == 'addressId.state' && reverse == true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
+                </th>
+                <th ng-click="predict = 'addressId.status'; reverse = !reverse;">
+                  State
+                  <span class="glyphicon pull-right {{(predict == 'addressId.status' && reverse == true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
+                </th>
                 <th>More</th>
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="location in organition.locations">
+              <tr ng-repeat="location in organition.locations | orderBy :predict :reverse">
                 <td ng-bind="location.locationName"></td>
                 <td ng-bind="location.addressId.street"></td>
                 <td ng-bind="location.addressId.city"></td>

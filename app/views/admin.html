@@ -11,11 +11,11 @@
                     <div class="col-sm-1 padding0 total-items"><span>{{admin.users[0].total}}</span> items</div>
                     <div class="col-sm-8 padding0">
                       <div class="col-sm-4 serch-section">
-                        <input type="serch" placeholder="Search First Name" class="serch-box" ng-model="admin.firstName" ng-enter="admin.searchUsers()">
+                        <input type="search" placeholder="Search First Name" class="serch-box" ng-model="admin.firstName" ng-enter="admin.searchUsers()">
                         <span class="glyphicon glyphicon-search" ng-click="admin.searchUsers()"></span>
                       </div>
                       <div class="col-sm-4 serch-section">
-                        <input type="serch" placeholder="Search Last Name" class="serch-box" ng-model="admin.lastName" ng-enter="admin.searchUsers()">
+                        <input type="search" placeholder="Search Last Name" class="serch-box" ng-model="admin.lastName" ng-enter="admin.searchUsers()">
                         <span class="glyphicon glyphicon-search" ng-click="admin.searchUsers()"></span>
                       </div>
                     </div>
@@ -45,7 +45,9 @@
                   User Name
                   <span class="glyphicon pull-right {{(predict == 'userName' && reverse==true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
                 </th>
-                <th>Status</th>
+                <th ng-click="predict = 'status'; reverse = !reverse;">Status
+                  <span class="glyphicon pull-right {{(predict == 'status' && reverse==true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
+                </th>
                 <th ng-click="predict = 'role'; reverse = !reverse;">Role
                   <span class="glyphicon pull-right {{(predict == 'role' && reverse==true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
                 </th>
