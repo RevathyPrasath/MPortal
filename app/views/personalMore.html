@@ -20,8 +20,8 @@
         </div>
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
-              <label>Birthdate</label>
-              <md-datepicker ng-model="personalMore.personalDetailsObj.dateOfBirth" ng-readonly="personalMore.viewmode" md-placeholder="Enter Birthdate"></md-datepicker>
+            <label>Birthdate</label>
+            <md-datepicker ng-model="personalMore.personalDetailsObj.dateOfBirth" ng-readonly="personalMore.viewmode" md-placeholder="Enter Birthdate"></md-datepicker>
           </md-input-container>
           <md-input-container class="md-block" flex-gt-sm>
             <label>Social Security#</label>
@@ -108,7 +108,61 @@
             </md-checkbox>
           </div>
         </div>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>NPI</label>
+            <input ng-model="personalMore.personalDetailsObj.lastName" ng-readonly="personalMore.viewmode" ng-required="true">
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Credential</label>
+            <md-select ng-model="personalMore.personalDetailsObj.addressId.state" ng-disabled="personalMore.viewmode" ng-required="true">
+              <md-option ng-repeat="state in personalMore.states" ng-value="state.stateCode">
+                {{state.stateName}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Speciality</label>
+            <md-select ng-model="personalMore.personalDetailsObj.addressId.state" ng-disabled="personalMore.viewmode">
+              <md-option ng-repeat="state in personalMore.states" ng-value="state.stateCode">
+                {{state.stateName}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Taxonomy</label>
+            <md-select ng-model="personalMore.personalDetailsObj.addressId.state" ng-disabled="personalMore.viewmode">
+              <md-option ng-repeat="state in personalMore.states" ng-value="state.stateCode">
+                {{state.stateName}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+        </div>
+        <br>
+        <div style="border-bottom: 1px solid #ccc">
+          <span>Media License
+          </span>
+          <span style="float: right;">+ Add New
+          </span>
+          </div>
+          <br>
+          <div style="border-bottom: 1px solid #ccc">
+          <span>DEA License
+          </span>
+          <span style="float: right;">+ Add New
+          </span>
+          </div>
+          <br>
+          <div style="border-bottom: 1px solid #ccc">
+          <span>Malpractice Insurance
+          </span>
+          <span style="float: right;">+ Add New
+          </span>
+          </div>
       </form>
+      <br>
       <div>
         <h5 style="border-bottom: 1px solid #ccc; color: #4CAF50;">ATTACHMENTS/REMAINDERS</h5>
         <br>
