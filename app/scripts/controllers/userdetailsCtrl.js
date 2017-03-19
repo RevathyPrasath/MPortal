@@ -78,7 +78,7 @@ angular.module('healthCareApp')
       })
       .then(function(res){
         vm.hideAttachmentCreate();
-        vm.userDetailsObj.documents.push(res.data)
+        vm.userDetailsObj['documents'].push(res.data)
       }, function(res){
          alert('document upload fail!');
       });
@@ -90,6 +90,8 @@ angular.module('healthCareApp')
       vm.viewmode = true;
     } else {
       vm.viewmode = false;
+      vm.userDetailsObj = {};
+      vm.userDetailsObj['documents'] = [];
     }
     vm.roles = [{ role: 'ADMINISTRATOR' }, { role: 'USER' }];
     console.log(vm.userdetailsObj);

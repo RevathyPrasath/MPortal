@@ -12,17 +12,17 @@
                     <div class="col-sm-8 padding0">
                       <div class="col-sm-4 serch-section">
                         <input type="serch" placeholder="Search First Name" class="serch-box" ng-model="admin.firstName" ng-enter="admin.searchUsers()">
-                        <span class="glyphicon glyphicon-search"></span>
+                        <span class="glyphicon glyphicon-search" ng-click="admin.searchUsers()"></span>
                       </div>
                       <div class="col-sm-4 serch-section">
                         <input type="serch" placeholder="Search Last Name" class="serch-box" ng-model="admin.lastName" ng-enter="admin.searchUsers()">
-                        <span class="glyphicon glyphicon-search"></span>
+                        <span class="glyphicon glyphicon-search" ng-click="admin.searchUsers()"></span>
                       </div>
                     </div>
                     <div class="col-sm-3">
                       <span class="text-status">Status:</span>
-                      <select class="status-dropdown" ng-model="admin.status" ng-chnage="admin.searchUsers();">
-                        <option value="" disabled="true">Select</option>
+                      <select class="status-dropdown" ng-model="admin.status" ng-change="admin.searchUsers();">
+                        <option value="" disabled="true">All</option>
                         <option class="text-status" value="true">Active</option>
                         <option class="text-status" value="false">Inactive</option>
                       </select>
