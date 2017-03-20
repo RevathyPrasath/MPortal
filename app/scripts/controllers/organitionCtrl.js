@@ -138,6 +138,7 @@ angular.module('healthCareApp')
       vm.myDate = new Date();
       vm.hideAttachmentCreate();
       vm.getStates();
+      vm.entityTypes = [{name:'S corporation'},{name:'C corporation'}];
     };
 
     vm.init();
