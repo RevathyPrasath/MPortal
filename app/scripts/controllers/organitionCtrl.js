@@ -34,7 +34,7 @@ angular.module('healthCareApp')
         "activeFlag": vm.status
       };
       if (vm.city || vm.state || vm.status) {
-        ApiService.post(healthCareBusinessConstants.PERSONAL_SEARCH_URL, searchObj).then(searchSuccessCallback, errorCallback).finally(finalCallBack);
+        ApiService.post(healthCareBusinessConstants.SEARCH_LOCATION, searchObj).then(searchSuccessCallback, errorCallback).finally(finalCallBack);
       } else {
         vm.errorMsg = 'Please Enter Name/Employee Id/SSN';
       }

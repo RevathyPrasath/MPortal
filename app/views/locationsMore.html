@@ -13,17 +13,20 @@
             <label>Street Address</label>
             <input ng-model="locationsMore.locationsDetailsObj.addressId.street" ng-readonly="locationsMore.viewmode" ng-required="true">
           </md-input-container>
-          <md-input-container class="md-block" flex-gt-sm>
-            <label>City</label>
-            <input ng-model="locationsMore.locationsDetailsObj.addressId.city" ng-readonly="locationsMore.viewmode">
-          </md-input-container>
         </div>
 
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
+            <label>City</label>
+            <input ng-model="locationsMore.locationsDetailsObj.addressId.city" ng-readonly="locationsMore.viewmode">
+          </md-input-container>
+          <md-input-container class="md-block" flex-gt-sm>
             <label>Zip Code</label>
             <input ng-model="locationsMore.locationsDetailsObj.addressId.zip" ng-readonly="locationsMore.viewmode">
           </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label>State</label>
             <md-select ng-model="locationsMore.locationsDetailsObj.addressId.state" ng-disabled="locationsMore.viewmode">
@@ -40,12 +43,7 @@
             </md-radio-group>
           </div>
         </div>
-
-        <div layout-gt-sm="row">
-           <md-input-container class="md-block" flex-gt-sm>
-            <label>Note</label>
-            <input ng-model="locationsMore.locationsDetailsObj.notes" ng-readonly="locationsMore.viewmode">
-          </md-input-container>
+        <div layout-gt-sm="row" style="margin-top: 20px;">
           <md-input-container class="md-block" flex-gt-sm>
             <label>Phone</label>
             <input ng-model="locationsMore.locationsDetailsObj.addressId.phone" ng-readonly="locationsMore.viewmode">
@@ -53,6 +51,12 @@
           <md-input-container class="md-block" flex-gt-sm>
             <label>Fax</label>
             <input ng-model="locationsMore.locationsDetailsObj.addressId.fax" ng-readonly="locationsMore.viewmode">
+          </md-input-container>
+        </div>
+        <div layout-gt-sm="row">
+           <md-input-container class="md-block" flex-gt-sm>
+            <label>Note</label>
+            <input ng-model="locationsMore.locationsDetailsObj.notes" ng-readonly="locationsMore.viewmode">
           </md-input-container>
         </div>
       </form>
