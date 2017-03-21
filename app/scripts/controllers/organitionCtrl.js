@@ -27,12 +27,16 @@ angular.module('healthCareApp')
       vm.personals = res.data;
     };
 
+    var searchObj = {
+      "city": '',
+      "state": '',
+      "activeFlag": ''
+    };
     vm.searchEmployee = function() {
-      var searchObj = {
-        "city": vm.city,
-        "state": vm.state,
-        "activeFlag": vm.status
-      };
+      searchObj.city = vm.city || '';
+      searchObj.state = vm.state || '';
+      searchObj.activeFlag = vm.status || '';
+      debugger;
       if (vm.city || vm.state || vm.status) {
         ApiService.post(healthCareBusinessConstants.SEARCH_LOCATION, searchObj).then(searchSuccessCallback, errorCallback).finally(finalCallBack);
       } else {
