@@ -105,9 +105,9 @@ angular.module('healthCareApp')
 
     vm.init = function() {
       vm.personalDetailsObj = angular.fromJson(localStorage.getItem('personnalDetails'));
-      vm.personalDetailsObj.dateOfBirth = new Date(vm.personalDetailsObj.dateOfBirth);
       if (Object.keys(vm.personalDetailsObj).length) {
         vm.viewmode = true;
+        vm.personalDetailsObj.dateOfBirth = new Date(vm.personalDetailsObj.dateOfBirth);
         vm.personalDetailsObj.myDate = new Date();
       } else {
         vm.viewmode = false;

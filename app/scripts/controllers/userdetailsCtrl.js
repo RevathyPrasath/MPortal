@@ -46,7 +46,12 @@ angular.module('healthCareApp')
     };
 
     vm.saveBtnClick = function () {
-      ApiService.post(healthCareBusinessConstants.GET_USERS, vm.userDetailsObj).then(saveUserSuccessCallback, errorCallback).finally(finalCallBack);
+      if(vm.userDetailsObj.password == vm.userDetailsObj.confirmPassword) {
+        ApiService.post(healthCareBusinessConstants.GET_USERS, vm.userDetailsObj).then(saveUserSuccessCallback, errorCallback).finally(finalCallBack);
+      } else {
+        alert('password and confirm password should be same!');
+      }
+      
     };
 
     vm.showAttachmentCreate = function() {
