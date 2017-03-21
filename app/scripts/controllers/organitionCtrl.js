@@ -24,19 +24,18 @@ angular.module('healthCareApp')
 
     // success Call back method
     var searchSuccessCallback = function(res) {
-      vm.personals = res.data;
+      vm.locations = res.data;
     };
 
     var searchObj = {
       "city": '',
       "state": '',
-      "activeFlag": ''
+      "activeFlag": false
     };
     vm.searchEmployee = function() {
       searchObj.city = vm.city || '';
       searchObj.state = vm.state || '';
-      searchObj.activeFlag = vm.status || '';
-      debugger;
+      searchObj.activeFlag = Boolean(vm.status) || false;
       if (vm.city || vm.state || vm.status) {
         ApiService.post(healthCareBusinessConstants.SEARCH_LOCATION, searchObj).then(searchSuccessCallback, errorCallback).finally(finalCallBack);
       } else {
