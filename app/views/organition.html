@@ -92,6 +92,8 @@
                       <label>DBA</label>
                       <input ng-model="organition.companyDetailsObj.dba" ng-readonly="organition.viewmode" ng-required="true">
                     </md-input-container>
+                  </div>
+                  <div layout-gt-sm="row">
                     <md-input-container class="md-block" flex-gt-sm>
                       <label>Entity Type</label>
                       <md-select ng-model="organition.companyDetailsObj.entityType" ng-readonly="organition.viewmode">
@@ -100,33 +102,97 @@
                         </md-option>
                       </md-select>
                     </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <label>Date of Incorporation</label>
+                      <md-datepicker ng-model="organition.companyDetailsObj.dateOfIncorporation" md-placeholder="Enter date"></md-datepicker>
+                    </md-input-container>
                   </div>
                   <div layout-gt-sm="row">
                     <md-input-container class="md-block" flex-gt-sm>
-                      <label>Zip Code</label>
-                      <input ng-model="organition.companyDetailsObj.addressId.zip" ng-readonly="organition.viewmode">
-                    </md-input-container>
-                    <md-input-container class="md-block" flex-gt-sm>
-                      <label>State</label>
-                      <md-select ng-model="organition.companyDetailsObj.addressId.state" ng-readonly="organition.viewmode">
+                      <label>State Incorporated</label>
+                      <md-select ng-model="organition.companyDetailsObj.stateOfIncorporation" ng-readonly="organition.viewmode">
                         <md-option ng-repeat="state in organition.states" ng-value="state.stateCode">
                           {{state.stateName}}
                         </md-option>
                       </md-select>
                     </md-input-container>
-                    <div flex layout='row' layout-padding layout-align="start center" style="height: 30px;">
-                      <div>Status</div>
-                      <md-radio-group ng-model="organition.companyDetailsObj.status" ng-readonly="organition.viewmode">
-                        <md-radio-button ng-value="true">Active</md-radio-button>
-                        <md-radio-button ng-value="false">In Active</md-radio-button>
-                      </md-radio-group>
-                    </div>
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <label>FEIN</label>
+                      <input ng-model="organition.companyDetailsObj.fein" ng-readonly="organition.viewmode">
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <label>Fiscal Year End</label>
+                      <input ng-model="organition.companyDetailsObj.fiscalYearEnd" ng-readonly="organition.viewmode">
+                    </md-input-container>
+                  </div>
+                  <h5 style="border-bottom: 2px dotted #ccc; color: #4CAF50;margin-bottom: 15px;">PRINCIPAL ADDRESS</h5>
+                  <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <label>Phone</label>
+                      <input ng-model="organition.companyDetailsObj.addressId.phone" ng-readonly="organition.viewmode">
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <label>Fax</label>
+                      <input ng-model="organition.companyDetailsObj.addressId.fax" ng-readonly="organition.viewmode">
+                    </md-input-container>
                   </div>
                   <div layout-gt-sm="row">
                     <md-input-container class="md-block" flex-gt-sm>
-                      <label>Note</label>
-                      <input ng-model="organition.companyDetailsObj.notes" ng-readonly="organition.viewmode">
+                      <label>Phone</label>
+                      <input ng-model="organition.companyDetailsObj.addressId.phone" ng-readonly="organition.viewmode">
                     </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <label>Fax</label>
+                      <input ng-model="organition.companyDetailsObj.addressId.fax" ng-readonly="organition.viewmode">
+                    </md-input-container>
+                  </div>
+                  <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <label>Phone</label>
+                      <input ng-model="organition.companyDetailsObj.addressId.phone" ng-readonly="organition.viewmode">
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <label>Fax</label>
+                      <input ng-model="organition.companyDetailsObj.addressId.fax" ng-readonly="organition.viewmode">
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <label>Phone</label>
+                      <input ng-model="organition.companyDetailsObj.addressId.phone" ng-readonly="organition.viewmode">
+                    </md-input-container>
+                  </div>
+                  <h5 style="border-bottom: 2px dotted #ccc; color: #4CAF50; margin-bottom: 15px;">OTHER IDENTIFICATIONS</h5>
+                  <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <label>Phone</label>
+                      <input ng-model="organition.companyDetailsObj.addressId.phone" ng-readonly="organition.viewmode">
+                      </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <label>Fax</label>
+                      <input ng-model="organition.companyDetailsObj.addressId.fax" ng-readonly="organition.viewmode">
+                    </md-input-container>
+                  </div>
+                  <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <label>Phone</label>
+                      <input ng-model="organition.companyDetailsObj.addressId.phone" ng-readonly="organition.viewmode">
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <label>Fax</label>
+                      <input ng-model="organition.companyDetailsObj.addressId.fax" ng-readonly="organition.viewmode">
+                    </md-input-container>
+                  </div>
+                  <h5 style="border-bottom: 2px dotted #ccc; color: #4CAF50; margin-bottom: 15px;">BUSINESS REQUIREMENT</h5>
+                  <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <label>Phone</label>
+                      <input ng-model="organition.companyDetailsObj.addressId.phone" ng-readonly="organition.viewmode">
+                      </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <label>Fax</label>
+                      <input ng-model="organition.companyDetailsObj.addressId.fax" ng-readonly="organition.viewmode">
+                    </md-input-container>
+                  </div>
+                  <div layout-gt-sm="row">
                     <md-input-container class="md-block" flex-gt-sm>
                       <label>Phone</label>
                       <input ng-model="organition.companyDetailsObj.addressId.phone" ng-readonly="organition.viewmode">
@@ -138,7 +204,7 @@
                   </div>
                 </form>
                 <div>
-                  <h5 style="border-bottom: 1px solid #ccc; color: #4CAF50;">ATTACHMENTS/REMAINDERS</h5>
+                  <h5 style="border-bottom: 2px dotted #ccc; color: #4CAF50;margin-bottom: 15px;">ATTACHMENTS/REMAINDERS</h5>
                   <br>
                   <form name="userForm" class="attachment-form" ng-show="organition.attachmentCreateViewmode">
                     <div layout-gt-sm="row">
