@@ -107,7 +107,7 @@ angular.module('healthCareApp')
     };
 
     var getCompaniesSb = function(res) {
-      vm.companyDetailsObj = res.data[0];
+      //vm.companyDetailsObj = res.data[0];
     };
 
     vm.getCompanies = function(pagenumber) {
@@ -124,13 +124,20 @@ angular.module('healthCareApp')
     //   localStorage.setItem('companyDetails', angular.toJson(obj));
     //   $location.path('companyMore');
     // };
-        //save button click
+    //save button click
     var saveUserSuccessCallback = function() {
       vm.viewmode = true;
     };
 
     vm.saveBtnClick = function() {
       ApiService.post(healthCareBusinessConstants.GET_COMPANIES, vm.companyDetailsObj).then(saveUserSuccessCallback, errorCallback).finally(finalCallBack);
+    };
+
+    vm.addOtherIdentifier = function() {
+      vm.companyDetailsObj.otherIdentifications.push({
+        "identifierName": "",
+        "identifierNumber": ""
+      });
     };
 
     vm.init = function() {
@@ -141,7 +148,13 @@ angular.module('healthCareApp')
       vm.myDate = new Date();
       vm.hideAttachmentCreate();
       vm.getStates();
-      vm.entityTypes = [{name:'S corporation'},{name:'C corporation'}];
+      vm.companyDetailsObj = {
+        'otherIdentifications': [{
+          "identifierName": "",
+          "identifierNumber": ""
+        }]
+      };
+      vm.entityTypes = [{ name: 'S corporation' }, { name: 'C corporation' }];
     };
 
     vm.init();

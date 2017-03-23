@@ -128,65 +128,65 @@
                   <h5 style="border-bottom: 2px dotted #ccc; color: #4CAF50;margin-bottom: 15px;">PRINCIPAL ADDRESS</h5>
                   <div layout-gt-sm="row">
                     <md-input-container class="md-block" flex-gt-sm>
-                      <label>Phone</label>
-                      <input ng-model="organition.companyDetailsObj.addressId.phone" ng-readonly="organition.viewmode">
+                      <label>Street Address</label>
+                      <input ng-model="organition.companyDetailsObj.addressId.street" ng-readonly="organition.viewmode">
                     </md-input-container>
                     <md-input-container class="md-block" flex-gt-sm>
-                      <label>Fax</label>
-                      <input ng-model="organition.companyDetailsObj.addressId.fax" ng-readonly="organition.viewmode">
-                    </md-input-container>
-                  </div>
-                  <div layout-gt-sm="row">
-                    <md-input-container class="md-block" flex-gt-sm>
-                      <label>Phone</label>
-                      <input ng-model="organition.companyDetailsObj.addressId.phone" ng-readonly="organition.viewmode">
-                    </md-input-container>
-                    <md-input-container class="md-block" flex-gt-sm>
-                      <label>Fax</label>
-                      <input ng-model="organition.companyDetailsObj.addressId.fax" ng-readonly="organition.viewmode">
+                      <label>City</label>
+                      <input ng-model="organition.companyDetailsObj.addressId.city" ng-readonly="organition.viewmode">
                     </md-input-container>
                   </div>
                   <div layout-gt-sm="row">
                     <md-input-container class="md-block" flex-gt-sm>
-                      <label>Phone</label>
+                      <label>State</label>
+                      <md-select ng-model="organition.companyDetailsObj.state" ng-readonly="organition.viewmode">
+                        <md-option ng-repeat="state in organition.states" ng-value="state.stateCode">
+                          {{state.stateName}}
+                        </md-option>
+                      </md-select>
+                      
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <label>ZIP</label>
+                      <input ng-model="organition.companyDetailsObj.addressId.zip" ng-readonly="organition.viewmode">
+                    </md-input-container>
+                  </div>
+                  <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <label>Country</label>
+                      <input ng-model="organition.companyDetailsObj.addressId.country" ng-readonly="organition.viewmode">
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                      <label>phone</label>
                       <input ng-model="organition.companyDetailsObj.addressId.phone" ng-readonly="organition.viewmode">
                     </md-input-container>
                     <md-input-container class="md-block" flex-gt-sm>
-                      <label>Fax</label>
-                      <input ng-model="organition.companyDetailsObj.addressId.fax" ng-readonly="organition.viewmode">
-                    </md-input-container>
-                    <md-input-container class="md-block" flex-gt-sm>
-                      <label>Phone</label>
-                      <input ng-model="organition.companyDetailsObj.addressId.phone" ng-readonly="organition.viewmode">
+                      <label>Website</label>
+                      <input ng-model="organition.companyDetailsObj.addressId.email" ng-readonly="organition.viewmode">
                     </md-input-container>
                   </div>
                   <h5 style="border-bottom: 2px dotted #ccc; color: #4CAF50; margin-bottom: 15px;">OTHER IDENTIFICATIONS</h5>
-                  <div layout-gt-sm="row">
+                  <div layout-gt-sm="row" ng-repeat="otherIdentifier in organition.companyDetailsObj.otherIdentifications">
                     <md-input-container class="md-block" flex-gt-sm>
-                      <label>Phone</label>
-                      <input ng-model="organition.companyDetailsObj.addressId.phone" ng-readonly="organition.viewmode">
-                      </md-input-container>
+                      <label>Identifier Name</label>
+                      <input ng-model="otherIdentifier.identifierName" ng-readonly="organition.viewmode">
+                    </md-input-container>
                     <md-input-container class="md-block" flex-gt-sm>
-                      <label>Fax</label>
-                      <input ng-model="organition.companyDetailsObj.addressId.fax" ng-readonly="organition.viewmode">
+                      <label>Identifier Number</label>
+                      <input ng-model="otherIdentifier.identifierNumber" ng-readonly="organition.viewmode">
                     </md-input-container>
                   </div>
-                  <div layout-gt-sm="row">
-                    <md-input-container class="md-block" flex-gt-sm>
-                      <label>Phone</label>
-                      <input ng-model="organition.companyDetailsObj.addressId.phone" ng-readonly="organition.viewmode">
-                    </md-input-container>
-                    <md-input-container class="md-block" flex-gt-sm>
-                      <label>Fax</label>
-                      <input ng-model="organition.companyDetailsObj.addressId.fax" ng-readonly="organition.viewmode">
-                    </md-input-container>
+                  <div class="text-right" style="margin-top: -20px;margin-bottom: 20px;">
+                    <md-button class="md-fab md-mini md-primary" ng-click="organition.addOtherIdentifier()">
+                      <md-icon class="glyphicon glyphicon-plus" style="font-size: 30px;margin-bottom: 17px"></md-icon>
+                    </md-button>
                   </div>
                   <h5 style="border-bottom: 2px dotted #ccc; color: #4CAF50; margin-bottom: 15px;">BUSINESS REQUIREMENT</h5>
                   <div layout-gt-sm="row">
                     <md-input-container class="md-block" flex-gt-sm>
                       <label>Phone</label>
                       <input ng-model="organition.companyDetailsObj.addressId.phone" ng-readonly="organition.viewmode">
-                      </md-input-container>
+                    </md-input-container>
                     <md-input-container class="md-block" flex-gt-sm>
                       <label>Fax</label>
                       <input ng-model="organition.companyDetailsObj.addressId.fax" ng-readonly="organition.viewmode">
