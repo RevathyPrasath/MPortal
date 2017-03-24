@@ -64,7 +64,7 @@
                 <td ng-bind="obj.firstName"></td>
                 <td ng-bind="obj.addressId.email"></td>
                 <td ng-bind="obj.employeeId.location.locationName"></td>
-                <td ng-bind="obj.employeeId.status"></td>
+                <td>{{obj.employeeId.status && 'Active' || 'In Active'}}</td>
                 <td ng-bind="obj.employeeId.jobTitle"></td>
                 <td><a ng-click="personal.fnViewMore(obj)">More</a></td>
               </tr>
