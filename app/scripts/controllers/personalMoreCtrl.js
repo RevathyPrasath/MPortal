@@ -102,6 +102,25 @@ angular.module('healthCareApp')
     };
 
     // Save personal flow ends
+    var getSupervisorsScb = function(res) {
+      vm.supervisorList = res.data;
+    };
+
+    //List of supervisor
+    var getSupervisors = function() {
+      var url = healthCareBusinessConstants.SUPERVISOR_LIST;
+      ApiService.get(url).then(getSupervisorsScb, errorCallback)
+    };
+
+    var getSpecialitiesScb = function(res){
+      vm.specialities = res.data;
+    };
+
+    //get specialities
+    var getSpecialities = function() {
+      var url = healthCareBusinessConstants.SPECIALTY_LIST;
+      ApiService.get(url).then(getSpecialitiesScb, errorCallback);
+    };
 
     vm.init = function() {
       vm.personalDetailsObj = angular.fromJson(localStorage.getItem('personnalDetails'));
@@ -116,6 +135,169 @@ angular.module('healthCareApp')
       }
       vm.getLocations();
       vm.getStates();
+      getSupervisors();
+      getSpecialities();
+      //temp 
+      vm.taxonomies = [{id:1, name:'2086S0129X'}];
+      vm.credentials = [{id:1, name:'MD'}];
+
+      vm.provider = {
+        licenseType: [
+          {
+            "value": "Medical",
+            "license": [{
+              "licenseTypeId": {
+                "value": "Medical",
+                "createdOn": "1484716090000",
+                "createdBy": "SYSTEM"
+              },
+              "state": "CA",
+              "licenseNo": "F2817",
+              "expiryDate": "1484716090000",
+              "isDue": true,
+              "notes": "THIS IS 4 MEDICAL",
+              "licenseDocuments": [{
+                "description": "ERERERE RESUME",
+                "createdBy": "VINSDoc",
+                "updatedOn": "1484716090000",
+                "updatedBy": "VINSDoc"
+              }, {
+                "description": "ASASASAS",
+                "createdBy": "VINSDoc",
+                "updatedOn": "1484716090000",
+                "updatedBy": "VINSDoc"
+              }]
+            },
+            {
+              "licenseTypeId": {
+                "value": "Medical",
+                "createdOn": "1484716090000",
+                "createdBy": "SYSTEM"
+              },
+              "state": "CA",
+              "licenseNo": "F2817",
+              "expiryDate": "1484716090000",
+              "isDue": true,
+              "notes": "THIS IS 4 MEDICAL",
+              "licenseDocuments": [{
+                "description": "ERERERE RESUME",
+                "createdBy": "VINSDoc",
+                "updatedOn": "1484716090000",
+                "updatedBy": "VINSDoc"
+              }, {
+                "description": "ASASASAS",
+                "createdBy": "VINSDoc",
+                "updatedOn": "1484716090000",
+                "updatedBy": "VINSDoc"
+              }]
+            }],
+            "createdOn": "1484716090000",
+            "createdBy": "SYSTEM"
+          },
+          {
+            "value": "Deal Licence",
+            "license": [{
+              "licenseTypeId": {
+                "value": "Medical",
+                "createdOn": "1484716090000",
+                "createdBy": "SYSTEM"
+              },
+              "state": "CA",
+              "licenseNo": "F2817",
+              "expiryDate": "1484716090000",
+              "isDue": true,
+              "notes": "THIS IS 4 MEDICAL",
+              "licenseDocuments": [{
+                "description": "ERERERE RESUME",
+                "createdBy": "VINSDoc",
+                "updatedOn": "1484716090000",
+                "updatedBy": "VINSDoc"
+              }, {
+                "description": "ASASASAS",
+                "createdBy": "VINSDoc",
+                "updatedOn": "1484716090000",
+                "updatedBy": "VINSDoc"
+              }]
+            },
+            {
+              "licenseTypeId": {
+                "value": "Medical",
+                "createdOn": "1484716090000",
+                "createdBy": "SYSTEM"
+              },
+              "state": "CA",
+              "licenseNo": "F2817",
+              "expiryDate": "1484716090000",
+              "isDue": true,
+              "notes": "THIS IS 4 MEDICAL",
+              "licenseDocuments": [{
+                "description": "ERERERE RESUME",
+                "createdBy": "VINSDoc",
+                "updatedOn": "1484716090000",
+                "updatedBy": "VINSDoc"
+              }, {
+                "description": "ASASASAS",
+                "createdBy": "VINSDoc",
+                "updatedOn": "1484716090000",
+                "updatedBy": "VINSDoc"
+              }]
+            }],
+            "createdOn": "1484716090000",
+            "createdBy": "SYSTEM"
+          },
+          {
+            "value": "Malpractice Licence",
+            "license": [{
+              "licenseTypeId": {
+                "value": "Medical",
+                "createdOn": "1484716090000",
+                "createdBy": "SYSTEM"
+              },
+              "state": "CA",
+              "licenseNo": "F2817",
+              "expiryDate": "1484716090000",
+              "isDue": true,
+              "notes": "THIS IS 4 MEDICAL",
+              "licenseDocuments": [{
+                "description": "ERERERE RESUME",
+                "createdBy": "VINSDoc",
+                "updatedOn": "1484716090000",
+                "updatedBy": "VINSDoc"
+              }, {
+                "description": "ASASASAS",
+                "createdBy": "VINSDoc",
+                "updatedOn": "1484716090000",
+                "updatedBy": "VINSDoc"
+              }]
+            },
+            {
+              "licenseTypeId": {
+                "value": "Medical",
+                "createdOn": "1484716090000",
+                "createdBy": "SYSTEM"
+              },
+              "state": "CA",
+              "licenseNo": "F2817",
+              "expiryDate": "1484716090000",
+              "isDue": true,
+              "notes": "THIS IS 4 MEDICAL",
+              "licenseDocuments": [{
+                "description": "ERERERE RESUME",
+                "createdBy": "VINSDoc",
+                "updatedOn": "1484716090000",
+                "updatedBy": "VINSDoc"
+              }, {
+                "description": "ASASASAS",
+                "createdBy": "VINSDoc",
+                "updatedOn": "1484716090000",
+                "updatedBy": "VINSDoc"
+              }]
+            }],
+            "createdOn": "1484716090000",
+            "createdBy": "SYSTEM"
+          }
+        ]
+      }
     };
 
     vm.init();
