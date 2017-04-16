@@ -112,56 +112,89 @@
             </md-checkbox>
           </div>
         </div>
-         <h5 style="color: #4CAF50;margin-top:30px" class="text-uppercase">provider</h5>
-        <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm>
-            <label>NPI</label>
-            <input ng-model="personalMore.personalDetailsObj.lastName" ng-readonly="personalMore.viewmode" ng-required="true">
-          </md-input-container>
-          <md-input-container class="md-block" flex-gt-sm>
-            <label>Credential</label>
-            <md-select ng-model="personalMore.personalDetailsObj.provider.credential" ng-disabled="personalMore.viewmode" ng-required="true">
-              <md-option ng-repeat="credential in personalMore.credentials" ng-value="credential.name">
-                {{credential.name}}
-              </md-option>
-            </md-select>
-          </md-input-container>
+        <div ng-show="personalMore.personalDetailsObj.employeeId.isProvider">
+          <h5 style="color: #4CAF50;margin-top:30px;margin-bottom: 20px;" class="text-uppercase">provider</h5>
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>NPI</label>
+              <input ng-model="personalMore.personalDetailsObj.provider.npi" ng-readonly="personalMore.viewmode" ng-required="true">
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Credential</label>
+              <md-select ng-model="personalMore.personalDetailsObj.provider.credential" ng-disabled="personalMore.viewmode" ng-required="true">
+                <md-option ng-repeat="credential in personalMore.credentials" ng-value="credential.name">
+                  {{credential.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Speciality</label>
+              <md-select ng-model="personalMore.personalDetailsObj.provider.specialist" ng-disabled="personalMore.viewmode">
+                <md-option ng-repeat="speciality in personalMore.specialities" ng-value="speciality.name">
+                  {{speciality.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Taxonomy</label>
+              <md-select ng-model="personalMore.personalDetailsObj.provider.taxonomy" ng-disabled="personalMore.viewmode">
+                <md-option ng-repeat="taxonomy in personalMore.taxonomies" ng-value="taxonomy.name">
+                  {{taxonomy.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+          <table class="table personal-licencies">
+            <thead>
+              <tr>
+                <th colspan="3" class="background-none"><h5><b>Medical License</b></h5></th>
+                <th class="text-right background-none"><a ng-click="showAdvanced($event, {}, '', 'Medical License')">+ Add New</a></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="innerObj in personalMore.provider.licenseType.medicalLicence">
+                <td>License# {{innerObj.license.licenseNo}}</td>
+                <td>State: {{innerObj.license.state}}</td>
+                <td class="text-center">Expairy Date: {{innerObj.license.expiryDate  | date:'medium'}}</td>
+                <td class="text-right"><a ng-click="showAdvanced($event, innerObj, 'MEDICAL', 'Medical License')">More</a></td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table personal-licencies">
+            <thead>
+              <tr>
+                <th colspan="3" class="background-none"><h5><b>DEA License</b></h5></th>
+                <th class="text-right background-none"><a ng-click="showAdvanced($event, {},'', 'DEA License')">+ Add New</a></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="innerObj in personalMore.provider.licenseType.dealLicence">
+                <td>License# {{innerObj.license.licenseNo}}</td>
+                <td>Address: {{innerObj.license.address}}</td>
+                <td class="text-center">Expairy Date: {{innerObj.license.expiryDate  | date:'medium'}}</td>
+                <td class="text-right"><a ng-click="showAdvanced($event, innerObj, 'DEA_LICENSE', 'DEA License')">More</a></td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table personal-licencies">
+            <thead>
+              <tr>
+                <th colspan="3" class="background-none"><h5><b>Malpractice Insurance</b></h5></th>
+                <th class="text-right background-none"><a ng-click="showAdvanced($event, {}, '', 'Malpractice Insurance')">+ Add New</a></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="innerObj in personalMore.provider.licenseType.malpracticeInsurance">
+                <td>License# {{innerObj.license.licenseNo}}</td>
+                <td>Carrier: {{innerObj.license.carrier}}</td>
+                <td class="text-center">Expairy Date: {{innerObj.license.expiryDate  | date:'medium'}}</td>
+                <td class="text-right"><a ng-click="showAdvanced($event, innerObj, 'MALPRACTICE_INSURANCE', 'Malpractice Insurance')">More</a></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div layout-gt-sm="row">
-          <md-input-container class="md-block" flex-gt-sm>
-            <label>Speciality</label>
-            <md-select ng-model="personalMore.personalDetailsObj.provider.specialist" ng-disabled="personalMore.viewmode">
-              <md-option ng-repeat="speciality in personalMore.specialities" ng-value="speciality.name">
-                {{speciality.name}}
-              </md-option>
-            </md-select>
-          </md-input-container>
-          <md-input-container class="md-block" flex-gt-sm>
-            <label>Taxonomy</label>
-            <md-select ng-model="personalMore.personalDetailsObj.provider.taxonomy" ng-disabled="personalMore.viewmode">
-              <md-option ng-repeat="taxonomy in personalMore.taxonomies" ng-value="taxonomy.name">
-                {{taxonomy.name}}
-              </md-option>
-            </md-select>
-          </md-input-container>
-        </div>
-
-        <table class="table personal-licencies" ng-repeat="licence in personalMore.provider.licenseType">
-          <thead>
-            <tr>
-              <th colspan="3" class="background-none"><h5>{{licence.value}}</h5></th>
-              <th class="text-right background-none"><a href="">+ Add New</a></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="innerObj in licence.license">
-              <td>License# {{innerObj.licenseNo}}</td>
-              <td class="text-center">State: {{innerObj.state}}</td>
-              <td class="text-center">Expairy Date{{innerObj.expiryDate}}</td>
-              <td class="text-right"><a>More</a></td>
-            </tr>
-          </tbody>
-        </table>
       </form>
       <br>
       <div>

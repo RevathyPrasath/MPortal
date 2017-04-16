@@ -1,0 +1,124 @@
+<md-dialog style="width:80%">
+	<form ng-cloak>
+	  <md-toolbar>
+	    <div class="md-toolbar-tools">
+	      <h4>{{licenseHeading}}</h4>
+	      <span flex></span>
+	      <md-button class="md-icon-button" ng-click="cancel()">
+	        <md-icon>X</md-icon>
+	      </md-button>
+	    </div>
+	  </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+      	<div ng-show="showmedicalLicense">
+	      	<p><b>State</b>: {{moreinfo.license.state}}</p>
+	      	<p><b>License#</b>: {{moreinfo.license.licenseNo}}</p>
+	      	<p><b>Expiry Date</b>: {{moreinfo.license.expiryDate | date : format : timezone}} </p>
+	      	<p><b>Track Expiry/Due Date</b>: {{moreinfo.license.isDue && 'Yes' || 'No'}} </p>
+	      	<p><b>Notes</b>: {{moreinfo.license.notes}} </p>
+      	</div>
+      	<div ng-show="showdealLicense">
+      		<p><b>License#</b>: {{moreinfo.license.licenseNo}}</p>
+	      	<p><b>Address</b>: {{moreinfo.license.address}}</p>
+	      	<p><b>Expiry Date</b>: {{moreinfo.license.expiryDate | date : format : timezone}} </p>
+	      	<p><b>Track Expiry/Due Date</b>: {{moreinfo.license.isDue && 'Yes' || 'No'}} </p>
+	      	<p><b>Notes</b>: {{moreinfo.license.notes}} </p>
+      	</div>
+      	<div ng-show="showmalpracticeLicense">
+      		<p><b>Policy#</b>: {{moreinfo.license.policyNumber}}</p>
+	      	<p><b>Carrier</b>: {{moreinfo.license.carrier}}</p>
+	      	<p><b>Expiry Date</b>: {{moreinfo.license.expiryDate | date : format : timezone}} </p>
+	      	<p><b>Track Expiry/Due Date</b>: {{moreinfo.license.isDue && 'Yes' || 'No'}} </p>
+	      	<p><b>Notes</b>: {{moreinfo.license.notes}} </p>
+      	</div>
+
+      	<div ng-show="moreinfo.license.licenseDocuments.length>0">
+	      	<h3>Documents</h3>
+
+	      <div>
+        <h5 style="border-bottom: 1px solid #ccc; color: #4CAF50;">ATTACHMENTS/REMAINDERS</h5>
+        <br>
+        <!-- Need to build a form -->
+        <form name="userForm" class="attachment-form" ng-show="">
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Short Description</label>
+              <input ng-model="personalMore.fileuploadObject.shortdescription" ng-required="true">
+            </md-input-container>
+          </div>
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Notes</label>
+              <textarea ng-model="personalMore.fileuploadObject.notes" rows="3" md-select-on-focus></textarea>
+            </md-input-container>
+          </div>
+          <br>
+          <div layout-gt-sm="row">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Expiry / Due Date</label>
+              <md-datepicker ng-model="personalMore.fileuploadObject.expiry" md-placeholder="Enter date"></md-datepicker>
+            </md-input-container>
+            <div flex layout='row' layout-padding layout-align="start center" style="height: 30px;">
+              <div>Track Expiry / Due Date</div>
+              <md-radio-group ng-model="personalMore.fileuploadObject.trackExpiry" ng-readonly="userDetailsObj.viewmode">
+                <md-radio-button ng-value="true">Yes</md-radio-button>
+                <md-radio-button ng-value="false">No</md-radio-button>
+              </md-radio-group>
+            </div>
+          </div>
+          <div layout-gt-sm="row">
+            <input type="file" name="uploadingFiles" onchange="angular.element(this).scope().uploadFile(this.files)" />
+          </div>
+          <div class="text-right">
+            <md-button class="md-raised md-primary" ng-click="personalMore.createAttachment()">Save</md-button>
+            <md-button class="md-raised" ng-click="personalMore.hideAttachmentCreate()">Cancel</md-button>
+          </div>
+        </form>
+        <p ng-show="!personalMore.viewmode">
+          <md-button class="md-raised md-cornered" ng-click="personalMore.showAttachmentCreate()">Add New</md-button>
+        </p>
+        <table class="table" ng-show="personalMore.personalDetailsObj.document.length">
+          <tr>
+            <td>Id</td>
+            <td>Date Created</td>
+            <td>Description</td>
+            <td>Action</td>
+          </tr>
+          <tr ng-repeat="doc in personalMore.personalDetailsObj.document">
+            <td ng-bind="doc.documentId"></td>
+            <td ng-bind="doc.createdOn | date : format : timezone"></td>
+            <td ng-bind="doc.description"></td>
+            <td><a target="_blank" ng-href="{{doc.documentUrl}}">View</a></td>
+          </tr>
+        </table>
+      </div>
+
+	      	<table class="table">
+	          <tr>
+	            <td>Id</td>
+	            <td>Date Created</td>
+	            <td>Description</td>
+	            <td>Action</td>
+	          </tr>
+	          <tr ng-repeat="doc in moreinfo.license.licenseDocuments">
+	            <td ng-bind="doc.documentId"></td>
+	            <td ng-bind="doc.createdOn | date : format : timezone"></td>
+	            <td ng-bind="doc.description"></td>
+	            <td><a target="_blank" ng-href="{{doc.documentUrl}}">View</a></td>
+	          </tr>
+	        </table>
+	      </div>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <span flex></span>
+      <md-button ng-click="EditProvider()">
+      	Edit
+      </md-button>
+      <md-button ng-click="DoneProvider()">
+        Done
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

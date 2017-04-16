@@ -8,7 +8,7 @@
  * Controller of the healthCareApp
  */
 angular.module('healthCareApp')
-  .controller('personalMoreCtrl', function($scope, $rootScope, $http, $filter, $location, ApiService, healthCareBusinessConstants) {
+  .controller('personalMoreCtrl', function($scope, $rootScope, $http, $filter, $location, ApiService, healthCareBusinessConstants, $mdDialog) {
     var vm = this;
     var errorCallback = function(error) {
       vm.errorMsg = error.data.message;
@@ -122,6 +122,42 @@ angular.module('healthCareApp')
       ApiService.get(url).then(getSpecialitiesScb, errorCallback);
     };
 
+    $scope.showAdvanced = function(ev, data, licenceName, licenseHeading) {
+      $mdDialog.show({
+        controller: DialogController,
+        templateUrl: '../../views/personalInfo.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose:true,
+        locals: {
+          items: data,
+          showLicence: licenceName,
+          licenseHeading: licenseHeading
+        },
+        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+      })
+      .then(function(answer) {
+        $scope.status = 'You said the information was "' + answer + '".';
+      }, function() {
+        $scope.status = 'You cancelled the dialog.';
+      });
+    };
+
+    function DialogController($scope, $mdDialog, items, showLicence, licenseHeading) {
+      $scope.moreinfo = items;
+      $scope.licenseHeading = licenseHeading;
+      if(showLicence == 'MEDICAL') {
+        $scope.showmedicalLicense = true;
+      } else if (showLicence == 'DEA_LICENSE') {
+        $scope.showdealLicense = true;
+      } else if (showLicence == 'MALPRACTICE_INSURANCE') {
+        $scope.showmalpracticeLicense = true;
+      };
+      $scope.cancel = function() {
+        $mdDialog.cancel();
+      };
+    }
+
     vm.init = function() {
       vm.personalDetailsObj = angular.fromJson(localStorage.getItem('personnalDetails'));
       if (Object.keys(vm.personalDetailsObj).length) {
@@ -139,167 +175,26 @@ angular.module('healthCareApp')
       getSpecialities();
       //temp 
       vm.taxonomies = [{id:1, name:'2086S0129X'}];
-      vm.credentials = [{id:1, name:'MD'}];
-
+      vm.credentials = [{id:1, name:'MD'}, {id:2, name:'DR'}];
+      vm.personalDetailsObj.provider.licenseType
       vm.provider = {
-        licenseType: [
-          {
-            "value": "Medical",
-            "license": [{
-              "licenseTypeId": {
-                "value": "Medical",
-                "createdOn": "1484716090000",
-                "createdBy": "SYSTEM"
-              },
-              "state": "CA",
-              "licenseNo": "F2817",
-              "expiryDate": "1484716090000",
-              "isDue": true,
-              "notes": "THIS IS 4 MEDICAL",
-              "licenseDocuments": [{
-                "description": "ERERERE RESUME",
-                "createdBy": "VINSDoc",
-                "updatedOn": "1484716090000",
-                "updatedBy": "VINSDoc"
-              }, {
-                "description": "ASASASAS",
-                "createdBy": "VINSDoc",
-                "updatedOn": "1484716090000",
-                "updatedBy": "VINSDoc"
-              }]
-            },
-            {
-              "licenseTypeId": {
-                "value": "Medical",
-                "createdOn": "1484716090000",
-                "createdBy": "SYSTEM"
-              },
-              "state": "CA",
-              "licenseNo": "F2817",
-              "expiryDate": "1484716090000",
-              "isDue": true,
-              "notes": "THIS IS 4 MEDICAL",
-              "licenseDocuments": [{
-                "description": "ERERERE RESUME",
-                "createdBy": "VINSDoc",
-                "updatedOn": "1484716090000",
-                "updatedBy": "VINSDoc"
-              }, {
-                "description": "ASASASAS",
-                "createdBy": "VINSDoc",
-                "updatedOn": "1484716090000",
-                "updatedBy": "VINSDoc"
-              }]
-            }],
-            "createdOn": "1484716090000",
-            "createdBy": "SYSTEM"
-          },
-          {
-            "value": "Deal Licence",
-            "license": [{
-              "licenseTypeId": {
-                "value": "Medical",
-                "createdOn": "1484716090000",
-                "createdBy": "SYSTEM"
-              },
-              "state": "CA",
-              "licenseNo": "F2817",
-              "expiryDate": "1484716090000",
-              "isDue": true,
-              "notes": "THIS IS 4 MEDICAL",
-              "licenseDocuments": [{
-                "description": "ERERERE RESUME",
-                "createdBy": "VINSDoc",
-                "updatedOn": "1484716090000",
-                "updatedBy": "VINSDoc"
-              }, {
-                "description": "ASASASAS",
-                "createdBy": "VINSDoc",
-                "updatedOn": "1484716090000",
-                "updatedBy": "VINSDoc"
-              }]
-            },
-            {
-              "licenseTypeId": {
-                "value": "Medical",
-                "createdOn": "1484716090000",
-                "createdBy": "SYSTEM"
-              },
-              "state": "CA",
-              "licenseNo": "F2817",
-              "expiryDate": "1484716090000",
-              "isDue": true,
-              "notes": "THIS IS 4 MEDICAL",
-              "licenseDocuments": [{
-                "description": "ERERERE RESUME",
-                "createdBy": "VINSDoc",
-                "updatedOn": "1484716090000",
-                "updatedBy": "VINSDoc"
-              }, {
-                "description": "ASASASAS",
-                "createdBy": "VINSDoc",
-                "updatedOn": "1484716090000",
-                "updatedBy": "VINSDoc"
-              }]
-            }],
-            "createdOn": "1484716090000",
-            "createdBy": "SYSTEM"
-          },
-          {
-            "value": "Malpractice Licence",
-            "license": [{
-              "licenseTypeId": {
-                "value": "Medical",
-                "createdOn": "1484716090000",
-                "createdBy": "SYSTEM"
-              },
-              "state": "CA",
-              "licenseNo": "F2817",
-              "expiryDate": "1484716090000",
-              "isDue": true,
-              "notes": "THIS IS 4 MEDICAL",
-              "licenseDocuments": [{
-                "description": "ERERERE RESUME",
-                "createdBy": "VINSDoc",
-                "updatedOn": "1484716090000",
-                "updatedBy": "VINSDoc"
-              }, {
-                "description": "ASASASAS",
-                "createdBy": "VINSDoc",
-                "updatedOn": "1484716090000",
-                "updatedBy": "VINSDoc"
-              }]
-            },
-            {
-              "licenseTypeId": {
-                "value": "Medical",
-                "createdOn": "1484716090000",
-                "createdBy": "SYSTEM"
-              },
-              "state": "CA",
-              "licenseNo": "F2817",
-              "expiryDate": "1484716090000",
-              "isDue": true,
-              "notes": "THIS IS 4 MEDICAL",
-              "licenseDocuments": [{
-                "description": "ERERERE RESUME",
-                "createdBy": "VINSDoc",
-                "updatedOn": "1484716090000",
-                "updatedBy": "VINSDoc"
-              }, {
-                "description": "ASASASAS",
-                "createdBy": "VINSDoc",
-                "updatedOn": "1484716090000",
-                "updatedBy": "VINSDoc"
-              }]
-            }],
-            "createdOn": "1484716090000",
-            "createdBy": "SYSTEM"
-          }
-        ]
+        licenseType: {
+          medicalLicence:[],
+          dealLicence: [],
+          malpracticeInsurance:[]
+        }
+      };
+      for (var i = 0; i < vm.personalDetailsObj.provider.licenseType.length; i++) {
+        if(vm.personalDetailsObj.provider.licenseType[i].objectValue.toUpperCase() === "MEDICAL") {
+          vm.provider.licenseType.medicalLicence.push(vm.personalDetailsObj.provider.licenseType[i]);
+        } else if(vm.personalDetailsObj.provider.licenseType[i].objectValue.toUpperCase() == "DEA_LICENSE") {
+          vm.provider.licenseType.dealLicence.push(vm.personalDetailsObj.provider.licenseType[i]);
+        } else if(vm.personalDetailsObj.provider.licenseType[i].objectValue.toUpperCase() == "MALPRACTICE_INSURANCE") {
+          vm.provider.licenseType.malpracticeInsurance.push(vm.personalDetailsObj.provider.licenseType[i]);
+        }
       }
     };
 
-    vm.init();
+  vm.init();
 
   });
