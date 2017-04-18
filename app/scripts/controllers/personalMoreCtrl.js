@@ -122,41 +122,47 @@ angular.module('healthCareApp')
       ApiService.get(url).then(getSpecialitiesScb, errorCallback);
     };
 
-    $scope.showAdvanced = function(ev, data, licenceName, licenseHeading) {
-      $mdDialog.show({
-        controller: DialogController,
-        templateUrl: '../../views/personalInfo.html',
-        parent: angular.element(document.body),
-        targetEvent: ev,
-        clickOutsideToClose:true,
-        locals: {
-          items: data,
-          showLicence: licenceName,
-          licenseHeading: licenseHeading
-        },
-        fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-      })
-      .then(function(answer) {
-        $scope.status = 'You said the information was "' + answer + '".';
-      }, function() {
-        $scope.status = 'You cancelled the dialog.';
-      });
+    vm.providerMore = function (items, type) {
+      localStorage.setItem("providerMoreInfo", JSON.stringify(items));
+      localStorage.setItem("licenseType", type)
+      $location.path("providermore");
     };
 
-    function DialogController($scope, $mdDialog, items, showLicence, licenseHeading) {
-      $scope.moreinfo = items;
-      $scope.licenseHeading = licenseHeading;
-      if(showLicence == 'MEDICAL') {
-        $scope.showmedicalLicense = true;
-      } else if (showLicence == 'DEA_LICENSE') {
-        $scope.showdealLicense = true;
-      } else if (showLicence == 'MALPRACTICE_INSURANCE') {
-        $scope.showmalpracticeLicense = true;
-      };
-      $scope.cancel = function() {
-        $mdDialog.cancel();
-      };
-    }
+    // $scope.showAdvanced = function(ev, data, licenceName, licenseHeading) {
+    //   $mdDialog.show({
+    //     controller: DialogController,
+    //     templateUrl: '../../views/personalInfo.html',
+    //     parent: angular.element(document.body),
+    //     targetEvent: ev,
+    //     clickOutsideToClose:true,
+    //     locals: {
+    //       items: data,
+    //       showLicence: licenceName,
+    //       licenseHeading: licenseHeading
+    //     },
+    //     fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+    //   })
+    //   .then(function(answer) {
+    //     $scope.status = 'You said the information was "' + answer + '".';
+    //   }, function() {
+    //     $scope.status = 'You cancelled the dialog.';
+    //   });
+    // };
+
+    // function DialogController($scope, $mdDialog, items, showLicence, licenseHeading) {
+    //   $scope.moreinfo = items;
+    //   $scope.licenseHeading = licenseHeading;
+    //   if(showLicence == 'MEDICAL') {
+    //     $scope.showmedicalLicense = true;
+    //   } else if (showLicence == 'DEA_LICENSE') {
+    //     $scope.showdealLicense = true;
+    //   } else if (showLicence == 'MALPRACTICE_INSURANCE') {
+    //     $scope.showmalpracticeLicense = true;
+    //   };
+    //   $scope.cancel = function() {
+    //     $mdDialog.cancel();
+    //   };
+    // }
 
     vm.init = function() {
       vm.personalDetailsObj = angular.fromJson(localStorage.getItem('personnalDetails'));
@@ -195,6 +201,6 @@ angular.module('healthCareApp')
       }
     };
 
-  vm.init();
+    vm.init();
 
   });

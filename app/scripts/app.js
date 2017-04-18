@@ -50,6 +50,11 @@ angular
         controller: 'personalMoreCtrl',
         controllerAs: 'personalMore'
       })
+      .when('/providermore', {
+        templateUrl: 'views/personalInfo.html',
+        controller: 'providerMoreCtrl',
+        controllerAs: 'providerMore'
+      })
       .when('/organition', {
         templateUrl: 'views/organition.html',
         controller: 'OrganitionCtrl',

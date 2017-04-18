@@ -158,7 +158,7 @@
                 <td>License# {{innerObj.license.licenseNo}}</td>
                 <td>State: {{innerObj.license.state}}</td>
                 <td class="text-center">Expairy Date: {{innerObj.license.expiryDate  | date:'medium'}}</td>
-                <td class="text-right"><a ng-click="showAdvanced($event, innerObj, 'MEDICAL', 'Medical License')">More</a></td>
+                <td class="text-right"><a ng-click="personalMore.providerMore(innerObj, 'MEDICAL')">More</a></td>
               </tr>
             </tbody>
           </table>
@@ -166,7 +166,7 @@
             <thead>
               <tr>
                 <th colspan="3" class="background-none"><h5><b>DEA License</b></h5></th>
-                <th class="text-right background-none"><a ng-click="showAdvanced($event, {},'', 'DEA License')">+ Add New</a></th>
+                <th class="text-right background-none"><a ng-click="personalMore.providerMore({}, 'DEA License')">+ Add New</a></th>
               </tr>
             </thead>
             <tbody>
@@ -174,7 +174,7 @@
                 <td>License# {{innerObj.license.licenseNo}}</td>
                 <td>Address: {{innerObj.license.address}}</td>
                 <td class="text-center">Expairy Date: {{innerObj.license.expiryDate  | date:'medium'}}</td>
-                <td class="text-right"><a ng-click="showAdvanced($event, innerObj, 'DEA_LICENSE', 'DEA License')">More</a></td>
+                <td class="text-right"><a ng-click="personalMore.providerMore( innerObj, 'DEA_LICENSE')">More</a></td>
               </tr>
             </tbody>
           </table>
@@ -182,7 +182,7 @@
             <thead>
               <tr>
                 <th colspan="3" class="background-none"><h5><b>Malpractice Insurance</b></h5></th>
-                <th class="text-right background-none"><a ng-click="showAdvanced($event, {}, '', 'Malpractice Insurance')">+ Add New</a></th>
+                <th class="text-right background-none"><a ng-click="personalMore.providerMore({},'Malpractice Insurance')">+ Add New</a></th>
               </tr>
             </thead>
             <tbody>
@@ -190,7 +190,7 @@
                 <td>License# {{innerObj.license.licenseNo}}</td>
                 <td>Carrier: {{innerObj.license.carrier}}</td>
                 <td class="text-center">Expairy Date: {{innerObj.license.expiryDate  | date:'medium'}}</td>
-                <td class="text-right"><a ng-click="showAdvanced($event, innerObj, 'MALPRACTICE_INSURANCE', 'Malpractice Insurance')">More</a></td>
+                <td class="text-right"><a ng-click="personalMore.providerMore(innerObj, 'MALPRACTICE_INSURANCE')">More</a></td>
               </tr>
             </tbody>
           </table>
