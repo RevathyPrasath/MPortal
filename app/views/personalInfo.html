@@ -56,7 +56,38 @@
   	<p><b>Notes</b>: {{providerMore.moreinfo.license.notes}} </p>
 	</div>
   <div ng-show="providerMore.EditDealLicense">
-    <h1>Edit deal</h1>
+    <div name="userForm" class="attachment-form">
+      <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>License #</label>
+          <input ng-model="providerMore.moreinfo.license.licenseNo" ng-required="true">
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Address</label>
+          <input ng-model="providerMore.moreinfo.license.address" ng-required="true">
+        </md-input-container>
+      </div>
+      <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Expiry / Due Date</label>
+          <md-datepicker ng-model="providerMore.moreinfo.license.licenseDate" md-placeholder="Enter date"></md-datepicker>
+        </md-input-container>
+        <div flex layout='row' layout-padding layout-align="start center" style="height: 30px;">
+          <div>Track Expiry / Due Date</div>
+          <md-radio-group ng-model="providerMore.moreinfo.license.isDue" ng-readonly="userDetailsObj.viewmode"  style="display: inline-flex;
+    margin-top: 15px;">
+            <md-radio-button ng-value="true" style="margin-right: 10px;">Yes</md-radio-button>
+            <md-radio-button ng-value="false">No</md-radio-button>
+          </md-radio-group>
+        </div>
+      </div>
+      <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Notes</label>
+          <textarea ng-model="providerMore.moreinfo.license.notes" rows="3" md-select-on-focus></textarea>
+        </md-input-container>
+      </div>
+    </div>
   </div>
   <!-- Dea info -->
 
@@ -69,7 +100,38 @@
   	<p><b>Notes</b>: {{providerMore.moreinfo.license.notes}} </p>
 	</div>
   <div ng-show="providerMore.EditMalpracticeLicense">
-    <h1>Edit malpracticeLicense</h1>
+    <div name="userForm" class="attachment-form">
+      <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Policy #</label>
+          <input ng-model="providerMore.moreinfo.license.policyNumber" ng-required="true">
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Carrier</label>
+          <input ng-model="providerMore.moreinfo.license.carrier" ng-required="true">
+        </md-input-container>
+      </div>
+      <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Expiry / Due Date</label>
+          <md-datepicker ng-model="providerMore.moreinfo.license.licenseDate" md-placeholder="Enter date"></md-datepicker>
+        </md-input-container>
+        <div flex layout='row' layout-padding layout-align="start center" style="height: 30px;">
+          <div>Track Expiry / Due Date</div>
+          <md-radio-group ng-model="providerMore.moreinfo.license.isDue" ng-readonly="userDetailsObj.viewmode"  style="display: inline-flex;
+    margin-top: 15px;">
+            <md-radio-button ng-value="true" style="margin-right: 10px;">Yes</md-radio-button>
+            <md-radio-button ng-value="false">No</md-radio-button>
+          </md-radio-group>
+        </div>
+      </div>
+      <div layout-gt-sm="row">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Notes</label>
+          <textarea ng-model="providerMore.moreinfo.license.notes" rows="3" md-select-on-focus></textarea>
+        </md-input-container>
+      </div>
+    </div>
   </div>
   <!-- malpracticeLicense info -->
 
