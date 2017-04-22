@@ -26,12 +26,13 @@
       <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
           <label>Expiry / Due Date</label>
-          <md-datepicker ng-model="providerMore.moreinfo.license.expiryDate" md-placeholder="Enter date"></md-datepicker>
+          <md-datepicker ng-model="providerMore.moreinfo.license.licenseDate" md-placeholder="Enter date"></md-datepicker>
         </md-input-container>
         <div flex layout='row' layout-padding layout-align="start center" style="height: 30px;">
           <div>Track Expiry / Due Date</div>
-          <md-radio-group ng-model="providerMore.moreinfo.license.isDue" ng-readonly="userDetailsObj.viewmode">
-            <md-radio-button ng-value="true">Yes</md-radio-button>
+          <md-radio-group ng-model="providerMore.moreinfo.license.isDue" ng-readonly="userDetailsObj.viewmode"  style="display: inline-flex;
+    margin-top: 15px;">
+            <md-radio-button ng-value="true" style="margin-right: 10px;">Yes</md-radio-button>
             <md-radio-button ng-value="false">No</md-radio-button>
           </md-radio-group>
         </div>
@@ -95,8 +96,9 @@
       </md-input-container>
       <div flex layout='row' layout-padding layout-align="start center" style="height: 30px;">
         <div>Track Expiry / Due Date</div>
-        <md-radio-group ng-model="providerMore.fileuploadObject.trackExpiry" ng-readonly="userDetailsObj.viewmode">
-          <md-radio-button ng-value="true">Yes</md-radio-button>
+        <md-radio-group ng-model="providerMore.fileuploadObject.trackExpiry" ng-readonly="userDetailsObj.viewmode" style="display: inline-flex;
+    margin-top: 15px;">
+          <md-radio-button ng-value="true" style="margin-right: 15px">Yes</md-radio-button>
           <md-radio-button ng-value="false">No</md-radio-button>
         </md-radio-group>
       </div>
@@ -112,20 +114,6 @@
   <p ng-show="!providerMore.providerViewMode">
     <md-button class="md-raised md-cornered" ng-click="providerMore.showAttachmentCreate()">Add New</md-button>
   </p>
-  <table class="table" ng-show="personalDetailsObj.document.length>0">
-    <tr>
-      <td>Id</td>
-      <td>Date Created</td>
-      <td>Description</td>
-      <td>Action</td>
-    </tr>
-    <tr ng-repeat="doc in personalDetailsObj.document">
-      <td ng-bind="doc.documentId"></td>
-      <td ng-bind="doc.createdOn | date : format : timezone"></td>
-      <td ng-bind="doc.description"></td>
-      <td><a target="_blank" ng-href="{{doc.documentUrl}}">View</a></td>
-    </tr>
-  </table>
 	<table class="table">
     <tr>
       <td>Id</td>
@@ -133,7 +121,7 @@
       <td>Description</td>
       <td>Action</td>
     </tr>
-    <tr ng-repeat="doc in providerMore.providerMore.moreinfo.license.licenseDocuments">
+    <tr ng-repeat="doc in providerMore.moreinfo.license.licenseDocuments">
       <td ng-bind="doc.documentId"></td>
       <td ng-bind="doc.createdOn | date : format : timezone"></td>
       <td ng-bind="doc.description"></td>

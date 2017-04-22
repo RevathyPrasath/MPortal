@@ -91,6 +91,7 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
 
   vm.init = function() {
     vm.moreinfo = JSON.parse(localStorage.getItem("providerMoreInfo"));
+    vm.moreinfo.license['licenseDate'] = new Date(vm.moreinfo.license.expiryDate);
     vm.providerViewMode = true;
     vm.attachmentCreateViewmode = false;
     vm.getStates();
