@@ -176,7 +176,10 @@
   <p ng-show="!providerMore.providerViewMode">
     <md-button class="md-raised md-cornered" ng-click="providerMore.showAttachmentCreate()">Add New</md-button>
   </p>
-	<table class="table">
+  <h4 ng-show="providerMore.moreinfo.license.licenseDocuments.length==0 && providerMore.providerViewMode">
+    No Documents Available
+  </h4>
+	<table class="table" ng-show="providerMore.moreinfo.license.licenseDocuments.length>0">
     <tr>
       <td>Id</td>
       <td>Date Created</td>

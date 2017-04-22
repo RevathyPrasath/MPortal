@@ -1,4 +1,4 @@
-angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, $location, healthCareBusinessConstants, ApiService) {
+angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, $location, healthCareBusinessConstants, ApiService, $http) {
 	var vm = this;
 	var showLicence = localStorage.getItem("licenseType");
 
@@ -10,7 +10,6 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
   // final call back method called no matter success or failure
   var finalCallBack = function(res) {
     console.log('finalCallBack', res);
-    //$rootScope.loading = false;
   };
 
   if(showLicence == 'MEDICAL') {
@@ -27,12 +26,16 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
 
   var savePersonalSuccessCallback = function() {
     console.log("personal saved successfully");
-    $location.path('personal');
+    $location.path('personnalDetails');
   };
 
   vm.savePersonal = function() {
-    vm.personalDetailsObj.dateOfBirth = (vm.personalDetailsObj.dateOfBirth) ? vm.personalDetailsObj.dateOfBirth.getTime() : 0;
-    ApiService.post(healthCareBusinessConstants.PERSONAL, vm.personalDetailsObj).then(savePersonalSuccessCallback, errorCallback).finally(finalCallBack);
+    vm.moreinfo.license.licenseDate = (vm.moreinfo.license.licenseDate) ? vm.moreinfo.license.licenseDate.getTime() : 0;
+    ApiService.post(healthCareBusinessConstants.CREATE_LICENSE, vm.moreinfo).then(savePersonalSuccessCallback, errorCallback).finally(finalCallBack);
+  };
+
+  vm.hideAttachmentCreate = function() {
+    vm.attachmentCreateViewmode = false;
   };
 
   var fd = new FormData();
@@ -55,8 +58,7 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
       })
       .then(function(res) {
         vm.hideAttachmentCreate();
-        vm.personalDetailsObj.document.push(res.data);
-        //vm.locationsDetailsObj['documents'].push(res.data)
+        vm.moreinfo.license.licenseDocuments.push(res.data);
       }, function(res) {
         alert('document upload fail!');
       });
@@ -71,7 +73,6 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
     vm.showmedicalLicense = false;
     vm.showdealLicense = false;
     vm.showmalpracticeLicense = false;
-    
     if(showLicence == 'MEDICAL') {
       vm.EditMedicalLicense = true;
     } else if (showLicence == 'DEA_LICENSE') {
@@ -81,18 +82,24 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
     };
   };
 
-    var getStatesSb = function(res) {
-      vm.states = res.data;
-    };
+  var getStatesSb = function(res) {
+    vm.states = res.data;
+  };
 
-    vm.getStates = function() {
-      ApiService.get(healthCareBusinessConstants.GET_STATES_LIST).then(getStatesSb, errorCallback).finally(finalCallBack);
-    };
+  vm.getStates = function() {
+    ApiService.get(healthCareBusinessConstants.GET_STATES_LIST).then(getStatesSb, errorCallback).finally(finalCallBack);
+  };
 
   vm.init = function() {
     vm.moreinfo = JSON.parse(localStorage.getItem("providerMoreInfo"));
-    vm.moreinfo.license['licenseDate'] = new Date(vm.moreinfo.license.expiryDate);
-    vm.providerViewMode = true;
+    if (Object.keys(vm.moreinfo).length) {
+      vm.providerViewMode = true;
+      vm.moreinfo.license['licenseDate'] = new Date(vm.moreinfo.license.expiryDate);
+      } else {
+        vm.editBtnClick();
+        vm.moreinfo = { "licenseTypeId": null, "objectValue": "", "provider": null, "license": { "licenseId": null, "state": "", "licenseNo": "", "expiryDate": null, "isDue": null, "notes": "", "carrier": null, "address": null, "policyNumber": null, "objectName": null, "pageNumber": null, "total": null, "size": null, "licenseDocuments": [] }, "createdOn": null, "createdBy": "SYSTEM", "updatedOn": null, "updatedBy": null };
+        // vm.moreinfo['document'] = [];
+      }
     vm.attachmentCreateViewmode = false;
     vm.getStates();
   };
