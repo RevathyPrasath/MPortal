@@ -1,6 +1,17 @@
-angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, $location) {
+angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, $location, healthCareBusinessConstants, ApiService) {
 	var vm = this;
 	var showLicence = localStorage.getItem("licenseType");
+
+  var errorCallback = function(error) {
+    vm.errorMsg = error.data.message;
+    console.log("login response::", error);
+  };
+
+  // final call back method called no matter success or failure
+  var finalCallBack = function(res) {
+    console.log('finalCallBack', res);
+    //$rootScope.loading = false;
+  };
 
   if(showLicence == 'MEDICAL') {
     vm.showmedicalLicense = true;
@@ -70,10 +81,19 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
     };
   };
 
+    var getStatesSb = function(res) {
+      vm.states = res.data;
+    };
+
+    vm.getStates = function() {
+      ApiService.get(healthCareBusinessConstants.GET_STATES_LIST).then(getStatesSb, errorCallback).finally(finalCallBack);
+    };
+
   vm.init = function() {
     vm.moreinfo = JSON.parse(localStorage.getItem("providerMoreInfo"));
     vm.providerViewMode = true;
     vm.attachmentCreateViewmode = false;
+    vm.getStates();
   };
 
   vm.init();
