@@ -24,14 +24,30 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
   	vm.attachmentCreateViewmode = true;
   };
 
-  var savePersonalSuccessCallback = function() {
+  var savePersonalSuccessCallback = function(res) {
+    localStorage.setItem("providerResObj", JSON.stringify(res.data));
     console.log("personal saved successfully");
     $location.path('personnalDetails');
   };
 
   vm.savePersonal = function() {
-    vm.moreinfo.license.licenseDate = (vm.moreinfo.license.licenseDate) ? vm.moreinfo.license.licenseDate.getTime() : 0;
-    ApiService.post(healthCareBusinessConstants.CREATE_LICENSE, vm.moreinfo).then(savePersonalSuccessCallback, errorCallback).finally(finalCallBack);
+   var providerSaveObj = {
+      "licenseId": vm.moreinfo.license.licenseId,
+      "state": vm.moreinfo.license.state,
+      "licenseNo": vm.moreinfo.license.licenseNo,
+      "expiryDate": (vm.moreinfo.license.licenseDate) ? vm.moreinfo.license.licenseDate.getTime() : 0,
+      "isDue": vm.moreinfo.license.isDue,
+      "notes": vm.moreinfo.license.notes,
+      "policyNumber": vm.moreinfo.license.policyNumber,
+      "objectName": vm.moreinfo.license.objectName || vm.objectName,
+      "carrier": vm.moreinfo.license.carrier,
+      "address": vm.moreinfo.license.address,
+      "pageNumber": 0,
+      "total": 0,
+      "size": 0,
+      "licenseDocuments": vm.moreinfo.license.licenseDocuments
+    }
+    ApiService.post(healthCareBusinessConstants.CREATE_LICENSE, providerSaveObj).then(savePersonalSuccessCallback, errorCallback).finally(finalCallBack);
   };
 
   vm.hideAttachmentCreate = function() {
@@ -75,10 +91,13 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
     vm.showmalpracticeLicense = false;
     if(showLicence == 'MEDICAL') {
       vm.EditMedicalLicense = true;
+      vm.objectName = 'MEDICAL';
     } else if (showLicence == 'DEA_LICENSE') {
       vm.EditDealLicense = true;
+      vm.objectName = 'DEA_LICENSE';
     } else if (showLicence == 'MALPRACTICE_INSURANCE') {
       vm.EditMalpracticeLicense = true;
+      vm.objectName = 'MALPRACTICE_INSURANCE';
     };
   };
 

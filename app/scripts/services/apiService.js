@@ -8,6 +8,9 @@ angular.module('healthCareApp').factory('ApiService', function($http) {
     },
     get: function (url, headers) {
     	return $http.get(url);
+    },
+    put: function (url, data, headers) {
+      return $http.put(url, data, {'Content-Type': 'multipart/form-data'});
     }
   }
 });

@@ -71,7 +71,11 @@ angular.module('healthCareApp')
 
     vm.savePersonal = function() {
       vm.personalDetailsObj.dateOfBirth = (vm.personalDetailsObj.dateOfBirth) ? vm.personalDetailsObj.dateOfBirth.getTime() : 0;
-      ApiService.post(healthCareBusinessConstants.PERSONAL, vm.personalDetailsObj).then(savePersonalSuccessCallback, errorCallback).finally(finalCallBack);
+      if(!vm.viewmode) {
+        ApiService.put(healthCareBusinessConstants.PERSONAL, vm.personalDetailsObj).then(savePersonalSuccessCallback, errorCallback).finally(finalCallBack);
+      } else {
+        ApiService.post(healthCareBusinessConstants.PERSONAL, vm.personalDetailsObj).then(savePersonalSuccessCallback, errorCallback).finally(finalCallBack);
+      }
     };
 
     var fd = new FormData();
@@ -94,7 +98,7 @@ angular.module('healthCareApp')
         })
         .then(function(res) {
           vm.hideAttachmentCreate();
-          vm.personalDetailsObj.document.push(res.data);
+          vm.personalDetailsObj['document'].push(res.data);
           //vm.locationsDetailsObj['documents'].push(res.data)
         }, function(res) {
           alert('document upload fail!');
@@ -128,42 +132,6 @@ angular.module('healthCareApp')
       $location.path("providermore");
     };
 
-    // $scope.showAdvanced = function(ev, data, licenceName, licenseHeading) {
-    //   $mdDialog.show({
-    //     controller: DialogController,
-    //     templateUrl: '../../views/personalInfo.html',
-    //     parent: angular.element(document.body),
-    //     targetEvent: ev,
-    //     clickOutsideToClose:true,
-    //     locals: {
-    //       items: data,
-    //       showLicence: licenceName,
-    //       licenseHeading: licenseHeading
-    //     },
-    //     fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-    //   })
-    //   .then(function(answer) {
-    //     $scope.status = 'You said the information was "' + answer + '".';
-    //   }, function() {
-    //     $scope.status = 'You cancelled the dialog.';
-    //   });
-    // };
-
-    // function DialogController($scope, $mdDialog, items, showLicence, licenseHeading) {
-    //   $scope.moreinfo = items;
-    //   $scope.licenseHeading = licenseHeading;
-    //   if(showLicence == 'MEDICAL') {
-    //     $scope.showmedicalLicense = true;
-    //   } else if (showLicence == 'DEA_LICENSE') {
-    //     $scope.showdealLicense = true;
-    //   } else if (showLicence == 'MALPRACTICE_INSURANCE') {
-    //     $scope.showmalpracticeLicense = true;
-    //   };
-    //   $scope.cancel = function() {
-    //     $mdDialog.cancel();
-    //   };
-    // }
-
     vm.init = function() {
       vm.personalDetailsObj = angular.fromJson(localStorage.getItem('personnalDetails'));
       if (Object.keys(vm.personalDetailsObj).length) {
@@ -182,7 +150,7 @@ angular.module('healthCareApp')
       //temp 
       vm.taxonomies = [{id:1, name:'2086S0129X'}];
       vm.credentials = [{id:1, name:'MD'}, {id:2, name:'DR'}];
-      vm.personalDetailsObj.provider.licenseType
+      //vm.personalDetailsObj.provider.licenseType
       vm.provider = {
         licenseType: {
           medicalLicence:[],
@@ -190,6 +158,18 @@ angular.module('healthCareApp')
           malpracticeInsurance:[]
         }
       };
+      var providerresponseObj = angular.fromJson(localStorage.getItem('providerResObj'));
+      //console.log(vm.providerresponseObj);
+      //providerresponseObj['objectName'];
+ 
+      if(providerresponseObj) {
+        var temp = {
+          license: providerresponseObj,
+          licenseTypeId: null,
+          objectValue: providerresponseObj['objectName']
+        };
+        vm.personalDetailsObj.provider.licenseType.push(temp);  
+      }
       for (var i = 0; i < vm.personalDetailsObj.provider.licenseType.length; i++) {
         if(vm.personalDetailsObj.provider.licenseType[i].objectValue.toUpperCase() === "MEDICAL") {
           vm.provider.licenseType.medicalLicence.push(vm.personalDetailsObj.provider.licenseType[i]);
