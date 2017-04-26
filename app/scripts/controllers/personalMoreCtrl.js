@@ -42,10 +42,10 @@ angular.module('healthCareApp')
       vm.attachmentCreateViewmode = false;
     };
 
-    vm.createAttachment = function() {
-      // make an api for adding the new attachment
-      vm.hideAttachmentCreate();
-    };
+    // vm.createAttachment = function() {
+    //   // make an api for adding the new attachment
+    //   vm.hideAttachmentCreate();
+    // };
 
     var getLocationsSb = function(res) {
       vm.locations = res.data;
@@ -98,7 +98,14 @@ angular.module('healthCareApp')
         })
         .then(function(res) {
           vm.hideAttachmentCreate();
-          vm.personalDetailsObj['document'].push(res.data);
+          debugger;
+          if(vm.personalDetailsObj['document'] && vm.personalDetailsObj['document'].length) {
+            vm.personalDetailsObj['document'].push(res.data);
+          } else {
+            vm.personalDetailsObj['document'] = [];
+            vm.personalDetailsObj['document'].push(res.data);
+          }
+          
           //vm.locationsDetailsObj['documents'].push(res.data)
         }, function(res) {
           alert('document upload fail!');
@@ -127,9 +134,14 @@ angular.module('healthCareApp')
     };
 
     vm.providerMore = function (items, type) {
-      localStorage.setItem("providerMoreInfo", JSON.stringify(items));
-      localStorage.setItem("licenseType", type)
-      $location.path("providermore");
+      if(!vm.viewmode) {
+        localStorage.setItem("providerMoreInfo", JSON.stringify(items));
+        localStorage.setItem("licenseType", type)
+        $location.path("providermore");
+      } else {
+        return;
+      }
+      
     };
 
     vm.init = function() {
