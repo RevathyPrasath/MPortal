@@ -98,7 +98,6 @@ angular.module('healthCareApp')
         })
         .then(function(res) {
           vm.hideAttachmentCreate();
-          debugger;
           if(vm.personalDetailsObj['document'] && vm.personalDetailsObj['document'].length) {
             vm.personalDetailsObj['document'].push(res.data);
           } else {

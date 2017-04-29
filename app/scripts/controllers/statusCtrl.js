@@ -8,40 +8,51 @@
  * Controller of the healthCareApp
  */
 angular.module('healthCareApp')
-    .controller('StatusCtrl', function($rootScope, ApiService, healthCareBusinessConstants) {
-        var vm = this;
-        vm.expaire = function(value) {
-            $rootScope.loading = true;
-            if (value == 'Staff') {
-                ApiService.post(healthCareBusinessConstants.STAFF, {}).then(successCallback, errorCallback).finally(finalCallBack);
-            } else {
-                ApiService.post(healthCareBusinessConstants.FACILITY, {}).then(successCallback, errorCallback).finally(finalCallBack);
-            }
-        };
+    .controller('StatusCtrl', function($rootScope, ApiService, healthCareBusinessConstants, $location) {
+    var vm = this;
+    vm.expaire = function(value) {
+      $rootScope.loading = true;
+      if (value == 'Staff') {
+        ApiService.post(healthCareBusinessConstants.STAFF, {}).then(successCallback, errorCallback).finally(finalCallBack);
+      } else {
+        ApiService.post(healthCareBusinessConstants.FACILITY, {}).then(successCallback, errorCallback).finally(finalCallBack);
+      }
+    };
 
-        // success Call back method
-        function successCallback(response) {
-            console.log(response);
-            vm.expaireData = response.data;
-        };
+    // success Call back method
+    function successCallback(response) {
+        console.log(response);
+        vm.personalData = response.data;
+    };
 
-        // error call back method.
-        function errorCallback(error) {
-            vm.errorMsg = error.data.message;
-            console.log("login response::", error);
-        };
+    // error call back method.
+    function errorCallback(error) {
+        vm.errorMsg = error.data.message;
+        console.log("login response::", error);
+    };
 
-        // final call back method called no matter success or failure
-        function finalCallBack(res) {
-            console.log('finalCallBack', res);
-            $rootScope.loading = false;
-        };
-        vm.statusSelected = function(selectedTab) {
-            vm.selected = selectedTab;
-        }
-        vm.isActive = function(selectedTab) {
-            console.log(selectedTab);
-            return vm.selected == selectedTab
-        }
-        vm.expaire('Staff');
-    });
+    // final call back method called no matter success or failure
+    function finalCallBack(res) {
+        console.log('finalCallBack', res);
+        $rootScope.loading = false;
+    };
+    vm.statusSelected = function(selectedTab) {
+        vm.selected = selectedTab;
+    }
+    vm.isActive = function(selectedTab) {
+        console.log(selectedTab);
+        return vm.selected == selectedTab
+    }
+    vm.expaire('Staff');
+
+    vm.providerMore = function (items, type) {
+      localStorage.setItem("providerMoreInfo", JSON.stringify(items));
+      localStorage.setItem("licenseType", type)
+      $location.path("providermore");
+    };
+
+    vm.init =  function(){
+      ApiService.get(healthCareBusinessConstants.PERSONAL_STATUS).then(successCallback, errorCallback).finally(finalCallBack); 
+    };
+    vm.init();
+});

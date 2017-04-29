@@ -83,12 +83,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="obj in status.dashboardData">
-                <td ng-bind="obj.name"></td>
-                <td ng-bind="obj.event"></td>
-                <td ng-bind="obj.duedate"></td>
-                <td>{{obj.status && 'Active' || 'InActive'}}</td>
-                <td ng-click="status.userDetailsView(user)"><strong><a>More</a></strong></td>
+              <tr ng-repeat="obj in status.personalData">
+                <td ng-bind="obj.entityName"></td>
+                <td ng-bind="obj.objectName"></td>
+                <td>{{obj.expiryDate  | date:'medium'}}</td>
+                <td>{{obj.status}}</td>
+                <td ng-click="status.providerMore(obj, obj.objectName)"><strong><a>More</a></strong></td>
               </tr>
             </tbody>
           </table>
