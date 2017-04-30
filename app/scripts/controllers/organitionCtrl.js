@@ -8,7 +8,7 @@
  * Controller of the healthCareApp
  */
 angular.module('healthCareApp')
-  .controller('OrganitionCtrl', function($scope, $http, $location, healthCareBusinessConstants, ApiService, $rootScope) {
+  .controller('OrganitionCtrl', function($scope, $interval, $http, $location, healthCareBusinessConstants, ApiService, $rootScope) {
     var vm = this;
     // error call back method.
     var errorCallback = function(error) {
@@ -19,7 +19,7 @@ angular.module('healthCareApp')
     // final call back method called no matter success or failure
     var finalCallBack = function(res) {
       console.log('finalCallBack', res);
-      $rootScope.loading = false;
+      $scope.showLoader = false;
     };
 
     // success Call back method
@@ -80,6 +80,7 @@ angular.module('healthCareApp')
 
     vm.fileuploadObject = {};
     vm.createAttachment = function() {
+      $scope.showLoader = true;
       var url = healthCareBusinessConstants.SAVE_DOC;
       fd.append('description', vm.fileuploadObject.shortdescription);
       fd.append('notes', vm.fileuploadObject.notes);
@@ -93,9 +94,11 @@ angular.module('healthCareApp')
         })
         .then(function(res) {
           vm.hideAttachmentCreate();
-          vm.companyDetailsObj['documents'].push(res.data)
+          vm.companyDetailsObj['documents'].push(res.data);
+           $scope.showLoader = false;
         }, function(res) {
           alert('document upload fail!');
+           $scope.showLoader = false;
         });
     };
     var getStatesSb = function(res) {
@@ -107,7 +110,8 @@ angular.module('healthCareApp')
     };
 
     var getCompaniesSb = function(res) {
-      //vm.companyDetailsObj = res.data[0];
+      vm.companyDetailsObj = res.data[0];
+      vm.companyDetailsObj.dateOfIncorporation = new Date(vm.companyDetailsObj.dateOfIncorporation);
     };
 
     vm.getCompanies = function(pagenumber) {
@@ -119,6 +123,11 @@ angular.module('healthCareApp')
       $location.path('locationsMore');
     };
 
+     vm.providerMore = function (items, type) {
+      localStorage.setItem("providerMoreInfo", JSON.stringify(items));
+      localStorage.setItem("licenseType", type)
+      $location.path("providermore");
+    };
 
     // vm.organitionCompanyDetailsView = function(obj) {
     //   localStorage.setItem('companyDetails', angular.toJson(obj));
@@ -130,6 +139,7 @@ angular.module('healthCareApp')
     };
 
     vm.saveBtnClick = function() {
+       $scope.showLoader = true;
       ApiService.post(healthCareBusinessConstants.GET_COMPANIES, vm.companyDetailsObj).then(saveUserSuccessCallback, errorCallback).finally(finalCallBack);
     };
 
@@ -140,7 +150,49 @@ angular.module('healthCareApp')
       });
     };
 
+
+    $interval(function() {
+      vm.determinateValue += 1;
+      if (vm.determinateValue > 100) {
+        vm.determinateValue = 20;
+      }
+    }, 100);
+
     vm.init = function() {
+
+
+
+       vm.provider = {
+        licenseType: {
+          medicalLicence:[],
+          dealLicence: [],
+          malpracticeInsurance:[]
+        }
+      };
+      var providerresponseObj = angular.fromJson(localStorage.getItem('providerResObj'));
+      //console.log(vm.providerresponseObj);
+      //providerresponseObj['objectName'];
+ 
+      if(providerresponseObj) {
+        var temp = {
+          license: providerresponseObj,
+          licenseTypeId: null,
+          objectValue: providerresponseObj['objectName']
+        };
+        vm.personalDetailsObj.provider.licenseType.push(temp);  
+      }
+      for (var i = 0; i < vm.personalDetailsObj.provider.licenseType.length; i++) {
+        if(vm.personalDetailsObj.provider.licenseType[i].objectValue.toUpperCase() === "MEDICAL") {
+          vm.provider.licenseType.medicalLicence.push(vm.personalDetailsObj.provider.licenseType[i]);
+        } else if(vm.personalDetailsObj.provider.licenseType[i].objectValue.toUpperCase() == "DEA_LICENSE") {
+          vm.provider.licenseType.dealLicence.push(vm.personalDetailsObj.provider.licenseType[i]);
+        } else if(vm.personalDetailsObj.provider.licenseType[i].objectValue.toUpperCase() == "MALPRACTICE_INSURANCE") {
+          vm.provider.licenseType.malpracticeInsurance.push(vm.personalDetailsObj.provider.licenseType[i]);
+        }
+      }
+
+      vm.activated = true;
+      vm.determinateValue = 20;
       vm.pageNo = 0;
       vm.getLocations(0);
       vm.getCompanies(0);
@@ -154,7 +206,7 @@ angular.module('healthCareApp')
           "identifierNumber": ""
         }]
       };
-      vm.entityTypes = [{ name: 'S corporation' }, { name: 'C corporation' }];
+      vm.entityTypes = [{ id:"SCorporation", name: 'S corporation' }, {id:'CCorporation', name: 'C corporation' }];
     };
 
     vm.init();

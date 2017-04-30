@@ -140,7 +140,6 @@ angular.module('healthCareApp')
       } else {
         return;
       }
-      
     };
 
     vm.init = function() {

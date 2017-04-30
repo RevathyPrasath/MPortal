@@ -1,4 +1,7 @@
 <div ng-cloak class="admin-view">
+  <div class="loader-parent" ng-if="showLoader">
+    <md-progress-circular class="main-loader" md-mode="determinate" value="{{organition.determinateValue}}"></md-progress-circular>
+  </div>
   <md-content>
     <md-tabs md-dynamic-height md-border-bottom>
       <md-tab label="Locations">
@@ -97,7 +100,7 @@
                     <md-input-container class="md-block" flex-gt-sm>
                       <label>Entity Type</label>
                       <md-select ng-model="organition.companyDetailsObj.entityType" ng-readonly="organition.viewmode">
-                        <md-option ng-repeat="entity in organition.entityTypes" ng-value="entity.name">
+                        <md-option ng-repeat="entity in organition.entityTypes" ng-value="entity.id">
                           {{entity.name}}
                         </md-option>
                       </md-select>
@@ -182,26 +185,55 @@
                     </md-button>
                   </div>
                   <h5 style="border-bottom: 2px dotted #ccc; color: #4CAF50; margin-bottom: 15px;">BUSINESS REQUIREMENT</h5>
-                  <div layout-gt-sm="row">
-                    <md-input-container class="md-block" flex-gt-sm>
-                      <label>Phone</label>
-                      <input ng-model="organition.companyDetailsObj.addressId.phone" ng-readonly="organition.viewmode">
-                    </md-input-container>
-                    <md-input-container class="md-block" flex-gt-sm>
-                      <label>Fax</label>
-                      <input ng-model="organition.companyDetailsObj.addressId.fax" ng-readonly="organition.viewmode">
-                    </md-input-container>
-                  </div>
-                  <div layout-gt-sm="row">
-                    <md-input-container class="md-block" flex-gt-sm>
-                      <label>Phone</label>
-                      <input ng-model="organition.companyDetailsObj.addressId.phone" ng-readonly="organition.viewmode">
-                    </md-input-container>
-                    <md-input-container class="md-block" flex-gt-sm>
-                      <label>Fax</label>
-                      <input ng-model="organition.companyDetailsObj.addressId.fax" ng-readonly="organition.viewmode">
-                    </md-input-container>
-                  </div>
+
+                  <table class="table personal-licencies">
+                    <thead>
+                      <tr>
+                        <th colspan="3" class="background-none"><h5><b>Medical License</b></h5></th>
+                        <th class="text-right background-none"><a ng-click="organition.providerMore({}, 'MEDICAL')"  class="btn" ng-disabled="organition.viewmode">+ Add New</a></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="innerObj in organition.provider.licenseType.medicalLicence">
+                        <td>License# {{innerObj.license.licenseNo}}</td>
+                        <td>State: {{innerObj.license.state}}</td>
+                        <td class="text-center">Expairy Date: {{innerObj.license.expiryDate  | date:'medium'}}</td>
+                        <td class="text-right"><a ng-click="organition.providerMore(innerObj, 'MEDICAL')" class="btn" ng-disabled="organition.viewmode">More</a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table class="table personal-licencies">
+                    <thead>
+                      <tr>
+                        <th colspan="3" class="background-none"><h5><b>DEA License</b></h5></th>
+                        <th class="text-right background-none"><a ng-click="organition.providerMore( {}, 'DEA_LICENSE')" class="btn" ng-disabled="organition.viewmode">+ Add New</a></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="innerObj in organition.provider.licenseType.dealLicence">
+                        <td>License# {{innerObj.license.licenseNo}}</td>
+                        <td>Address: {{innerObj.license.address}}</td>
+                        <td class="text-center">Expairy Date: {{innerObj.license.expiryDate  | date:'medium'}}</td>
+                        <td class="text-right"><a ng-click="organition.providerMore( innerObj, 'DEA_LICENSE')" class="btn" ng-disabled="organition.viewmode">More</a></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <table class="table personal-licencies">
+                    <thead>
+                      <tr>
+                        <th colspan="3" class="background-none"><h5><b>Malpractice Insurance</b></h5></th>
+                        <th class="text-right background-none"><a ng-click="organition.providerMore({}, 'MALPRACTICE_INSURANCE')" class="btn" ng-disabled="organition.viewmode">+ Add New</a></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr ng-repeat="innerObj in organition.provider.licenseType.malpracticeInsurance">
+                        <td>License# {{innerObj.license.policyNumber}}</td>
+                        <td>Carrier: {{innerObj.license.carrier}}</td>
+                        <td class="text-center">Expairy Date: {{innerObj.license.expiryDate  | date:'medium'}}</td>
+                        <td class="text-right"><a ng-click="organition.providerMore(innerObj, 'MALPRACTICE_INSURANCE')" class="btn" ng-disabled="organition.viewmode">More</a></td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </form>
                 <div>
                   <h5 style="border-bottom: 2px dotted #ccc; color: #4CAF50;margin-bottom: 15px;">ATTACHMENTS/REMAINDERS</h5>
