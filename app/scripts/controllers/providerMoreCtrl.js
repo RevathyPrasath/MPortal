@@ -1,7 +1,7 @@
 angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, $location, healthCareBusinessConstants, ApiService, $http) {
 	var vm = this;
 	var showLicence = localStorage.getItem("licenseType");
-
+debugger;
   var errorCallback = function(error) {
     vm.errorMsg = error.data.message;
     console.log("login response::", error);
@@ -11,14 +11,16 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
   var finalCallBack = function(res) {
     console.log('finalCallBack', res);
   };
-
   if(showLicence == 'MEDICAL') {
     vm.showmedicalLicense = true;
   } else if (showLicence == 'DEA_LICENSE') {
     vm.showdealLicense = true;
   } else if (showLicence == 'MALPRACTICE_INSURANCE') {
     vm.showmalpracticeLicense = true;
-  };
+  } else if(showLicence == 'INSURANCE'){
+    vm.showmalpracticeLicense = true;
+    vm.objectName = 'INSURANCE';
+  }
 
   vm.showAttachmentCreate = function() {
   	vm.attachmentCreateViewmode = true;
@@ -27,7 +29,7 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
   var savePersonalSuccessCallback = function(res) {
     localStorage.setItem("providerResObj", JSON.stringify(res.data));
     console.log("personal saved successfully");
-    $location.path('personnalDetails');
+    $location.path(localStorage.getItem("frompage"));
   };
 
   vm.savePersonal = function() {
@@ -81,7 +83,12 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
   };
 
   vm.cancelBtnclick = function() {
-    $location.path("personnalDetails");
+    $location.path(localStorage.getItem("frompage"));
+    // if(localStorage.getItem("frompage") == 'company'){
+    //   $location.path("organition");
+    // } else{
+    //   $location.path("personnalDetails");
+    // }
   };
 
   vm.editBtnClick = function() {
@@ -98,6 +105,9 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
     } else if (showLicence == 'MALPRACTICE_INSURANCE') {
       vm.EditMalpracticeLicense = true;
       vm.objectName = 'MALPRACTICE_INSURANCE';
+    } else if(showLicence == 'INSURANCE') {
+      vm.EditMalpracticeLicense = true;
+      vm.objectName = 'INSURANCE';
     };
   };
 
@@ -111,9 +121,15 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
 
   vm.init = function() {
     vm.moreinfo = JSON.parse(localStorage.getItem("providerMoreInfo"));
-    if (Object.keys(vm.moreinfo).length) {
+    if (Object.keys(vm.moreinfo).length && Object.keys(vm.moreinfo.license).length ) {
       vm.providerViewMode = true;
       vm.moreinfo.license['licenseDate'] = new Date(vm.moreinfo.license.expiryDate);
+      // if(vm.moreinfo.license) {
+      //   vm.moreinfo.license['licenseDate'] = new Date(vm.moreinfo.license.expiryDate);
+      //   } else {
+      //     vm.moreinfo['license'] = vm.moreinfo;
+      //     vm.moreinfo.license['licenseDate'] = new Date(vm.moreinfo.license.expiryDate);
+      //   }
       } else {
         vm.editBtnClick();
         vm.moreinfo = { "licenseTypeId": null, "objectValue": "", "provider": null, "license": { "licenseId": null, "state": "", "licenseNo": "", "expiryDate": null, "isDue": null, "notes": "", "carrier": null, "address": null, "policyNumber": null, "objectName": null, "pageNumber": null, "total": null, "size": null, "licenseDocuments": [] }, "createdOn": null, "createdBy": "SYSTEM", "updatedOn": null, "updatedBy": null };

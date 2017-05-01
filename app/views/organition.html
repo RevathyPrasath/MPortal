@@ -4,80 +4,6 @@
   </div>
   <md-content>
     <md-tabs md-dynamic-height md-border-bottom>
-      <md-tab label="Locations">
-        <md-content class="md-padding">
-          <table class="table table-bordered table-stripped users-table">
-            <thead>
-              <tr class="heading">
-                <td colspan="7">
-                  <div class="col-sm-12 padding0">
-                    <div class="col-sm-1 padding0 total-items"><span>
-                    {{organition.locations[0].total}}</span> items</div>
-                    <div class="col-sm-8 padding0">
-                      <div class="col-sm-4 serch-section">
-                        <input type="serch" placeholder="Search City" class="serch-box" ng-enter="organition.searchEmployee()" ng-model="organition.city">
-                        <span class="glyphicon glyphicon-search" ng-click="organition.searchEmployee()"></span>
-                      </div>
-                      <div class="col-sm-4 serch-section">
-                        <input type="serch" placeholder="Search State" class="serch-box" ng-enter="organition.searchEmployee()" ng-model="organition.state">
-                        <span class="glyphicon glyphicon-search" ng-click="organition.searchEmployee()"></span>
-                      </div>
-                    </div>
-                    <div class="col-sm-3">
-                      <span class="text-status">Status:</span>
-                      <select class="status-dropdown" ng-model="organition.status" ng-change="organition.searchEmployee()">
-                        <option value="">All</option>
-                        <option class="text-status" value="true">Active</option>
-                        <option class="text-status" value="false">Inactive</option>
-                      </select>
-                      <span class="text-status add-item pull-right" ng-click="organition.addNew()"><span>+</span> Add New
-                      </span>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th ng-click="predict = 'locationName'; reverse = !reverse;">
-                  Location Name
-                  <span class="glyphicon pull-right {{(predict == 'locationName' && reverse == true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
-                </th>
-                <th ng-click="predict = 'addressId.street'; reverse = !reverse;">
-                  Street Address
-                  <span class="glyphicon pull-right {{(predict == 'addressId.street' && reverse == true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
-                </th>
-                <th ng-click="predict = 'addressId.city'; reverse = !reverse;">
-                  City
-                  <span class="glyphicon pull-right {{(predict == 'addressId.city' && reverse == true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
-                </th>
-                <th ng-click="predict = 'addressId.zip'; reverse = !reverse;">
-                  Zip
-                  <span class="glyphicon pull-right {{(predict == 'addressId.zip' && reverse == true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
-                </th>
-                <th ng-click="predict = 'addressId.state'; reverse = !reverse;">
-                  State
-                  <span class="glyphicon pull-right {{(predict == 'addressId.state' && reverse == true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
-                </th>
-                <th ng-click="predict = 'addressId.status'; reverse = !reverse;">
-                  State
-                  <span class="glyphicon pull-right {{(predict == 'addressId.status' && reverse == true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
-                </th>
-                <th>More</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="location in organition.locations | orderBy :predict :reverse">
-                <td ng-bind="location.locationName"></td>
-                <td ng-bind="location.addressId.street"></td>
-                <td ng-bind="location.addressId.city"></td>
-                <td ng-bind="location.addressId.zip"></td>
-                <td ng-bind="location.addressId.state"></td>
-                <td>{{location.status && 'Active' || 'InActive'}}</td>
-                <td ng-click="organition.organitionDetailsView(location)"><strong><a>More</a></strong></td>
-              </tr>
-            </tbody>
-          </table>
-        </md-content>
-      </md-tab>
       <md-tab label="Company">
         <md-content class="md-padding">
           <div layout="column" ng-cloak class="md-inline-form user-detail-view">
@@ -186,7 +112,7 @@
                   </div>
                   <h5 style="border-bottom: 2px dotted #ccc; color: #4CAF50; margin-bottom: 15px;">BUSINESS REQUIREMENT</h5>
 
-                  <table class="table personal-licencies">
+                 <!--  <table class="table personal-licencies">
                     <thead>
                       <tr>
                         <th colspan="3" class="background-none"><h5><b>Medical License</b></h5></th>
@@ -202,6 +128,7 @@
                       </tr>
                     </tbody>
                   </table>
+
                   <table class="table personal-licencies">
                     <thead>
                       <tr>
@@ -217,20 +144,21 @@
                         <td class="text-right"><a ng-click="organition.providerMore( innerObj, 'DEA_LICENSE')" class="btn" ng-disabled="organition.viewmode">More</a></td>
                       </tr>
                     </tbody>
-                  </table>
+                  </table> -->
+
                   <table class="table personal-licencies">
                     <thead>
                       <tr>
-                        <th colspan="3" class="background-none"><h5><b>Malpractice Insurance</b></h5></th>
-                        <th class="text-right background-none"><a ng-click="organition.providerMore({}, 'MALPRACTICE_INSURANCE')" class="btn" ng-disabled="organition.viewmode">+ Add New</a></th>
+                        <th colspan="3" class="background-none"><h5><b>Insurance</b></h5></th>
+                        <th class="text-right background-none"><a ng-click="organition.providerMore({}, 'INSURANCE')" class="btn" ng-disabled="organition.viewmode">+ Add New</a></th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="innerObj in organition.provider.licenseType.malpracticeInsurance">
-                        <td>License# {{innerObj.license.policyNumber}}</td>
+                      <tr ng-repeat="innerObj in organition.companyDetailsObj.licenseType">
+                        <td>policyNumber# {{innerObj.license.policyNumber}}</td>
                         <td>Carrier: {{innerObj.license.carrier}}</td>
                         <td class="text-center">Expairy Date: {{innerObj.license.expiryDate  | date:'medium'}}</td>
-                        <td class="text-right"><a ng-click="organition.providerMore(innerObj, 'MALPRACTICE_INSURANCE')" class="btn" ng-disabled="organition.viewmode">More</a></td>
+                        <td class="text-right"><a ng-click="organition.providerMore(innerObj, 'INSURANCE')" class="btn" ng-disabled="organition.viewmode">More</a></td>
                       </tr>
                     </tbody>
                   </table>
@@ -300,6 +228,80 @@
               </div>
             </md-content>
           </div>
+        </md-content>
+      </md-tab>
+      <md-tab label="Locations">
+        <md-content class="md-padding">
+          <table class="table table-bordered table-stripped users-table">
+            <thead>
+              <tr class="heading">
+                <td colspan="7">
+                  <div class="col-sm-12 padding0">
+                    <div class="col-sm-1 padding0 total-items"><span>
+                    {{organition.locations[0].total}}</span> items</div>
+                    <div class="col-sm-8 padding0">
+                      <div class="col-sm-4 serch-section">
+                        <input type="serch" placeholder="Search City" class="serch-box" ng-enter="organition.searchEmployee()" ng-model="organition.city">
+                        <span class="glyphicon glyphicon-search" ng-click="organition.searchEmployee()"></span>
+                      </div>
+                      <div class="col-sm-4 serch-section">
+                        <input type="serch" placeholder="Search State" class="serch-box" ng-enter="organition.searchEmployee()" ng-model="organition.state">
+                        <span class="glyphicon glyphicon-search" ng-click="organition.searchEmployee()"></span>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <span class="text-status">Status:</span>
+                      <select class="status-dropdown" ng-model="organition.status" ng-change="organition.searchEmployee()">
+                        <option value="">All</option>
+                        <option class="text-status" value="true">Active</option>
+                        <option class="text-status" value="false">Inactive</option>
+                      </select>
+                      <span class="text-status add-item pull-right" ng-click="organition.addNew()"><span>+</span> Add New
+                      </span>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th ng-click="predict = 'locationName'; reverse = !reverse;">
+                  Location Name
+                  <span class="glyphicon pull-right {{(predict == 'locationName' && reverse == true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
+                </th>
+                <th ng-click="predict = 'addressId.street'; reverse = !reverse;">
+                  Street Address
+                  <span class="glyphicon pull-right {{(predict == 'addressId.street' && reverse == true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
+                </th>
+                <th ng-click="predict = 'addressId.city'; reverse = !reverse;">
+                  City
+                  <span class="glyphicon pull-right {{(predict == 'addressId.city' && reverse == true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
+                </th>
+                <th ng-click="predict = 'addressId.zip'; reverse = !reverse;">
+                  Zip
+                  <span class="glyphicon pull-right {{(predict == 'addressId.zip' && reverse == true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
+                </th>
+                <th ng-click="predict = 'addressId.state'; reverse = !reverse;">
+                  State
+                  <span class="glyphicon pull-right {{(predict == 'addressId.state' && reverse == true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
+                </th>
+                <th ng-click="predict = 'addressId.status'; reverse = !reverse;">
+                  State
+                  <span class="glyphicon pull-right {{(predict == 'addressId.status' && reverse == true) && 'glyphicon-triangle-bottom' || 'glyphicon-triangle-top'}}"></span>
+                </th>
+                <th>More</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="location in organition.locations | orderBy :predict :reverse">
+                <td ng-bind="location.locationName"></td>
+                <td ng-bind="location.addressId.street"></td>
+                <td ng-bind="location.addressId.city"></td>
+                <td ng-bind="location.addressId.zip"></td>
+                <td ng-bind="location.addressId.state"></td>
+                <td>{{location.status && 'Active' || 'InActive'}}</td>
+                <td ng-click="organition.organitionDetailsView(location)"><strong><a>More</a></strong></td>
+              </tr>
+            </tbody>
+          </table>
         </md-content>
       </md-tab>
     </md-tabs>

@@ -27,6 +27,7 @@ angular.module('healthCareApp')
     };
 
     vm.navigate = function(name) {
+      localStorage.setItem("providerResObj", JSON.stringify(null));
       $location.path(name);
     };
     vm.logout = function() {

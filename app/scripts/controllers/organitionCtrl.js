@@ -111,7 +111,39 @@ angular.module('healthCareApp')
 
     var getCompaniesSb = function(res) {
       vm.companyDetailsObj = res.data[0];
-      vm.companyDetailsObj.dateOfIncorporation = new Date(vm.companyDetailsObj.dateOfIncorporation);
+        vm.companyDetailsObj.dateOfIncorporation = new Date(vm.companyDetailsObj.dateOfIncorporation);
+        var providerresponseObj = angular.fromJson(localStorage.getItem('providerResObj'));
+          // if(providerresponseObj) {
+          //   if(vm.companyDetailsObj && vm.companyDetailsObj.licenseType && vm.companyDetailsObj.licenseType.license) {
+          //     vm.companyDetailsObj.licenseType.license.push(providerresponseObj);
+          //   } else {
+          //     vm.companyDetailsObj['licenseType'] = [];
+          //     vm.companyDetailsObj['licenseType'].push(providerresponseObj);
+          //   }
+          // }
+          
+          if(providerresponseObj) {
+            var temp = {
+              license: providerresponseObj,
+              licenseTypeId: null,
+              objectValue: providerresponseObj['objectName']
+            };
+            vm.companyDetailsObj['licenseType'].push(temp);  
+          }
+
+      //vm.licenseType.malpracticeInsurance.push(vm.companyDetailsObj.licenseType[0]);
+      //licenseType
+      /*if(vm.companyDetailsObj && vm.companyDetailsObj.licenseType) {
+         for (var i = 0; i < vm.companyDetailsObj.licenseType.length; i++) {
+          if(vm.companyDetailsObj.licenseType[i].objectValue.toUpperCase() === "MEDICAL") {
+            vm.provider.licenseType.medicalLicence.push(vm.companyDetailsObj.licenseType[i]);
+          } else if(vm.companyDetailsObj.licenseType[i].objectValue.toUpperCase() == "DEA_LICENSE") {
+            vm.provider.licenseType.dealLicence.push(vm.companyDetailsObj.licenseType[i]);
+          } else if(vm.companyDetailsObj.licenseType[i].objectValue.toUpperCase() == "MALPRACTICE_INSURANCE") {
+            vm.provider.licenseType.malpracticeInsurance.push(vm.companyDetailsObj.licenseType[i]);
+          }
+        } 
+      };*/
     };
 
     vm.getCompanies = function(pagenumber) {
@@ -124,22 +156,26 @@ angular.module('healthCareApp')
     };
 
      vm.providerMore = function (items, type) {
-      localStorage.setItem("providerMoreInfo", JSON.stringify(items));
-      localStorage.setItem("licenseType", type)
+      var license = {
+        license:items
+      }
+      if(!vm.viewmode) {
+      localStorage.setItem("providerMoreInfo", JSON.stringify(license));
+      localStorage.setItem("licenseType", type);
+      localStorage.setItem("frompage", 'organition');
       $location.path("providermore");
+      } else {
+        return;
+      }
     };
 
-    // vm.organitionCompanyDetailsView = function(obj) {
-    //   localStorage.setItem('companyDetails', angular.toJson(obj));
-    //   $location.path('companyMore');
-    // };
-    //save button click
     var saveUserSuccessCallback = function() {
       vm.viewmode = true;
     };
 
     vm.saveBtnClick = function() {
-       $scope.showLoader = true;
+      $scope.showLoader = true;
+      debugger;
       ApiService.post(healthCareBusinessConstants.GET_COMPANIES, vm.companyDetailsObj).then(saveUserSuccessCallback, errorCallback).finally(finalCallBack);
     };
 
@@ -159,38 +195,6 @@ angular.module('healthCareApp')
     }, 100);
 
     vm.init = function() {
-
-
-
-       vm.provider = {
-        licenseType: {
-          medicalLicence:[],
-          dealLicence: [],
-          malpracticeInsurance:[]
-        }
-      };
-      var providerresponseObj = angular.fromJson(localStorage.getItem('providerResObj'));
-      //console.log(vm.providerresponseObj);
-      //providerresponseObj['objectName'];
- 
-      if(providerresponseObj) {
-        var temp = {
-          license: providerresponseObj,
-          licenseTypeId: null,
-          objectValue: providerresponseObj['objectName']
-        };
-        vm.personalDetailsObj.provider.licenseType.push(temp);  
-      }
-      for (var i = 0; i < vm.personalDetailsObj.provider.licenseType.length; i++) {
-        if(vm.personalDetailsObj.provider.licenseType[i].objectValue.toUpperCase() === "MEDICAL") {
-          vm.provider.licenseType.medicalLicence.push(vm.personalDetailsObj.provider.licenseType[i]);
-        } else if(vm.personalDetailsObj.provider.licenseType[i].objectValue.toUpperCase() == "DEA_LICENSE") {
-          vm.provider.licenseType.dealLicence.push(vm.personalDetailsObj.provider.licenseType[i]);
-        } else if(vm.personalDetailsObj.provider.licenseType[i].objectValue.toUpperCase() == "MALPRACTICE_INSURANCE") {
-          vm.provider.licenseType.malpracticeInsurance.push(vm.personalDetailsObj.provider.licenseType[i]);
-        }
-      }
-
       vm.activated = true;
       vm.determinateValue = 20;
       vm.pageNo = 0;

@@ -10,19 +10,11 @@
 angular.module('healthCareApp')
     .controller('StatusCtrl', function($rootScope, ApiService, healthCareBusinessConstants, $location) {
     var vm = this;
-    vm.expaire = function(value) {
-      $rootScope.loading = true;
-      if (value == 'Staff') {
-        ApiService.post(healthCareBusinessConstants.STAFF, {}).then(successCallback, errorCallback).finally(finalCallBack);
-      } else {
-        ApiService.post(healthCareBusinessConstants.FACILITY, {}).then(successCallback, errorCallback).finally(finalCallBack);
-      }
-    };
 
     // success Call back method
     function successCallback(response) {
-        console.log(response);
-        vm.personalData = response.data;
+      console.log(response);
+      vm.personalData = response.data;
     };
 
     // error call back method.
@@ -36,18 +28,21 @@ angular.module('healthCareApp')
         console.log('finalCallBack', res);
         $rootScope.loading = false;
     };
+
     vm.statusSelected = function(selectedTab) {
         vm.selected = selectedTab;
-    }
+    };
+
     vm.isActive = function(selectedTab) {
-        console.log(selectedTab);
-        return vm.selected == selectedTab
+      console.log(selectedTab);
+      return vm.selected == selectedTab
     }
-    vm.expaire('Staff');
 
     vm.providerMore = function (items, type) {
       localStorage.setItem("providerMoreInfo", JSON.stringify(items));
-      localStorage.setItem("licenseType", type)
+      localStorage.setItem("licenseType", type);
+      localStorage.setItem("frompage", 'status');
+      //$location.path(localStorage.getItem("status"));
       $location.path("providermore");
     };
 

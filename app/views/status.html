@@ -27,9 +27,9 @@
                         <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
                       </div>
                       <div class="col-xs-7 text">
-                        <div>Due 30 Days:8</div>
-                        <div>Due 7 Days:2</div>
-                        <div>Past Due:1</div>
+                        <div>Due 30 Days:{{status.personalData.thirtyDayDue}}</div>
+                        <div>Due 7 Days:{{status.personalData.sevenDayDue}}</div>
+                        <div>Past Due:{{status.personalData.pastDue}}</div>
                       </div>
                     </div>
                   </div>
@@ -40,9 +40,9 @@
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                       </div>
                       <div class="col-xs-7 text">
-                        <div>Due 30 Days:8</div>
-                        <div>Due 7 Days:2</div>
-                        <div>Past Due:1</div>
+                        <div>Due 30 Days:{{thirtyDayDue}}</div>
+                        <div>Due 7 Days:{{sevenDayDue}}</div>
+                        <div>Past Due:{{pastDue}}</div>
                       </div>
                     </div>
                   </div>
@@ -83,12 +83,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="obj in status.personalData">
-                <td ng-bind="obj.entityName"></td>
+              <tr ng-repeat="obj in status.personalData.statusDTOList">
                 <td ng-bind="obj.objectName"></td>
+                <td ng-bind="obj.objectEvent"></td>
                 <td>{{obj.expiryDate  | date:'medium'}}</td>
                 <td>{{obj.status}}</td>
-                <td ng-click="status.providerMore(obj, obj.objectName)"><strong><a>More</a></strong></td>
+                <td ng-click="status.providerMore(obj.licenseDTO, obj.objectValue)"><strong><a>More</a></strong></td>
               </tr>
             </tbody>
           </table>
