@@ -149,20 +149,7 @@ angular.module('healthCareApp')
         vm.viewmode = true;
         vm.personalDetailsObj.dateOfBirth = new Date(vm.personalDetailsObj.dateOfBirth);
         vm.personalDetailsObj.myDate = new Date();
-      } else {
-        vm.viewmode = false;
-        vm.personalDetailsObj = {};
-        vm.personalDetailsObj['document'] = [];
-      }
-      vm.getLocations();
-      vm.getStates();
-      getSupervisors();
-      getSpecialities();
-      //temp 
-      vm.taxonomies = [{id:1, name:'2086S0129X'}];
-      vm.credentials = [{id:1, name:'MD'}, {id:2, name:'DR'}];
-      //vm.personalDetailsObj.provider.licenseType
-      vm.provider = {
+              vm.provider = {
         licenseType: {
           medicalLicence:[],
           dealLicence: [],
@@ -170,9 +157,6 @@ angular.module('healthCareApp')
         }
       };
       var providerresponseObj = angular.fromJson(localStorage.getItem('providerResObj'));
-      //console.log(vm.providerresponseObj);
-      //providerresponseObj['objectName'];
- 
       if(providerresponseObj) {
         var temp = {
           license: providerresponseObj,
@@ -190,6 +174,19 @@ angular.module('healthCareApp')
           vm.provider.licenseType.malpracticeInsurance.push(vm.personalDetailsObj.provider.licenseType[i]);
         }
       }
+      } else {
+        vm.viewmode = false;
+        vm.personalDetailsObj = {};
+        vm.personalDetailsObj['document'] = [];
+      }
+      vm.getLocations();
+      vm.getStates();
+      getSupervisors();
+      getSpecialities();
+      //temp 
+      vm.taxonomies = [{id:1, name:'2086S0129X'}];
+      vm.credentials = [{id:1, name:'MD'}, {id:2, name:'DR'}];
+      //vm.personalDetailsObj.provider.licenseType
     };
 
     vm.init();

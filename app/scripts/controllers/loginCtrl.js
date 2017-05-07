@@ -8,7 +8,7 @@
  * Controller of the healthCareApp
  */
 angular.module('healthCareApp')
-  .controller('LoginCtrl', function($location, $rootScope, ApiService, healthCareBusinessConstants) {
+  .controller('LoginCtrl', function($location, $rootScope, ApiService, healthCareBusinessConstants, UtilService) {
     var vm = this;
 
     vm.login = function() {
@@ -35,6 +35,7 @@ angular.module('healthCareApp')
       vm.username = '';
       vm.password = '';
       vm.errorMsg = 'Please check username/password and Try again';
+      UtilService.errorMessage(vm.errorMsg);
       console.log("login response::", error);
     };
 
