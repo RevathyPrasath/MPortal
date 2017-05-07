@@ -8,18 +8,23 @@
  * Controller of the healthCareApp
  */
 angular.module('healthCareApp')
-  .controller('locationsMoreCtrl', function($scope, $rootScope, $http, $location, ApiService, healthCareBusinessConstants) {
+  .controller('locationsMoreCtrl', function($scope, $rootScope, $http, $location, $interval, UtilService, ApiService, healthCareBusinessConstants) {
     var vm = this;
 
     var errorCallback = function(error) {
       vm.errorMsg = error.data.message;
-      console.log("login response::", error);
+      $scope.showLoader = false;
+      if(vm.errorMsg) {
+        UtilService.errorMessage(vm.errorMsg);
+      } else {
+        UtilService.errorMessage('Something went wrong!!');
+      }
     };
 
     // final call back method called no matter success or failure
     var finalCallBack = function(res) {
       console.log('finalCallBack', res);
-      $rootScope.loading = false;
+      $scope.showLoader = false;
     };
 
     vm.cancelBtnclick = function() {
@@ -40,11 +45,14 @@ angular.module('healthCareApp')
 
     //save button click
     var saveUserSuccessCallback = function() {
-      console.log("personal saved successfully");
+      $scope.showLoader = false;
+      UtilService.errorMessage("locations saved successfully");
+      //console.log("personal saved successfully");
       $location.path('organition');
     };
 
     vm.saveBtnClick = function() {
+      $scope.showLoader = true;
       ApiService.post(healthCareBusinessConstants.GET_LOCATIONS, vm.locationsDetailsObj).then(saveUserSuccessCallback, errorCallback).finally(finalCallBack);
     };
 
@@ -62,8 +70,10 @@ angular.module('healthCareApp')
       fd.append("uploadingFiles", files[0]);
     };
 
+
     vm.fileuploadObject = {};
     vm.createAttachment = function() {
+      $scope.showLoader = true;
       var url = healthCareBusinessConstants.SAVE_DOC;
       fd.append('description', vm.fileuploadObject.shortdescription);
       fd.append('notes', vm.fileuploadObject.notes);
@@ -77,12 +87,34 @@ angular.module('healthCareApp')
         })
         .then(function(res) {
           vm.hideAttachmentCreate();
+          $scope.showLoader = false;
           vm.locationsDetailsObj['documents'].push(res.data)
         }, function(res) {
-          alert('document upload fail!');
+          $scope.showLoader = false;
+          UtilService.errorMessage("document upload fail!");
         });
     };
+
+    var docremoveScb = function(msg) {
+      $scope.showLoader = false;
+      UtilService.errorMessage('Successfully document removed!!');
+    };
+
+    vm.documentRemove = function(docId) {
+      $scope.showLoader = true;
+      var url = healthCareBusinessConstants.DELETE_DOC + docId;
+      ApiService.delete(url).then(docremoveScb, errorCallback);
+    };
+
+    $interval(function() {
+      vm.determinateValue += 1;
+      if (vm.determinateValue > 100) {
+        vm.determinateValue = 20;
+      }
+    }, 100);
+
     vm.init = function() {
+       vm.determinateValue = 20;
       vm.getStates();
       vm.locationsDetailsObj = angular.fromJson(localStorage.getItem('locationsDetails'));
       if (Object.keys(vm.locationsDetailsObj).length) {

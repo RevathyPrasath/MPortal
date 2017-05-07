@@ -8,13 +8,27 @@
  * Controller of the healthCareApp
  */
 angular.module('healthCareApp')
-  .controller('OrganitionCtrl', function($scope, $interval, $http, $location, healthCareBusinessConstants, ApiService, $rootScope) {
+  .controller('OrganitionCtrl', function($scope, $interval, $http, $location, healthCareBusinessConstants, ApiService, $rootScope, UtilService) {
     var vm = this;
     // error call back method.
     var errorCallback = function(error) {
       vm.errorMsg = error.data.message;
-      console.log("login response::", error);
+      if(vm.errorMsg) {
+       UtilService.errorMessage(vm.errorMsg);
+      } else {
+       UtilService.errorMessage('Something went wrong!!');
+      }
     };
+
+  var docremoveScb = function(msg) {
+    vm.getCompanies(0);
+    UtilService.errorMessage('Successfully document removed!!');
+  };
+
+  vm.documentRemove = function(docId) {
+    var url = healthCareBusinessConstants.DELETE_DOC + docId;
+    ApiService.delete(url).then(docremoveScb, errorCallback);
+  };
 
     // final call back method called no matter success or failure
     var finalCallBack = function(res) {
@@ -30,16 +44,16 @@ angular.module('healthCareApp')
     var searchObj = {
       "city": '',
       "state": '',
-      "activeFlag": false
+      "activeFlag": ""
     };
     vm.searchEmployee = function() {
       searchObj.city = vm.city || '';
       searchObj.state = vm.state || '';
-      searchObj.activeFlag = Boolean(vm.status) || false;
+      searchObj.activeFlag = Boolean(vm.status) || "";
       if (vm.city || vm.state || vm.status) {
         ApiService.post(healthCareBusinessConstants.SEARCH_LOCATION, searchObj).then(searchSuccessCallback, errorCallback).finally(finalCallBack);
       } else {
-        vm.errorMsg = 'Please Enter Name/Employee Id/SSN';
+        UtilService.errorMessage('Enter valid details!!');
       }
     };
 
@@ -87,7 +101,6 @@ angular.module('healthCareApp')
       fd.append('expiryDate', vm.fileuploadObject.expiry);
       fd.append('trackExpiryDate', vm.fileuploadObject.trackExpiry);
       fd.append('documentCategory', 'abc');
-
       $http.post(url, fd, {
           transformRequest: angular.identity,
           headers: { 'Content-Type': undefined }
@@ -97,8 +110,9 @@ angular.module('healthCareApp')
           vm.companyDetailsObj['documents'].push(res.data);
            $scope.showLoader = false;
         }, function(res) {
-          alert('document upload fail!');
-           $scope.showLoader = false;
+          //alert('document upload fail!');
+          UtilService.errorMessage('document upload fail!');
+          $scope.showLoader = false;
         });
     };
     var getStatesSb = function(res) {
@@ -175,7 +189,6 @@ angular.module('healthCareApp')
 
     vm.saveBtnClick = function() {
       $scope.showLoader = true;
-      debugger;
       ApiService.post(healthCareBusinessConstants.GET_COMPANIES, vm.companyDetailsObj).then(saveUserSuccessCallback, errorCallback).finally(finalCallBack);
     };
 
@@ -185,7 +198,6 @@ angular.module('healthCareApp')
         "identifierNumber": ""
       });
     };
-
 
     $interval(function() {
       vm.determinateValue += 1;

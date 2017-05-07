@@ -7,21 +7,24 @@
  * Controller of the healthCareApp
  */
 angular.module('healthCareApp')
-  .controller('UserdetailsCtrl', function($http, $rootScope, $scope, healthCareBusinessConstants, ApiService, $location) {
+  .controller('UserdetailsCtrl', function($interval, $http, $rootScope, $scope, healthCareBusinessConstants, ApiService, $location, UtilService) {
     $rootScope.hideNavbar = false;
     var vm = this;
 
     // error call back method.
     var errorCallback = function(error) {
-      if (error && error.data) {
-        vm.errorMsg = error.data.message;
+      $scope.showLoader = false;
+      if(vm.errorMsg) {
+        UtilService.errorMessage(vm.errorMsg);
+      } else {
+        UtilService.errorMessage('Something went wrong!!');
       }
       console.log("login response::", error);
     };
 
     // final call back method called no matter success or failure
     var finalCallBack = function(res) {
-      console.log('finalCallBack', res);
+      $scope.showLoader = false;
     };
 
     var getUsersSb = function(res) {
@@ -29,6 +32,7 @@ angular.module('healthCareApp')
     };
 
     vm.getPersonals = function() {
+      $scope.showLoader = true;
       ApiService.get(healthCareBusinessConstants.GET_USERS).then(getUsersSb, errorCallback).finally(finalCallBack);
     };
 
@@ -41,15 +45,17 @@ angular.module('healthCareApp')
     };
 
     var saveUserSuccessCallback = function () {
-      console.log("personal saved successfully");
+      $scope.showLoader = false;
+      UtilService.errorMessage('user details saved!!');
       $location.path('admin');
     };
 
     vm.saveBtnClick = function () {
+      $scope.showLoader = true;
       if(vm.userDetailsObj.password == vm.userDetailsObj.confirmPassword) {
         ApiService.post(healthCareBusinessConstants.GET_USERS, vm.userDetailsObj).then(saveUserSuccessCallback, errorCallback).finally(finalCallBack);
       } else {
-        alert('password and confirm password should be same!');
+        UtilService.errorMessage('password and confirm password should be same!!');
       }
       
     };
@@ -70,6 +76,7 @@ angular.module('healthCareApp')
 
   vm.fileuploadObject = {};
   vm.createAttachment = function() {
+    $scope.showLoader = true;
     var url = healthCareBusinessConstants.SAVE_DOC;
     fd.append('description', vm.fileuploadObject.shortdescription);
     fd.append('notes', vm.fileuploadObject.notes);
@@ -83,13 +90,34 @@ angular.module('healthCareApp')
       })
       .then(function(res) {
         vm.hideAttachmentCreate();
-        vm.userDetailsObj['documents'].push(res.data)
+        vm.userDetailsObj['documents'].push(res.data);
+        UtilService.errorMessage('document upload success!');
       }, function(res) {
-        alert('document upload fail!');
+        UtilService.errorMessage('document upload fail!');
+       // alert('document upload fail!');
       });
   };
 
+  var docremoveScb = function(msg) {
+    $scope.showLoader = false;
+    UtilService.errorMessage('Successfully document removed!!');
+  };
+
+  vm.documentRemove = function(docId) {
+    $scope.showLoader = true;
+    var url = healthCareBusinessConstants.DELETE_DOC + docId;
+    ApiService.delete(url).then(docremoveScb, errorCallback);
+  };
+
+  $interval(function() {
+      vm.determinateValue += 1;
+      if (vm.determinateValue > 100) {
+        vm.determinateValue = 20;
+      }
+    }, 100);
+
   vm.init = function() {
+    vm.determinateValue = 20;
     vm.userDetailsObj = angular.fromJson(localStorage.getItem('userdetails'));
     if (Object.keys(vm.userDetailsObj).length) {
       vm.viewmode = true;

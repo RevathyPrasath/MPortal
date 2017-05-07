@@ -1,4 +1,7 @@
 <div layout="column" ng-cloak class="md-inline-form user-detail-view">
+  <div class="loader-parent" ng-if="showLoader">
+    <md-progress-circular class="main-loader" md-mode="determinate" value="{{personalMore.determinateValue}}"></md-progress-circular>
+  </div>
   <md-content layout-padding>
     <div class="container" style="width:70%; margin: 0 auto; background: #fff;">
       <h5 style="color: #4CAF50;">PERSONAL</h5>

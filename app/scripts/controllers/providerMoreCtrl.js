@@ -1,8 +1,10 @@
-angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, $location, healthCareBusinessConstants, ApiService, $http, UtilService) {
+angular.module('healthCareApp').controller('providerMoreCtrl', function($scope,  $interval, $location, healthCareBusinessConstants, ApiService, $http, UtilService) {
 	var vm = this;
-	
+	var showLicence = localStorage.getItem("licenseType");
+
   var errorCallback = function(error) {
     vm.errorMsg = error.data.message;
+    $scope.showLoader = false;
     if(vm.errorMsg) {
       UtilService.errorMessage(vm.errorMsg);
     } else {
@@ -20,12 +22,21 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
   };
 
   var savePersonalSuccessCallback = function(res) {
+    $scope.showLoader = false;
     localStorage.setItem("providerResObj", JSON.stringify(res.data));
     console.log("personal saved successfully");
     $location.path(localStorage.getItem("frompage"));
   };
 
+  $interval(function() {
+    vm.determinateValue += 1;
+    if (vm.determinateValue > 100) {
+      vm.determinateValue = 20;
+    }
+  }, 100);
+
   vm.savePersonal = function() {
+    $scope.showLoader = true;
    var providerSaveObj = {
       "licenseId": vm.moreinfo.license.licenseId,
       "state": vm.moreinfo.license.state,
@@ -56,6 +67,7 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
 
   vm.fileuploadObject = {};
   vm.createAttachment = function() {
+    $scope.showLoader = true;
     var url = healthCareBusinessConstants.SAVE_DOC;
     fd.append('description', vm.fileuploadObject.shortdescription);
     fd.append('notes', vm.fileuploadObject.notes);
@@ -68,12 +80,25 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
       })
       .then(function(res) {
         vm.hideAttachmentCreate();
+        $scope.showLoader = false;
+        UtilService.errorMessage('document uploaded successfully!!');
         vm.moreinfo.license.licenseDocuments.push(res.data);
       }, function(res) {
+        $scope.showLoader = false;
         UtilService.errorMessage('document upload fail!!');
       });
   };
 
+  /* doc remove */
+  var docremoveScb = function(msg) {
+    UtilService.errorMessage('Successfully document removed!!');
+  };
+
+  vm.documentRemove = function(docId) {
+    var url = healthCareBusinessConstants.DELETE_DOC + docId;
+    ApiService.delete(url).then(docremoveScb, errorCallback);
+  };
+    
   vm.cancelBtnclick = function() {
     $location.path(localStorage.getItem("frompage"));
   };
@@ -107,7 +132,7 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
   };
 
   vm.init = function() {
-    var showLicence = localStorage.getItem("licenseType");
+    vm.determinateValue = 20;
     if(showLicence == 'MEDICAL') {
       vm.showmedicalLicense = true;
     } else if (showLicence == 'DEA_LICENSE') {

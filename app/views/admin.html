@@ -1,4 +1,7 @@
 <div ng-cloak class="admin-view">
+  <div class="loader-parent" ng-if="showLoader">
+    <md-progress-circular class="main-loader" md-mode="determinate" value="{{admin.determinateValue}}"></md-progress-circular>
+  </div>
   <md-content>
     <md-tabs md-dynamic-height md-border-bottom>
       <md-tab label="Users">

@@ -13,14 +13,17 @@ angular.module('healthCareApp')
     // error call back method.
     var errorCallback = function(error) {
       vm.errorMsg = error.data.message;
-      UtilService.errorMessage(vm.errorMsg);
-      console.log("login response::", error);
+      if(vm.errorMsg) {
+        UtilService.errorMessage(vm.errorMsg);
+      } else {
+       UtilService.errorMessage("Something went wrong!!");
+     }
     };
 
     // final call back method called no matter success or failure
     var finalCallBack = function(res) {
-      console.log('finalCallBack', res);
       $rootScope.loading = false;
+      console.log('finalCallBack', res);
     };
 
     // success Call back method
@@ -39,7 +42,7 @@ angular.module('healthCareApp')
         ApiService.post(healthCareBusinessConstants.PERSONAL_SEARCH_URL, searchObj).then(searchSuccessCallback, errorCallback).finally(finalCallBack);
       } else {
         UtilService.errorMessage('Please enter search details!!');
-        vm.errorMsg = 'Please Enter Name/Employee Id/SSN';
+        //vm.errorMsg = 'Please Enter Name/Employee Id/SSN';
       }
     };
 

@@ -8,7 +8,7 @@
  * Controller of the healthCareApp
  */
 angular.module('healthCareApp')
-  .controller('personalMoreCtrl', function($scope, $rootScope, $http, $filter, $location, ApiService, healthCareBusinessConstants, $mdDialog, UtilService) {
+  .controller('personalMoreCtrl', function($scope, $rootScope, $http, $filter, $location, ApiService, healthCareBusinessConstants, $mdDialog, UtilService,  $interval) {
     var vm = this;
     var errorCallback = function(error) {
       vm.errorMsg = error.data.message;
@@ -22,7 +22,7 @@ angular.module('healthCareApp')
     // final call back method called no matter success or failure
     var finalCallBack = function(res) {
       console.log('finalCallBack', res);
-      $rootScope.loading = false;
+      $scope.showLoader = false;
     };
 
     vm.editBtnClick = function() {
@@ -64,11 +64,13 @@ angular.module('healthCareApp')
     // Save personal flow starts
     var savePersonalSuccessCallback = function() {
       //console.log("personal saved successfully");
+      $scope.showLoader = false;
       UtilService.errorMessage('Successfully saved personal details!!');
       $location.path('personal');
     };
 
     vm.savePersonal = function() {
+      $scope.showLoader = true;
       console.log('vm.personalDetailsObj::', vm.personalDetailsObj);
       vm.personalDetailsObj.dateOfBirth = (vm.personalDetailsObj.dateOfBirth) ? vm.personalDetailsObj.dateOfBirth.getTime() : 0;
       if(!vm.viewmode) {
@@ -85,6 +87,7 @@ angular.module('healthCareApp')
 
     vm.fileuploadObject = {};
     vm.createAttachment = function() {
+      $scope.showLoader = true;
       var url = healthCareBusinessConstants.SAVE_DOC;
       fd.append('description', vm.fileuploadObject.shortdescription);
       fd.append('notes', vm.fileuploadObject.notes);
@@ -96,17 +99,23 @@ angular.module('healthCareApp')
           transformRequest: angular.identity,
           headers: { 'Content-Type': undefined }
         }).then(function(res) {
+          $scope.showLoader = false;
           vm.hideAttachmentCreate();
           UtilService.errorMessage('Successfully document uploaded!! ');
-          if(vm.personalDetailsObj['documents'] && vm.personalDetailsObj['documents'].length) {
-            vm.personalDetailsObj['documents']['license'].push(res.data);
+          if(vm.personalDetailsObj['documents']) {
+            vm.personalDetailsObj.documents.push({
+              licence: res.data
+            })
           } else {
             vm.personalDetailsObj = {
               'documents': [{'license' : []}]
             }
-            vm.personalDetailsObj.documents[0].license.push(res.data);
+            vm.personalDetailsObj.documents.push({
+              licence: res.data
+            });
           }
         }, function(res) {
+          $scope.showLoader = false;
           UtilService.errorMessage('document upload fail!');
         });
     };
@@ -143,6 +152,13 @@ angular.module('healthCareApp')
       }
     };
 
+     $interval(function() {
+      vm.determinateValue += 1;
+      if (vm.determinateValue > 100) {
+        vm.determinateValue = 20;
+      }
+    }, 100);
+
     /* doc remove */
     var docremoveScb = function(msg) {
       UtilService.errorMessage('Successfully document removed!!');
@@ -154,6 +170,7 @@ angular.module('healthCareApp')
     };
 
     vm.init = function() {
+      vm.determinateValue = 20;
       vm.personalDetailsObj = angular.fromJson(localStorage.getItem('personnalDetails'));
       if (Object.keys(vm.personalDetailsObj).length) {
         vm.viewmode = true;

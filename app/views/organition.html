@@ -209,13 +209,14 @@
                       <td>Id</td>
                       <td>Date Created</td>
                       <td>Description</td>
-                      <td>Action</td>
+                      <td colspan="2">Action</td>
                     </tr>
                     <tr ng-repeat="doc in organition.companyDetailsObj.documents">
                       <td ng-bind="doc.documentId"></td>
                       <td ng-bind="doc.createdOn | date : format : timezone"></td>
                       <td ng-bind="doc.description"></td>
                       <td><a target="_blank" ng-href="{{doc.documentUrl}}">View</a></td>
+                      <td><a ng-click="organition.documentRemove(doc.documentId);">Remove</a></td>
                     </tr>
                   </table>
                 </div>

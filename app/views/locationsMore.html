@@ -1,4 +1,7 @@
 <div layout="column" ng-cloak class="md-inline-form user-detail-view">
+  <div class="loader-parent" ng-if="showLoader">
+    <md-progress-circular class="main-loader" md-mode="determinate" value="{{locationsMore.determinateValue}}"></md-progress-circular>
+  </div>
   <md-content layout-padding>
     <div class="container" style="width:70%; margin: 0 auto; background: #fff;">
       <h5 style="color: #4CAF50;">LOCATION</h5>
@@ -106,13 +109,14 @@
             <td>Id</td>
             <td>Date Created</td>
             <td>Description</td>
-            <td>Action</td>
+            <td colspan="2">Action</td>
           </tr>
           <tr ng-repeat="doc in locationsMore.locationsDetailsObj.documents">
             <td ng-bind="doc.documentId"></td>
             <td ng-bind="doc.createdOn | date : format : timezone"></td>
             <td ng-bind="doc.description"></td>
             <td><a target="_blank" ng-href="{{doc.documentUrl}}">View</a></td>
+            <td><a ng-click="locationsMore.documentRemove(doc.documentId);">Remove</a></td>
           </tr>
         </table>
       </div>
