@@ -11,6 +11,9 @@ angular.module('healthCareApp').factory('ApiService', function($http) {
     },
     put: function (url, data, headers) {
       return $http.put(url, data, {'Content-Type': 'multipart/form-data'});
-    }
+    },
+    delete: function (url, headers) {
+      return $http.delete(url);
+    },
   }
 });

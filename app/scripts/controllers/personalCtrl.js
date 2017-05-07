@@ -7,12 +7,13 @@
  * Controller of the healthCareApp
  */
 angular.module('healthCareApp')
-  .controller('PersonalCtrl', function($scope, $rootScope, ApiService, healthCareBusinessConstants, $location, $window) {
+  .controller('PersonalCtrl', function($scope, $rootScope, ApiService, healthCareBusinessConstants, $location, $window, UtilService) {
     var vm = this;
 
     // error call back method.
     var errorCallback = function(error) {
       vm.errorMsg = error.data.message;
+      UtilService.errorMessage(vm.errorMsg);
       console.log("login response::", error);
     };
 
@@ -37,6 +38,7 @@ angular.module('healthCareApp')
       if (vm.firstName || vm.lastName || vm.location || vm.status) {
         ApiService.post(healthCareBusinessConstants.PERSONAL_SEARCH_URL, searchObj).then(searchSuccessCallback, errorCallback).finally(finalCallBack);
       } else {
+        UtilService.errorMessage('Please enter search details!!');
         vm.errorMsg = 'Please Enter Name/Employee Id/SSN';
       }
     };
@@ -56,7 +58,7 @@ angular.module('healthCareApp')
     };
 
     vm.active = function() {
-      if (vm.personals && vm.personals[0].total) {
+      if (vm.personals && vm.personals[0] && vm.personals[0].total) {
         return vm.pageNo == 0 && vm.pageNo <= vm.personals[0].total / 20;
       }
     };
@@ -70,7 +72,7 @@ angular.module('healthCareApp')
     };
 
     vm.fnViewMore = function (obj) {
-      console.log(obj);
+      //console.log(obj);
       localStorage.setItem('personnalDetails', angular.toJson(obj));
       $location.path('personnalDetails');
     };

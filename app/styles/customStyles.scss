@@ -1,4 +1,8 @@
 /* Global styles */
+.md-toast-content {
+    top:50px !important;
+    position: fixed !important;
+}
 .loader-parent {
     position: fixed;
     top: 0;

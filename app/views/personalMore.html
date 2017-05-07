@@ -139,11 +139,7 @@
             </md-input-container>
             <md-input-container class="md-block" flex-gt-sm>
               <label>Taxonomy</label>
-              <md-select ng-model="personalMore.personalDetailsObj.provider.taxonomy" ng-disabled="personalMore.viewmode">
-                <md-option ng-repeat="taxonomy in personalMore.taxonomies" ng-value="taxonomy.name">
-                  {{taxonomy.name}}
-                </md-option>
-              </md-select>
+               <input ng-model="personalMore.personalDetailsObj.provider.taxonomy" ng-readonly="personalMore.viewmode" ng-required="true">
             </md-input-container>
           </div>
           <table class="table personal-licencies">
@@ -239,18 +235,19 @@
         <p ng-show="!personalMore.viewmode">
           <md-button class="md-raised md-cornered" ng-click="personalMore.showAttachmentCreate()">Add New</md-button>
         </p>
-        <table class="table" ng-show="personalMore.personalDetailsObj.document.length>0">
+        <table class="table" ng-show="personalMore.personalDetailsObj.documents.length>0">
           <tr>
             <td>Id</td>
             <td>Date Created</td>
             <td>Description</td>
-            <td>Action</td>
+            <td colspan="2">Action</td>
           </tr>
-          <tr ng-repeat="doc in personalMore.personalDetailsObj.document">
-            <td ng-bind="doc.documentId"></td>
-            <td ng-bind="doc.createdOn | date : format : timezone"></td>
-            <td ng-bind="doc.description"></td>
-            <td><a target="_blank" ng-href="{{doc.documentUrl}}">View</a></td>
+          <tr ng-repeat="doc in personalMore.personalDetailsObj.documents">
+            <td ng-bind="doc.license[0].documentId"></td>
+            <td ng-bind="doc.license[0].createdOn | date : format : timezone"></td>
+            <td ng-bind="doc.license[0].description"></td>
+            <td><a target="_blank" ng-href="{{doc.license[0].documentUrl}}">View</a></td>
+            <td><a ng-click="personalMore.documentRemove(doc.license[0].documentId);">Remove</a></td>
           </tr>
         </table>
       </div>
