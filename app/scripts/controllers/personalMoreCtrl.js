@@ -74,7 +74,7 @@ angular.module('healthCareApp')
       console.log('vm.personalDetailsObj::', vm.personalDetailsObj);
       vm.personalDetailsObj.dateOfBirth = (vm.personalDetailsObj.dateOfBirth) ? vm.personalDetailsObj.dateOfBirth.getTime() : 0;
       if(!vm.viewmode) {
-        ApiService.put(healthCareBusinessConstants.PERSONAL, vm.personalDetailsObj).then(savePersonalSuccessCallback, errorCallback).finally(finalCallBack);
+        ApiService.post(healthCareBusinessConstants.PERSONAL_UPDATE, vm.personalDetailsObj).then(savePersonalSuccessCallback, errorCallback).finally(finalCallBack);
       } else {
         ApiService.post(healthCareBusinessConstants.PERSONAL, vm.personalDetailsObj).then(savePersonalSuccessCallback, errorCallback).finally(finalCallBack);
       }
@@ -93,7 +93,7 @@ angular.module('healthCareApp')
       fd.append('notes', vm.fileuploadObject.notes);
       fd.append('expiryDate', vm.fileuploadObject.expiry);
       fd.append('trackExpiryDate', vm.fileuploadObject.trackExpiry);
-      fd.append('documentCategory', 'abc');
+      fd.append('documentCategory', 'abc13');
 
       $http.post(url, fd, {
           transformRequest: angular.identity,
@@ -103,9 +103,7 @@ angular.module('healthCareApp')
           vm.hideAttachmentCreate();
           UtilService.errorMessage('Successfully document uploaded!! ');
           if(vm.personalDetailsObj['documents']) {
-            vm.personalDetailsObj.documents.push({
-              licence: res.data
-            })
+            vm.personalDetailsObj.documents.push(res.data);
           } else {
             vm.personalDetailsObj = {
               'documents': [{'license' : []}]
@@ -192,13 +190,15 @@ angular.module('healthCareApp')
           };
           vm.personalDetailsObj.provider.licenseType.push(temp);  
         }
-        for (var i = 0; i < vm.personalDetailsObj.provider.licenseType.length; i++) {
-          if(vm.personalDetailsObj.provider.licenseType[i].objectValue.toUpperCase() === "MEDICAL") {
-            vm.provider.licenseType.medicalLicence.push(vm.personalDetailsObj.provider.licenseType[i]);
-          } else if(vm.personalDetailsObj.provider.licenseType[i].objectValue.toUpperCase() == "DEA_LICENSE") {
-            vm.provider.licenseType.dealLicence.push(vm.personalDetailsObj.provider.licenseType[i]);
-          } else if(vm.personalDetailsObj.provider.licenseType[i].objectValue.toUpperCase() == "MALPRACTICE_INSURANCE") {
-            vm.provider.licenseType.malpracticeInsurance.push(vm.personalDetailsObj.provider.licenseType[i]);
+        if(vm.personalDetailsObj.provider) {
+          for (var i = 0; i < vm.personalDetailsObj.provider.licenseType.length; i++) {
+            if(vm.personalDetailsObj.provider.licenseType[i].objectValue.toUpperCase() === "MEDICAL") {
+              vm.provider.licenseType.medicalLicence.push(vm.personalDetailsObj.provider.licenseType[i]);
+            } else if(vm.personalDetailsObj.provider.licenseType[i].objectValue.toUpperCase() == "DEA_LICENSE") {
+              vm.provider.licenseType.dealLicence.push(vm.personalDetailsObj.provider.licenseType[i]);
+            } else if(vm.personalDetailsObj.provider.licenseType[i].objectValue.toUpperCase() == "MALPRACTICE_INSURANCE") {
+              vm.provider.licenseType.malpracticeInsurance.push(vm.personalDetailsObj.provider.licenseType[i]);
+            }
           }
         }
       } else {

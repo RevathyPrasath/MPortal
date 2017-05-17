@@ -65,7 +65,6 @@ angular.module('healthCareApp')
     };
 
     vm.hideAttachmentCreate = function() {
-      // remove or empty the attachment form data
       vm.attachmentCreateViewmode = false;
     };
 
@@ -83,18 +82,17 @@ angular.module('healthCareApp')
     fd.append('expiryDate', vm.fileuploadObject.expiry);
     fd.append('trackExpiryDate', vm.fileuploadObject.trackExpiry);
     fd.append('documentCategory', 'abc');
-
     $http.post(url, fd, {
         transformRequest: angular.identity,
         headers: { 'Content-Type': undefined }
       })
       .then(function(res) {
         vm.hideAttachmentCreate();
+        $scope.showLoader = false;
         vm.userDetailsObj['documents'].push(res.data);
         UtilService.errorMessage('document upload success!');
       }, function(res) {
         UtilService.errorMessage('document upload fail!');
-       // alert('document upload fail!');
       });
   };
 
