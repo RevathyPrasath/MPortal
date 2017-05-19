@@ -86,7 +86,7 @@ angular.module('healthCareApp')
     };
 
     vm.fileuploadObject = {};
-    vm.createAttachment = function() {
+    vm.createAttachment = function() {debugger;
       $scope.showLoader = true;
       var url = healthCareBusinessConstants.SAVE_DOC;
       fd.append('description', vm.fileuploadObject.shortdescription);
@@ -105,12 +105,8 @@ angular.module('healthCareApp')
           if(vm.personalDetailsObj['documents']) {
             vm.personalDetailsObj.documents.push(res.data);
           } else {
-            vm.personalDetailsObj = {
-              'documents': [{'license' : []}]
-            }
-            vm.personalDetailsObj.documents.push({
-              licence: res.data
-            });
+            vm.personalDetailsObj['documents'] = [];
+            vm.personalDetailsObj.documents.push(res.data);
           }
         }, function(res) {
           $scope.showLoader = false;
@@ -204,7 +200,7 @@ angular.module('healthCareApp')
       } else {
         vm.viewmode = false;
         vm.personalDetailsObj = {};
-        vm.personalDetailsObj['document'] = [];
+        vm.personalDetailsObj['documents'] = [];
       }
       vm.getLocations();
       vm.getStates();

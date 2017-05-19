@@ -246,11 +246,11 @@
             <td colspan="2">Action</td>
           </tr>
           <tr ng-repeat="doc in personalMore.personalDetailsObj.documents">
-            <td ng-bind="doc.license.documentId"></td>
-            <td ng-bind="doc.license.createdOn | date : format : timezone"></td>
-            <td ng-bind="doc.license.description"></td>
-            <td><a target="_blank" ng-href="{{doc.license.documentUrl}}">View</a></td>
-            <td><a ng-click="personalMore.documentRemove(doc.license.documentId);">Remove</a></td>
+            <td ng-bind="doc.documentId"></td>
+            <td ng-bind="doc.createdOn | date : format : timezone"></td>
+            <td ng-bind="doc.license[0].shortDescription"></td>
+            <td><a target="_blank" ng-href="{{doc.documentUrl}}" ng-show="doc.documentId">View</a></td>
+            <td><a ng-click="personalMore.documentRemove(doc.documentId);" ng-show="doc.documentId">Remove</a></td>
           </tr>
         </table>
       </div>
