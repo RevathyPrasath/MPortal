@@ -111,7 +111,7 @@
           <div flex layout="row" layout-padding layout-align="start center" style="height: 30px;">
             <md-checkbox ng-disabled="personalMore.viewmode" class="md-block" flex-gt-sm ng-model="personalMore.personalDetailsObj.employeeId.isSupervisor" aria-label="Supervisor">Supervisor
             </md-checkbox>
-            <md-checkbox ng-disabled="personalMore.viewmode" class="md-block" flex-gt-sm ng-model="personalMore.personalDetailsObj.employeeId.isProvider" aria-label="Provider">Provider
+            <md-checkbox ng-disabled="personalMore.viewmode" class="md-block" flex-gt-sm ng-model="personalMore.personalDetailsObj.employeeId.isProvider" aria-label="Provider" ng-click="personalMore.providerClick()">Provider
             </md-checkbox>
           </div>
         </div>

@@ -137,6 +137,7 @@ angular.module('healthCareApp')
     };
 
     vm.providerMore = function (items, type) {
+      localStorage.setItem("providerMoreTempData", JSON.stringify(vm.personalDetailsObj));
       if(!vm.viewmode) {
         localStorage.setItem("providerMoreInfo", JSON.stringify(items));
         localStorage.setItem("licenseType", type);
@@ -165,34 +166,47 @@ angular.module('healthCareApp')
       ApiService.delete(url).then(docremoveScb, errorCallback);
     };
 
+    vm.providerClick = function () {
+      vm.personalDetailsObj.provider = {
+        npi: "",
+        credential: "",
+        name: "",
+        specialist: "",
+        taxonomy: "",
+        licenseType: []
+      };
+    };
+
     vm.init = function() {
       vm.determinateValue = 20;
       vm.personalDetailsObj = angular.fromJson(localStorage.getItem('personnalDetails'));
       if (Object.keys(vm.personalDetailsObj).length) {
         if(localStorage.getItem("fromProvider")) {
           vm.viewmode = false;
+          var providerresponseObj = angular.fromJson(localStorage.getItem('providerResObj'));
+           vm.personalDetailsObj = angular.fromJson(localStorage.getItem('providerMoreTempData'));
+          if(providerresponseObj) {
+              var temp = {
+                license: providerresponseObj,
+                licenseTypeId: null,
+                objectValue: providerresponseObj['objectName']
+              };
+              vm.personalDetailsObj.provider.licenseType.push(temp);  
+            } 
         } else {
           vm.viewmode = true;
         }
         
         vm.personalDetailsObj.dateOfBirth = new Date(vm.personalDetailsObj.dateOfBirth);
         vm.personalDetailsObj.myDate = new Date();
-       vm.provider = {
-        licenseType: {
-          medicalLicence:[],
-          dealLicence: [],
-          malpracticeInsurance:[]
-        }
-      };
-      var providerresponseObj = angular.fromJson(localStorage.getItem('providerResObj'));
-      if(providerresponseObj) {
-          var temp = {
-            license: providerresponseObj,
-            licenseTypeId: null,
-            objectValue: providerresponseObj['objectName']
-          };
-          vm.personalDetailsObj.provider.licenseType.push(temp);  
-        }
+         vm.provider = {
+          licenseType: {
+            medicalLicence:[],
+            dealLicence: [],
+            malpracticeInsurance:[]
+          }
+        };
+
         if(vm.personalDetailsObj.provider) {
           for (var i = 0; i < vm.personalDetailsObj.provider.licenseType.length; i++) {
             if(vm.personalDetailsObj.provider.licenseType[i].objectValue.toUpperCase() === "MEDICAL") {
