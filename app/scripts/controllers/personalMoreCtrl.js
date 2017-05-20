@@ -73,9 +73,9 @@ angular.module('healthCareApp')
       $scope.showLoader = true;
       console.log('vm.personalDetailsObj::', vm.personalDetailsObj);
       vm.personalDetailsObj.dateOfBirth = (vm.personalDetailsObj.dateOfBirth) ? vm.personalDetailsObj.dateOfBirth.getTime() : 0;
-      if(!vm.viewmode) {
+      if(!vm.viewmode && !vm.addMode) {
         ApiService.post(healthCareBusinessConstants.PERSONAL_UPDATE, vm.personalDetailsObj).then(savePersonalSuccessCallback, errorCallback).finally(finalCallBack);
-      } else {
+      } else if(vm.addMode) {
         ApiService.post(healthCareBusinessConstants.PERSONAL, vm.personalDetailsObj).then(savePersonalSuccessCallback, errorCallback).finally(finalCallBack);
       }
     };
@@ -86,14 +86,14 @@ angular.module('healthCareApp')
     };
 
     vm.fileuploadObject = {};
-    vm.createAttachment = function() {debugger;
+    vm.createAttachment = function() {
       $scope.showLoader = true;
       var url = healthCareBusinessConstants.SAVE_DOC;
       fd.append('description', vm.fileuploadObject.shortdescription);
       fd.append('notes', vm.fileuploadObject.notes);
       fd.append('expiryDate', vm.fileuploadObject.expiry);
       fd.append('trackExpiryDate', vm.fileuploadObject.trackExpiry);
-      fd.append('documentCategory', 'abc13');
+      fd.append('documentCategory', 'test');
 
       $http.post(url, fd, {
           transformRequest: angular.identity,
@@ -115,12 +115,12 @@ angular.module('healthCareApp')
     };
 
     // Save personal flow ends
-    var getSupervisorsScb = function(res) {
+    var getSupervisorsScb = function(res) {debugger;
       vm.supervisorList = res.data;
     };
 
     //List of supervisor
-    var getSupervisors = function() {
+    var getSupervisors = function() {debugger;
       var url = healthCareBusinessConstants.SUPERVISOR_LIST;
       ApiService.get(url).then(getSupervisorsScb, errorCallback)
     };
@@ -198,6 +198,7 @@ angular.module('healthCareApp')
           }
         }
       } else {
+        vm.addMode = true; 
         vm.viewmode = false;
         vm.personalDetailsObj = {};
         vm.personalDetailsObj['documents'] = [];
