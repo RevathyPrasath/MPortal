@@ -177,6 +177,16 @@ angular.module('healthCareApp')
       };
     };
 
+    function findWithAttr(array, value) {
+    for(var i = 0; i < array.length; i += 1) {
+        if(array[i].license.licenseId === value) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+
     vm.init = function() {
       vm.determinateValue = 20;
       vm.personalDetailsObj = angular.fromJson(localStorage.getItem('personnalDetails'));
@@ -191,7 +201,15 @@ angular.module('healthCareApp')
                 licenseTypeId: null,
                 objectValue: providerresponseObj['objectName']
               };
-              vm.personalDetailsObj.provider.licenseType.push(temp);  
+              for (var i = 0; i < vm.personalDetailsObj.provider.licenseType.length; i++) {
+                if(vm.personalDetailsObj.provider.licenseType[i].license.licenseId == providerresponseObj.licenseId) {
+                  vm.personalDetailsObj.provider.licenseType[i] = temp;
+                  break;
+                }
+              };
+              if(findWithAttr(vm.personalDetailsObj.provider.licenseType, providerresponseObj.licenseId) == -1){
+                vm.personalDetailsObj.provider.licenseType.push(temp);
+              }
             } 
         } else {
           vm.viewmode = true;
