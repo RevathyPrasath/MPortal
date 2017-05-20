@@ -250,7 +250,7 @@
             <td ng-bind="doc.createdOn | date : format : timezone"></td>
             <td ng-bind="doc.license[0].shortDescription"></td>
             <td><a target="_blank" ng-href="{{doc.documentUrl}}" ng-show="doc.documentId">View</a></td>
-            <td><a ng-click="personalMore.documentRemove(doc.documentId);" ng-show="doc.documentId">Remove</a></td>
+            <td><a ng-click="personalMore.documentRemove($index, doc.documentId);" ng-show="doc.documentId">Remove</a></td>
           </tr>
         </table>
       </div>

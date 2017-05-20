@@ -115,12 +115,12 @@ angular.module('healthCareApp')
     };
 
     // Save personal flow ends
-    var getSupervisorsScb = function(res) {debugger;
+    var getSupervisorsScb = function(res) {
       vm.supervisorList = res.data;
     };
 
     //List of supervisor
-    var getSupervisors = function() {debugger;
+    var getSupervisors = function() {
       var url = healthCareBusinessConstants.SUPERVISOR_LIST;
       ApiService.get(url).then(getSupervisorsScb, errorCallback)
     };
@@ -158,8 +158,9 @@ angular.module('healthCareApp')
       UtilService.errorMessage('Successfully document removed!!');
     };
 
-    vm.documentRemove = function(docId) {
+    vm.documentRemove = function(index, docId) {
       var url = healthCareBusinessConstants.DELETE_DOC + docId;
+      vm.personalDetailsObj.documents.splice(index,1);
       ApiService.delete(url).then(docremoveScb, errorCallback);
     };
 

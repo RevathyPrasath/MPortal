@@ -25,8 +25,9 @@ angular.module('healthCareApp')
     UtilService.errorMessage('Successfully document removed!!');
   };
 
-  vm.documentRemove = function(docId) {
+  vm.documentRemove = function(index, docId) {
     var url = healthCareBusinessConstants.DELETE_DOC + docId;
+     vm.companyDetailsObj.documents.splice(index, 1);
     ApiService.delete(url).then(docremoveScb, errorCallback);
   };
 

@@ -94,8 +94,9 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
     UtilService.errorMessage('Successfully document removed!!');
   };
 
-  vm.documentRemove = function(docId) {
+  vm.documentRemove = function(index, docId) {
     var url = healthCareBusinessConstants.DELETE_DOC + docId;
+    vm.moreinfo.license.licenseDocuments.splice(index, 1);
     ApiService.delete(url).then(docremoveScb, errorCallback);
   };
     
