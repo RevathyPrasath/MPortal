@@ -24,6 +24,7 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
   var savePersonalSuccessCallback = function(res) {
     $scope.showLoader = false;
     localStorage.setItem("providerResObj", JSON.stringify(res.data));
+    localStorage.setItem("fromProvider", true);
     console.log("personal saved successfully");
     $location.path(localStorage.getItem("frompage"));
   };

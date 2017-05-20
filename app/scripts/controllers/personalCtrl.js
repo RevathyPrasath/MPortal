@@ -77,6 +77,7 @@ angular.module('healthCareApp')
     vm.fnViewMore = function (obj) {
       //console.log(obj);
       localStorage.setItem('personnalDetails', angular.toJson(obj));
+      localStorage.setItem("fromProvider", '');
       $location.path('personnalDetails');
     };
 

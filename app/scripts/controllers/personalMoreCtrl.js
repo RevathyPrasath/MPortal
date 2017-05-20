@@ -11,6 +11,7 @@ angular.module('healthCareApp')
   .controller('personalMoreCtrl', function($scope, $rootScope, $http, $filter, $location, ApiService, healthCareBusinessConstants, $mdDialog, UtilService,  $interval) {
     var vm = this;
     var errorCallback = function(error) {
+      if(error.data && error.data.message) 
       vm.errorMsg = error.data.message;
       if(vm.errorMsg) {
         UtilService.errorMessage(vm.errorMsg);
@@ -62,7 +63,7 @@ angular.module('healthCareApp')
     };
 
     // Save personal flow starts
-    var savePersonalSuccessCallback = function() {
+    var savePersonalSuccessCallback = function() {debugger;
       //console.log("personal saved successfully");
       $scope.showLoader = false;
       UtilService.errorMessage('Successfully saved personal details!!');
@@ -168,7 +169,12 @@ angular.module('healthCareApp')
       vm.determinateValue = 20;
       vm.personalDetailsObj = angular.fromJson(localStorage.getItem('personnalDetails'));
       if (Object.keys(vm.personalDetailsObj).length) {
-        vm.viewmode = true;
+        if(localStorage.getItem("fromProvider")) {
+          vm.viewmode = false;
+        } else {
+          vm.viewmode = true;
+        }
+        
         vm.personalDetailsObj.dateOfBirth = new Date(vm.personalDetailsObj.dateOfBirth);
         vm.personalDetailsObj.myDate = new Date();
        vm.provider = {
