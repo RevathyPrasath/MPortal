@@ -104,7 +104,6 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
   vm.cancelBtnclick = function() {
     localStorage.setItem("fromProvider", true);
     $location.path(localStorage.getItem("frompage"));
-
   };
 
   vm.editBtnClick = function() {

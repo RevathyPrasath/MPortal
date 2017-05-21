@@ -178,39 +178,42 @@ angular.module('healthCareApp')
     };
 
     function findWithAttr(array, value) {
-    for(var i = 0; i < array.length; i += 1) {
+      for(var i = 0; i < array.length; i += 1) {
         if(array[i].license.licenseId === value) {
-            return i;
+          return i;
         }
+      }
+      return -1;
     }
-    return -1;
-}
-
 
     vm.init = function() {
       vm.determinateValue = 20;
+        debugger;
       vm.personalDetailsObj = angular.fromJson(localStorage.getItem('personnalDetails'));
+      if(Object.keys(angular.fromJson(localStorage.getItem('providerMoreTempData'))).length) {
+      vm.personalDetailsObj = angular.fromJson(localStorage.getItem('providerMoreTempData'));
+      }
+    
       if (Object.keys(vm.personalDetailsObj).length) {
         if(localStorage.getItem("fromProvider")) {
           vm.viewmode = false;
           var providerresponseObj = angular.fromJson(localStorage.getItem('providerResObj'));
-           vm.personalDetailsObj = angular.fromJson(localStorage.getItem('providerMoreTempData'));
           if(providerresponseObj) {
-              var temp = {
-                license: providerresponseObj,
-                licenseTypeId: null,
-                objectValue: providerresponseObj['objectName']
-              };
-              for (var i = 0; i < vm.personalDetailsObj.provider.licenseType.length; i++) {
-                if(vm.personalDetailsObj.provider.licenseType[i].license.licenseId == providerresponseObj.licenseId) {
-                  vm.personalDetailsObj.provider.licenseType[i] = temp;
-                  break;
-                }
-              };
-              if(findWithAttr(vm.personalDetailsObj.provider.licenseType, providerresponseObj.licenseId) == -1){
-                vm.personalDetailsObj.provider.licenseType.push(temp);
+            var temp = {
+              license: providerresponseObj,
+              licenseTypeId: null,
+              objectValue: providerresponseObj['objectName']
+            };
+            for (var i = 0; i < vm.personalDetailsObj.provider.licenseType.length; i++) {
+              if(vm.personalDetailsObj.provider.licenseType[i].license.licenseId == providerresponseObj.licenseId) {
+                vm.personalDetailsObj.provider.licenseType[i] = temp;
+                break;
               }
-            } 
+            };
+            if(findWithAttr(vm.personalDetailsObj.provider.licenseType, providerresponseObj.licenseId) == -1){
+              vm.personalDetailsObj.provider.licenseType.push(temp);
+            }
+          }
         } else {
           vm.viewmode = true;
         }
