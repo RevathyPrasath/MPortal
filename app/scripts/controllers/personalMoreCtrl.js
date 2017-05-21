@@ -74,9 +74,9 @@ angular.module('healthCareApp')
       $scope.showLoader = true;
       console.log('vm.personalDetailsObj::', vm.personalDetailsObj);
       vm.personalDetailsObj.dateOfBirth = (vm.personalDetailsObj.dateOfBirth) ? vm.personalDetailsObj.dateOfBirth.getTime() : 0;
-      if(!vm.viewmode && !vm.addMode) {
+      if(!vm.viewmode && localStorage.getItem("addMode") != 'true') {
         ApiService.post(healthCareBusinessConstants.PERSONAL_UPDATE, vm.personalDetailsObj).then(savePersonalSuccessCallback, errorCallback).finally(finalCallBack);
-      } else if(vm.addMode) {
+      } else if(localStorage.getItem("addMode") == 'true') {
         ApiService.post(healthCareBusinessConstants.PERSONAL, vm.personalDetailsObj).then(savePersonalSuccessCallback, errorCallback).finally(finalCallBack);
       }
     };
@@ -240,7 +240,7 @@ angular.module('healthCareApp')
           }
         }
       } else {
-        vm.addMode = true; 
+        vm.addMode = true;
         vm.viewmode = false;
         vm.personalDetailsObj = {};
         vm.personalDetailsObj['documents'] = [];

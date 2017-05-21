@@ -79,12 +79,14 @@ angular.module('healthCareApp')
       localStorage.setItem('personnalDetails', angular.toJson(obj));
       localStorage.setItem("providerMoreTempData", JSON.stringify({}));
       localStorage.setItem("fromProvider", '');
+      localStorage.setItem("addMode", false);
       $location.path('personnalDetails');
     };
 
     vm.fnAdd = function () {
       localStorage.setItem("providerMoreTempData", JSON.stringify({}));
       localStorage.setItem('personnalDetails', angular.toJson({}));
+      localStorage.setItem("addMode", true);
       $location.path('personnalDetails');
     };
 
