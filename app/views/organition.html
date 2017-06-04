@@ -204,7 +204,7 @@
                   <p ng-show="!organition.viewmode">
                     <md-button class="md-raised md-cornered" ng-click="organition.showAttachmentCreate()">Add New</md-button>
                   </p>
-                  <table class="table">
+                  <table class="table" ng-show="organition.companyDetailsObj.documents.length>0">
                     <tr>
                       <td>Id</td>
                       <td>Date Created</td>

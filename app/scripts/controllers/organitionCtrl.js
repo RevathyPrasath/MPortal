@@ -67,8 +67,13 @@ angular.module('healthCareApp')
     };
 
     vm.addNew = function() {
-      $location.path('locationsMore');
-      localStorage.setItem('locationsDetails', angular.toJson({}));
+      localStorage.setItem("companyTempData", JSON.stringify(vm.companyDetailsObj));
+      if(!vm.viewmode) {
+        localStorage.setItem('locationsDetails', angular.toJson({}));
+        $location.path('locationsMore');
+      } else  {
+        return ;
+      }
     };
 
     vm.cancelBtnclick = function() {
@@ -108,7 +113,13 @@ angular.module('healthCareApp')
         })
         .then(function(res) {
           vm.hideAttachmentCreate();
-          vm.companyDetailsObj['documents'].push(res.data);
+          if(vm.companyDetailsObj['documents']) {
+            vm.companyDetailsObj['documents'].push(res.data);
+          } else {
+            vm.companyDetailsObj['documents'] = [];
+            vm.companyDetailsObj['documents'].push(res.data);
+          }
+          
            $scope.showLoader = false;
         }, function(res) {
           //alert('document upload fail!');
@@ -125,8 +136,13 @@ angular.module('healthCareApp')
     };
 
     var getCompaniesSb = function(res) {
-      vm.companyDetailsObj = res.data[0];
-        vm.companyDetailsObj.dateOfIncorporation = new Date(vm.companyDetailsObj.dateOfIncorporation);
+        if(res && res.data[0]) {
+          vm.viewmode = true;
+          vm.companyDetailsObj = res.data[0];
+          vm.companyDetailsObj.dateOfIncorporation = new Date(vm.companyDetailsObj.dateOfIncorporation);
+        } else {
+          vm.viewmode = false;
+        }
         var providerresponseObj = angular.fromJson(localStorage.getItem('providerResObj'));
           // if(providerresponseObj) {
           //   if(vm.companyDetailsObj && vm.companyDetailsObj.licenseType && vm.companyDetailsObj.licenseType.license) {
@@ -194,10 +210,18 @@ angular.module('healthCareApp')
     };
 
     vm.addOtherIdentifier = function() {
-      vm.companyDetailsObj.otherIdentifications.push({
+      if(vm.companyDetailsObj.otherIdentifications == undefined) {
+        vm.companyDetailsObj['otherIdentifications'] = [];
+        vm.companyDetailsObj.otherIdentifications.push({
         "identifierName": "",
         "identifierNumber": ""
-      });
+        });
+      } else {
+        vm.companyDetailsObj.otherIdentifications.push({
+          "identifierName": "",
+          "identifierNumber": ""
+        });
+      }
     };
 
     $interval(function() {
@@ -211,18 +235,22 @@ angular.module('healthCareApp')
       vm.activated = true;
       vm.determinateValue = 20;
       vm.pageNo = 0;
-      vm.getLocations(0);
-      vm.getCompanies(0);
       vm.viewmode = true;
       vm.myDate = new Date();
       vm.hideAttachmentCreate();
-      vm.getStates();
       vm.companyDetailsObj = {
         'otherIdentifications': [{
           "identifierName": "",
           "identifierNumber": ""
         }]
       };
+
+      if(localStorage.getItem('companyTempData') && Object.keys(angular.fromJson(localStorage.getItem('companyTempData'))).length) {
+        vm.companyDetailsObj = angular.fromJson(localStorage.getItem('companyTempData'));
+      }
+      vm.getStates();
+      vm.getLocations(0);
+      vm.getCompanies(0);
       vm.entityTypes = [{ id:"SCorporation", name: 'S corporation' }, {id:'CCorporation', name: 'C corporation' }];
     };
 
