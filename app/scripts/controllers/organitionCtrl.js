@@ -99,6 +99,7 @@ angular.module('healthCareApp')
     };
 
     vm.fileuploadObject = {};
+    vm.fileuploadObject.trackExpiry = false;
     vm.createAttachment = function() {
       $scope.showLoader = true;
       var url = healthCareBusinessConstants.SAVE_DOC;

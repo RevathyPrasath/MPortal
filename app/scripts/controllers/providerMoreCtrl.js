@@ -67,6 +67,7 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
   };
 
   vm.fileuploadObject = {};
+  vm.fileuploadObject.trackExpiry = false;
   vm.createAttachment = function() {
     $scope.showLoader = true;
     var url = healthCareBusinessConstants.SAVE_DOC;
@@ -152,7 +153,7 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
       vm.moreinfo.license['licenseDate'] = new Date(vm.moreinfo.license.expiryDate);
       } else {
         vm.editBtnClick();
-        vm.moreinfo = { "licenseTypeId": null, "objectValue": "", "provider": null, "license": { "licenseId": null, "state": "", "licenseNo": "", "expiryDate": null, "isDue": null, "notes": "", "carrier": null, "address": null, "policyNumber": null, "objectName": null, "pageNumber": null, "total": null, "size": null, "licenseDocuments": [] }, "createdOn": null, "createdBy": "SYSTEM", "updatedOn": null, "updatedBy": null };
+        vm.moreinfo = { "licenseTypeId": null, "objectValue": "", "provider": null, "license": { "licenseId": null, "state": "", "licenseNo": "", "expiryDate": null, "isDue": false, "notes": "", "carrier": null, "address": null, "policyNumber": null, "objectName": null, "pageNumber": null, "total": null, "size": null, "licenseDocuments": [] }, "createdOn": null, "createdBy": "SYSTEM", "updatedOn": null, "updatedBy": null };
       }
     vm.attachmentCreateViewmode = false;
     vm.getStates();
