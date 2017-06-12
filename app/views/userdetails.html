@@ -113,7 +113,7 @@
             <td ng-bind="doc.documentId"></td>
             <td ng-bind="doc.createdOn | date : format : timezone"></td>
             <td ng-bind="doc.description"></td>
-            <td><a target="_blank" ng-href="{{doc.documentUrl}}">View</a></td>
+            <td><a ng-click="user.viewDoc(doc)">View</a></td>
             <td><a ng-click="user.documentRemove($index, doc.documentId);">Remove</a></td>
           </tr>
         </table>

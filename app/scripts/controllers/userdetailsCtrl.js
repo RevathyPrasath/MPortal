@@ -116,6 +116,18 @@ angular.module('healthCareApp')
       }
     }, 100);
 
+  vm.viewDoc = function(obj) {
+    vm.attachmentCreateViewmode = true;
+    vm.fileuploadObject = {
+      shortdescription: obj.description,
+      notes: obj.notes,
+      expiry: obj.expiryDate,
+      trackExpiry: obj.trackExpiryDate
+    }
+
+    console.log(obj);
+  };
+
   vm.init = function() {
     vm.determinateValue = 20;
     vm.userDetailsObj = angular.fromJson(localStorage.getItem('userdetails'));
