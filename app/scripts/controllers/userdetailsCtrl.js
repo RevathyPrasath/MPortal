@@ -124,6 +124,7 @@ angular.module('healthCareApp')
     } else {
       vm.viewmode = false;
       vm.userDetailsObj = {};
+      vm.userDetailsObj.status = true;
       vm.userDetailsObj['documents'] = [];
     }
     vm.roles = [{ role: 'ADMINISTRATOR' }, { role: 'USER' }];

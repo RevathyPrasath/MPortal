@@ -189,7 +189,6 @@ angular.module('healthCareApp')
 
     vm.init = function() {
       vm.determinateValue = 20;
-        debugger;
       vm.personalDetailsObj = angular.fromJson(localStorage.getItem('personnalDetails'));
       if(Object.keys(angular.fromJson(localStorage.getItem('providerMoreTempData'))).length) {
       vm.personalDetailsObj = angular.fromJson(localStorage.getItem('providerMoreTempData'));
@@ -244,6 +243,7 @@ angular.module('healthCareApp')
         vm.addMode = true;
         vm.viewmode = false;
         vm.personalDetailsObj = {};
+        vm.personalDetailsObj['employeeId']= {'status':true};
         vm.personalDetailsObj['documents'] = [];
       }
       vm.getLocations();
