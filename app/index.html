@@ -26,15 +26,15 @@
     <![endif]-->
   <!-- Add your site or application content here -->
   <header ng-controller="HeaderCtrl as header" ng-hide="hideNavbar" class="main-header">
-    <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
-      <md-nav-item md-nav-click="header.navigate('main')" name="main"><span class="orange">HealthCare</span>Business</md-nav-item>
-      <md-nav-item md-nav-click="header.navigate('home')" name="home">Home</md-nav-item>
-      <md-nav-item md-nav-click="header.navigate('operations')" name="Operations">Operations</md-nav-item>
-      <md-nav-item md-nav-click="header.navigate('status')" name="status">Status</md-nav-item>
-      <md-nav-item md-nav-click="header.navigate('personal')" name="personal">Personnel</md-nav-item>
-      <md-nav-item md-nav-click="header.navigate('organition')" name="organition">Organization</md-nav-item>
-      <md-nav-item md-nav-click="header.navigate('admin')" name="Admin">Admin</md-nav-item>
-      <md-nav-item md-nav-click="header.logout()" name="logout" style="float: right;right: 0;position: absolute;">Logout</md-nav-item>
+    <md-nav-bar md-selected-nav-item="header.currentNavItem" nav-bar-aria-label="navigation links">
+      <li style="font-size: 18px;margin-top: 13px;padding-left: 10px;"><span class="orange">HealthCare</span>Business</li>
+      <md-nav-item md-nav-click="header.navigate('home')" name="home" value="home">Home</md-nav-item>
+      <md-nav-item md-nav-click="header.navigate('operations')" name="Operations" value="Operations">Operations</md-nav-item>
+      <md-nav-item md-nav-click="header.navigate('status')" name="status" value="status">Status</md-nav-item>
+      <md-nav-item md-nav-click="header.navigate('personal')" name="personal" value="personal">Personnel</md-nav-item>
+      <md-nav-item md-nav-click="header.navigate('organition')" name="organition" value="organition">Organization</md-nav-item>
+      <md-nav-item md-nav-click="header.navigate('admin')" name="Admin" value="Admin">Admin</md-nav-item>
+      <md-nav-item md-nav-click="header.logout()" name="logout" value="logout" style="float: right;right: 0;position: absolute;">Logout</md-nav-item>
     </md-nav-bar>
     <!-- <span class="pull-right">Logout</span> -->
   </header>

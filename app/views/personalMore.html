@@ -33,7 +33,7 @@
           <div flex layout='row' layout-padding layout-align="start center" style="height: 30px;">
             <div>Gender</div>
             <md-radio-group ng-disabled="personalMore.viewmode" ng-model="personalMore.personalDetailsObj.gender" ng-readonly="personalMore.viewmode">
-              <md-radio-button value="MALE">Male</md-radio-button>
+              <md-radio-button value="MALE" style="margin-right:20px;">Male</md-radio-button>
               <md-radio-button value="FEMALE">Female</md-radio-button>
             </md-radio-group>
           </div>
@@ -69,11 +69,11 @@
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label>Phone</label>
-            <input ng-model="personalMore.personalDetailsObj.addressId.phone" ng-readonly="personalMore.viewmode">
+            <input type="number" ng-model="personalMore.personalDetailsObj.addressId.phone" ng-readonly="personalMore.viewmode">
           </md-input-container>
           <md-input-container class="md-block" flex-gt-sm>
             <label>Personal Email</label>
-            <input ng-model="personalMore.personalDetailsObj.addressId.email" ng-readonly="personalMore.viewmode">
+            <input type="email" ng-model="personalMore.personalDetailsObj.addressId.email" ng-readonly="personalMore.viewmode">
           </md-input-container>
         </div>
         <h5 style="color: #4CAF50;">EMPLOYEE</h5>
@@ -94,7 +94,7 @@
           <div flex layout='row' layout-padding layout-align="start center" style="height: 30px;">
             <div>Status</div>
             <md-radio-group ng-disabled="personalMore.viewmode" ng-model="personalMore.personalDetailsObj.employeeId.status" ng-readonly="personalMore.viewmode">
-              <md-radio-button ng-value="true">Active</md-radio-button>
+              <md-radio-button ng-value="true" style="margin-right:20px;">Active</md-radio-button>
               <md-radio-button ng-value="false">Inactive</md-radio-button>
             </md-radio-group>
           </div>
@@ -108,7 +108,7 @@
               </md-option>
             </md-select>
           </md-input-container>
-          <div flex layout="row" layout-padding layout-align="start center" style="height: 30px;">
+          <div flex layout="row" layout-padding layout-align="start center" style="height: 30px; padding-left:50px">
             <md-checkbox ng-disabled="personalMore.viewmode" class="md-block" flex-gt-sm ng-model="personalMore.personalDetailsObj.employeeId.isSupervisor" aria-label="Supervisor">Supervisor
             </md-checkbox>
             <md-checkbox ng-disabled="personalMore.viewmode" class="md-block" flex-gt-sm ng-model="personalMore.personalDetailsObj.employeeId.isProvider" aria-label="Provider" ng-click="personalMore.providerClick()">Provider

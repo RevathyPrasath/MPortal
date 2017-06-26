@@ -41,7 +41,7 @@
           <div flex layout='row' layout-padding layout-align="start center" style="height: 30px;">
             <div>Status</div>
             <md-radio-group ng-model="locationsMore.locationsDetailsObj.status" ng-readonly="locationsMore.viewmode">
-              <md-radio-button ng-value="true">Active</md-radio-button>
+              <md-radio-button ng-value="true" style="margin-right:20px;">Active</md-radio-button>
               <md-radio-button ng-value="false">In Active</md-radio-button>
             </md-radio-group>
           </div>
@@ -49,7 +49,7 @@
         <div layout-gt-sm="row" style="margin-top: 20px;">
           <md-input-container class="md-block" flex-gt-sm>
             <label>Phone</label>
-            <input ng-model="locationsMore.locationsDetailsObj.addressId.phone" ng-readonly="locationsMore.viewmode">
+            <input type="number" ng-model="locationsMore.locationsDetailsObj.addressId.phone" ng-readonly="locationsMore.viewmode">
           </md-input-container>
           <md-input-container class="md-block" flex-gt-sm>
             <label>Fax</label>

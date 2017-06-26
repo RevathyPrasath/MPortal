@@ -119,6 +119,7 @@ angular.module('healthCareApp')
        vm.determinateValue = 20;
       vm.getStates();
       vm.locationsDetailsObj = angular.fromJson(localStorage.getItem('locationsDetails'));
+      vm.locationsDetailsObj.addressId.phone = parseInt(vm.locationsDetailsObj.addressId.phone);
       if (Object.keys(vm.locationsDetailsObj).length) {
         vm.viewmode = true;
       } else {

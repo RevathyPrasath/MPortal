@@ -12,7 +12,9 @@ angular.module('healthCareApp')
     var vm = this;
     // error call back method.
     var errorCallback = function(error) {
-      vm.errorMsg = error.data.message;
+      if(error.data && error.data.message){
+        vm.errorMsg = error.data.message;
+      }
       if(vm.errorMsg) {
        UtilService.errorMessage(vm.errorMsg);
       } else {
@@ -144,6 +146,7 @@ angular.module('healthCareApp')
         } else {
           vm.viewmode = false;
         }
+         vm.companyDetailsObj.addressId.phone = parseInt(vm.companyDetailsObj.addressId.phone);
         var providerresponseObj = angular.fromJson(localStorage.getItem('providerResObj'));
           // if(providerresponseObj) {
           //   if(vm.companyDetailsObj && vm.companyDetailsObj.licenseType && vm.companyDetailsObj.licenseType.license) {
@@ -248,6 +251,7 @@ angular.module('healthCareApp')
 
       if(localStorage.getItem('companyTempData') && Object.keys(angular.fromJson(localStorage.getItem('companyTempData'))).length) {
         vm.companyDetailsObj = angular.fromJson(localStorage.getItem('companyTempData'));
+        vm.companyDetailsObj.addressId.phone = parseInt(vm.companyDetailsObj.addressId.phone);
       }
       vm.getStates();
       vm.getLocations(0);

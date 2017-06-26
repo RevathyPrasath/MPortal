@@ -217,7 +217,7 @@ angular.module('healthCareApp')
         } else {
           vm.viewmode = true;
         }
-        
+        vm.personalDetailsObj.addressId.phone = parseInt(vm.personalDetailsObj.addressId.phone);
         vm.personalDetailsObj.dateOfBirth = new Date(vm.personalDetailsObj.dateOfBirth);
         vm.personalDetailsObj.myDate = new Date();
          vm.provider = {

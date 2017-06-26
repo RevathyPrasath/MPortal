@@ -10,7 +10,7 @@
 angular.module('healthCareApp')
   .controller('HeaderCtrl', function($location) {
     var vm = this;
-
+    vm.currentNavItem = 'personal';
     var errorCallback = function(error) {
       vm.errorMsg = error.data.message;
       console.log("logout response::", error);
