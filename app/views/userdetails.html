@@ -55,7 +55,7 @@
         </md-input-container>
         <div flex layout='row' layout-padding layout-align="start center" style="    height: 30px;">
           <div>Status</div>
-          <md-radio-group ng-model="user.userDetailsObj.status" ng-readonly="user.viewmode">
+          <md-radio-group ng-model="user.userDetailsObj.status"  ng-readonly="user.viewmode" ng-disabled="user.viewmode">
             <md-radio-button ng-value="true" style="margin-right:20px;">Active</md-radio-button>
             <md-radio-button ng-value="false"> In active </md-radio-button>
           </md-radio-group>

@@ -44,7 +44,7 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
+    font-size: 14px;
     color: #444;
     margin: 0;
     padding: 0;
@@ -1016,14 +1016,14 @@ table tr th {
 table tr th {
     background: #333;
     color: #fff;
-    font-size: 14px;
+    font-size: 17px;
     font-weight: normal;
 }
 
 table tr th,
 table tr td {
     padding: 10px;
-    font-size: 14px;
+    font-size: 17px;
 }
 
 table tr:nth-child(odd) {
@@ -1312,8 +1312,8 @@ md-input-container {
     margin: 0 !important;
     label {
         text-align: left;
-        font-size: 13px;
-        line-height: 12px;
+        font-size: 16px;
+        line-height: 14px;
     }
     input[type="password"] {
         border: none;
@@ -1408,4 +1408,13 @@ md-nav-bar {
     .provider {
         margin-bottom: 12px;
     }
+}
+.more {
+    cursor:pointer;
+}
+.input-phone {
+    box-shadow: none !important;
+    border: none !important;
+    border-bottom: 1px solid #ccc !important;
+    border-radius: 0 !important;
 }

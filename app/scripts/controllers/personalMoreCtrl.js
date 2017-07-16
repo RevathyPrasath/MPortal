@@ -251,7 +251,7 @@ angular.module('healthCareApp')
       getSupervisors();
       getSpecialities();
       //temp
-      vm.credentials = [{id:1, name:'MD'}, {id:2, name:'DR'}];
+      vm.credentials = [{id:1, name:'MD'}, {id:2, name:'DO'}, {id:3, name:'PA'},{id:4, name:'NPP'}];
     };
     vm.init();
   });

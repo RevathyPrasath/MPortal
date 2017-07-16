@@ -1304,3 +1304,9 @@ a.ui-button:active,
 	-webkit-box-shadow: 0px 0px 5px #666666;
 	box-shadow: 0px 0px 5px #666666;
 }
+.phone-number {
+	box-shadow: none;
+	border: none;
+	border-bottom: 1px solid #ccc;
+	border-radius: 0;
+}
