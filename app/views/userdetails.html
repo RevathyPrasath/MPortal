@@ -40,7 +40,8 @@
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label>phone</label>
-            <input ng-model="user.userDetailsObj.phone" ng-readonly="user.viewmode">
+            <!-- <input ng-model="user.userDetailsObj.phone" ng-readonly="user.viewmode"> -->
+            <input class="input-phone" type='text' phone-input ng-model="user.userDetailsObj.phone" ng-readonly="user.viewmode"/>
           </md-input-container>
           <md-input-container lass="md-block" flex-gt-sm>
             <label>Role</label>
@@ -94,9 +95,22 @@
           <div layout-gt-sm="row">
             <input type="file" name="uploadingFiles" onchange="angular.element(this).scope().uploadFile(this.files)"/>
           </div>
-          <div class="text-right">
-            <md-button class="md-raised md-primary" ng-click="user.createAttachment()">Save</md-button>
-            <md-button class="md-raised" ng-click="user.hideAttachmentCreate()">Cancel</md-button>
+
+          <div layout-gt-sm="row">  
+            <table class="table" style="width:50%;margin-top:10px;margin-bottom:10px;">
+              <tr>
+                <td>File Name</td>
+                <td>Ation</td>
+              </tr>
+              <tr>
+                <td ng-bind="user.fileuploadObject.description"></td>
+                <td><span ng-click="user.documentRemove(user.fileuploadObject.docId);" class="btn btn-link text-danger">Delete</span></td>
+              </tr>
+            </table>
+            <div class="text-right" style="width:50%;">
+              <md-button class="md-raised md-warn md-button md-ink-ripple" ng-click="user.createAttachment()">Upload</md-button>
+              <md-button class="md-raised" ng-click="user.hideAttachmentCreate()">Cancel</md-button>
+            </div>
           </div>
         </form>
         <p ng-show="!user.viewmode">
@@ -113,8 +127,9 @@
             <td ng-bind="doc.documentId"></td>
             <td ng-bind="doc.createdOn | date : format : timezone"></td>
             <td ng-bind="doc.description"></td>
-            <td><a ng-click="user.viewDoc(doc)">View</a></td>
-            <td><a ng-click="user.documentRemove($index, doc.documentId);">Remove</a></td>
+            <td><a target="_blank" ng-href="{{doc.documentUrl}}" class="btn btn-link">View</a></td>
+            <td><a ng-click="user.viewDoc(doc)" class="btn btn-link" ng-disabled="user.viewmode">Edit</a></td>
+            <!-- <td><a ng-click="user.documentRemove($index, doc.documentId);">Remove</a></td> -->
           </tr>
         </table>
       </div>

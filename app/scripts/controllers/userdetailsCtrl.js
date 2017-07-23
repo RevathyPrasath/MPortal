@@ -102,9 +102,9 @@ angular.module('healthCareApp')
     UtilService.errorMessage('Successfully document removed!!');
   };
 
-  vm.documentRemove = function(index, docId) {
+  vm.documentRemove = function(docId) {
     $scope.showLoader = true;
-    vm.userDetailsObj.documents.splice(index, 1);
+    //vm.userDetailsObj.documents.splice(index, 1);
     var url = healthCareBusinessConstants.DELETE_DOC + docId;
     ApiService.delete(url).then(docremoveScb, errorCallback);
   };
@@ -119,10 +119,12 @@ angular.module('healthCareApp')
   vm.viewDoc = function(obj) {
     vm.attachmentCreateViewmode = true;
     vm.fileuploadObject = {
-      shortdescription: obj.description,
-      notes: obj.notes,
-      expiry: obj.expiryDate,
-      trackExpiry: obj.trackExpiryDate
+      shortdescription: obj.license[0].shortDescription,
+      notes: obj.license[0].notes,
+      expiry: new Date(obj.license[0].expiryDate),
+      trackExpiry: obj.license[0].isDue,
+      url: obj.documentUrl,
+      docId: obj.documentId
     }
 
     console.log(obj);

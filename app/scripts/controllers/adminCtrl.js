@@ -37,7 +37,7 @@ angular.module('healthCareApp')
       ApiService.get(healthCareBusinessConstants.GET_USERS).then(getUsersSb, errorCallback).finally(finalCallBack);
     };
 
-    vm.userDetailsView = function(obj) {
+    vm.userDetailsView = function(obj) {debugger;
       console.log(obj);
       localStorage.setItem('userdetails', angular.toJson(obj));
       $location.path('userdetails');
