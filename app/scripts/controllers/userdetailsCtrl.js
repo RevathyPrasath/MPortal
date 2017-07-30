@@ -80,12 +80,21 @@ angular.module('healthCareApp')
   $scope.uploadFile = function(files) {
     fd.append("uploadingFiles", files[0]);
   };
+ // update doc
+ 
 
   vm.fileuploadObject = {};
   vm.fileuploadObject.trackExpiry = false;
-  vm.createAttachment = function() {
+  vm.createAttachment = function(doc) {
     $scope.showLoader = true;
-    var url = healthCareBusinessConstants.SAVE_DOC;
+    var url = null;
+    console.log('doccccccccccc Mode', vm.showDeleteDoc);
+    if(!vm.showDeleteDoc) {
+      url = healthCareBusinessConstants.SAVE_DOC;
+    } else {
+      url = healthCareBusinessConstants.UPDATE_DOC;
+    }
+    
     fd.append('description', vm.fileuploadObject.shortdescription);
     fd.append('notes', vm.fileuploadObject.notes);
     fd.append('expiryDate', vm.fileuploadObject.expiry);
