@@ -251,8 +251,11 @@ angular.module('healthCareApp')
 
       if(localStorage.getItem('companyTempData') && Object.keys(angular.fromJson(localStorage.getItem('companyTempData'))).length) {
         vm.companyDetailsObj = angular.fromJson(localStorage.getItem('companyTempData'));
-        vm.companyDetailsObj.addressId.phone = parseInt(vm.companyDetailsObj.addressId.phone);
+        if(vm.companyDetailsObj && vm.companyDetailsObj.addressId) {
+          vm.companyDetailsObj.addressId.phone = parseInt(vm.companyDetailsObj.addressId.phone);
+        }  
       }
+      
       vm.getStates();
       vm.getLocations(0);
       vm.getCompanies(0);

@@ -51,9 +51,14 @@ angular.module('healthCareApp')
     };
 
     vm.saveBtnClick = function () {
-      $scope.showLoader = true;
+      
       if(vm.userDetailsObj.password == vm.userDetailsObj.confirmPassword) {
-        ApiService.post(healthCareBusinessConstants.GET_USERS, vm.userDetailsObj).then(saveUserSuccessCallback, errorCallback).finally(finalCallBack);
+        if(vm.userDetailsObj.lastName && vm.userDetailsObj.firstName && vm.userDetailsObj.userName && vm.userDetailsObj.email && vm.userDetailsObj.password) {
+          $scope.showLoader = true;
+          ApiService.post(healthCareBusinessConstants.GET_USERS, vm.userDetailsObj).then(saveUserSuccessCallback, errorCallback).finally(finalCallBack);
+        } else {
+          UtilService.errorMessage('Please Enter the required fields.');
+        }
       } else {
         UtilService.errorMessage('password and confirm password should be same!!');
       }
@@ -61,7 +66,10 @@ angular.module('healthCareApp')
     };
 
     vm.showAttachmentCreate = function() {
+      vm.fileuploadObject = {};
+      vm.fileuploadObject.trackExpiry = false;
       vm.attachmentCreateViewmode = true;
+      vm.showDeleteDoc = false;
     };
 
     vm.hideAttachmentCreate = function() {
@@ -124,9 +132,10 @@ angular.module('healthCareApp')
       expiry: new Date(obj.license[0].expiryDate),
       trackExpiry: obj.license[0].isDue,
       url: obj.documentUrl,
-      docId: obj.documentId
+      docId: obj.documentId,
+      documentName: obj.documentName
     }
-
+    vm.showDeleteDoc = true;
     console.log(obj);
   };
 

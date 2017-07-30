@@ -10,27 +10,27 @@
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label>Last Name</label>
-            <input ng-model="user.userDetailsObj.lastName" ng-readonly="user.viewmode">
+            <input ng-model="user.userDetailsObj.lastName" ng-readonly="user.viewmode"  ng-required="true">
           </md-input-container>
           <md-input-container class="md-block" flex-gt-sm>
             <label>First Name</label>
-            <input ng-model="user.userDetailsObj.firstName" ng-readonly="user.viewmode">
+            <input ng-model="user.userDetailsObj.firstName" ng-readonly="user.viewmode"  ng-required="true">
           </md-input-container>
         </div>
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label>User Name</label>
-            <input ng-model="user.userDetailsObj.userName" ng-readonly="user.viewmode">
+            <input ng-model="user.userDetailsObj.userName" ng-readonly="user.viewmode" ng-required="true">
           </md-input-container>
           <md-input-container class="md-block" flex-gt-sm>
             <label>Email</label>
-            <input ng-model="user.userDetailsObj.email" ng-readonly="user.viewmode">
+            <input ng-model="user.userDetailsObj.email" ng-readonly="user.viewmode" ng-required="true">
           </md-input-container>
         </div>
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label>Password</label>
-            <input type="password" ng-model="user.userDetailsObj.password" ng-readonly="user.viewmode">
+            <input type="password" ng-model="user.userDetailsObj.password" ng-readonly="user.viewmode" ng-required="true">
           </md-input-container>
           <md-input-container class="md-block" flex-gt-sm>
             <label>Confirm Password</label>
@@ -97,17 +97,18 @@
           </div>
 
           <div layout-gt-sm="row">  
-            <table class="table" style="width:50%;margin-top:10px;margin-bottom:10px;">
+            <table class="table" style="width:50%;margin-top:10px;margin-bottom:10px;" ng-show="user.showDeleteDoc">
               <tr>
                 <td>File Name</td>
                 <td>Ation</td>
               </tr>
               <tr>
-                <td ng-bind="user.fileuploadObject.description"></td>
+                <td ng-bind="user.fileuploadObject.documentName"></td>
                 <td><span ng-click="user.documentRemove(user.fileuploadObject.docId);" class="btn btn-link text-danger">Delete</span></td>
               </tr>
             </table>
-            <div class="text-right" style="width:50%;">
+            {{user.showDeleteDoc}} bonds
+            <div class="text-right {{!user.showDeleteDoc && 'half-width' || 'full-width'}}">
               <md-button class="md-raised md-warn md-button md-ink-ripple" ng-click="user.createAttachment()">Upload</md-button>
               <md-button class="md-raised" ng-click="user.hideAttachmentCreate()">Cancel</md-button>
             </div>
