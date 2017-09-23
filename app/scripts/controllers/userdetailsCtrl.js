@@ -79,15 +79,27 @@ angular.module('healthCareApp')
     $scope.uploadFile = function(files) {
       fd.append("uploadingFiles", files[0]);
     };
+
     // update doc
-
-
     vm.fileuploadObject = {};
     vm.fileuploadObject.trackExpiry = false;
-    vm.createAttachment = function(doc) {debugger;
+
+    vm.checkExpireValidation = function() {
+      if (vm.fileuploadObject.trackExpiry) {
+        if (vm.fileuploadObject.expiry) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return true;
+      }
+    };
+
+    vm.createAttachment = function(doc) {
+      if(vm.checkExpireValidation()) {
       $scope.showLoader = true;
       var url = null;
-      // console.log('doccccccccccc Mode', vm.showDeleteDoc);
       var newDoc = false;
       if (!vm.showDeleteDoc) {
         newDoc = true;
@@ -98,7 +110,6 @@ angular.module('healthCareApp')
         fd.append('documentUrl', vm.fileuploadObject.url);
         fd.append('documentName', vm.fileuploadObject.documentName);
       }
-
       var docId = (vm.fileuploadObject.docId ? vm.fileuploadObject.docId : 0);
       fd.append('description', vm.fileuploadObject.shortdescription);
       fd.append('notes', vm.fileuploadObject.notes);
@@ -106,7 +117,6 @@ angular.module('healthCareApp')
       fd.append('trackExpiryDate', vm.fileuploadObject.trackExpiry);
       fd.append('documentCategory', 'testing');
       fd.append('docID', docId);
-
       $http.post(url, fd, {
           transformRequest: angular.identity,
           headers: { 'Content-Type': undefined }
@@ -125,11 +135,14 @@ angular.module('healthCareApp')
               }
             }
           }
-
           UtilService.errorMessage('document upload success!');
         }, function(res) {
+          $scope.showLoader = false;
           UtilService.errorMessage('document upload fail!');
         });
+      } else {
+        UtilService.errorMessage('Please select Expiry Date!');
+      }
     };
 
     var docremoveScb = function(msg) {
@@ -139,7 +152,6 @@ angular.module('healthCareApp')
 
     vm.documentRemove = function(docId) {
       $scope.showLoader = true;
-      //vm.userDetailsObj.documents.splice(index, 1);
       var url = healthCareBusinessConstants.DELETE_DOC + docId;
       ApiService.delete(url).then(docremoveScb, errorCallback);
     };

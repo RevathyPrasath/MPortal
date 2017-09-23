@@ -1,12 +1,20 @@
 /* Global styles */
 
 .glyphicon-ok-sign {
- color: #19e0c9;
+  color: #19e0c9;
+}
+
+.full-width {
+  margin-left: 10px;
+}
+
+.half-width {
+  margin-left: -8px;
 }
 .glyphicon-exclamation-sign {
-    color: red;
-
+  color: red;
 }
+
 .md-toast-content {
   top: 50px !important;
   position: fixed !important;
@@ -641,6 +649,8 @@ a.ui-button:active,
 
 
 
+
+
 /* Tab styles begin */
 
 .tabs {
@@ -708,6 +718,8 @@ footer {
   margin-top: 35px;
   position: fixed;
 }
+
+
 
 
 
@@ -786,6 +798,8 @@ input[type=radio]:checked~.check {
 input[type=radio]:checked~.check::before {
   background: #e65100;
 }
+
+
 
 
 
@@ -1089,6 +1103,8 @@ table tr:nth-child(odd) {
 
 
 
+
+
 /*.status-dashboard table tr.bf-warning td:last-child {
  background:#f29a12;
 }
@@ -1106,11 +1122,15 @@ table tr:nth-child(odd) {
 
 
 
+
+
 /* Status Dashboard Styles End */
 
 .padding0 {
   padding: 0;
 }
+
+
 
 
 
@@ -1210,6 +1230,8 @@ table tr:nth-child(odd) {
 
 
 
+
+
 /* Human Resource List Styles begin */
 
 
@@ -1231,6 +1253,8 @@ table tr:nth-child(odd) {
   width: 50%;
   float: left;
 }
+
+
 
 
 
@@ -1311,6 +1335,8 @@ ul.collect ul.dropdown-menu {
 
 
 
+
+
 /* admin */
 
 .admin-view {
@@ -1358,6 +1384,8 @@ md-radio-button {
 md-nav-bar {
   box-shadow: 0 0 10px #ccc;
 }
+
+
 
 
 
