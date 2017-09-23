@@ -52,7 +52,8 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
       "pageNumber": 0,
       "total": 0,
       "size": 0,
-      "licenseDocuments": vm.moreinfo.license.licenseDocuments
+      "licenseDocuments": vm.moreinfo.license.licenseDocuments,
+      "personId": (JSON.parse(localStorage.getItem("providerMoreTempData")).personId) ? (JSON.parse(localStorage.getItem("providerMoreTempData")).personId) : 0
     }
     ApiService.post(healthCareBusinessConstants.CREATE_LICENSE, providerSaveObj).then(savePersonalSuccessCallback, errorCallback).finally(finalCallBack);
   };
@@ -135,7 +136,7 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
     ApiService.get(healthCareBusinessConstants.GET_STATES_LIST).then(getStatesSb, errorCallback).finally(finalCallBack);
   };
 
-  vm.init = function() {
+  vm.init = function() {debugger;
     vm.determinateValue = 20;
     if(showLicence == 'MEDICAL') {
       vm.showmedicalLicense = true;
@@ -147,6 +148,7 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
       vm.showmalpracticeLicense = true;
       vm.objectName = 'INSURANCE';
     }
+    
     vm.moreinfo = JSON.parse(localStorage.getItem("providerMoreInfo"));
     if (Object.keys(vm.moreinfo).length && Object.keys(vm.moreinfo.license).length ) {
       vm.providerViewMode = true;

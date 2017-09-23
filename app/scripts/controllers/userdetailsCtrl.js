@@ -14,7 +14,7 @@ angular.module('healthCareApp')
     // error call back method.
     var errorCallback = function(error) {
       $scope.showLoader = false;
-      if(vm.errorMsg) {
+      if (vm.errorMsg) {
         UtilService.errorMessage(vm.errorMsg);
       } else {
         UtilService.errorMessage('Something went wrong!!');
@@ -44,16 +44,15 @@ angular.module('healthCareApp')
       vm.viewmode = false;
     };
 
-    var saveUserSuccessCallback = function () {
+    var saveUserSuccessCallback = function() {
       $scope.showLoader = false;
       UtilService.errorMessage('user details saved!!');
       $location.path('admin');
     };
 
-    vm.saveBtnClick = function () {
-      
-      if(vm.userDetailsObj.password == vm.userDetailsObj.confirmPassword) {
-        if(vm.userDetailsObj.lastName && vm.userDetailsObj.firstName && vm.userDetailsObj.userName && vm.userDetailsObj.email && vm.userDetailsObj.password) {
+    vm.saveBtnClick = function() {
+      if (vm.userDetailsObj.password == vm.userDetailsObj.confirmPassword) {
+        if (vm.userDetailsObj.lastName && vm.userDetailsObj.firstName && vm.userDetailsObj.userName && vm.userDetailsObj.email && vm.userDetailsObj.password) {
           $scope.showLoader = true;
           ApiService.post(healthCareBusinessConstants.GET_USERS, vm.userDetailsObj).then(saveUserSuccessCallback, errorCallback).finally(finalCallBack);
         } else {
@@ -62,7 +61,7 @@ angular.module('healthCareApp')
       } else {
         UtilService.errorMessage('password and confirm password should be same!!');
       }
-      
+
     };
 
     vm.showAttachmentCreate = function() {
@@ -76,92 +75,111 @@ angular.module('healthCareApp')
       vm.attachmentCreateViewmode = false;
     };
 
-  var fd = new FormData();
-  $scope.uploadFile = function(files) {
-    fd.append("uploadingFiles", files[0]);
-  };
- // update doc
- 
+    var fd = new FormData();
+    $scope.uploadFile = function(files) {
+      fd.append("uploadingFiles", files[0]);
+    };
+    // update doc
 
-  vm.fileuploadObject = {};
-  vm.fileuploadObject.trackExpiry = false;
-  vm.createAttachment = function(doc) {
-    $scope.showLoader = true;
-    var url = null;
-    console.log('doccccccccccc Mode', vm.showDeleteDoc);
-    if(!vm.showDeleteDoc) {
-      url = healthCareBusinessConstants.SAVE_DOC;
-    } else {
-      url = healthCareBusinessConstants.UPDATE_DOC;
-    }
-    
-    fd.append('description', vm.fileuploadObject.shortdescription);
-    fd.append('notes', vm.fileuploadObject.notes);
-    fd.append('expiryDate', vm.fileuploadObject.expiry);
-    fd.append('trackExpiryDate', vm.fileuploadObject.trackExpiry);
-    fd.append('documentCategory', 'abc');
-    $http.post(url, fd, {
-        transformRequest: angular.identity,
-        headers: { 'Content-Type': undefined }
-      })
-      .then(function(res) {
-        vm.hideAttachmentCreate();
-        $scope.showLoader = false;
-        vm.userDetailsObj['documents'].push(res.data);
-        UtilService.errorMessage('document upload success!');
-      }, function(res) {
-        UtilService.errorMessage('document upload fail!');
-      });
-  };
 
-  var docremoveScb = function(msg) {
-    $scope.showLoader = false;
-    UtilService.errorMessage('Successfully document removed!!');
-  };
+    vm.fileuploadObject = {};
+    vm.fileuploadObject.trackExpiry = false;
+    vm.createAttachment = function(doc) {debugger;
+      $scope.showLoader = true;
+      var url = null;
+      // console.log('doccccccccccc Mode', vm.showDeleteDoc);
+      var newDoc = false;
+      if (!vm.showDeleteDoc) {
+        newDoc = true;
+        url = healthCareBusinessConstants.SAVE_DOC;
+      } else {
+        newDoc = false;
+        url = healthCareBusinessConstants.UPDATE_DOC;
+        fd.append('documentUrl', vm.fileuploadObject.url);
+        fd.append('documentName', vm.fileuploadObject.documentName);
+      }
 
-  vm.documentRemove = function(docId) {
-    $scope.showLoader = true;
-    //vm.userDetailsObj.documents.splice(index, 1);
-    var url = healthCareBusinessConstants.DELETE_DOC + docId;
-    ApiService.delete(url).then(docremoveScb, errorCallback);
-  };
+      var docId = (vm.fileuploadObject.docId ? vm.fileuploadObject.docId : 0);
+      fd.append('description', vm.fileuploadObject.shortdescription);
+      fd.append('notes', vm.fileuploadObject.notes);
+      fd.append('expiryDate', vm.fileuploadObject.expiry);
+      fd.append('trackExpiryDate', vm.fileuploadObject.trackExpiry);
+      fd.append('documentCategory', 'testing');
+      fd.append('docID', docId);
 
-  $interval(function() {
+      $http.post(url, fd, {
+          transformRequest: angular.identity,
+          headers: { 'Content-Type': undefined }
+        })
+        .then(function(res) {
+          vm.hideAttachmentCreate();
+          $scope.showLoader = false;
+          if (newDoc) {
+            vm.userDetailsObj['documents'].push(res.data);
+            vm.saveBtnClick();
+          } else {
+            for (var i = 0; i < vm.userDetailsObj['documents'].length; i++) {
+              if (vm.userDetailsObj['documents'][i].documentId === docId) {
+                vm.userDetailsObj['documents'][i] = res.data;
+                vm.saveBtnClick();
+              }
+            }
+          }
+
+          UtilService.errorMessage('document upload success!');
+        }, function(res) {
+          UtilService.errorMessage('document upload fail!');
+        });
+    };
+
+    var docremoveScb = function(msg) {
+      $scope.showLoader = false;
+      UtilService.errorMessage('Successfully document removed!!');
+    };
+
+    vm.documentRemove = function(docId) {
+      $scope.showLoader = true;
+      //vm.userDetailsObj.documents.splice(index, 1);
+      var url = healthCareBusinessConstants.DELETE_DOC + docId;
+      ApiService.delete(url).then(docremoveScb, errorCallback);
+    };
+
+    $interval(function() {
       vm.determinateValue += 1;
       if (vm.determinateValue > 100) {
         vm.determinateValue = 20;
       }
     }, 100);
 
-  vm.viewDoc = function(obj) {
-    vm.attachmentCreateViewmode = true;
-    vm.fileuploadObject = {
-      shortdescription: obj.license[0].shortDescription,
-      notes: obj.license[0].notes,
-      expiry: new Date(obj.license[0].expiryDate),
-      trackExpiry: obj.license[0].isDue,
-      url: obj.documentUrl,
-      docId: obj.documentId,
-      documentName: obj.documentName
-    }
-    vm.showDeleteDoc = true;
-    console.log(obj);
-  };
+    vm.viewDoc = function(obj) {
+      vm.attachmentCreateViewmode = true;
+      vm.fileuploadObject = {
+        shortdescription: obj.license[0].shortDescription,
+        notes: obj.license[0].notes,
+        expiry: new Date(obj.license[0].expiryDate),
+        trackExpiry: obj.license[0].isDue,
+        url: obj.documentUrl,
+        docId: obj.documentId,
+        documentName: obj.documentName
+      }
+      vm.showDeleteDoc = true;
+      console.log(obj);
+    };
 
-  vm.init = function() {
-    vm.determinateValue = 20;
-    vm.userDetailsObj = angular.fromJson(localStorage.getItem('userdetails'));
-    if (Object.keys(vm.userDetailsObj).length) {
-      vm.viewmode = true;
-    } else {
-      vm.viewmode = false;
-      vm.userDetailsObj = {};
-      vm.userDetailsObj.status = true;
-      vm.userDetailsObj['documents'] = [];
-    }
-    vm.roles = [{ role: 'ADMINISTRATOR' }, { role: 'USER' }];
-    console.log(vm.userdetailsObj);
-  };
+    vm.init = function() {
+      vm.determinateValue = 20;
+      vm.userDetailsObj = angular.fromJson(localStorage.getItem('userdetails'));
+      if (Object.keys(vm.userDetailsObj).length) {
+        vm.viewmode = true;
+      } else {
+        vm.viewmode = false;
+        vm.userDetailsObj = {};
+        vm.userDetailsObj.status = true;
+        vm.userDetailsObj['documents'] = [];
+      }
+      vm.roles = [{ role: 'ADMINISTRATOR' }, { role: 'USER' }];
+      console.log(vm.userdetailsObj);
+    };
 
-  vm.init();
-});
+    vm.init();
+  });

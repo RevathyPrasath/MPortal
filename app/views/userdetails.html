@@ -82,7 +82,7 @@
           <div layout-gt-sm="row">
             <md-input-container class="md-block" flex-gt-sm>
               <label>Expiry / Due Date</label>
-              <md-datepicker ng-model="user.fileuploadObject.expiry" md-placeholder="Enter date"></md-datepicker>
+              <md-datepicker ng-model="user.fileuploadObject.expiry" md-placeholder="Enter date" ng-disabled="!user.fileuploadObject.trackExpiry"></md-datepicker>
             </md-input-container>
             <div flex layout='row' layout-padding layout-align="start center" style="height: 30px;">
               <div>Track Expiry / Due Date</div>

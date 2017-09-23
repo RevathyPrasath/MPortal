@@ -29,7 +29,7 @@
       <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
           <label>Expiry / Due Date</label>
-          <md-datepicker ng-model="providerMore.moreinfo.license.licenseDate" md-placeholder="Enter date"></md-datepicker>
+          <md-datepicker ng-model="providerMore.moreinfo.license.licenseDate" md-placeholder="Enter date" ng-disabled="!providerMore.moreinfo.license.isDue"></md-datepicker>
         </md-input-container>
         <div flex layout='row' layout-padding layout-align="start center" style="height: 30px;">
           <div>Track Expiry / Due Date</div>
@@ -72,7 +72,7 @@
       <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
           <label>Expiry / Due Date</label>
-          <md-datepicker ng-model="providerMore.moreinfo.license.licenseDate" md-placeholder="Enter date"></md-datepicker>
+          <md-datepicker ng-model="providerMore.moreinfo.license.licenseDate" md-placeholder="Enter date" ng-disabled="!providerMore.moreinfo.license.isDue"></md-datepicker>
         </md-input-container>
         <div flex layout='row' layout-padding layout-align="start center" style="height: 30px;">
           <div>Track Expiry / Due Date</div>
@@ -116,7 +116,7 @@
       <div layout-gt-sm="row">
         <md-input-container class="md-block" flex-gt-sm>
           <label>Expiry / Due Date</label>
-          <md-datepicker ng-model="providerMore.moreinfo.license.licenseDate" md-placeholder="Enter date"></md-datepicker>
+          <md-datepicker ng-model="providerMore.moreinfo.license.licenseDate" md-placeholder="Enter date" ng-disabled="!providerMore.moreinfo.license.isDue"></md-datepicker>
         </md-input-container>
         <div flex layout='row' layout-padding layout-align="start center" style="height: 30px;">
           <div>Track Expiry / Due Date</div>
@@ -156,7 +156,7 @@
     <div layout-gt-sm="row">
       <md-input-container class="md-block" flex-gt-sm>
         <label>Expiry / Due Date</label>
-        <md-datepicker ng-model="providerMore.fileuploadObject.expiry" md-placeholder="Enter date"></md-datepicker>
+        <md-datepicker ng-model="providerMore.fileuploadObject.expiry" md-placeholder="Enter date" ng-disabled="!providerMore.fileuploadObject.trackExpiry"></md-datepicker>
       </md-input-container>
       <div flex layout='row' layout-padding layout-align="start center" style="height: 30px;">
         <div>Track Expiry / Due Date</div>
