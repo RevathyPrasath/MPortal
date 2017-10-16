@@ -158,7 +158,6 @@ angular.module('healthCareApp')
     var docremoveScb = function(msg) {
       $scope.showLoader = false;
       UtilService.errorMessage('Successfully document removed!!');
-
       for (var i = 0; i < vm.userDetailsObj.documents.length; i++) {
         if (vm.userDetailsObj.documents[i].documentId == vm.fileuploadObject.docId) {
           vm.userDetailsObj.documents.splice(i, 1);
@@ -169,8 +168,6 @@ angular.module('healthCareApp')
             trackExpiry: '',
             expiry: ''
           }
-          //console.log('vm.userDetailsObj.documents', vm.userDetailsObj.documents);
-          //$route.reload();
         }
       }
     };

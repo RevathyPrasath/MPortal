@@ -25,11 +25,23 @@ angular.module('healthCareApp')
     var docremoveScb = function(msg) {
       vm.getCompanies(0);
       UtilService.errorMessage('Successfully document removed!!');
+      for (var i = 0; i < vm.companyDetailsObj.documents.length; i++) {
+        if (vm.companyDetailsObj.documents[i].documentId == vm.fileuploadObject.docId) {
+          vm.companyDetailsObj.documents.splice(i, 1);
+          vm.attachmentCreateViewmode = false;
+          vm.fileuploadObject = {
+            shortdescription: '',
+            notes: '',
+            trackExpiry: '',
+            expiry: ''
+          }
+        }
+      }
     };
 
-    vm.documentRemove = function(index, docId) {
+    vm.documentRemove = function(docId) {
       var url = healthCareBusinessConstants.DELETE_DOC + docId;
-      vm.companyDetailsObj.documents.splice(index, 1);
+     // vm.companyDetailsObj.documents.splice(index, 1);
       ApiService.delete(url).then(docremoveScb, errorCallback);
     };
 
@@ -71,12 +83,13 @@ angular.module('healthCareApp')
 
     vm.addNew = function() {
       localStorage.setItem("companyTempData", JSON.stringify(vm.companyDetailsObj));
-      if (!vm.viewmode) {
-        localStorage.setItem('locationsDetails', angular.toJson({}));
-        $location.path('locationsMore');
-      } else {
-        return;
-      }
+      $location.path('locationsMore');
+      // if (!vm.viewmode) {
+      //   localStorage.setItem('locationsDetails', angular.toJson({}));
+      //   $location.path('locationsMore');
+      // } else {
+      //   return;
+      // }
     };
 
     vm.cancelBtnclick = function() {
