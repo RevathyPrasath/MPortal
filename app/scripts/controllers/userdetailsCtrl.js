@@ -7,7 +7,7 @@
  * Controller of the healthCareApp
  */
 angular.module('healthCareApp')
-  .controller('UserdetailsCtrl', function($interval, $http, $rootScope, $scope, healthCareBusinessConstants, ApiService, $location, UtilService) {
+  .controller('UserdetailsCtrl', function($route, $interval, $http, $rootScope, $scope, healthCareBusinessConstants, ApiService, $location, UtilService) {
     $rootScope.hideNavbar = false;
     var vm = this;
 
@@ -97,49 +97,59 @@ angular.module('healthCareApp')
     };
 
     vm.createAttachment = function(doc) {
-      if(vm.checkExpireValidation()) {
-      $scope.showLoader = true;
-      var url = null;
-      var newDoc = false;
-      if (!vm.showDeleteDoc) {
-        newDoc = true;
-        url = healthCareBusinessConstants.SAVE_DOC;
-      } else {
-        newDoc = false;
-        url = healthCareBusinessConstants.UPDATE_DOC;
-        fd.append('documentUrl', vm.fileuploadObject.url);
-        fd.append('documentName', vm.fileuploadObject.documentName);
-      }
-      var docId = (vm.fileuploadObject.docId ? vm.fileuploadObject.docId : 0);
-      fd.append('description', vm.fileuploadObject.shortdescription);
-      fd.append('notes', vm.fileuploadObject.notes);
-      fd.append('expiryDate', vm.fileuploadObject.expiry);
-      fd.append('trackExpiryDate', vm.fileuploadObject.trackExpiry);
-      fd.append('documentCategory', 'testing');
-      fd.append('docID', docId);
-      $http.post(url, fd, {
-          transformRequest: angular.identity,
-          headers: { 'Content-Type': undefined }
-        })
-        .then(function(res) {
-          vm.hideAttachmentCreate();
-          $scope.showLoader = false;
-          if (newDoc) {
-            vm.userDetailsObj['documents'].push(res.data);
-            vm.saveBtnClick();
-          } else {
-            for (var i = 0; i < vm.userDetailsObj['documents'].length; i++) {
-              if (vm.userDetailsObj['documents'][i].documentId === docId) {
-                vm.userDetailsObj['documents'][i] = res.data;
-                vm.saveBtnClick();
+      if (vm.checkExpireValidation()) {
+        $scope.showLoader = true;
+        var url = null;
+        var newDoc = false;
+        if (!vm.showDeleteDoc) {
+          newDoc = true;
+          url = healthCareBusinessConstants.SAVE_DOC;
+        } else {
+          newDoc = false;
+          url = healthCareBusinessConstants.UPDATE_DOC;
+          fd.append('documentUrl', vm.fileuploadObject.url);
+          fd.append('documentName', vm.fileuploadObject.documentName);
+        }
+        var docId = (vm.fileuploadObject.docId ? vm.fileuploadObject.docId : 0);
+        fd.append('description', vm.fileuploadObject.shortdescription);
+        fd.append('notes', vm.fileuploadObject.notes);
+        if (vm.fileuploadObject.expiry) {
+          fd.append('expiryDate', vm.fileuploadObject.expiry);
+        } else {
+          fd.append('expiryDate', new Date(0));
+        }
+        fd.append('trackExpiryDate', vm.fileuploadObject.trackExpiry);
+        fd.append('documentCategory', 'testing');
+        fd.append('docID', docId);
+        $http.post(url, fd, {
+            transformRequest: angular.identity,
+            headers: { 'Content-Type': undefined }
+          })
+          .then(function(res) {
+            vm.hideAttachmentCreate();
+            $scope.showLoader = false;
+            if (newDoc) {
+              vm.userDetailsObj['documents'].push(res.data);
+              vm.saveBtnClick();
+            } else {
+              for (var i = 0; i < vm.userDetailsObj['documents'].length; i++) {
+                if (vm.userDetailsObj['documents'][i].documentId === docId) {
+                  vm.userDetailsObj['documents'][i] = res.data;
+                  vm.saveBtnClick();
+                }
               }
             }
-          }
-          UtilService.errorMessage('document upload success!');
-        }, function(res) {
-          $scope.showLoader = false;
-          UtilService.errorMessage('document upload fail!');
-        });
+            fd.delete('description');
+            fd.delete('notes');
+            fd.delete('expiryDate');
+            fd.delete('trackExpiryDate');
+            fd.delete('documentCategory');
+            fd.delete('docID');
+            UtilService.errorMessage('document upload success!');
+          }, function(res) {
+            $scope.showLoader = false;
+            UtilService.errorMessage('document upload fail!');
+          });
       } else {
         UtilService.errorMessage('Please select Expiry Date!');
       }
@@ -148,6 +158,21 @@ angular.module('healthCareApp')
     var docremoveScb = function(msg) {
       $scope.showLoader = false;
       UtilService.errorMessage('Successfully document removed!!');
+
+      for (var i = 0; i < vm.userDetailsObj.documents.length; i++) {
+        if (vm.userDetailsObj.documents[i].documentId == vm.fileuploadObject.docId) {
+          vm.userDetailsObj.documents.splice(i, 1);
+          vm.attachmentCreateViewmode = false;
+          vm.fileuploadObject = {
+            shortdescription: '',
+            notes: '',
+            trackExpiry: '',
+            expiry: ''
+          }
+          //console.log('vm.userDetailsObj.documents', vm.userDetailsObj.documents);
+          //$route.reload();
+        }
+      }
     };
 
     vm.documentRemove = function(docId) {
@@ -168,14 +193,16 @@ angular.module('healthCareApp')
       vm.fileuploadObject = {
         shortdescription: obj.license[0].shortDescription,
         notes: obj.license[0].notes,
-        expiry: new Date(obj.license[0].expiryDate),
         trackExpiry: obj.license[0].isDue,
         url: obj.documentUrl,
         docId: obj.documentId,
         documentName: obj.documentName
       }
+      if (obj.license[0].expiryDate !== 0) {
+        vm.fileuploadObject['expiry'] = new Date(obj.license[0].expiryDate)
+      }
       vm.showDeleteDoc = true;
-      console.log(obj);
+      //console.log(obj);
     };
 
     vm.init = function() {

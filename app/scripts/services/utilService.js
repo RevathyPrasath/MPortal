@@ -7,7 +7,7 @@ angular.module('healthCareApp').factory('UtilService', function($mdToast) {
       .hideDelay(5000)
       .highlightAction(true)
       .highlightClass('md-accent')
-      .position("top right");
+      .position("top center");
       $mdToast.show(toast).then(function(response) {
         if ( response == 'ok' ) {
           $mdToast.hide();
