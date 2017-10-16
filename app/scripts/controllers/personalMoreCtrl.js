@@ -222,7 +222,6 @@ angular.module('healthCareApp')
     vm.providerMore = function(items, type) {
       localStorage.setItem("providerMoreTempData", JSON.stringify(vm.personalDetailsObj));
       if (!vm.viewmode) {
-
         localStorage.setItem("providerMoreInfo", JSON.stringify(items));
         localStorage.setItem("licenseType", type);
         localStorage.setItem("frompage", 'personnalDetails');
@@ -305,7 +304,7 @@ angular.module('healthCareApp')
       vm.showDeleteDoc = true;
     };
 
-    vm.init = function() {
+    vm.init = function() {debugger;
       vm.licensetype = localStorage.getItem("licenseType");
       console.log('licensetype===============>', vm.licensetype);
       vm.determinateValue = 20;
@@ -350,10 +349,7 @@ angular.module('healthCareApp')
 
         if (vm.personalDetailsObj.provider) {
           for (var i = 0; i < vm.personalDetailsObj.provider.licenseType.length; i++) {
-            // vm.personalDetailsObj.provider.licenseType[i]['erroricon'] = 
             if (vm.personalDetailsObj.provider.licenseType[i].objectValue.toUpperCase() === "MEDICAL") {
-
-              // console.lo('objectValue', vm.personalDetailsObj.provider.licenseType[i]['iconClass'] = 'icon-error')
               vm.provider.licenseType.medicalLicence.push(vm.personalDetailsObj.provider.licenseType[i]);
             } else if (vm.personalDetailsObj.provider.licenseType[i].objectValue.toUpperCase() == "DEA_LICENSE") {
               vm.provider.licenseType.dealLicence.push(vm.personalDetailsObj.provider.licenseType[i]);

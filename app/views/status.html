@@ -88,7 +88,7 @@
                 <td ng-bind="obj.objectEvent"></td>
                 <td>{{obj.expiryDate  | date:'medium'}}</td>
                 <td>{{obj.status}}</td>
-                <td ng-click="status.providerMore(obj.licenseDTO, obj.objectEvent)"><strong><a>More</a></strong></td>
+                <td ng-click="status.providerMore(obj, obj.objectEvent)"><strong><a>More</a></strong></td>
               </tr>
             </tbody>
           </table>
