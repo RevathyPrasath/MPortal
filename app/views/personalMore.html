@@ -230,15 +230,50 @@
           <div layout-gt-sm="row">
             <input type="file" name="uploadingFiles" onchange="angular.element(this).scope().uploadFile(this.files)" />
           </div>
-          <div class="text-right">
+           <div layout-gt-sm="row">  
+            <table class="table" style="width:50%;margin-top:10px;margin-bottom:10px;" ng-show="personalMore.showDeleteDoc">
+              <tr>
+                <td>File Name</td>
+                <td>Ation</td>
+              </tr>
+              <tr>
+                <td ng-bind="personalMore.fileuploadObject.documentName"></td>
+                <td><span ng-click="personalMore.documentRemove(personalMore.fileuploadObject.docId);" class="btn btn-link text-danger">Delete</span></td>
+              </tr>
+            </table>
+            <div class="text-right {{!personalMore.showDeleteDoc && 'half-width' || 'full-width'}}">
+              <md-button class="md-raised md-warn md-button md-ink-ripple" ng-click="personalMore.createAttachment()">Upload</md-button>
+              <md-button class="md-raised" ng-click="personalMore.hideAttachmentCreate()">Cancel</md-button>
+            </div>
+          </div>
+
+          <!-- <div class="text-right">
             <md-button class="md-raised md-primary" ng-click="personalMore.createAttachment()">Save</md-button>
             <md-button class="md-raised" ng-click="personalMore.hideAttachmentCreate()">Cancel</md-button>
-          </div>
+          </div> -->
         </form>
+
+         
         <p ng-show="!personalMore.viewmode">
           <md-button class="md-raised md-cornered" ng-click="personalMore.showAttachmentCreate()">Add New</md-button>
         </p>
-        <table class="table" ng-show="personalMore.personalDetailsObj.documents.length>0">
+         <table class="table" data-ng-show="personalMore.personalDetailsObj.documents.length>0">
+          <tr>
+            <td>Id</td>
+            <td>Date Created</td>
+            <td>Description</td>
+            <td colspan="2">Action</td>
+          </tr>
+          <tr ng-repeat="doc in personalMore.personalDetailsObj.documents">
+            <td ng-bind="doc.documentId"></td>
+            <td ng-bind="doc.createdOn | date : format : timezone"></td>
+            <td ng-bind="doc.description"></td>
+            <td><a target="_blank" ng-href="{{doc.documentUrl}}" class="btn btn-link">View</a></td>
+            <td><a ng-click="personalMore.viewDoc(doc)" class="btn btn-link" ng-disabled="personalMore.viewmode">Edit</a></td>
+          </tr>
+        </table>
+
+        <!-- <table class="table" ng-show="personalMore.personalDetailsObj.documents.length>0">
           <tr>
             <td>Id</td>
             <td>Date Created</td>
@@ -252,7 +287,7 @@
             <td><a target="_blank" ng-href="{{doc.documentUrl}}" ng-show="doc.documentId">View</a></td>
             <td><a ng-click="personalMore.documentRemove($index, doc.documentId);" ng-show="doc.documentId">Remove</a></td>
           </tr>
-        </table>
+        </table> -->
       </div>
       <hr/>
       <div class="text-right">

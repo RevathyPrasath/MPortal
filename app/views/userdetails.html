@@ -107,12 +107,12 @@
                 <td><span ng-click="user.documentRemove(user.fileuploadObject.docId);" class="btn btn-link text-danger">Delete</span></td>
               </tr>
             </table>
-            
             <div class="text-right {{!user.showDeleteDoc && 'half-width' || 'full-width'}}">
               <md-button class="md-raised md-warn md-button md-ink-ripple" ng-click="user.createAttachment()">Upload</md-button>
               <md-button class="md-raised" ng-click="user.hideAttachmentCreate()">Cancel</md-button>
             </div>
           </div>
+          
         </form>
         <p ng-show="!user.viewmode">
           <md-button class="md-raised md-cornered" ng-click="user.showAttachmentCreate()">Add New</md-button>
