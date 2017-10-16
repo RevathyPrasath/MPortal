@@ -122,7 +122,7 @@ angular.module('healthCareApp')
       if(vm.locationsDetailsObj && vm.locationsDetailsObj.addressId && vm.locationsDetailsObj.addressId.phone) {
         vm.locationsDetailsObj.addressId.phone = parseInt(vm.locationsDetailsObj.addressId.phone);
       }
-      if (Object.keys(vm.locationsDetailsObj).length) {
+      if (vm.locationsDetailsObj && Object.keys(vm.locationsDetailsObj).length) {
         vm.viewmode = true;
       } else {
         vm.viewmode = false;
