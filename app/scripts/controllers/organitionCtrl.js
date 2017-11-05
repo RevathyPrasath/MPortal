@@ -146,7 +146,11 @@ angular.module('healthCareApp')
         var docId = (vm.fileuploadObject.docId ? vm.fileuploadObject.docId : 0);
         fd.append('description', vm.fileuploadObject.shortdescription);
         fd.append('notes', vm.fileuploadObject.notes);
-        fd.append('expiryDate', vm.fileuploadObject.expiry);
+         if (vm.fileuploadObject.expiry) {
+          fd.append('expiryDate', vm.fileuploadObject.expiry);
+        } else {
+          fd.append('expiryDate', new Date(0));
+        }
         fd.append('trackExpiryDate', vm.fileuploadObject.trackExpiry);
         fd.append('documentCategory', 'testing');
         fd.append('docID', docId);
@@ -188,6 +192,9 @@ angular.module('healthCareApp')
         url: obj.documentUrl,
         docId: obj.documentId,
         documentName: obj.documentName
+      }
+        if (obj.license[0].expiryDate !== 0) {
+        vm.fileuploadObject['expiry'] = new Date(obj.license[0].expiryDate)
       }
       vm.showDeleteDoc = true;
       console.log(obj);

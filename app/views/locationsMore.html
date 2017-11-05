@@ -82,7 +82,8 @@
           <div layout-gt-sm="row">
             <md-input-container class="md-block" flex-gt-sm>
               <label>Expiry / Due Date</label>
-              <md-datepicker ng-model="locationsMore.fileuploadObject.expiry" md-placeholder="Enter date"></md-datepicker>
+              <md-datepicker ng-model="locationsMore.fileuploadObject.expiry" md-placeholder="Enter date" ng-disabled="!locationsMore.fileuploadObject.trackExpiry">
+              </md-datepicker>
             </md-input-container>
             <div flex layout='row' layout-padding layout-align="start center" style="height: 30px;">
               <div>Track Expiry / Due Date</div>
@@ -95,10 +96,23 @@
           <div layout-gt-sm="row">
             <input type="file" name="uploadingFiles" onchange="angular.element(this).scope().uploadFile(this.files)"/>
           </div>
-          <div class="text-right">
-            <md-button class="md-raised md-primary" ng-click="locationsMore.createAttachment()">Save</md-button>
-            <md-button class="md-raised" ng-click="locationsMore.hideAttachmentCreate()">Cancel</md-button>
+            <div layout-gt-sm="row">  
+            <table class="table" style="width:50%;margin-top:10px;margin-bottom:10px;" ng-show="locationsMore.showDeleteDoc">
+              <tr>
+                <td>File Name</td>
+                <td>Action</td>
+              </tr>
+              <tr>
+                <td ng-bind="locationsMore.fileuploadObject.documentName"></td>
+                <td><span ng-click="locationsMore.documentRemove(locationsMore.fileuploadObject.docId);" class="btn btn-link text-danger">Delete</span></td>
+              </tr>
+            </table>
+            <div class="text-right {{!locationsMore.showDeleteDoc && 'half-width' || 'full-width'}}">
+              <md-button class="md-raised md-warn md-button md-ink-ripple" ng-click="locationsMore.createAttachment()">Upload</md-button>
+              <md-button class="md-raised" ng-click="locationsMore.hideAttachmentCreate()">Cancel</md-button>
+            </div>
           </div>
+
         </form>
         <p ng-show="!locationsMore.viewmode">
           <md-button class="md-raised md-cornered" ng-click="locationsMore.showAttachmentCreate()">Add New</md-button>
@@ -116,7 +130,7 @@
             <td ng-bind="doc.createdOn | date : format : timezone"></td>
             <td ng-bind="doc.description"></td>
             <td><a target="_blank" ng-href="{{doc.documentUrl}}">View</a></td>
-            <td><a ng-click="locationsMore.documentRemove($index, doc.documentId);">Remove</a></td>
+            <td><a ng-click="locationsMore.viewDoc(doc)" class="btn btn-link" ng-disabled="locationsMore.viewmode">Edit</a></td>
           </tr>
         </table>
       </div>
@@ -124,6 +138,7 @@
       <div class="text-right">
         <md-button class="md-raised md-primary" ng-click="locationsMore.saveBtnClick()" ng-show="!locationsMore.viewmode">Save</md-button>
         <md-button ng-show="locationsMore.viewmode" class="md-raised md-primary" ng-click="locationsMore.editBtnClick()">Edit</md-button>
+
         <md-button class="md-raised" ng-click="locationsMore.cancelBtnclick()">Cancel</md-button>
       </div>
     </div>

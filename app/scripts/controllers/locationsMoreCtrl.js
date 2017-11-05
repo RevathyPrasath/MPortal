@@ -56,8 +56,11 @@ angular.module('healthCareApp')
       ApiService.post(healthCareBusinessConstants.GET_LOCATIONS, vm.locationsDetailsObj).then(saveUserSuccessCallback, errorCallback).finally(finalCallBack);
     };
 
-    vm.showAttachmentCreate = function() {
+      vm.showAttachmentCreate = function() {
+      vm.fileuploadObject = {};
+      vm.fileuploadObject.trackExpiry = false;
       vm.attachmentCreateViewmode = true;
+      vm.showDeleteDoc = false;
     };
 
     vm.hideAttachmentCreate = function() {
@@ -78,7 +81,11 @@ angular.module('healthCareApp')
       var url = healthCareBusinessConstants.SAVE_DOC;
       fd.append('description', vm.fileuploadObject.shortdescription);
       fd.append('notes', vm.fileuploadObject.notes);
-      fd.append('expiryDate', vm.fileuploadObject.expiry);
+       if (vm.fileuploadObject.expiry) {
+          fd.append('expiryDate', vm.fileuploadObject.expiry);
+        } else {
+          fd.append('expiryDate', new Date(0));
+        }
       fd.append('trackExpiryDate', vm.fileuploadObject.trackExpiry);
       fd.append('documentCategory', 'abc');
 
@@ -101,8 +108,7 @@ angular.module('healthCareApp')
       UtilService.errorMessage('Successfully document removed!!');
     };
 
-    vm.documentRemove = function(index, docId) {
-      vm.locationsDetailsObj.documents.splice(index, 1);
+      vm.documentRemove = function(docId) {
       $scope.showLoader = true;
       var url = healthCareBusinessConstants.DELETE_DOC + docId;
       ApiService.delete(url).then(docremoveScb, errorCallback);
@@ -114,6 +120,22 @@ angular.module('healthCareApp')
         vm.determinateValue = 20;
       }
     }, 100);
+
+    vm.viewDoc = function(obj) {
+      vm.attachmentCreateViewmode = true;
+      vm.fileuploadObject = {
+        shortdescription: obj.license[0].shortDescription,
+        notes: obj.license[0].notes,
+        trackExpiry: obj.license[0].isDue,
+        url: obj.documentUrl,
+        docId: obj.documentId,
+        documentName: obj.documentName
+      }
+      if (obj.license[0].expiryDate !== 0) {
+        vm.fileuploadObject['expiry'] = new Date(obj.license[0].expiryDate)
+      }
+      vm.showDeleteDoc = true;
+    };
 
     vm.init = function() {
        vm.determinateValue = 20;
