@@ -78,6 +78,7 @@ angular.module('healthCareApp')
     vm.fileuploadObject.trackExpiry = false;
     vm.createAttachment = function() {
       $scope.showLoader = true;
+      var newDoc = false;
       var url = healthCareBusinessConstants.SAVE_DOC;
       fd.append('description', vm.fileuploadObject.shortdescription);
       fd.append('notes', vm.fileuploadObject.notes);
@@ -96,16 +97,29 @@ angular.module('healthCareApp')
         .then(function(res) {
           vm.hideAttachmentCreate();
           $scope.showLoader = false;
-          vm.locationsDetailsObj['documents'].push(res.data)
+          vm.locationsDetailsObj['documents'].push(res.data);
+          vm.saveBtnClick();
         }, function(res) {
           $scope.showLoader = false;
           UtilService.errorMessage("document upload fail!");
         });
     };
 
-    var docremoveScb = function(msg) {
+     var docremoveScb = function(msg) {
       $scope.showLoader = false;
       UtilService.errorMessage('Successfully document removed!!');
+      for (var i = 0; i < vm.locationsDetailsObj.documents.length; i++) {
+        if (vm.locationsDetailsObj.documents[i].documentId == vm.fileuploadObject.docId) {
+          vm.locationsDetailsObj.documents.splice(i, 1);
+          vm.attachmentCreateViewmode = false;
+          vm.fileuploadObject = {
+            shortdescription: '',
+            notes: '',
+            trackExpiry: '',
+            expiry: ''
+          }
+        }
+      }
     };
 
       vm.documentRemove = function(docId) {

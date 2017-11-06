@@ -30,11 +30,15 @@ angular.module('healthCareApp')
       vm.viewmode = false;
     };
 
-    vm.showAttachmentCreate = function() {
+ 
+      vm.showAttachmentCreate = function() {
+      vm.fileuploadObject = {};
+      vm.fileuploadObject.trackExpiry = false;
       vm.attachmentCreateViewmode = true;
+      vm.showDeleteDoc = false;
     };
-
-    vm.hideAttachmentCreate = function() {
+    
+        vm.hideAttachmentCreate = function() {
       // remove or empty the attachment form data
       vm.attachmentCreateViewmode = false;
     };
@@ -51,6 +55,9 @@ angular.module('healthCareApp')
     vm.getStates = function() {
       ApiService.get(healthCareBusinessConstants.GET_STATES_LIST).then(getStatesSb, errorCallback).finally(finalCallBack);
     };
+
+    vm.fileuploadObject = {};
+    vm.fileuploadObject.trackExpiry = false;
 
     vm.init = function() {
       vm.companyDetailsObj = angular.fromJson(localStorage.getItem('companyDetails'));

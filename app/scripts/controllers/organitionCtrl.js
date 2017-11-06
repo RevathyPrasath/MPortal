@@ -82,14 +82,18 @@ angular.module('healthCareApp')
     };
 
     vm.addNew = function() {
-      localStorage.setItem("companyTempData", JSON.stringify(vm.companyDetailsObj));
-      $location.path('locationsMore');
-      // if (!vm.viewmode) {
-      //   localStorage.setItem('locationsDetails', angular.toJson({}));
-      //   $location.path('locationsMore');
-      // } else {
-      //   return;
-      // }
+      //localStorage.setItem("companyTempData", JSON.stringify(vm.companyDetailsObj));
+      //$location.path('locationsMore');
+
+       localStorage.setItem('locationsDetails', angular.toJson({}));
+        $location.path('locationsMore');
+
+   //  if (!vm.viewmode) {
+     //   localStorage.setItem('locationsDetails', angular.toJson({}));
+    //    $location.path('locationsMore');
+    //  } else {
+    //   return;
+     //  }
     };
 
     vm.cancelBtnclick = function() {
@@ -101,7 +105,11 @@ angular.module('healthCareApp')
     };
 
     vm.showAttachmentCreate = function() {
+      
+       vm.fileuploadObject = {};
+      vm.fileuploadObject.trackExpiry = false;
       vm.attachmentCreateViewmode = true;
+      vm.showDeleteDoc = false;
     };
 
     vm.hideAttachmentCreate = function() {
