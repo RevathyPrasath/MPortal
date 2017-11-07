@@ -12,8 +12,19 @@ angular.module('healthCareApp')
     var vm = this;
 
     // success Call back method
-    function successCallback(response) {
+    function operationsSuccessCallback(response) {
       console.log(response);
+      vm.operationsData = response.data;
+    };
+
+    function administrationSuccessCallback(response) {
+      console.log(response);
+      vm.administrationData = response.data;
+    };
+
+    function personalSuccessCallback(response) {
+      console.log(response);
+      vm.personalres = response.data;
       vm.personalData = response.data;
     };
 
@@ -31,6 +42,13 @@ angular.module('healthCareApp')
 
     vm.statusSelected = function(selectedTab) {
       vm.selected = selectedTab;
+      if(selectedTab === 'ADMINISTRATION') {
+       vm.personalData = vm.administrationData
+      } else if(selectedTab === 'OPERATIONS') {
+        vm.personalData = vm.operationsData
+      } else {
+        vm.personalData = vm.personalres
+      }
     };
 
     vm.isActive = function(selectedTab) {
@@ -48,12 +66,13 @@ angular.module('healthCareApp')
 
     vm.providerMore = function(items, type) {
        localStorage.setItem("licenseType", type);
-    //  items.personId = 1;
-      ApiService.get(healthCareBusinessConstants.PERSONAL_STATUS_MORE + items.personId).then(PersonalStatusMoreSb, errorCallback).finally(finalCallBack);
+       ApiService.get(healthCareBusinessConstants.PERSONAL_STATUS_MORE + items.personId).then(PersonalStatusMoreSb, errorCallback).finally(finalCallBack);
     };
 
     vm.init = function() {
-      ApiService.get(healthCareBusinessConstants.PERSONAL_STATUS).then(successCallback, errorCallback).finally(finalCallBack);
+      ApiService.get(healthCareBusinessConstants.ADMINISTRATION_STATUS).then(administrationSuccessCallback, errorCallback).finally(finalCallBack);
+      ApiService.get(healthCareBusinessConstants.OPERATIONS_STATUS).then(operationsSuccessCallback, errorCallback).finally(finalCallBack);
+      ApiService.get(healthCareBusinessConstants.PERSONAL_STATUS).then(personalSuccessCallback, errorCallback).finally(finalCallBack);
     };
     vm.init();
   });
