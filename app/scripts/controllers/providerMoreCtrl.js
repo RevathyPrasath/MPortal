@@ -36,6 +36,16 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
     }
   }, 100);
 
+  var getPersonId = function() {
+    if(localStorage.getItem("providerMoreTempData") && (JSON.parse(localStorage.getItem("providerMoreTempData")).personId)) {
+       return (JSON.parse(localStorage.getItem("providerMoreTempData")).personId);
+    } else if(localStorage.getItem("providerMoreTempData") && (JSON.parse(localStorage.getItem("providerMoreTempData")).companyId)){
+      return (JSON.parse(localStorage.getItem("providerMoreTempData")).companyId);
+    } else {
+      return 0;
+    }
+  };
+   
   vm.savePersonal = function() {
     $scope.showLoader = true;
    var providerSaveObj = {
@@ -53,7 +63,7 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
       "total": 0,
       "size": 0,
       "licenseDocuments": vm.moreinfo.license.licenseDocuments,
-      "personId": (JSON.parse(localStorage.getItem("providerMoreTempData")).personId) ? (JSON.parse(localStorage.getItem("providerMoreTempData")).personId) : 0
+      "personId": getPersonId()
     }
     ApiService.post(healthCareBusinessConstants.CREATE_LICENSE, providerSaveObj).then(savePersonalSuccessCallback, errorCallback).finally(finalCallBack);
   };

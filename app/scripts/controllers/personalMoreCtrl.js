@@ -105,6 +105,9 @@ angular.module('healthCareApp')
       }
     };
 
+var getPersonalId = function() {
+  return JSON.parse(localStorage.getItem("personnalDetails")).personId;
+};
     vm.createAttachment = function(doc) {
       if (vm.checkExpireValidation()) {
         $scope.showLoader = true;
@@ -130,6 +133,8 @@ angular.module('healthCareApp')
         fd.append('trackExpiryDate', vm.fileuploadObject.trackExpiry);
         fd.append('documentCategory', 'testing');
         fd.append('docID', docId);
+        fd.append('id', getPersonalId());
+
         $http.post(url, fd, {
             transformRequest: angular.identity,
             headers: { 'Content-Type': undefined }
