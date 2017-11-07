@@ -245,7 +245,7 @@ angular.module('healthCareApp')
       ApiService.get(healthCareBusinessConstants.GET_STATES_LIST).then(getStatesSb, errorCallback).finally(finalCallBack);
     };
 
-    var getCompaniesSb = function(res) {
+    var getCompaniesSb = function(res) {debugger;
       if (res && res.data[0]) {
         vm.viewmode = true;
         vm.companyDetailsObj = res.data[0];
@@ -256,7 +256,7 @@ angular.module('healthCareApp')
       if (vm.companyDetailsObj.addressId && vm.companyDetailsObj.addressId.phone) {
         vm.companyDetailsObj.addressId.phone = parseInt(vm.companyDetailsObj.addressId.phone);
       }
-      var providerresponseObj = angular.fromJson(localStorage.getItem('providerResObj'));
+      //var providerresponseObj = angular.fromJson(localStorage.getItem('providerResObj'));
       // if(providerresponseObj) {
       //   if(vm.companyDetailsObj && vm.companyDetailsObj.licenseType && vm.companyDetailsObj.licenseType.license) {
       //     vm.companyDetailsObj.licenseType.license.push(providerresponseObj);
@@ -266,14 +266,15 @@ angular.module('healthCareApp')
       //   }
       // }
 
-      if (providerresponseObj) {
-        var temp = {
-          license: providerresponseObj,
-          licenseTypeId: null,
-          objectValue: providerresponseObj['objectName']
-        };
-        vm.companyDetailsObj['licenseType'].push(temp);
-      }
+      // if (providerresponseObj) {
+      //   var temp = {
+      //     license: providerresponseObj,
+      //     licenseTypeId: null,
+      //     objectValue: providerresponseObj['objectName']
+      //   };
+      //   vm.companyDetailsObj['licenseType'].push(temp);
+      //   console.log('Bonds entering===', companyDetailsObj);
+      // }
 
       //vm.licenseType.malpracticeInsurance.push(vm.companyDetailsObj.licenseType[0]);
       //licenseType
@@ -303,8 +304,9 @@ angular.module('healthCareApp')
       var license = {
         license: items
       }
+      localStorage.setItem("providerMoreTempData", JSON.stringify(vm.companyDetailsObj));
       if (!vm.viewmode) {
-        localStorage.setItem("providerMoreInfo", JSON.stringify(license));
+        localStorage.setItem("providerMoreInfo", JSON.stringify(license.license));
         localStorage.setItem("licenseType", type);
         localStorage.setItem("frompage", 'organition');
         $location.path("providermore");
