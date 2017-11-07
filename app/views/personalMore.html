@@ -156,7 +156,7 @@
               <tr ng-repeat="innerObj in personalMore.provider.licenseType.medicalLicence">
                 <td><span class="glyphicon {{innerObj.license.expiryFlag && 'glyphicon-exclamation-sign' || 'glyphicon-ok-sign'}}"></span> License# {{innerObj.license.licenseNo}}</td>
                 <td>State: {{innerObj.license.state}}</td>
-                <td class="text-center">Expairy Date: {{innerObj.license.expiryDate  | date:'medium'}}</td>
+                <td class="text-center">Expiry Date: {{innerObj.license.expiryDate  | date:'medium'}}</td>
                 <td class="text-right"><a ng-click="personalMore.providerMore(innerObj, 'MEDICAL')" class="btn" ng-disabled="personalMore.viewmode">More</a></td>
               </tr>
             </tbody>
@@ -172,7 +172,7 @@
               <tr ng-repeat="innerObj in personalMore.provider.licenseType.dealLicence">
                 <td> <span class="glyphicon {{innerObj.license.expiryFlag && 'glyphicon-exclamation-sign' || 'glyphicon-ok-sign'}}"></span> License# {{innerObj.license.licenseNo}}</td>
                 <td>Address: {{innerObj.license.address}}</td>
-                <td class="text-center">Expairy Date: {{innerObj.license.expiryDate  | date:'medium'}}</td>
+                <td class="text-center">Expiry Date: {{innerObj.license.expiryDate  | date:'medium'}}</td>
                 <td class="text-right"><a ng-click="personalMore.providerMore( innerObj, 'DEA_LICENSE')" class="btn" ng-disabled="personalMore.viewmode">More</a></td>
               </tr>
             </tbody>
@@ -188,7 +188,7 @@
               <tr ng-repeat="innerObj in personalMore.provider.licenseType.malpracticeInsurance">
                 <td><span class="glyphicon {{innerObj.license.expiryFlag && 'glyphicon-exclamation-sign' || 'glyphicon-ok-sign'}}"></span> policyNumber# {{innerObj.license.policyNumber}}</td>
                 <td>Carrier: {{innerObj.license.carrier}}</td>
-                <td class="text-center">Expairy Date: {{innerObj.license.expiryDate  | date:'medium'}}</td>
+                <td class="text-center">Expiry Date: {{innerObj.license.expiryDate  | date:'medium'}}</td>
                 <td class="text-right"><a ng-click="personalMore.providerMore(innerObj, 'MALPRACTICE_INSURANCE')" class="btn" ng-disabled="personalMore.viewmode">More</a></td>
               </tr>
             </tbody>
@@ -234,7 +234,7 @@
             <table class="table" style="width:50%;margin-top:10px;margin-bottom:10px;" ng-show="personalMore.showDeleteDoc">
               <tr>
                 <td>File Name</td>
-                <td>Ation</td>
+                <td>Action</td>
               </tr>
               <tr>
                 <td ng-bind="personalMore.fileuploadObject.documentName"></td>

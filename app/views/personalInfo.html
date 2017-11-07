@@ -170,10 +170,30 @@
     <div layout-gt-sm="row">
       <input type="file" name="uploadingFiles" onchange="angular.element(this).scope().uploadFile(this.files)" />
     </div>
-    <div class="text-right">
+
+          <div layout-gt-sm="row">  
+            <table class="table" style="width:50%;margin-top:10px;margin-bottom:10px;" ng-show="providerMore.showDeleteDoc">
+              <tr>
+                <td>File Name</td>
+                <td>Action</td>
+              </tr>
+              <tr>
+                <td ng-bind="providerMore.fileuploadObject.documentName"></td>
+                <td><span ng-click="providerMore.documentRemove(providerMore.fileuploadObject.docId);" class="btn btn-link text-danger">Delete</span></td>
+              </tr>
+            </table>
+            <div class="text-right {{!personalMore.showDeleteDoc && 'half-width' || 'full-width'}}">
+              <md-button class="md-raised md-warn md-button md-ink-ripple" ng-click="providerMore.createAttachment()">Upload</md-button>
+              <md-button class="md-raised" ng-click="providerMore.hideAttachmentCreate()">Cancel</md-button>
+            </div>
+          </div>
+
+
+   
+ <!--    <div class="text-right">
       <md-button class="md-raised md-primary" ng-click="providerMore.createAttachment()">Save</md-button>
       <md-button class="md-raised" ng-click="providerMore.hideAttachmentCreate()">Cancel</md-button>
-    </div>
+    </div> -->
   </div>
   <p ng-show="!providerMore.providerViewMode">
     <md-button class="md-raised md-cornered" ng-click="providerMore.showAttachmentCreate()">Add New</md-button>
@@ -193,7 +213,8 @@
       <td ng-bind="doc.createdOn | date : format : timezone"></td>
       <td ng-bind="doc.description"></td>
       <td><a target="_blank" ng-href="{{doc.documentUrl}}">View</a></td>
-      <td><a ng-click="providerMore.documentRemove($index, doc.documentId);">Remove</a></td>
+      <td><a ng-click="providerMore.viewDoc(doc)" class="btn btn-link" ng-disabled="providerMore.viewmode">Edit</a></td>
+      
     </tr>
   </table>
 </div>

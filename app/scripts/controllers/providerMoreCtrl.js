@@ -12,6 +12,24 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
     }
   };
 
+
+      vm.viewDoc = function(obj) {
+      vm.attachmentCreateViewmode = true;
+      vm.fileuploadObject = {
+        shortdescription: obj.license[0].shortDescription,
+        notes: obj.license[0].notes,
+        trackExpiry: obj.license[0].isDue,
+        url: obj.documentUrl,
+        docId: obj.documentId,
+        documentName: obj.documentName
+      }
+      if (obj.license[0].expiryDate !== 0) {
+        vm.fileuploadObject['expiry'] = new Date(obj.license[0].expiryDate)
+      }
+      vm.showDeleteDoc = true;
+      console.log(obj);
+    };
+
   // final call back method called no matter success or failure
   var finalCallBack = function(res) {
     console.log('finalCallBack', res);
