@@ -106,7 +106,11 @@ angular.module('healthCareApp')
     };
 
     var getPersonalId = function() {
-      return JSON.parse(localStorage.getItem("personnalDetails")).personId;
+      if (JSON.parse(localStorage.getItem("personnalDetails")).personId) {
+        return JSON.parse(localStorage.getItem("personnalDetails")).personId;
+      } else {
+        return 0;
+      }
     };
 
     vm.createAttachment = function(doc) {
