@@ -42,9 +42,9 @@ angular.module('healthCareApp')
 
     vm.statusSelected = function(selectedTab) {
       vm.selected = selectedTab;
-      if(selectedTab === 'ADMINISTRATION') {
-       vm.personalData = vm.administrationData
-      } else if(selectedTab === 'OPERATIONS') {
+      if (selectedTab === 'ADMINISTRATION') {
+        vm.personalData = vm.administrationData
+      } else if (selectedTab === 'OPERATIONS') {
         vm.personalData = vm.operationsData
       } else {
         vm.personalData = vm.personalres
@@ -56,17 +56,44 @@ angular.module('healthCareApp')
       return vm.selected == selectedTab
     }
 
-    var PersonalStatusMoreSb = function(obj) {
+    var CommonDataSave = function(obj) {
       localStorage.setItem('personnalDetails', angular.toJson(obj.data));
       localStorage.setItem("providerMoreTempData", JSON.stringify({}));
       localStorage.setItem("fromProvider", '');
       localStorage.setItem("addMode", false);
+    }
+
+    var PersonalStatusMoreSb = function(obj) {
+      CommonDataSave(obj)
       $location.path('personnalDetails');
+    };
+
+    var CompanyStatusMoreSb = function(obj) {
+      CommonDataSave(obj)
+      $location.path('organition');
+    }
+
+    var UsersStatusMoreSb = function(obj) {
+      CommonDataSave(obj)
+      $location.path('userdetails');
+    }
+
+    var LocationStatusMoreSb = function(obj) {
+      CommonDataSave(obj)
+      $location.path('locationsMore');
     }
 
     vm.providerMore = function(items, type) {
-       localStorage.setItem("licenseType", type);
-       ApiService.get(healthCareBusinessConstants.PERSONAL_STATUS_MORE + items.personId).then(PersonalStatusMoreSb, errorCallback).finally(finalCallBack);
+      localStorage.setItem("licenseType", type);
+      if (items.objectValue == 'PERSONAL') {
+        ApiService.get(healthCareBusinessConstants.PERSONAL_STATUS_MORE + items.id).then(PersonalStatusMoreSb, errorCallback).finally(finalCallBack);
+      } else if (items.objectValue == 'COMPANY') {
+        ApiService.get(healthCareBusinessConstants.COMPANY_STATUS_MORE + items.id).then(CompanyStatusMoreSb, errorCallback).finally(finalCallBack);
+      } else if (items.objectValue == 'USERS') {
+        ApiService.get(healthCareBusinessConstants.USER_STATUS_MORE + items.id).then(UsersStatusMoreSb, errorCallback).finally(finalCallBack);
+      } else if (items.objectValue == 'LOCATION') {
+        ApiService.get(healthCareBusinessConstants.LOCATIONS_STATUS_MORE + items.id).then(LocationStatusMoreSb, errorCallback).finally(finalCallBack);
+      }
     };
 
     vm.init = function() {

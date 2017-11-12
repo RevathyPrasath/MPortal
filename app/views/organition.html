@@ -153,9 +153,9 @@
                     </thead>
                     <tbody>
                       <tr ng-repeat="innerObj in organition.companyDetailsObj.licenseType">
-                        <td>policyNumber# {{innerObj.license.policyNumber}}</td>
+                        <td><span class="glyphicon {{innerObj.license.expiryFlag && 'glyphicon-exclamation-sign' || 'glyphicon-ok-sign'}}"></span> policyNumber# {{innerObj.license.policyNumber}}</td>
                         <td>Carrier: {{innerObj.license.carrier}}</td>
-                        <td class="text-center">Expairy Date: {{innerObj.license.expiryDate | date:'medium'}}</td>
+                        <td class="text-center">Expiry Date: {{innerObj.license.expiryDate | date:'medium'}}</td>
                         <td class="text-right"><a ng-click="organition.providerMore(innerObj, 'INSURANCE')" class="btn" ng-disabled="organition.viewmode">More</a></td>
                       </tr>
                     </tbody>

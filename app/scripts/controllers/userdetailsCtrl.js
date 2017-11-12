@@ -119,9 +119,9 @@ angular.module('healthCareApp')
           fd.append('expiryDate', new Date(0));
         }
         fd.append('trackExpiryDate', vm.fileuploadObject.trackExpiry);
-        fd.append('documentCategory', 'ADMINISTRATION');
+        fd.append('documentCategory', 'USERS');
         fd.append('docID', docId);
-        fd.append('category', 'USERS');
+        fd.append('category', 'ADMINISTRATION');
         $http.post(url, fd, {
             transformRequest: angular.identity,
             headers: { 'Content-Type': undefined }

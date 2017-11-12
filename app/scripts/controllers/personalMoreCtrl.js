@@ -74,7 +74,6 @@ angular.module('healthCareApp')
     };
 
     vm.savePersonal = function() {
-      debugger;
       $scope.showLoader = true;
       console.log('vm.personalDetailsObj::', vm.personalDetailsObj);
       vm.personalDetailsObj.dateOfBirth = (vm.personalDetailsObj.dateOfBirth) ? new Date(vm.personalDetailsObj.dateOfBirth).getTime() : 0;
@@ -133,7 +132,8 @@ angular.module('healthCareApp')
           fd.append('expiryDate', new Date(0));
         }
         fd.append('trackExpiryDate', vm.fileuploadObject.trackExpiry);
-        fd.append('documentCategory', 'testing');
+        fd.append('documentCategory', 'PERSONAL');
+        fd.append('category', 'PERSONAL');
         fd.append('docID', docId);
         fd.append('id', getPersonalId());
 
@@ -292,6 +292,7 @@ angular.module('healthCareApp')
             };
             for (var i = 0; i < vm.personalDetailsObj.provider.licenseType.length; i++) {
               if (vm.personalDetailsObj.provider.licenseType[i].license.licenseId == providerresponseObj.licenseId) {
+                temp.licenseTypeId = vm.personalDetailsObj.provider.licenseType[i].licenseTypeId;
                 vm.personalDetailsObj.provider.licenseType[i] = temp;
                 break;
               }
