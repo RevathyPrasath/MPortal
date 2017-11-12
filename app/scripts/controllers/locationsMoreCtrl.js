@@ -14,7 +14,7 @@ angular.module('healthCareApp')
     var errorCallback = function(error) {
       vm.errorMsg = error.data.message;
       $scope.showLoader = false;
-      if(vm.errorMsg) {
+      if (vm.errorMsg) {
         UtilService.errorMessage(vm.errorMsg);
       } else {
         UtilService.errorMessage('Something went wrong!!');
@@ -44,11 +44,10 @@ angular.module('healthCareApp')
     };
 
     //save button click
-    var saveUserSuccessCallback = function() {
+    var saveUserSuccessCallback = function(res) {
+      vm.locationsDetailsObj.documents = res.data.documents;
       $scope.showLoader = false;
       UtilService.errorMessage("locations saved successfully");
-      //console.log("personal saved successfully");
-      $location.path('organition');
     };
 
     vm.saveBtnClick = function() {
@@ -56,7 +55,7 @@ angular.module('healthCareApp')
       ApiService.post(healthCareBusinessConstants.GET_LOCATIONS, vm.locationsDetailsObj).then(saveUserSuccessCallback, errorCallback).finally(finalCallBack);
     };
 
-      vm.showAttachmentCreate = function() {
+    vm.showAttachmentCreate = function() {
       vm.fileuploadObject = {};
       vm.fileuploadObject.trackExpiry = false;
       vm.attachmentCreateViewmode = true;
@@ -76,17 +75,18 @@ angular.module('healthCareApp')
 
     vm.fileuploadObject = {};
     vm.fileuploadObject.trackExpiry = false;
-    vm.createAttachment = function() {
+
+    /*   vm.createAttachment = function() {
       $scope.showLoader = true;
       var newDoc = false;
       var url = healthCareBusinessConstants.SAVE_DOC;
       fd.append('description', vm.fileuploadObject.shortdescription);
       fd.append('notes', vm.fileuploadObject.notes);
-       if (vm.fileuploadObject.expiry) {
-          fd.append('expiryDate', vm.fileuploadObject.expiry);
-        } else {
-          fd.append('expiryDate', new Date(0));
-        }
+      if (vm.fileuploadObject.expiry) {
+        fd.append('expiryDate', vm.fileuploadObject.expiry);
+      } else {
+        fd.append('expiryDate', new Date(0));
+      }
       fd.append('trackExpiryDate', vm.fileuploadObject.trackExpiry);
       fd.append('documentCategory', 'abc');
 
@@ -104,8 +104,72 @@ angular.module('healthCareApp')
           UtilService.errorMessage("document upload fail!");
         });
     };
+*/
+    vm.checkExpireValidation = function() {
+      if (vm.fileuploadObject.trackExpiry) {
+        if (vm.fileuploadObject.expiry) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return true;
+      }
+    };
 
-     var docremoveScb = function(msg) {
+    vm.createAttachment = function(doc) {
+      if (vm.checkExpireValidation()) {
+        $scope.showLoader = true;
+        var url = null;
+        var newDoc = false;
+        if (!vm.showDeleteDoc) {
+          newDoc = true;
+          url = healthCareBusinessConstants.SAVE_DOC;
+        } else {
+          newDoc = false;
+          url = healthCareBusinessConstants.UPDATE_DOC;
+          fd.append('documentUrl', vm.fileuploadObject.url);
+          fd.append('documentName', vm.fileuploadObject.documentName);
+        }
+        var docId = (vm.fileuploadObject.docId ? vm.fileuploadObject.docId : 0);
+        fd.append('description', vm.fileuploadObject.shortdescription);
+        fd.append('notes', vm.fileuploadObject.notes);
+        if (vm.fileuploadObject.expiry) {
+          fd.append('expiryDate', vm.fileuploadObject.expiry);
+        } else {
+          fd.append('expiryDate', new Date(0));
+        }
+        fd.append('trackExpiryDate', vm.fileuploadObject.trackExpiry);
+        fd.append('documentCategory', 'LOCATION');
+        fd.append('category', 'ADMINISTRATION');
+        fd.append('docID', docId);
+        fd.append('id', vm.id);
+
+        $http.post(url, fd, {
+          transformRequest: angular.identity,
+          headers: { 'Content-Type': undefined }
+        }).then(function(res) {
+          vm.hideAttachmentCreate();
+          $scope.showLoader = false;
+          vm.locationsDetailsObj['documents'].push(res.data);
+          vm.saveBtnClick();
+          fd.delete('description');
+          fd.delete('notes');
+          fd.delete('expiryDate');
+          fd.delete('trackExpiryDate');
+          fd.delete('documentCategory');
+          fd.delete('docID');
+          UtilService.errorMessage('document upload success!');
+        }, function(res) {
+          $scope.showLoader = false;
+          UtilService.errorMessage('document upload fail!');
+        });
+      } else {
+        UtilService.errorMessage('Please select Expiry Date!');
+      }
+    };
+
+    var docremoveScb = function(msg) {
       $scope.showLoader = false;
       UtilService.errorMessage('Successfully document removed!!');
       for (var i = 0; i < vm.locationsDetailsObj.documents.length; i++) {
@@ -122,7 +186,7 @@ angular.module('healthCareApp')
       }
     };
 
-      vm.documentRemove = function(docId) {
+    vm.documentRemove = function(docId) {
       $scope.showLoader = true;
       var url = healthCareBusinessConstants.DELETE_DOC + docId;
       ApiService.delete(url).then(docremoveScb, errorCallback);
@@ -152,14 +216,15 @@ angular.module('healthCareApp')
     };
 
     vm.init = function() {
-       vm.determinateValue = 20;
+      vm.determinateValue = 20;
       vm.getStates();
       vm.locationsDetailsObj = angular.fromJson(localStorage.getItem('locationsDetails'));
-      if(vm.locationsDetailsObj && vm.locationsDetailsObj.addressId && vm.locationsDetailsObj.addressId.phone) {
+      if (vm.locationsDetailsObj && vm.locationsDetailsObj.addressId && vm.locationsDetailsObj.addressId.phone) {
         vm.locationsDetailsObj.addressId.phone = parseInt(vm.locationsDetailsObj.addressId.phone);
       }
       if (vm.locationsDetailsObj && Object.keys(vm.locationsDetailsObj).length) {
         vm.viewmode = true;
+        vm.id = vm.locationsDetailsObj.locationId;
       } else {
         vm.viewmode = false;
         vm.locationsDetailsObj = {};

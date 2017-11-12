@@ -41,7 +41,7 @@ angular.module('healthCareApp')
 
     vm.documentRemove = function(docId) {
       var url = healthCareBusinessConstants.DELETE_DOC + docId;
-     // vm.companyDetailsObj.documents.splice(index, 1);
+      // vm.companyDetailsObj.documents.splice(index, 1);
       ApiService.delete(url).then(docremoveScb, errorCallback);
     };
 
@@ -82,18 +82,18 @@ angular.module('healthCareApp')
     };
 
     vm.addNew = function() {
-      //localStorage.setItem("companyTempData", JSON.stringify(vm.companyDetailsObj));
+      localStorage.setItem("companyTempData", JSON.stringify(vm.companyDetailsObj));
       //$location.path('locationsMore');
 
-       localStorage.setItem('locationsDetails', angular.toJson({}));
-        $location.path('locationsMore');
+      localStorage.setItem('locationsDetails', angular.toJson({}));
+      $location.path('locationsMore');
 
-   //  if (!vm.viewmode) {
-     //   localStorage.setItem('locationsDetails', angular.toJson({}));
-    //    $location.path('locationsMore');
-    //  } else {
-    //   return;
-     //  }
+      //  if (!vm.viewmode) {
+      //   localStorage.setItem('locationsDetails', angular.toJson({}));
+      //    $location.path('locationsMore');
+      //  } else {
+      //   return;
+      //  }
     };
 
     vm.cancelBtnclick = function() {
@@ -105,8 +105,8 @@ angular.module('healthCareApp')
     };
 
     vm.showAttachmentCreate = function() {
-      
-       vm.fileuploadObject = {};
+
+      vm.fileuploadObject = {};
       vm.fileuploadObject.trackExpiry = false;
       vm.attachmentCreateViewmode = true;
       vm.showDeleteDoc = false;
@@ -154,14 +154,16 @@ angular.module('healthCareApp')
         var docId = (vm.fileuploadObject.docId ? vm.fileuploadObject.docId : 0);
         fd.append('description', vm.fileuploadObject.shortdescription);
         fd.append('notes', vm.fileuploadObject.notes);
-         if (vm.fileuploadObject.expiry) {
+        if (vm.fileuploadObject.expiry) {
           fd.append('expiryDate', vm.fileuploadObject.expiry);
         } else {
           fd.append('expiryDate', new Date(0));
         }
         fd.append('trackExpiryDate', vm.fileuploadObject.trackExpiry);
-        fd.append('documentCategory', 'testing');
+        fd.append('documentCategory', 'COMPANY');
         fd.append('docID', docId);
+        fd.append('category', 'ADMINISTRATION');
+
         $http.post(url, fd, {
             transformRequest: angular.identity,
             headers: { 'Content-Type': undefined }
@@ -201,13 +203,13 @@ angular.module('healthCareApp')
         docId: obj.documentId,
         documentName: obj.documentName
       }
-        if (obj.license[0].expiryDate !== 0) {
+      if (obj.license[0].expiryDate !== 0) {
         vm.fileuploadObject['expiry'] = new Date(obj.license[0].expiryDate)
       }
       vm.showDeleteDoc = true;
       console.log(obj);
     };
-    
+
     // vm.createAttachment = function() {
     //   $scope.showLoader = true;
     //   var url = healthCareBusinessConstants.SAVE_DOC;
@@ -245,7 +247,7 @@ angular.module('healthCareApp')
       ApiService.get(healthCareBusinessConstants.GET_STATES_LIST).then(getStatesSb, errorCallback).finally(finalCallBack);
     };
 
-    var getCompaniesSb = function(res) {debugger;
+    var getCompaniesSb = function(res) {
       if (res && res.data[0]) {
         vm.viewmode = true;
         vm.companyDetailsObj = res.data[0];
@@ -315,8 +317,9 @@ angular.module('healthCareApp')
       }
     };
 
-    var saveUserSuccessCallback = function() {
+    var saveUserSuccessCallback = function(res) {
       vm.viewmode = true;
+      vm.companyDetailsObj.documents = res.data.documents;
     };
 
     vm.saveBtnClick = function() {
@@ -346,31 +349,61 @@ angular.module('healthCareApp')
       }
     }, 100);
 
-    vm.init = function() {
-      vm.activated = true;
-      vm.determinateValue = 20;
-      vm.pageNo = 0;
-      vm.viewmode = true;
-      vm.myDate = new Date();
-      vm.hideAttachmentCreate();
-      vm.companyDetailsObj = {
-        'otherIdentifications': [{
-          "identifierName": "",
-          "identifierNumber": ""
-        }]
-      };
-
-      if (localStorage.getItem('companyTempData') && Object.keys(angular.fromJson(localStorage.getItem('companyTempData'))).length) {
-        vm.companyDetailsObj = angular.fromJson(localStorage.getItem('companyTempData'));
-        if (vm.companyDetailsObj && vm.companyDetailsObj.addressId) {
-          vm.companyDetailsObj.addressId.phone = parseInt(vm.companyDetailsObj.addressId.phone);
+    function findWithAttr(array, value) {
+      for (var i = 0; i < array.length; i += 1) {
+        if (array[i].license.licenseId === value) {
+          return i;
         }
       }
+      return -1;
+    }
 
-      vm.getStates();
-      vm.getLocations(0);
-      vm.getCompanies(0);
-      vm.entityTypes = [{ id: "SCorporation", name: 'S corporation' }, { id: 'CCorporation', name: 'C corporation' }];
+    vm.init = function() {
+      var providerresponseObj = angular.fromJson(localStorage.getItem('providerResObj'));
+      var temp = {
+        license: providerresponseObj,
+        licenseTypeId: null,
+        objectValue: 'INSURANCE'
+      };
+      if (localStorage.getItem('fromProvider') == 'true' && providerresponseObj) {
+        localStorage.setItem('fromProvider', false);
+        if (Object.keys(angular.fromJson(localStorage.getItem('providerMoreTempData'))).length) {
+          vm.companyDetailsObj = angular.fromJson(localStorage.getItem('providerMoreTempData'));
+          for (var i = 0; i < vm.companyDetailsObj.licenseType.length; i++) {
+            if (vm.companyDetailsObj.licenseType[i].license && providerresponseObj && vm.companyDetailsObj.licenseType[i].license.licenseId == providerresponseObj.licenseId) {
+              vm.companyDetailsObj.licenseType[i] = temp;
+              break;
+            }
+          };
+          if (findWithAttr(vm.companyDetailsObj.licenseType, providerresponseObj.licenseId) == -1) {
+              vm.companyDetailsObj.licenseType.push(temp);
+          }
+          vm.saveBtnClick();
+        }
+      } else {
+        vm.activated = true;
+        vm.determinateValue = 20;
+        vm.pageNo = 0;
+        vm.viewmode = true;
+        vm.myDate = new Date();
+        vm.hideAttachmentCreate();
+        vm.companyDetailsObj = {
+          'otherIdentifications': [{
+            "identifierName": "",
+            "identifierNumber": ""
+          }]
+        };
+        if (localStorage.getItem('companyTempData') && Object.keys(angular.fromJson(localStorage.getItem('companyTempData'))).length) {
+          vm.companyDetailsObj = angular.fromJson(localStorage.getItem('companyTempData'));
+          if (vm.companyDetailsObj && vm.companyDetailsObj.addressId) {
+            vm.companyDetailsObj.addressId.phone = parseInt(vm.companyDetailsObj.addressId.phone);
+          }
+        }
+        vm.getStates();
+        vm.getLocations(0);
+        vm.getCompanies(0);
+        vm.entityTypes = [{ id: "SCorporation", name: 'S corporation' }, { id: 'CCorporation', name: 'C corporation' }];
+      }
     };
 
     vm.init();

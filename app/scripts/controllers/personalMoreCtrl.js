@@ -74,9 +74,10 @@ angular.module('healthCareApp')
     };
 
     vm.savePersonal = function() {
+      debugger;
       $scope.showLoader = true;
       console.log('vm.personalDetailsObj::', vm.personalDetailsObj);
-      vm.personalDetailsObj.dateOfBirth = (vm.personalDetailsObj.dateOfBirth) ? vm.personalDetailsObj.dateOfBirth.getTime() : 0;
+      vm.personalDetailsObj.dateOfBirth = (vm.personalDetailsObj.dateOfBirth) ? new Date(vm.personalDetailsObj.dateOfBirth).getTime() : 0;
       if (!vm.viewmode && localStorage.getItem("addMode") != 'true') {
         ApiService.post(healthCareBusinessConstants.PERSONAL_UPDATE, vm.personalDetailsObj).then(savePersonalSuccessCallback, errorCallback).finally(finalCallBack);
       } else if (localStorage.getItem("addMode") == 'true') {
@@ -105,9 +106,10 @@ angular.module('healthCareApp')
       }
     };
 
-var getPersonalId = function() {
-  return JSON.parse(localStorage.getItem("personnalDetails")).personId;
-};
+    var getPersonalId = function() {
+      return JSON.parse(localStorage.getItem("personnalDetails")).personId;
+    };
+
     vm.createAttachment = function(doc) {
       if (vm.checkExpireValidation()) {
         $scope.showLoader = true;
@@ -169,40 +171,6 @@ var getPersonalId = function() {
       }
     };
 
-
-    // vm.createAttachment = function() {
-    //   $scope.showLoader = true;
-    //   var url = healthCareBusinessConstants.SAVE_DOC;
-    //   fd.append('description', vm.fileuploadObject.shortdescription);
-    //   fd.append('notes', vm.fileuploadObject.notes);
-    //   //fd.append('expiryDate', vm.fileuploadObject.expiry);
-    //   if (vm.fileuploadObject.expiry) {
-    //       fd.append('expiryDate', vm.fileuploadObject.expiry);
-    //     } else {
-    //       fd.append('expiryDate', new Date(0));
-    //     }
-    //   fd.append('trackExpiryDate', vm.fileuploadObject.trackExpiry);
-    //   fd.append('documentCategory', 'test');
-
-    //   $http.post(url, fd, {
-    //     transformRequest: angular.identity,
-    //     headers: { 'Content-Type': undefined }
-    //   }).then(function(res) {
-    //     $scope.showLoader = false;
-    //     vm.hideAttachmentCreate();
-    //     UtilService.errorMessage('Successfully document uploaded!! ');
-    //     if (vm.personalDetailsObj['documents']) {
-    //       vm.personalDetailsObj.documents.push(res.data);
-    //     } else {
-    //       vm.personalDetailsObj['documents'] = [];
-    //       vm.personalDetailsObj.documents.push(res.data);
-    //     }
-    //   }, function(res) {
-    //     $scope.showLoader = false;
-    //     UtilService.errorMessage('document upload fail!');
-    //   });
-    // };
-
     // Save personal flow ends
     var getSupervisorsScb = function(res) {
       vm.supervisorList = res.data;
@@ -261,12 +229,6 @@ var getPersonalId = function() {
       }
     };
 
-    // vm.documentRemove = function(index, docId) {
-    //   var url = healthCareBusinessConstants.DELETE_DOC + docId;
-    //   vm.personalDetailsObj.documents.splice(index, 1);
-    //   ApiService.delete(url).then(docremoveScb, errorCallback);
-    // };
-
     vm.documentRemove = function(docId) {
       $scope.showLoader = true;
       var url = healthCareBusinessConstants.DELETE_DOC + docId;
@@ -309,7 +271,7 @@ var getPersonalId = function() {
       vm.showDeleteDoc = true;
     };
 
-    vm.init = function() {debugger;
+    vm.init = function() {
       vm.licensetype = localStorage.getItem("licenseType");
       console.log('licensetype===============>', vm.licensetype);
       vm.determinateValue = 20;
@@ -337,6 +299,7 @@ var getPersonalId = function() {
             if (findWithAttr(vm.personalDetailsObj.provider.licenseType, providerresponseObj.licenseId) == -1) {
               vm.personalDetailsObj.provider.licenseType.push(temp);
             }
+            vm.savePersonal();
           }
         } else {
           vm.viewmode = true;
