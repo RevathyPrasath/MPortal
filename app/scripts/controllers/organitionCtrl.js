@@ -307,14 +307,18 @@ angular.module('healthCareApp')
         license: items
       }
       localStorage.setItem("providerMoreTempData", JSON.stringify(vm.companyDetailsObj));
-      if (!vm.viewmode) {
+      localStorage.setItem("providerMoreInfo", JSON.stringify(license.license));
+      localStorage.setItem("licenseType", type);
+      localStorage.setItem("frompage", 'organition');
+      $location.path("providermore");
+     /* if (!vm.viewmode) {
         localStorage.setItem("providerMoreInfo", JSON.stringify(license.license));
         localStorage.setItem("licenseType", type);
         localStorage.setItem("frompage", 'organition');
         $location.path("providermore");
       } else {
         return;
-      }
+      }*/
     };
 
     var saveUserSuccessCallback = function(res) {

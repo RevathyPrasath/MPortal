@@ -148,7 +148,7 @@
                       <tr>
                         <th colspan="3" class="background-none">
                           <h5><b>Insurance</b></h5></th>
-                        <th class="text-right background-none"><a ng-click="organition.providerMore({}, 'INSURANCE')" class="btn" ng-disabled="organition.viewmode">+ Add New</a></th>
+                        <th class="text-right background-none"><a ng-click="organition.providerMore({}, 'INSURANCE')" class="btn">+ Add New</a></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -156,7 +156,7 @@
                         <td><span class="glyphicon {{innerObj.license.expiryFlag && 'glyphicon-exclamation-sign' || 'glyphicon-ok-sign'}}"></span> policyNumber# {{innerObj.license.policyNumber}}</td>
                         <td>Carrier: {{innerObj.license.carrier}}</td>
                         <td class="text-center">Expiry Date: {{innerObj.license.expiryDate | date:'medium'}}</td>
-                        <td class="text-right"><a ng-click="organition.providerMore(innerObj, 'INSURANCE')" class="btn" ng-disabled="organition.viewmode">More</a></td>
+                        <td class="text-right"><a ng-click="organition.providerMore(innerObj, 'INSURANCE')" class="btn">More</a></td>
                       </tr>
                     </tbody>
                   </table>
@@ -206,7 +206,7 @@
                         </tr>
                       </table>
                       <div class="text-right edit-doc-upload-btn {{!organition.showDeleteDoc && 'half-width' || 'full-width'}}">
-                        <md-button class="md-raised md-warn md-button md-ink-ripple" ng-click="organition.createAttachment()">Upload</md-button>
+                        <md-button class="md-raised md-warn md-button md-ink-ripple" ng-click="organition.createAttachment()">Save</md-button>
                         <md-button class="md-raised" ng-click="organition.hideAttachmentCreate()">Cancel</md-button>
                       </div>
                     </div>
@@ -219,7 +219,7 @@
                       <td>Id</td>
                       <td>Date Created</td>
                       <td>Description</td>
-                      <td colspan="2">Action</td>
+                      <td colspan="3">Action</td>
                     </tr>
                     <tr ng-repeat="doc in organition.companyDetailsObj.documents">
                       <td ng-bind="doc.documentId"></td>
@@ -227,7 +227,8 @@
                       <td ng-bind="doc.description"></td>
                       <td><a target="_blank" ng-href="{{doc.documentUrl}}">View</a></td>
                       <!-- <td><a ng-click="organition.viewDoc(doc);" ng-disabled="organition.viewmode">Edit</a></td> -->
-                      <td><a ng-click="organition.viewDoc(doc)" class="btn btn-link" ng-disabled="organition.viewmode">Edit</a></td>
+                      <td><a ng-click="organition.viewDoc(doc)" class="btn btn-link">Edit</a></td>
+                      <td><a ng-click="organition.documentRemove(doc.documentId);" class="btn btn-link">Delete</a></td>
                     </tr>
                   </table>
                 </div>
