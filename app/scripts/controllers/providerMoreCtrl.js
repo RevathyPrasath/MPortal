@@ -59,7 +59,6 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
 
 
   vm.savePersonal = function() {
-    $scope.showLoader = true;
     var providerSaveObj = {
       "licenseId": vm.moreinfo.license.licenseId,
       "state": vm.moreinfo.license.state,
@@ -79,7 +78,29 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
       "licenseDocuments": vm.moreinfo.license.licenseDocuments,
       "id": getId()
     }
-    ApiService.post(healthCareBusinessConstants.CREATE_LICENSE, providerSaveObj).then(savePersonalSuccessCallback, errorCallback).finally(finalCallBack);
+
+    if (showLicence == 'MEDICAL') {
+      if (vm.moreinfo.license.state && vm.moreinfo.license.licenseNo) {
+        $scope.showLoader = true;
+        ApiService.post(healthCareBusinessConstants.CREATE_LICENSE, providerSaveObj).then(savePersonalSuccessCallback, errorCallback).finally(finalCallBack);
+      } else {
+        UtilService.errorMessage('Please fill State and License');
+      }
+    } else if (showLicence == 'DEA_LICENSE') {
+      if (vm.moreinfo.license.licenseNo && vm.moreinfo.license.address) {
+        $scope.showLoader = true;
+        ApiService.post(healthCareBusinessConstants.CREATE_LICENSE, providerSaveObj).then(savePersonalSuccessCallback, errorCallback).finally(finalCallBack);
+      } else {
+        UtilService.errorMessage('Please fill License and Address');
+      }
+    } else if (showLicence == 'MALPRACTICE_INSURANCE') {
+      if (vm.moreinfo.license.carrier && vm.moreinfo.license.policyNumber) {
+        $scope.showLoader = true;
+        ApiService.post(healthCareBusinessConstants.CREATE_LICENSE, providerSaveObj).then(savePersonalSuccessCallback, errorCallback).finally(finalCallBack);
+      } else {
+        UtilService.errorMessage('Please fill Policy and Carrier');
+      }
+    } 
   };
 
   vm.hideAttachmentCreate = function() {
@@ -116,7 +137,7 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
     }
   };
 
-  vm.createAttachment = function(doc) {debugger;
+  vm.createAttachment = function(doc) {
     if (vm.checkExpireValidation()) {
       $scope.showLoader = true;
       var url = null;
@@ -150,7 +171,7 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
       }).then(function(res) {
         vm.hideAttachmentCreate();
         $scope.showLoader = false;
-        if(newDoc) {
+        if (newDoc) {
           vm.moreinfo.license.licenseDocuments.push(res.data);
         } else {
           for (var i = 0; i < vm.moreinfo.license.licenseDocuments.length; i++) {
@@ -248,7 +269,7 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
   };
 
   vm.init = function() {
-    if(localStorage.getItem("frompage") == 'organition'){
+    if (localStorage.getItem("frompage") == 'organition') {
       vm.documentCategory = 'COMPANY';
       vm.category = 'ADMINISTRATION';
       vm.objectValue = 'COMPANY';
