@@ -36,7 +36,10 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
   };
 
   vm.showAttachmentCreate = function() {
+    vm.fileuploadObject = {};
+    vm.fileuploadObject.trackExpiry = false;
     vm.attachmentCreateViewmode = true;
+    vm.showDeleteDoc = false;
   };
 
   var savePersonalSuccessCallback = function(res) {
@@ -113,7 +116,7 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
     }
   };
 
-  vm.createAttachment = function(doc) {
+  vm.createAttachment = function(doc) {debugger;
     if (vm.checkExpireValidation()) {
       $scope.showLoader = true;
       var url = null;
@@ -147,20 +150,16 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
       }).then(function(res) {
         vm.hideAttachmentCreate();
         $scope.showLoader = false;
-        vm.moreinfo.license.licenseDocuments.push(res.data);
-
-        // if (newDoc) {
-        //   vm.personalDetailsObj['documents'].push(res.data);
-        //   vm.savePersonal();
-        // } else {
-        //   for (var i = 0; i < vm.personalDetailsObj['documents'].length; i++) {
-        //     if (vm.personalDetailsObj['documents'][i].documentId === docId) {
-        //       vm.personalDetailsObj['documents'][i] = res.data;
-        //       vm.savePersonal();
-        //     }
-        //   }
-        // }
-
+        if(newDoc) {
+          vm.moreinfo.license.licenseDocuments.push(res.data);
+        } else {
+          for (var i = 0; i < vm.moreinfo.license.licenseDocuments.length; i++) {
+            if (vm.moreinfo.license.licenseDocuments[i].documentId === res.data.documentId) {
+              vm.moreinfo.license.licenseDocuments[i] = res.data;
+              //vm.savePersonal();
+            }
+          }
+        }
         fd.delete('description');
         fd.delete('notes');
         fd.delete('expiryDate');
@@ -176,12 +175,6 @@ angular.module('healthCareApp').controller('providerMoreCtrl', function($scope, 
       UtilService.errorMessage('Please select Expiry Date!');
     }
   };
-
-
-  /* doc remove */
-  // var docremoveScb = function(msg) {
-  //   UtilService.errorMessage('Successfully document removed!!');
-  // };
 
   var docremoveScb = function(msg) {
     $scope.showLoader = false;

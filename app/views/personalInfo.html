@@ -183,7 +183,7 @@
               </tr>
             </table>
             <div class="text-right {{!personalMore.showDeleteDoc && 'half-width' || 'full-width'}}">
-              <md-button class="md-raised md-warn md-button md-ink-ripple" ng-click="providerMore.createAttachment()">Upload</md-button>
+              <md-button class="md-raised md-warn md-button md-ink-ripple" ng-click="providerMore.createAttachment()">Save</md-button>
               <md-button class="md-raised" ng-click="providerMore.hideAttachmentCreate()">Cancel</md-button>
             </div>
           </div>
@@ -206,15 +206,15 @@
       <td>Id</td>
       <td>Date Created</td>
       <td>Description</td>
-      <td colspan="2">Action</td>
+      <td colspan="3">Action</td>
     </tr>
     <tr ng-repeat="doc in providerMore.moreinfo.license.licenseDocuments">
       <td ng-bind="doc.documentId"></td>
       <td ng-bind="doc.createdOn | date : format : timezone"></td>
       <td ng-bind="doc.description"></td>
       <td><a target="_blank" ng-href="{{doc.documentUrl}}">View</a></td>
-      <td><a ng-click="providerMore.viewDoc(doc)" class="btn btn-link" ng-disabled="providerMore.viewmode">Edit</a></td>
-      
+      <td><a ng-click="providerMore.viewDoc(doc)" class="btn btn-link">Edit</a></td>
+      <td><a  ng-click="providerMore.documentRemove(doc.documentId);" class="btn btn-link">Delete</a></td>
     </tr>
   </table>
 </div>

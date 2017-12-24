@@ -149,7 +149,7 @@
             <thead>
               <tr>
                 <th colspan="3" class="background-none"><h5><b>Medical License</b> <span class="glyphicon {{personalMore.licensetype == 'MEDICAL' && 'glyphicon-exclamation-sign' || 'glyphicon-ok-sign'}}"></span></h5></th>
-                <th class="text-right background-none"><a ng-click="personalMore.providerMore({}, 'MEDICAL')"  class="btn" ng-disabled="personalMore.viewmode">+ Add New</a></th>
+                <th class="text-right background-none"><a ng-click="personalMore.providerMore({}, 'MEDICAL')"  class="btn">+ Add New</a></th>
               </tr>
             </thead>
             <tbody>
@@ -157,7 +157,7 @@
                 <td><span class="glyphicon {{innerObj.license.expiryFlag && 'glyphicon-exclamation-sign' || 'glyphicon-ok-sign'}}"></span> License# {{innerObj.license.licenseNo}}</td>
                 <td>State: {{innerObj.license.state}}</td>
                 <td class="text-center">Expiry Date: {{innerObj.license.expiryDate  | date:'medium'}}</td>
-                <td class="text-right"><a ng-click="personalMore.providerMore(innerObj, 'MEDICAL')" class="btn" ng-disabled="personalMore.viewmode">More</a></td>
+                <td class="text-right"><a ng-click="personalMore.providerMore(innerObj, 'MEDICAL')" class="btn">More</a></td>
               </tr>
             </tbody>
           </table>
@@ -165,7 +165,7 @@
             <thead>
               <tr>
                 <th colspan="3" class="background-none"><h5><b>DEA License</b> <span class="glyphicon {{personalMore.licensetype == 'DEA_LICENSE' && 'glyphicon-exclamation-sign' || 'glyphicon-ok-sign'}}"></span></h5></th>
-                <th class="text-right background-none"><a ng-click="personalMore.providerMore( {}, 'DEA_LICENSE')" class="btn" ng-disabled="personalMore.viewmode">+ Add New</a></th>
+                <th class="text-right background-none"><a ng-click="personalMore.providerMore( {}, 'DEA_LICENSE')" class="btn">+ Add New</a></th>
               </tr>
             </thead>
             <tbody>
@@ -173,7 +173,7 @@
                 <td> <span class="glyphicon {{innerObj.license.expiryFlag && 'glyphicon-exclamation-sign' || 'glyphicon-ok-sign'}}"></span> License# {{innerObj.license.licenseNo}}</td>
                 <td>Address: {{innerObj.license.address}}</td>
                 <td class="text-center">Expiry Date: {{innerObj.license.expiryDate  | date:'medium'}}</td>
-                <td class="text-right"><a ng-click="personalMore.providerMore( innerObj, 'DEA_LICENSE')" class="btn" ng-disabled="personalMore.viewmode">More</a></td>
+                <td class="text-right"><a ng-click="personalMore.providerMore( innerObj, 'DEA_LICENSE')" class="btn">More</a></td>
               </tr>
             </tbody>
           </table>
@@ -181,7 +181,7 @@
             <thead>
               <tr>
                 <th colspan="3" class="background-none"><h5><b>Malpractice Insurance</b> <span class="glyphicon {{personalMore.licensetype == 'MALPRACTICE_INSURANCE' && 'glyphicon-exclamation-sign' || 'glyphicon-ok-sign'}}"></span></h5></th>
-                <th class="text-right background-none"><a ng-click="personalMore.providerMore({}, 'MALPRACTICE_INSURANCE')" class="btn" ng-disabled="personalMore.viewmode">+ Add New</a></th>
+                <th class="text-right background-none"><a ng-click="personalMore.providerMore({}, 'MALPRACTICE_INSURANCE')" class="btn">+ Add New</a></th>
               </tr>
             </thead>
             <tbody>
@@ -189,7 +189,7 @@
                 <td><span class="glyphicon {{innerObj.license.expiryFlag && 'glyphicon-exclamation-sign' || 'glyphicon-ok-sign'}}"></span> policyNumber# {{innerObj.license.policyNumber}}</td>
                 <td>Carrier: {{innerObj.license.carrier}}</td>
                 <td class="text-center">Expiry Date: {{innerObj.license.expiryDate  | date:'medium'}}</td>
-                <td class="text-right"><a ng-click="personalMore.providerMore(innerObj, 'MALPRACTICE_INSURANCE')" class="btn" ng-disabled="personalMore.viewmode">More</a></td>
+                <td class="text-right"><a ng-click="personalMore.providerMore(innerObj, 'MALPRACTICE_INSURANCE')" class="btn">More</a></td>
               </tr>
             </tbody>
           </table>
@@ -242,7 +242,7 @@
               </tr>
             </table>
             <div class="text-right {{!personalMore.showDeleteDoc && 'half-width' || 'full-width'}}">
-              <md-button class="md-raised md-warn md-button md-ink-ripple" ng-click="personalMore.createAttachment()">Upload</md-button>
+              <md-button class="md-raised md-warn md-button md-ink-ripple" ng-click="personalMore.createAttachment()">Save</md-button>
               <md-button class="md-raised" ng-click="personalMore.hideAttachmentCreate()">Cancel</md-button>
             </div>
           </div>
@@ -254,7 +254,7 @@
         </form>
 
          
-        <p ng-show="!personalMore.viewmode">
+        <p ng-show="!personalMore.viewmode && !personalMore.attachmentCreateViewmode">
           <md-button class="md-raised md-cornered" ng-click="personalMore.showAttachmentCreate()">Add New</md-button>
         </p>
          <table class="table" data-ng-show="personalMore.personalDetailsObj.documents.length>0">
@@ -262,14 +262,15 @@
             <td>Id</td>
             <td>Date Created</td>
             <td>Description</td>
-            <td colspan="2">Action</td>
+            <td colspan="3">Action</td>
           </tr>
           <tr ng-repeat="doc in personalMore.personalDetailsObj.documents">
             <td ng-bind="doc.documentId"></td>
             <td ng-bind="doc.createdOn | date : format : timezone"></td>
             <td ng-bind="doc.description"></td>
             <td><a target="_blank" ng-href="{{doc.documentUrl}}" class="btn btn-link">View</a></td>
-            <td><a ng-click="personalMore.viewDoc(doc)" class="btn btn-link" ng-disabled="personalMore.viewmode">Edit</a></td>
+            <td><a ng-click="personalMore.viewDoc(doc)" class="btn btn-link">Edit</a></td>
+            <td><a ng-click="personalMore.documentRemove(doc.documentId);" class="btn btn-link">Delete</a></td>
           </tr>
         </table>
 

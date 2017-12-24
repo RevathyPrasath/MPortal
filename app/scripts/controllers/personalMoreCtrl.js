@@ -198,14 +198,19 @@ angular.module('healthCareApp')
 
     vm.providerMore = function(items, type) {
       localStorage.setItem("providerMoreTempData", JSON.stringify(vm.personalDetailsObj));
-      if (!vm.viewmode) {
+      localStorage.setItem("providerMoreInfo", JSON.stringify(items));
+      localStorage.setItem("licenseType", type);
+      localStorage.setItem("frompage", 'personnalDetails');
+      $location.path("providermore");
+      
+      /*if (!vm.viewmode) {
         localStorage.setItem("providerMoreInfo", JSON.stringify(items));
         localStorage.setItem("licenseType", type);
         localStorage.setItem("frompage", 'personnalDetails');
         $location.path("providermore");
       } else {
         return;
-      }
+      }*/
     };
 
     $interval(function() {
