@@ -118,21 +118,26 @@
           <md-button class="md-raised md-cornered" ng-click="locationsMore.showAttachmentCreate()">Add New</md-button>
         </p>
 
-        <table class="table" ng-show="locationsMore.locationsDetailsObj.documents.length>0">
+        <table class="table" data-ng-show="locationsMore.locationsDetailsObj.documents.length>0">
           <tr>
             <td>Id</td>
             <td>Date Created</td>
             <td>Description</td>
-            <td colspan="2">Action</td>
+            <td colspan="3">Action</td>
           </tr>
           <tr ng-repeat="doc in locationsMore.locationsDetailsObj.documents">
             <td ng-bind="doc.documentId"></td>
             <td ng-bind="doc.createdOn | date : format : timezone"></td>
             <td ng-bind="doc.description"></td>
-            <td><a target="_blank" ng-href="{{doc.documentUrl}}">View</a></td>
-            <td><a ng-click="locationsMore.viewDoc(doc)" class="btn btn-link" ng-disabled="locationsMore.viewmode">Edit</a></td>
+            <td><a target="_blank" ng-href="{{doc.documentUrl}}" class="btn btn-link">View</a></td>
+
+            <td><a ng-click="locationsMore.viewDoc(doc)" class="btn btn-link">Edit</a></td>
+            <td><a ng-click="locationsMore.documentRemove(doc.documentId);" class="btn btn-link">Delete</a></td>
           </tr>
         </table>
+
+      
+
       </div>
       <hr/>
       <div class="text-right">

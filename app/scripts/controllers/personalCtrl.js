@@ -90,6 +90,24 @@ angular.module('healthCareApp')
       $location.path('personnalDetails');
     };
 
+    //added by Sai
+      vm.providerMore = function(items) {
+        ApiService.get(healthCareBusinessConstants.PERSONAL_STATUS_MORE + items.personId).then(PersonalStatusMoreSb, errorCallback).finally(finalCallBack);
+    
+    };
+
+    var PersonalStatusMoreSb = function(obj) {
+      CommonDataSave(obj)
+      $location.path('personnalDetails');
+    };
+
+     var CommonDataSave = function(obj) {
+      localStorage.setItem('personnalDetails', angular.toJson(obj.data));
+      localStorage.setItem("providerMoreTempData", JSON.stringify({}));
+      localStorage.setItem("fromProvider", '');
+      localStorage.setItem("addMode", false);
+    }
+
     vm.init = function() {
       $rootScope.loading = true;
       vm.pageNo = 0;
